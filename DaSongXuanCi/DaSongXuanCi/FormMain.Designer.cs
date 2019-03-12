@@ -393,6 +393,7 @@
             this.Btn分析数据.TabIndex = 326;
             this.Btn分析数据.Text = "分析数据";
             this.Btn分析数据.UseVisualStyleBackColor = true;
+            this.Btn分析数据.Click += new System.EventHandler(this.Btn分析数据_Click);
             // 
             // Tab分析结果
             // 
@@ -405,7 +406,7 @@
             this.Tab分析结果.Size = new System.Drawing.Size(2246, 739);
             this.Tab分析结果.TabIndex = 328;
             // 
-            // Form1
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -437,7 +438,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Btn分析数据);
             this.Controls.Add(this.Tab分析结果);
-            this.Name = "Form1";
+            this.Name = "FormMain";
             this.Text = "大松选词 V3.0";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
