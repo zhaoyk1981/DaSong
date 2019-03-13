@@ -11,9 +11,9 @@ using VRGameConsole.Models;
 using System.IO;
 namespace VRGameConsole
 {
-    public partial class FormNewGame : Form
+    public partial class FormEditGame : Form
     {
-        public FormNewGame()
+        public FormEditGame()
         {
             InitializeComponent();
         }
@@ -44,7 +44,9 @@ namespace VRGameConsole
             }
         }
 
-        private void BtnAdd_Click(object sender, EventArgs e)
+        public FormMain FormMain { get; set; }
+
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             var newApp = new AppModel()
             {
@@ -52,7 +54,16 @@ namespace VRGameConsole
                 Path = this.TxtPath.Text.Trim(),
                 ProcessName = this.TxtProcessName.Text.Trim()
             };
-            this.Close();
+            if (this.FormMain.Controller.Save(newApp))
+            {
+                this.FormMain.RefreshGamesList(newApp.Name);
+                this.Close();
+            }
+            else
+            {
+                this.FormMain.RefreshGamesList();
+                MessageBox.Show(this, "An error occurred while adding the program.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BtnBrowse_Click(object sender, EventArgs e)

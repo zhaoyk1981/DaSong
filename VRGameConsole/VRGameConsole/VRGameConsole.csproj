@@ -72,23 +72,24 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormNewGame.cs">
+    <Compile Include="FormEditGame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormNewGame.Designer.cs">
-      <DependentUpon>FormNewGame.cs</DependentUpon>
+    <Compile Include="FormEditGame.Designer.cs">
+      <DependentUpon>FormEditGame.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AppModel.cs" />
-    <Compile Include="Models\OprationRecordModel.cs" />
+    <Compile Include="Models\OperationRecordModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
+    <Compile Include="Models\UserStateModel.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormNewGame.resx">
-      <DependentUpon>FormNewGame.cs</DependentUpon>
+    <EmbeddedResource Include="FormEditGame.resx">
+      <DependentUpon>FormEditGame.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
