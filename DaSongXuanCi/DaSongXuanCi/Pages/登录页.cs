@@ -17,7 +17,7 @@ namespace DaSongXuanCi.Pages
 
         public const string URL = "https://sycm.taobao.com/custom/login.htm";
 
-        public const string HOME_URL = "";
+        public const string HOME_URL = "https://sycm.taobao.com/portal/home.htm";
 
         public bool 跳转()
         {
@@ -34,29 +34,24 @@ namespace DaSongXuanCi.Pages
                     return false;
                 }
 
-                this.Model.WebDriver.SwitchTo().Frame(0);
+                
                 // 输入登录信息
-                var c = this.Controls;
-                //var controls = this.GetControls();
-                //if (controls == null)
+                
+                //if (!string.IsNullOrEmpty(this.帐户.用户名))
                 //{
-                //    this.Sleep(0.1);
-                //    continue;
+                //    this.Model.WebDriver.SwitchTo().Frame(0);
+                //    var c = this.Controls;
+                //    c["txtUserName"].Clear();
+                //    c["txtUserName"].SendKeys(this.帐户.用户名);
+
+                //    c["txtPassword"].Clear();
+                //    c["txtPassword"].SendKeys(this.帐户.密码);
+                //    this.Sleep(1);
+                //    if (this.Model.WebDriver.FindElements(By.CssSelector("#nocaptcha")).SingleOrDefault() == null)
+                //    {
+                //        c["btnLoginSubmit"].Click();
+                //    }
                 //}
-
-                if (!string.IsNullOrEmpty(this.帐户.用户名))
-                {
-                    c["txtUserName"].Clear();
-                    c["txtUserName"].SendKeys(this.帐户.用户名);
-
-                    c["txtPassword"].Clear();
-                    c["txtPassword"].SendKeys(this.帐户.密码);
-                    this.Sleep(1);
-                    if (this.Model.WebDriver.FindElements(By.CssSelector("#nocaptcha")).SingleOrDefault() == null)
-                    {
-                        c["btnLoginSubmit"].Click();
-                    }
-                }
 
                 this.Model.WebDriver.SwitchTo().DefaultContent();
                 //this.Sleep(1);

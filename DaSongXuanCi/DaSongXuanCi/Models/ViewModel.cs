@@ -27,11 +27,12 @@ namespace DaSongXuanCi.Models
                     OpenQA.Selenium.Firefox.FirefoxDriverService driverService = OpenQA.Selenium.Firefox.FirefoxDriverService.CreateDefaultService();
 
                     driverService.HideCommandPromptWindow = true;//关闭cmd窗口
-
+                    
                     var options = new OpenQA.Selenium.Firefox.FirefoxOptions();
-
+                    options.AddArgument("--no-sandbox");
                     options.Profile = new OpenQA.Selenium.Firefox.FirefoxProfile("c:\\ffp_DaSongXuanCi", false);
                     options.Profile.SetPreference("browser.cache.disk.parent_directory", "C:\\ffc_DaSongXuanCi");
+                    
                     this._WebDriver = new OpenQA.Selenium.Firefox.FirefoxDriver(driverService, options);
                     this._WebDriver.Manage().Window.Maximize();
                 }
