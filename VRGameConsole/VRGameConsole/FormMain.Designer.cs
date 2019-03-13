@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.BtnAddGame = new System.Windows.Forms.Button();
             this.ChooseGameDialog = new System.Windows.Forms.OpenFileDialog();
             this.ListGames = new System.Windows.Forms.ListBox();
@@ -144,6 +145,7 @@
             this.Controls.Add(this.ListGames);
             this.Controls.Add(this.BtnAddGame);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FormMain";
