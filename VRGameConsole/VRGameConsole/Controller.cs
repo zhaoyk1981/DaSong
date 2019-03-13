@@ -60,7 +60,18 @@ namespace VRGameConsole
         public bool CompareProcess(List<OperationRecordModel> processList)
         {
             var changed = this.Biz.CompareProcess(processList);
+            if (!changed)
+            {
+                this.ExportExcel();
+            }
+
             return changed;
+        }
+
+        public bool ExportExcel()
+        {
+            var r = this.Biz.ExportExcel();
+            return r;
         }
     }
 }

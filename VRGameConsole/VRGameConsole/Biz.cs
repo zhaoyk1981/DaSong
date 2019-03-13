@@ -1,4 +1,7 @@
 ﻿using Newtonsoft.Json;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -244,6 +247,78 @@ namespace VRGameConsole
             }
             return output;
 
+        }
+
+        public bool ExportExcel()
+        {
+            try
+            {
+                var list = this.Model.RunApps.Where(m => !m.Saved).ToList();
+                if (list.Count == 0)
+                {
+                    return false;
+                }
+
+                list = this.Model.RunApps.OrderBy(m => m.DateStarted.GetValueOrDefault()).ToList();
+                IWorkbook wb = new XSSFWorkbook();
+                ISheet sht = wb.CreateSheet("运行记录");
+                var rowIndex = 0;
+                IRow rh = sht.CreateRow(rowIndex++);
+                var col = 0;
+                ICell cell = rh.CreateCell(col++);
+                cell.SetCellValue("开始时间");
+
+                cell = rh.CreateCell(col++);
+                cell.SetCellValue("结束时间");
+
+                cell = rh.CreateCell(col++);
+                cell.SetCellValue("程序名称");
+
+                cell = rh.CreateCell(col++);
+                cell.SetCellValue("时限");
+
+                var i = 1;
+                foreach (var t in list)
+                {
+                    col = 0;
+                    IRow row = sht.CreateRow(rowIndex++);
+
+                    row.CreateCell(col++).SetCellValue(t.DateStarted.HasValue ? t.DateStarted.Value.ToString("yyyy-MM-dd HH:mm:ss") : "N/A");
+                    row.CreateCell(col++).SetCellValue(t.DateFinished.HasValue ? t.DateFinished.Value.ToString("yyyy-MM-dd HH:mm:ss") : "N/A");
+                    row.CreateCell(col++).SetCellValue(Path.GetFileName(t.App.Path));
+                    row.CreateCell(col++).SetCellValue(t.LimitMinutes.HasValue ? t.LimitMinutes.Value.ToString() : "N/A");
+                    i++;
+                }
+
+                var fileName = $"RunRecords_{DateTime.Now.ToString("yyyy-MM-dd")}.xlsx";
+                using (var ms = new MemoryStream())
+                {
+                    wb.Write(ms);
+                    var buf = ms.ToArray();
+
+                    //保存为Excel文件  
+                    using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                    {
+                        fs.Write(buf, 0, buf.Length);
+                        fs.Flush();
+                    }
+                }
+
+                foreach (var t in list)
+                {
+                    t.Saved = true;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                throw ex;
+#else
+                return false;
+#endif
+            }
         }
     }
 }
