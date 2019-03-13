@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VRGameConsole.Models;
+using System.Configuration;
 
 namespace VRGameConsole
 {
@@ -87,7 +88,7 @@ namespace VRGameConsole
         {
             try
             {
-                var m = this.Model as SettingsModel;
+                var m = this.Model.GetSettings();
                 var str = JsonConvert.SerializeObject(m);
                 File.WriteAllText(SETTINGS_FILE_NAME, str);
                 return true;
@@ -188,15 +189,38 @@ namespace VRGameConsole
             return changed;
         }
 
+        public void StopAllRunning()
+        {
+            for (var i = this.Model.RunningApps.Count - 1; i >= 0; i--)
+            {
+                var m = this.Model.RunningApps[i];
+                this.KillProcess($"{m.App.ProcessName}{Path.GetExtension(m.App.Path)}");
+                m.DateFinished = DateTime.Now;
+                this.Model.RunApps.Add(m);
+                this.Model.RunningApps.Remove(m);
+            }
+        }
+
         public void KillProcess(string processName)
         {
-            try
+            var retry = 3;
+            while (true)
             {
-                this.Execute($"TASKKILL /F /IM {processName} /T", 10);
-            }
-            catch
-            {
+                try
+                {
+                    this.Execute($"TASKKILL /F /IM {processName} /T", 10);
+                    break;
+                }
+                catch
+                {
+                    retry--;
+                    if (retry <= 0)
+                    {
+                        break;
+                    }
+                }
 
+                this.Sleep(1);
             }
         }
 
@@ -251,74 +275,109 @@ namespace VRGameConsole
 
         public bool ExportExcel()
         {
-            try
+            var retry = 3;
+            while (true)
             {
-                var list = this.Model.RunApps.Where(m => !m.Saved).ToList();
-                if (list.Count == 0)
+                try
                 {
-                    return false;
-                }
-
-                list = this.Model.RunApps.OrderBy(m => m.DateStarted.GetValueOrDefault()).ToList();
-                IWorkbook wb = new XSSFWorkbook();
-                ISheet sht = wb.CreateSheet("运行记录");
-                var rowIndex = 0;
-                IRow rh = sht.CreateRow(rowIndex++);
-                var col = 0;
-                ICell cell = rh.CreateCell(col++);
-                cell.SetCellValue("开始时间");
-
-                cell = rh.CreateCell(col++);
-                cell.SetCellValue("结束时间");
-
-                cell = rh.CreateCell(col++);
-                cell.SetCellValue("程序名称");
-
-                cell = rh.CreateCell(col++);
-                cell.SetCellValue("时限");
-
-                var i = 1;
-                foreach (var t in list)
-                {
-                    col = 0;
-                    IRow row = sht.CreateRow(rowIndex++);
-
-                    row.CreateCell(col++).SetCellValue(t.DateStarted.HasValue ? t.DateStarted.Value.ToString("yyyy-MM-dd HH:mm:ss") : "N/A");
-                    row.CreateCell(col++).SetCellValue(t.DateFinished.HasValue ? t.DateFinished.Value.ToString("yyyy-MM-dd HH:mm:ss") : "N/A");
-                    row.CreateCell(col++).SetCellValue(Path.GetFileName(t.App.Path));
-                    row.CreateCell(col++).SetCellValue(t.LimitMinutes.HasValue ? t.LimitMinutes.Value.ToString() : "N/A");
-                    i++;
-                }
-
-                var fileName = $"RunRecords_{DateTime.Now.ToString("yyyy-MM-dd")}.xlsx";
-                using (var ms = new MemoryStream())
-                {
-                    wb.Write(ms);
-                    var buf = ms.ToArray();
-
-                    //保存为Excel文件  
-                    using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                    var list = this.Model.RunApps.Where(m => !m.Saved).ToList();
+                    if (list.Count == 0)
                     {
-                        fs.Write(buf, 0, buf.Length);
-                        fs.Flush();
+                        return false;
                     }
-                }
 
-                foreach (var t in list)
+                    list = this.Model.RunApps.OrderBy(m => m.DateStarted.GetValueOrDefault()).ToList();
+                    IWorkbook wb = new XSSFWorkbook();
+                    ISheet sht = wb.CreateSheet("运行记录");
+                    var rowIndex = 0;
+                    IRow rh = sht.CreateRow(rowIndex++);
+                    var col = 0;
+                    ICell cell = rh.CreateCell(col++);
+                    cell.SetCellValue("开始时间");
+
+                    cell = rh.CreateCell(col++);
+                    cell.SetCellValue("结束时间");
+
+                    cell = rh.CreateCell(col++);
+                    cell.SetCellValue("程序名称");
+
+                    cell = rh.CreateCell(col++);
+                    cell.SetCellValue("时限");
+
+                    cell = rh.CreateCell(col++);
+                    cell.SetCellValue("已完成");
+
+                    var i = 1;
+                    foreach (var t in list)
+                    {
+                        col = 0;
+                        IRow row = sht.CreateRow(rowIndex++);
+
+                        row.CreateCell(col++).SetCellValue(t.DateStarted.HasValue ? t.DateStarted.Value.ToString("yyyy-MM-dd HH:mm:ss") : "N/A");
+                        row.CreateCell(col++).SetCellValue(t.DateFinished.HasValue ? t.DateFinished.Value.ToString("yyyy-MM-dd HH:mm:ss") : "N/A");
+                        row.CreateCell(col++).SetCellValue(Path.GetFileName(t.App.Path));
+                        row.CreateCell(col++).SetCellValue(t.LimitMinutes.HasValue ? t.LimitMinutes.Value.ToString() : "N/A");
+                        row.CreateCell(col++).SetCellValue(t.Expired ? "" : "否");
+                        i++;
+                    }
+
+                    //var folder = $"{this.Model.StartTime.ToString("yyyy-MM-dd HH_mm_ss")}";
+                    //if (!Directory.Exists(folder))
+                    //{
+                    //    Directory.CreateDirectory(folder);
+                    //}
+
+                    var fileName = $"Records_{DateTime.Now.ToString("yyyyMMdd")}_{this.Model.StartTime.Ticks / 10000000L}{(string.IsNullOrEmpty(this.Model.Desc) ? string.Empty : $"_{this.Model.Desc}")}.xlsx";
+                    using (var ms = new MemoryStream())
+                    {
+                        wb.Write(ms);
+                        var buf = ms.ToArray();
+
+                        //保存为Excel文件  
+                        using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                        {
+                            fs.Write(buf, 0, buf.Length);
+                            fs.Flush();
+                        }
+                    }
+
+                    foreach (var t in list)
+                    {
+                        t.Saved = true;
+                    }
+
+                    return true;
+                }
+                catch (Exception ex)
                 {
-                    t.Saved = true;
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
 #if DEBUG
-                throw ex;
+                    retry--;
+                    if (retry <= 0)
+                    {
+                        throw ex;
+                    }
 #else
                 return false;
 #endif
+                }
+
+                this.Sleep(1);
             }
+        }
+
+        public string[] GetDefaultLimitDataSource()
+        {
+            var str = ConfigurationManager.AppSettings["DefaultLimits"];
+            if (string.IsNullOrEmpty(str))
+            {
+                return new string[0];
+            }
+
+            var array = str.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                .Where(m => int.TryParse(m.Trim(), out int tmp))
+                .OrderByDescending(m => Convert.ToInt32(m))
+                .ToArray();
+            return array;
         }
     }
 }

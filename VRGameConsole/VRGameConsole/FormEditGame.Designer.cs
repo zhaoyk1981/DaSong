@@ -42,29 +42,29 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 92);
+            this.label1.Location = new System.Drawing.Point(13, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 18);
+            this.label1.Size = new System.Drawing.Size(53, 18);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Path";
+            this.label1.Text = "Path:";
             // 
             // TxtPath
             // 
-            this.TxtPath.Location = new System.Drawing.Point(147, 87);
-            this.TxtPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtPath.Location = new System.Drawing.Point(57, 31);
+            this.TxtPath.Margin = new System.Windows.Forms.Padding(4);
             this.TxtPath.Name = "TxtPath";
             this.TxtPath.ReadOnly = true;
-            this.TxtPath.Size = new System.Drawing.Size(850, 28);
-            this.TxtPath.TabIndex = 1;
+            this.TxtPath.Size = new System.Drawing.Size(754, 28);
+            this.TxtPath.TabIndex = 10;
             // 
             // BtnBrowse
             // 
-            this.BtnBrowse.Location = new System.Drawing.Point(1008, 84);
-            this.BtnBrowse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnBrowse.Location = new System.Drawing.Point(825, 31);
+            this.BtnBrowse.Margin = new System.Windows.Forms.Padding(4);
             this.BtnBrowse.Name = "BtnBrowse";
-            this.BtnBrowse.Size = new System.Drawing.Size(112, 34);
-            this.BtnBrowse.TabIndex = 2;
+            this.BtnBrowse.Size = new System.Drawing.Size(112, 28);
+            this.BtnBrowse.TabIndex = 20;
             this.BtnBrowse.Text = "Browse";
             this.BtnBrowse.UseVisualStyleBackColor = true;
             this.BtnBrowse.Click += new System.EventHandler(this.BtnBrowse_Click);
@@ -72,25 +72,25 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(54, 130);
+            this.label2.Location = new System.Drawing.Point(13, 151);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 18);
+            this.label2.Size = new System.Drawing.Size(53, 18);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Name";
+            this.label2.Text = "Name:";
             // 
             // TxtName
             // 
-            this.TxtName.Location = new System.Drawing.Point(147, 126);
-            this.TxtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtName.Location = new System.Drawing.Point(57, 173);
+            this.TxtName.Margin = new System.Windows.Forms.Padding(4);
             this.TxtName.Name = "TxtName";
-            this.TxtName.Size = new System.Drawing.Size(850, 28);
-            this.TxtName.TabIndex = 4;
+            this.TxtName.Size = new System.Drawing.Size(754, 28);
+            this.TxtName.TabIndex = 40;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(54, 50);
+            this.label3.Location = new System.Drawing.Point(13, 81);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(125, 18);
@@ -99,19 +99,19 @@
             // 
             // TxtProcessName
             // 
-            this.TxtProcessName.Location = new System.Drawing.Point(182, 45);
-            this.TxtProcessName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtProcessName.Location = new System.Drawing.Point(57, 103);
+            this.TxtProcessName.Margin = new System.Windows.Forms.Padding(4);
             this.TxtProcessName.Name = "TxtProcessName";
             this.TxtProcessName.Size = new System.Drawing.Size(754, 28);
-            this.TxtProcessName.TabIndex = 6;
+            this.TxtProcessName.TabIndex = 30;
             // 
             // BtnSave
             // 
-            this.BtnSave.Location = new System.Drawing.Point(825, 212);
-            this.BtnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnSave.Location = new System.Drawing.Point(699, 234);
+            this.BtnSave.Margin = new System.Windows.Forms.Padding(4);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(112, 34);
-            this.BtnSave.TabIndex = 7;
+            this.BtnSave.TabIndex = 50;
             this.BtnSave.Text = "Save";
             this.BtnSave.UseVisualStyleBackColor = true;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -125,7 +125,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1200, 675);
+            this.ClientSize = new System.Drawing.Size(952, 286);
             this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.TxtProcessName);
             this.Controls.Add(this.label3);
@@ -134,9 +134,11 @@
             this.Controls.Add(this.BtnBrowse);
             this.Controls.Add(this.TxtPath);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "FormEditGame";
-            this.Text = "New Game";
+            this.Text = "Game Info";
             this.ResumeLayout(false);
             this.PerformLayout();
 

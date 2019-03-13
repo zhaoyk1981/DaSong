@@ -73,5 +73,16 @@ namespace VRGameConsole
             var r = this.Biz.ExportExcel();
             return r;
         }
+
+        public string[] GetDefaultLimitDataSource()
+        {
+            var list = this.Biz.GetDefaultLimitDataSource();
+            return list;
+        }
+
+        public void StopAllRunning()
+        {
+            this.Biz.StopAllRunning();
+        }
     }
 }

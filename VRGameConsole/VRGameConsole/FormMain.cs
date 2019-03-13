@@ -52,8 +52,10 @@ namespace VRGameConsole
         {
             this.Controller = new Controller(this.Model);
             this.Controller.LoadSettings();
+            this.TxtDesc.Text = this.Model.Desc;
             this.RefreshGamesList();
-            this.ComboBoxLimitTime.Items.AddRange(new string[] { "1", "5", "10", "30" });
+
+            this.ComboBoxLimitTime.Items.AddRange(this.Controller.GetDefaultLimitDataSource());
             this.Model.Worker.ProgressChanged += Worker_ProgressChanged;
             this.Model.Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             this.Model.Worker.DoWork += Worker_DoWork;
@@ -64,6 +66,12 @@ namespace VRGameConsole
         {
             while (true)
             {
+                this.Model.Worker.ReportProgress(0);
+                if (this.Model.Worker.CancellationPending)
+                {
+                    break;
+                }
+
                 this.Controller.Sleep(1);
                 if (this.Model.AppList.Count > 0)
                 {
@@ -74,16 +82,19 @@ namespace VRGameConsole
                     this.Controller.CompareProcess(ps);
                 }
             }
+
+            e.Cancel = this.Model.Worker.CancellationPending;
+            this.Model.Worker.ReportProgress(0);
         }
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
+            this.SetControlEnabled(this.Model.RunningApps.Count == 0);
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
+            this.SetControlEnabled(true);
         }
         private void BtnRemoveGame_Click(object sender, EventArgs e)
         {
@@ -127,10 +138,12 @@ namespace VRGameConsole
                 return;
             }
 
+            this.OrganizeLimit(limit);
             var g = new OperationRecordModel();
             g.App = this.Model.AppList.Single(m => string.Compare(m.Name, game, true) == 0);
             g.LimitMinutes = limit;
             this.Model.RunningApps.Add(g);
+            this.SetControlEnabled(false);
             try
             {
                 Process p = new Process();
@@ -138,11 +151,71 @@ namespace VRGameConsole
                 p.StartInfo.UseShellExecute = false;    //是否使用操作系统shell启动
                 p.StartInfo.CreateNoWindow = true;//不显示程序窗口
                 p.Start();//启动程序
+
             }
             catch (Exception ex)
             {
                 this.Model.RunningApps.Remove(g);
+                this.SetControlEnabled(true);
             }
+        }
+
+        private void SetControlEnabled(bool enabled)
+        {
+            this.BtnAddGame.Enabled =
+                this.BtnRemoveGame.Enabled =
+                this.BtnRunGame.Enabled = enabled;
+        }
+
+        private void OrganizeLimit(int limit)
+        {
+            var list = new List<string>();
+            foreach (var itm in this.ComboBoxLimitTime.Items)
+            {
+                var str = itm as string;
+                if (string.Compare(str, limit.ToString(), true) == 0)
+                {
+                    return;
+                }
+
+                list.Add(itm as string);
+            }
+
+            list.Add(limit.ToString());
+            this.ComboBoxLimitTime.Items.Clear();
+            this.ComboBoxLimitTime.Items.AddRange(list.OrderByDescending(m => Convert.ToInt32(m)).ToArray());
+            this.ComboBoxLimitTime.SelectedItem = limit.ToString();
+        }
+
+        private void TxtDesc_TextChanged(object sender, EventArgs e)
+        {
+            var list = "\\/:*?\"<>|".Select(m => m.ToString()).ToList();
+            var str = this.TxtDesc.Text.Trim();
+            foreach (var c in list)
+            {
+                str = str.Replace(c, "");
+            }
+
+            this.TxtDesc.Text = this.Model.Desc = str;
+            this.Controller.SaveSettings();
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show(this, "Are you sure you want to close the console application?", "Close console", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                this.Model.Worker.CancelAsync();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Controller.StopAllRunning();
+            this.Controller.ExportExcel();
         }
     }
 }
