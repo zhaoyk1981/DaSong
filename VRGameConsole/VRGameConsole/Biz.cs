@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VRGameConsole.Models
+namespace VRGameConsole
 {
-    public class ViewModel : SettingsModel
+    public class Biz
     {
-
-        
     }
 }

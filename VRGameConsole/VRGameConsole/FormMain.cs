@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VRGameConsole.Models;
 
 namespace VRGameConsole
 {
@@ -15,6 +16,24 @@ namespace VRGameConsole
         public FormMain()
         {
             InitializeComponent();
+        }
+
+        private ViewModel Model { get; set; } = new ViewModel();
+
+        private void BtnAddGame_Click(object sender, EventArgs e)
+        {
+            if (this.ChooseGameDialog.ShowDialog() == DialogResult.OK)
+            {
+                var fileName = this.ChooseGameDialog.FileName;
+                var newAppForm = new FormNewGame();
+                newAppForm.NewAppPath = fileName;
+                newAppForm.ShowDialog(this);
+            }
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
