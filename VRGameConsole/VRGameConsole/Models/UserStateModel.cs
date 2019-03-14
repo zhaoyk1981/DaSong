@@ -8,6 +8,6 @@ namespace VRGameConsole.Models
 {
     public class UserStateModel
     {
-        public int? CountDown { get; set; }
+        public TimeSpan? CountDown { get; set; }
     }
 }

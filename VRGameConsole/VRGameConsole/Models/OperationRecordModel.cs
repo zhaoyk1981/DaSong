@@ -45,13 +45,13 @@ namespace VRGameConsole.Models
             }
         }
 
-        public int? CountDown
+        public TimeSpan? CountDown
         {
             get
             {
                 if (this.DateStarted.HasValue && this.LimitMinutes.HasValue)
                 {
-                    return Convert.ToInt32((this.DateStarted.Value.AddMinutes(this.LimitMinutes.Value) - DateTime.Now).TotalSeconds);
+                    return this.DateStarted.Value.AddMinutes(this.LimitMinutes.Value) - DateTime.Now;
                 }
 
                 return null;

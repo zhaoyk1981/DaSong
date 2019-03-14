@@ -173,9 +173,9 @@ namespace VRGameConsole
                     this.Model.RunApps.Add(m);
                     this.Model.RunningApps.Remove(m);
                     changed = true;
-                    this.Model.Worker.ReportProgress(0, new UserStateModel() { CountDown = -1 });
+                    this.Model.Worker.ReportProgress(0, new UserStateModel());
                 }
-                else if (m.CountDown.HasValue && m.CountDown.Value >= 0 && m.CountDown.Value <= 30)
+                else if (m.CountDown.HasValue)
                 {
                     this.Model.Worker.ReportProgress(0, new UserStateModel() { CountDown = m.CountDown });
                 }

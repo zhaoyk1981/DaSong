@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -57,6 +58,18 @@ namespace VRGameConsole
             this.RefreshGamesList();
 
             this.ComboBoxLimitTime.Items.AddRange(this.Controller.GetDefaultLimitDataSource());
+            if (string.Compare(ConfigurationManager.AppSettings["InputLimits"], "false", true) == 0)
+            {
+                if (this.ComboBoxLimitTime.Items.Count == 0)
+                {
+                    MessageBox.Show("Please set values for limit drop down list in app.config");
+                    return;
+                }
+
+                this.ComboBoxLimitTime.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.ComboBoxLimitTime.SelectedIndex = 0;
+            }
+
             this.Model.Worker.ProgressChanged += Worker_ProgressChanged;
             this.Model.Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             this.Model.Worker.DoWork += Worker_DoWork;
@@ -95,7 +108,9 @@ namespace VRGameConsole
             {
                 if (us.CountDown.HasValue)
                 {
-                    this.LblCountDown.Text = us.CountDown.Value < 0 ? string.Empty : us.CountDown.Value.ToString().PadLeft(2, '0');
+                    this.LblCountDown.Text = us.CountDown.Value.TotalSeconds > 0
+                        ? $"{Convert.ToInt32(Math.Floor(us.CountDown.Value.TotalMinutes)).ToString().PadLeft(2, '0')}:{us.CountDown.Value.Seconds.ToString().PadLeft(2, '0')}"
+                        : string.Empty;
                 }
             }
 

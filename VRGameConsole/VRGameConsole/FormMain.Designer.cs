@@ -61,7 +61,7 @@
             // 
             this.ListGames.FormattingEnabled = true;
             this.ListGames.Location = new System.Drawing.Point(32, 69);
-            this.ListGames.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ListGames.Margin = new System.Windows.Forms.Padding(2);
             this.ListGames.Name = "ListGames";
             this.ListGames.ScrollAlwaysVisible = true;
             this.ListGames.Size = new System.Drawing.Size(389, 147);
@@ -70,7 +70,7 @@
             // BtnRemoveGame
             // 
             this.BtnRemoveGame.Location = new System.Drawing.Point(443, 112);
-            this.BtnRemoveGame.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnRemoveGame.Margin = new System.Windows.Forms.Padding(2);
             this.BtnRemoveGame.Name = "BtnRemoveGame";
             this.BtnRemoveGame.Size = new System.Drawing.Size(103, 24);
             this.BtnRemoveGame.TabIndex = 40;
@@ -81,7 +81,7 @@
             // BtnRunGame
             // 
             this.BtnRunGame.Location = new System.Drawing.Point(316, 229);
-            this.BtnRunGame.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BtnRunGame.Margin = new System.Windows.Forms.Padding(2);
             this.BtnRunGame.Name = "BtnRunGame";
             this.BtnRunGame.Size = new System.Drawing.Size(103, 24);
             this.BtnRunGame.TabIndex = 60;
@@ -93,7 +93,7 @@
             // 
             this.ComboBoxLimitTime.FormattingEnabled = true;
             this.ComboBoxLimitTime.Location = new System.Drawing.Point(101, 233);
-            this.ComboBoxLimitTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ComboBoxLimitTime.Margin = new System.Windows.Forms.Padding(2);
             this.ComboBoxLimitTime.Name = "ComboBoxLimitTime";
             this.ComboBoxLimitTime.Size = new System.Drawing.Size(112, 21);
             this.ComboBoxLimitTime.TabIndex = 50;
@@ -111,7 +111,7 @@
             // TxtDesc
             // 
             this.TxtDesc.Location = new System.Drawing.Point(32, 20);
-            this.TxtDesc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TxtDesc.Margin = new System.Windows.Forms.Padding(2);
             this.TxtDesc.Name = "TxtDesc";
             this.TxtDesc.Size = new System.Drawing.Size(389, 20);
             this.TxtDesc.TabIndex = 10;
@@ -140,13 +140,13 @@
             // LblCountDown
             // 
             this.LblCountDown.AutoSize = true;
-            this.LblCountDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblCountDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblCountDown.ForeColor = System.Drawing.Color.Red;
-            this.LblCountDown.Location = new System.Drawing.Point(442, 156);
+            this.LblCountDown.Location = new System.Drawing.Point(434, 174);
             this.LblCountDown.Name = "LblCountDown";
-            this.LblCountDown.Size = new System.Drawing.Size(104, 73);
+            this.LblCountDown.Size = new System.Drawing.Size(112, 42);
             this.LblCountDown.TabIndex = 61;
-            this.LblCountDown.Text = "30";
+            this.LblCountDown.Text = "30:00";
             // 
             // FormMain
             // 
