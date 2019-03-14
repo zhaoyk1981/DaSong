@@ -49,8 +49,16 @@ namespace VRGameConsole
             }
         }
 
+        public string Mgr { get; set; }
+
         private void FormMain_Load(object sender, EventArgs e)
         {
+            if (string.Compare(this.Mgr, "-management", true) != 0)
+            {
+                this.BtnAddGame.Visible = false;
+                this.BtnRemoveGame.Visible = false;
+            }
+
             this.LblCountDown.Text = string.Empty;
             this.Controller = new Controller(this.Model);
             this.Controller.LoadSettings();
@@ -73,7 +81,10 @@ namespace VRGameConsole
             this.Model.Worker.ProgressChanged += Worker_ProgressChanged;
             this.Model.Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             this.Model.Worker.DoWork += Worker_DoWork;
-            this.Model.Worker.RunWorkerAsync();
+            if (string.Compare(this.Mgr, "-management", true) != 0)
+            {
+                this.Model.Worker.RunWorkerAsync();
+            }
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
