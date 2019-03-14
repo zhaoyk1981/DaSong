@@ -50,6 +50,7 @@ namespace VRGameConsole
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            this.LblCountDown.Text = string.Empty;
             this.Controller = new Controller(this.Model);
             this.Controller.LoadSettings();
             this.TxtDesc.Text = this.Model.Desc;
@@ -89,6 +90,15 @@ namespace VRGameConsole
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            var us = e.UserState as UserStateModel;
+            if (us != null)
+            {
+                if (us.CountDown.HasValue)
+                {
+                    this.LblCountDown.Text = us.CountDown.Value < 0 ? string.Empty : us.CountDown.Value.ToString().PadLeft(2, '0');
+                }
+            }
+
             this.SetControlEnabled(this.Model.RunningApps.Count == 0);
         }
 

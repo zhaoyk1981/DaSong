@@ -32,13 +32,29 @@ namespace VRGameConsole.Models
 
         public bool Saved { get; set; }
 
-        public bool Expired
+        public bool? Expired
         {
             get
             {
-                return this.DateStarted.HasValue
-                    && this.LimitMinutes.HasValue
-                    && DateTime.Now > this.DateStarted.Value.AddMinutes(this.LimitMinutes.Value);
+                if (this.DateStarted.HasValue && this.LimitMinutes.HasValue)
+                {
+                    return DateTime.Now > this.DateStarted.Value.AddMinutes(this.LimitMinutes.Value);
+                }
+
+                return null;
+            }
+        }
+
+        public int? CountDown
+        {
+            get
+            {
+                if (this.DateStarted.HasValue && this.LimitMinutes.HasValue)
+                {
+                    return Convert.ToInt32((this.DateStarted.Value.AddMinutes(this.LimitMinutes.Value) - DateTime.Now).TotalSeconds);
+                }
+
+                return null;
             }
         }
 

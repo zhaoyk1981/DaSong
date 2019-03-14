@@ -166,13 +166,18 @@ namespace VRGameConsole
             for (var i = this.Model.RunningApps.Count - 1; i >= 0; i--)
             {
                 var m = this.Model.RunningApps[i];
-                if (m.Expired)
+                if (m.Expired.GetValueOrDefault())
                 {
                     this.KillProcess($"{m.App.ProcessName}{Path.GetExtension(m.App.Path)}");
                     m.DateFinished = DateTime.Now;
                     this.Model.RunApps.Add(m);
                     this.Model.RunningApps.Remove(m);
                     changed = true;
+                    this.Model.Worker.ReportProgress(0, new UserStateModel() { CountDown = -1 });
+                }
+                else if (m.CountDown.HasValue && m.CountDown.Value >= 0 && m.CountDown.Value <= 30)
+                {
+                    this.Model.Worker.ReportProgress(0, new UserStateModel() { CountDown = m.CountDown });
                 }
             }
 
@@ -208,8 +213,11 @@ namespace VRGameConsole
             {
                 try
                 {
-                    this.Execute($"TASKKILL /F /IM {processName} /T", 10);
-                    break;
+                    var output = this.Execute($"TASKKILL /F /IM {processName} /T", 10);
+                    if (!output.Contains("成功") && !output.Contains("SUCCESS"))
+                    {
+                        break;
+                    }
                 }
                 catch
                 {
@@ -218,9 +226,9 @@ namespace VRGameConsole
                     {
                         break;
                     }
-                }
 
-                this.Sleep(1);
+                    this.Sleep(1);
+                }
             }
         }
 
@@ -317,7 +325,7 @@ namespace VRGameConsole
                         row.CreateCell(col++).SetCellValue(t.DateFinished.HasValue ? t.DateFinished.Value.ToString("yyyy-MM-dd HH:mm:ss") : "N/A");
                         row.CreateCell(col++).SetCellValue(Path.GetFileName(t.App.Path));
                         row.CreateCell(col++).SetCellValue(t.LimitMinutes.HasValue ? t.LimitMinutes.Value.ToString() : "N/A");
-                        row.CreateCell(col++).SetCellValue(t.Expired ? "" : "否");
+                        row.CreateCell(col++).SetCellValue(t.Expired.GetValueOrDefault() ? "" : "否");
                         i++;
                     }
 
@@ -357,7 +365,7 @@ namespace VRGameConsole
                         throw ex;
                     }
 #else
-                return false;
+                    return false;
 #endif
                 }
 
