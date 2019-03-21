@@ -55,14 +55,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Controllers\UIController.cs" />
+    <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\AppContextModel.cs" />
+    <Compile Include="Models\Order500Model.cs" />
+    <Compile Include="Models\UserStateModel.cs" />
+    <Compile Include="Models\WorkResultModel.cs" />
+    <Compile Include="Models\交易记录Model.cs" />
+    <Compile Include="Models\价格策略Enum.cs" />
+    <Compile Include="Models\Price7Model.cs" />
+    <Compile Include="Models\出价Model.cs" />
+    <Compile Include="Models\出价表Model.cs" />
+    <Compile Include="Models\帐户Model.cs" />
+    <Compile Include="Models\操作Enum.cs" />
+    <Compile Include="Models\浏览器Enum.cs" />
+    <Compile Include="Models\订单Model.cs" />
+    <Compile Include="Models\订单历史分析结果.cs" />
+    <Compile Include="Models\设置Model.cs" />
+    <Compile Include="Models\预期值Enum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ControlUtil.cs" />
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -85,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Biz\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
