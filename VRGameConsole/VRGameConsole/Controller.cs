@@ -3,6 +3,9 @@ using VRGameConsole.Models;
 
 namespace VRGameConsole
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Controller
     {
         public Controller(ViewModel model)
