@@ -120,7 +120,6 @@ namespace JDCount
                 //获取第一行
                 IRow headrow = sheet.GetRow(0);
 
-                int? targetIndex1 = null;
                 //创建列
                 for (int i = headrow.FirstCellNum; i < headrow.Cells.Count; i++)
                 {
@@ -164,6 +163,7 @@ namespace JDCount
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return false;
             }
         }
