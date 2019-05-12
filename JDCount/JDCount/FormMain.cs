@@ -125,7 +125,7 @@ namespace JDCount
                 {
                     switch (headrow.Cells[i].StringCellValue.Trim())
                     {
-                        case "商品名":
+                        case "关键词":
                             {
                                 this.Context.KeywordColIndex = i;
                                 break;
