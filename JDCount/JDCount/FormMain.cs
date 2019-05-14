@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -78,11 +79,12 @@ namespace JDCount
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             this.TxtPath.ReadOnly = false;
+            this.lblPercent.Text = $"{this.Context.List.Count}/{this.Context.List.Count}";
         }
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
+            this.lblPercent.Text = $"{e.ProgressPercentage}/{this.Context.List.Count}";
         }
 
         private void SetControls()
@@ -143,9 +145,14 @@ namespace JDCount
                     }
                 }
 
-                if (this.Context.CountColIndex < 0 || this.Context.KeywordColIndex < 0)
+                if (this.Context.KeywordColIndex < 0)
                 {
                     return false;
+                }
+
+                if (this.Context.CountColIndex < 0)
+                {
+                    this.Context.CountColIndex = headrow.Cells.Count;
                 }
 
                 this.Context.List.Clear();
@@ -192,11 +199,23 @@ namespace JDCount
 
             //获取第一个sheet
             ISheet sheet = wk.GetSheetAt(0);
+            var row = sheet.GetRow(0);
+            ICell cell = null;
+            if (row.Cells.Count <= this.Context.CountColIndex)
+            {
+                cell = row.CreateCell(this.Context.CountColIndex);
+            }
+            else
+            {
+                cell = row.Cells[this.Context.CountColIndex];
+            }
+
+            cell.SetCellValue("商品数");
 
             foreach (var model in this.Context.List)
             {
-                var row = sheet.GetRow(model.Index);
-                ICell cell = null;
+                row = sheet.GetRow(model.Index);
+                //ICell cell = null;
                 if (row.Cells.Count <= this.Context.CountColIndex)
                 {
                     cell = row.CreateCell(this.Context.CountColIndex);
@@ -218,11 +237,14 @@ namespace JDCount
 
         private void GetCountFromJD()
         {
+            var i = 0;
             foreach (var prod in this.Context.List)
             {
                 var url = $"https://search.jd.com/Search?keyword={prod.Keyword}&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&wq=%E7%9D%AB%E6%AF%9B%E8%86%8F&stock=1&click=1{(this.Context.京东物流 ? "&wtype=1" : "")}";
                 //var html = this.GetResponseContent(url);
                 prod.JDCount = this.FindCount(url);
+                i++;
+                this.Worker.ReportProgress(i, null);
             }
         }
 
@@ -247,22 +269,32 @@ namespace JDCount
 
         private int? FindCount(string url)
         {
-            try
+            var i = 5;
+            while (true)
             {
-                HtmlWeb webClient = new HtmlWeb();
-                HtmlAgilityPack.HtmlDocument doc = webClient.Load(url);
-                var jResCountNode = doc.DocumentNode.SelectSingleNode("//span[@id='J_resCount']");
-
-                if (int.TryParse(jResCountNode.InnerText.Replace("+", ""), out int tmp))
+                try
                 {
-                    return tmp;
-                }
+                    HtmlWeb webClient = new HtmlWeb();
+                    HtmlAgilityPack.HtmlDocument doc = webClient.Load(url);
+                    var jResCountNode = doc.DocumentNode.SelectSingleNode("//span[@id='J_resCount']");
 
-                return null;
-            }
-            catch (Exception ex)
-            {
-                return null;
+                    if (int.TryParse(jResCountNode.InnerText.Replace("+", ""), out int tmp))
+                    {
+                        return tmp;
+                    }
+
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    i++;
+                    if (i <= 0)
+                    {
+                        return null;
+                    }
+
+                    Thread.Sleep(1000);
+                }
             }
         }
     }

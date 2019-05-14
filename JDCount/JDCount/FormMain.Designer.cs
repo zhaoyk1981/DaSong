@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.TxtPath = new System.Windows.Forms.TextBox();
             this.openXlsFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.lblPercent = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // BtnBrowse
@@ -67,11 +68,20 @@
             // 
             this.openXlsFileDialog.Filter = "Excel 文件|*.xls";
             // 
+            // lblPercent
+            // 
+            this.lblPercent.AutoSize = true;
+            this.lblPercent.Location = new System.Drawing.Point(12, 74);
+            this.lblPercent.Name = "lblPercent";
+            this.lblPercent.Size = new System.Drawing.Size(0, 18);
+            this.lblPercent.TabIndex = 3;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1041, 115);
+            this.Controls.Add(this.lblPercent);
             this.Controls.Add(this.TxtPath);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnBrowse);
@@ -89,6 +99,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TxtPath;
         private System.Windows.Forms.OpenFileDialog openXlsFileDialog;
+        private System.Windows.Forms.Label lblPercent;
     }
 }
 
