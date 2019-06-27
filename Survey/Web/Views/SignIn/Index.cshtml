@@ -1,0 +1,22 @@
+﻿@model SignInViewModel
+@{
+    ViewBag.Title = "登录";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-content page-sign-in" data-page-js="signin" vm-json="@Model.Json">
+    <form autocomplete="off">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-form-label" for="TxtMobile">手机号：</label>
+                <input type="text" id="TxtMobile" name="Mobile" class="form-control" maxlength="11" />
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="TxtIDNumbers">身份证号：</label>
+                <input type="text" id="TxtIDNumbers" name="IDNumbers" class="form-control" maxlength="18" />
+            </div>
+            <div class="form-group">
+                <button type="button" id="BtnSubmit" class="btn btn-primary">验证</button>
+            </div>
+        </fieldset>
+    </form>
+</div>

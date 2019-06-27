@@ -1,0 +1,22 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_Layout</title>
+    <link href="~/css/default.css" rel="stylesheet" />
+    @RenderSection("Head", false)
+    <script data-main="../js/pages/main.js" src="~/scripts/require.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+    @RenderSection("BodyFoot", false)
+</body>
+</html>
