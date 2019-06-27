@@ -75,6 +75,8 @@ namespace VRGameConsole
                 this.ComboBoxLimitTime.SelectedIndex = 0;
             }
 
+            this.ComboBoxLimitTime.Text = ConfigurationManager.AppSettings["DefaultSelectedLimits"];
+
             this.Model.Worker.ProgressChanged += Worker_ProgressChanged;
             this.Model.Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             this.Model.Worker.DoWork += Worker_DoWork;

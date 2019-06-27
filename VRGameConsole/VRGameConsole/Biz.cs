@@ -210,7 +210,7 @@ namespace VRGameConsole
             {
                 try
                 {
-                    var output = this.Execute($"TASKKILL /F /IM {processName} /T", 10);
+                    var output = this.Execute($"TASKKILL /F /IM \"{processName}\" /T", 10);
                     if (!output.Contains("成功") && !output.Contains("SUCCESS"))
                     {
                         break;
