@@ -1,0 +1,35 @@
+﻿.multi-view {
+    & > .sub-view {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+
+        &.step-question {
+            &.question {
+                border-collapse: collapse;
+                border-spacing: 0;
+
+                td {
+                    vertical-align: top;
+
+                    &.question-sn {
+                        white-space: nowrap;
+                        width: 1%;
+                        padding-right: 5px;
+                    }
+                }
+            }
+
+            .answers {
+                text-align: center;
+
+                button {
+                    display: block;
+                    margin: 20px auto;
+                }
+            }
+        }
+    }
+}

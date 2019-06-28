@@ -7022,3 +7022,22 @@ a.text-dark:hover, a.text-dark:focus {
 
 .page-sign-in fieldset {
   margin-left: 30px; }
+
+.multi-view > .sub-view {
+  display: none; }
+  .multi-view > .sub-view.active {
+    display: block; }
+  .multi-view > .sub-view.step-question.question {
+    border-collapse: collapse;
+    border-spacing: 0; }
+    .multi-view > .sub-view.step-question.question td {
+      vertical-align: top; }
+      .multi-view > .sub-view.step-question.question td.question-sn {
+        white-space: nowrap;
+        width: 1%;
+        padding-right: 5px; }
+  .multi-view > .sub-view.step-question .answers {
+    text-align: center; }
+    .multi-view > .sub-view.step-question .answers button {
+      display: block;
+      margin: 20px auto; }

@@ -5,10 +5,41 @@
 }
 
 <div class="page-content page-survey" data-page-js="survey" vm-json="@Model.Json">
-    <div id="SubViewSurvey">
-        <h2>Index</h2>
-    </div>
-    <div id="SubViewCompleted">
+    <div class="logo">
 
     </div>
+    <div id="SubViewSurvey">
+        <div class="multi-view">
+            @for (var i = 0; i < Model.Questions.Count; i++)
+            {
+                <div class="sub-view step-question active">
+                    <table class="question">
+                        <tbody>
+                            <tr>
+                                <td class="question-sn">@($"{i + 1}.")</td>
+                                <td>@Model.Questions[i].Text</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="answers">
+                        @for (var j = 0; j < Model.Questions[i].Answers.Count; j++)
+                        {
+                            <button type="button" class="btn-answer" value="@Model.Questions[i].Answers[j].ID.Value">@Model.Questions[i].Answers[j].Text</button>
+                        }
+                    </div>
+                </div>
+            }
+            <div class="sub-view step-suggest">
+                <div>您还有什么更好的建议请在下方留言</div>
+                <textarea id="TxtSuggest"></textarea>
+                <div>
+                    <button type="button" id="BtnSubmit">提交表单</button>
+                </div>
+            </div>
+            <div class="sub-view step-complete">
+                完成
+            </div>
+        </div>
+    </div>
+
 </div>
