@@ -1,0 +1,27 @@
+﻿@{
+    var buildVer = ViewData["BuildVer"] as string;
+    var debug = ViewData["DEBUG"] as string;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@(ViewBag.Title)</title>
+    <link href="~/css/default@(debug == "DEBUG" ? "" : ".min").css?buildver=@buildVer" rel="stylesheet" />
+    <script>
+        sessionStorage.setItem('buildVer', '@buildVer');
+        window.debug = '@debug';
+    </script>
+    @RenderSection("Head", false)
+    <script data-main="../js/pages/main.js?buildver=@buildVer" src="~/scripts/require.js?buildver=@buildVer"></script>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+    @RenderSection("BodyFoot", false)
+</body>
+</html>
