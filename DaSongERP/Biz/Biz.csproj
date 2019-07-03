@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Biz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserBiz.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dal\Dal.csproj">

@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[店铺] (
+    [ID]   UNIQUEIDENTIFIER NOT NULL,
+    [Name] NVARCHAR (50)    NOT NULL,
+    [SN]   INT              NOT NULL,
+    CONSTRAINT [PK_店铺] PRIMARY KEY CLUSTERED ([ID] ASC)
+);
+

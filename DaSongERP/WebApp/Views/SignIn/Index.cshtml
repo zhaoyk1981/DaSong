@@ -1,0 +1,21 @@
+﻿@model SignInViewModel
+@{
+    ViewBag.Title = "登录";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="vw-sign-in" data-page-js="signin">
+    <h2>登录</h2>
+    <form default-button="#BtnSubmit" autocomplete="off">
+        <div class="form-group">
+            <label for="TxtUserName" class="custom-control-label">用户名</label>
+            <input type="text" class="form-control" name="UserName" id="TxtUserName" on-enter />
+        </div>
+        <div class="form-group">
+            <label>密码</label>
+            <input type="password" class="form-control" name="Password" id="TxtPassword" on-enter />
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" id="BtnSubmit">登录</button>
+        </div>
+    </form>
+</div>
