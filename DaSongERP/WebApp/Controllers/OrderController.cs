@@ -147,5 +147,28 @@ namespace WebApp.Controllers
                 Success = rowCount == 1
             });
         }
+
+        public ActionResult ShouHou(Guid id)
+        {
+            var vm = this.OrderBiz.Get售后OrderViewModel(id);
+            if (vm.Order == null)
+            {
+                return Redirect("/Order");
+            }
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AShouHou()
+        {
+            var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
+            var rowCount = this.OrderBiz.Update售后(order);
+
+            return Json(new
+            {
+                Success = rowCount == 1
+            });
+        }
     }
 }

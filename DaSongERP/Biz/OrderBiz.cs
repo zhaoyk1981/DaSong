@@ -104,5 +104,21 @@ namespace DaSongERP.Biz
             vm.Order = this.GetOrderBy(id);
             return vm;
         }
+
+        public int Update售后(OrderModel order)
+        {
+            order.售后人员ID = this.UserID;
+            var rowCount = OrderDao.Update售后(order);
+            return rowCount;
+        }
+
+        public EditOrderViewModel Get售后OrderViewModel(Guid id)
+        {
+            var vm = new EditOrderViewModel();
+            vm.售后操作DataSource = MetaDao.Get售后操作();
+            vm.售后原因DataSource = MetaDao.Get售后原因();
+            vm.Order = this.GetOrderBy(id);
+            return vm;
+        }
     }
 }

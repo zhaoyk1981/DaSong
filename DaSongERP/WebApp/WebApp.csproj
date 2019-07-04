@@ -12,8 +12,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebApp</RootNamespace>
-    <AssemblyName>WebApp</AssemblyName>
+    <RootNamespace>DaSongERP.WebApp</RootNamespace>
+    <AssemblyName>DaSongERP.WebApp</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -117,6 +117,7 @@
     <Content Include="js\pages\main.js" />
     <Content Include="js\pages\neworder.js" />
     <Content Include="js\pages\orderlist.js" />
+    <Content Include="js\pages\shouhouorder.js" />
     <Content Include="js\pages\signin.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -274,6 +275,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -290,6 +292,7 @@
     <Content Include="Views\Order\GenJin.cshtml" />
     <Content Include="Views\Order\Import.cshtml" />
     <Content Include="Views\Order\ChaiBao.cshtml" />
+    <Content Include="Views\Order\ShouHou.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -300,7 +303,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Excel\" />
-    <Folder Include="Models\" />
     <Folder Include="ProductImages\" />
     <Folder Include="Views\Authorized\" />
     <Folder Include="Views\Base\" />

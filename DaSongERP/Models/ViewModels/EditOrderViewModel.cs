@@ -14,6 +14,10 @@ namespace DaSongERP.ViewModels
 
         public IList<MetaModel> 审单操作DataSource { get; set; }
 
+        public IList<MetaModel> 售后操作DataSource { get; set; }
+
+        public IList<MetaModel> 售后原因DataSource { get; set; }
+
         public OrderModel Order { get; set; }
 
     }

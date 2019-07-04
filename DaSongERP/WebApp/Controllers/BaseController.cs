@@ -148,5 +148,10 @@ namespace WebApp.Controllers
         {
             this.SetLoggedInUserId();
         }
+
+        public string DPTxt(DateTime? dt, string format = "yyyy-MM-dd HH:mm", string dflt = "无")
+        {
+            return dt.HasValue ? dt.Value.ToString(format) : dflt;
+        }
     }
 }

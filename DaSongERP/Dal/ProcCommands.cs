@@ -185,5 +185,21 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_Update拆包
+
+        #region sp_Update售后
+        public static SqlCommand sp_Update售后()
+        {
+            var cmd = new SqlCommand("sp_Update售后") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后操作ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后原因ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后备注", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后人员ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客人退回单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@是否淘宝退回", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后完结", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Update售后
     }
 }
