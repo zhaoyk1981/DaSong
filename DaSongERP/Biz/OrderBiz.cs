@@ -25,7 +25,7 @@ namespace DaSongERP.Biz
             order.ID = Guid.NewGuid();
             order.采购人ID = this.UserID;
             order.进货日期 = DateTime.Now;
-            
+
             return this.OrderDao.Create(order);
         }
 
@@ -67,6 +67,27 @@ namespace DaSongERP.Biz
             order.跟进人ID = this.UserID;
             var rowCount = this.OrderDao.订单跟进(order);
             return rowCount;
+        }
+
+        public string 电话客服导入(Stream excelStream, bool isXlsx)
+        {
+            var memStream = new MemoryStream();
+            excelStream.CopyTo(memStream);
+            var ordersInExcel = ExcelDao.Read(excelStream, isXlsx);
+            foreach (var order in ordersInExcel)
+            {
+                order.导入结果 = OrderDao.Update电话备注(order);
+            }
+
+            var file = $"导入结果_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xls{(isXlsx ? "x" : "")}";
+            var path = $"{HttpContext.Current.Server.MapPath("~/Excel")}\\{file}";
+            ExcelDao.Write(memStream, isXlsx, ordersInExcel, path);
+            return file;
+        }
+
+        public int Count未导入()
+        {
+            return OrderDao.Count未导入();
         }
     }
 }

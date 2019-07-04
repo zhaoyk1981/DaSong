@@ -104,5 +104,25 @@ namespace WebApp.Controllers
                 Success = rowCount == 1
             });
         }
+
+        public ActionResult Import()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AImport()
+        {
+            var excelStream = this.Request.Files[0].InputStream;
+            bool isXlsx = string.Compare(Path.GetExtension(this.Request.Files[0].FileName), ".xlsx", true) == 0;
+            var file = OrderBiz.电话客服导入(excelStream, isXlsx);
+            var 未导入 = OrderBiz.Count未导入();
+            return Json(new
+            {
+                Success = true,
+                Url = $"/Excel/{file}",
+                未导入 = 未导入
+            });
+        }
     }
 }

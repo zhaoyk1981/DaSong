@@ -163,6 +163,11 @@ namespace DaSongERP.Models
         }
         public string 电话情况 { get; set; }
 
+        /// <summary>
+        /// 0 没找到， 1 无需导入， 2 已更新
+        /// </summary>
+        public int? 导入结果 { get; set; }
+
         public MetaModel 审单操作 { get; set; }
 
         public Guid? 审单操作ID

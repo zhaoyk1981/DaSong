@@ -1,8 +1,4 @@
 ﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, enhance, model, validation) {
-    let initValidation = function () {
-
-    };
-
     let validate = function () {
         var validationResult = validation.validate(['default']);
         if (validationResult !== true) {
@@ -18,29 +14,31 @@
             return;
         }
 
-        var m = model.createModel();
-        var json = model.captureJSON(m);
-
         var formData = new FormData();
-        formData.append("formJson", json);
-        //formData.append("file", $('#IptPicture')[0].files[0], "file");
-        //formData.append("upload_file", true);
+        //formData.append("formJson", json);
+        formData.append("file", $('#IptExcel')[0].files[0], $('#IptExcel')[0].files[0].name);
+        formData.append("upload_file", true);
         $.ajax({
-            url: '/Order/AGenJin',
+            url: '/Order/AImport',
             type: 'POST',
             dataType: 'JSON',
             data: formData,
             processData: false,
             contentType: false,
             success: function (data) {
-                alert(data.Success === true ? '操作成功' : '操作失败');
+                if (data.Success !== true) {
+                    alert('操作失败');
+                    return;
+                }
+
+                $("#LblMessage").text('未导入订单数量：' + data.未导入);
+                window.open(data.Url);
             }
         });
     };
 
     return {
         ready: function () {
-            initValidation();
             $('#BtnSubmit').click(btnSubmit_click);
         }
     };

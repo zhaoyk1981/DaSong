@@ -10,7 +10,7 @@ CREATE PROCEDURE [dbo].[sp_UpdateOrder]
     ,@JD订单号 nvarchar(50)
     ,@客人地址 nvarchar(150)
     ,@淘宝账号ID uniqueidentifier
-	,@淘宝订单号 NVARCHAR(500)
+	,@淘宝订单号 NVARCHAR(50)
     ,@采购备注 nvarchar(max)
     ,@订单修改备注 nvarchar(max)
     ,@京东价 money

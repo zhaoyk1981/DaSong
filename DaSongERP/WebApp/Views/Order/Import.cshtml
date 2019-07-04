@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="vw-import-order" data-page-js="importorders">
+    <h2>Import</h2>
+    <div>
+        <a href="/Order">订单列表</a>
+    </div>
+    <form validation-group="default" autocomplete="off">
+        <fieldset>
+            <legend>订单跟进</legend>
+            <div class="form-group">
+                <label for="IptExcel">Excel</label>
+                <input type="file" class="form-control" id="IptExcel" />
+                <span class="validator" id="vdFile" data-required="" data-validate-target="#IptExcel"><span class="error-message text-danger">此项必填</span></span>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" id="BtnSubmit">上传</button>
+            </div>
+            <div id="LblMessage" class="alert alert-info hide-when-empty"></div>
+        </fieldset>
+    </form>
+</div>
+

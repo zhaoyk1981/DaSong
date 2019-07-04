@@ -50,5 +50,19 @@ namespace DaSongERP.Dal
             var rowCount = (int)DBHelper.ExecuteScalar(cmd);
             return rowCount;
         }
+
+        public int Update电话备注(OrderModel order)
+        {
+            var cmd = ProcCommands.sp_Update电话备注().SetParameterValues(order);
+            var 导入结果 = (int)DBHelper.ExecuteScalar(cmd);
+            return 导入结果;
+        }
+
+        public int Count未导入()
+        {
+            var cmd = ProcCommands.sp_Count未导入();
+            var result = (int)DBHelper.ExecuteScalar(cmd);
+            return result;
+        }
     }
 }

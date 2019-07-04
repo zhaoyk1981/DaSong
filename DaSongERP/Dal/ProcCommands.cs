@@ -153,5 +153,24 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_订单跟进
+
+        #region sp_Update电话备注
+        public static SqlCommand sp_Update电话备注()
+        {
+            var cmd = new SqlCommand("sp_Update电话备注") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@电话客服ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@电话备注", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Update电话备注
+
+        #region sp_Count未导入
+        public static SqlCommand sp_Count未导入()
+        {
+            var cmd = new SqlCommand("sp_Count未导入") { CommandType = CommandType.StoredProcedure };
+            return cmd;
+        }
+        #endregion sp_Count未导入
     }
 }

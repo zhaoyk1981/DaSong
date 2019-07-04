@@ -86,5 +86,8 @@
     <Build Include="dbo\Stored Procedures\sp_GetOrderByJD订单号.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetOrderByID.sql" />
     <Build Include="dbo\Stored Procedures\sp_CreateOrder.sql" />
+    <Build Include="dbo\Stored Procedures\sp_订单跟进.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Update电话备注.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Count未导入.sql" />
   </ItemGroup>
 </Project>

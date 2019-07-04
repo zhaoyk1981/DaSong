@@ -111,6 +111,7 @@
     <Content Include="js\KyleToolkit\validation_result_handler.js" />
     <Content Include="js\pages\editorder.js" />
     <Content Include="js\pages\genjinorder.js" />
+    <Content Include="js\pages\importorders.js" />
     <Content Include="js\pages\layout.js" />
     <Content Include="js\pages\main.js" />
     <Content Include="js\pages\neworder.js" />
@@ -286,6 +287,7 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\Edit.cshtml" />
     <Content Include="Views\Order\GenJin.cshtml" />
+    <Content Include="Views\Order\Import.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -295,6 +297,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Excel\" />
     <Folder Include="Models\" />
     <Folder Include="ProductImages\" />
     <Folder Include="Views\Authorized\" />

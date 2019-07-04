@@ -20,6 +20,8 @@ namespace DaSongERP.Biz
 
         protected StockDao StockDao { get; set; } = new StockDao();
 
+        protected ExcelDao ExcelDao { get; set; } = new ExcelDao();
+
         protected Guid? UserID
         {
             get

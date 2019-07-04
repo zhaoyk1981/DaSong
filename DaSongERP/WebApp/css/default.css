@@ -7031,6 +7031,9 @@ label.file {
 .form-control.has-error {
   border-color: #a94442; }
 
+.hide-when-empty:empty {
+  display: none; }
+
 /*#endregion base END */
 /*#region components START */
 /*#region popup*/

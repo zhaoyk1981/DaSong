@@ -53,7 +53,7 @@
             processData: false,
             contentType: false,
             success: function (data) {
-                alert('完成');
+                alert(data.Success === true ? '操作成功' : '操作失败');
             }
         });
     };
