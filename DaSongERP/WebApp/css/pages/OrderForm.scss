@@ -1,0 +1,15 @@
+﻿body {
+    .vw-order-form {
+        .product-image {
+            max-height: 150px;
+        }
+
+        #LblStockInfo {
+            min-height: 50px;
+
+            &:empty {
+                visibility: hidden;
+            }
+        }
+    }
+}

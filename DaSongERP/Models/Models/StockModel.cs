@@ -10,6 +10,8 @@ namespace DaSongERP.Models
     {
         public Guid? ID { get; set; }
 
+        public string 货号 { get; set; }
+
         public int? 库存数量 { get; set; }
 
         public int? 在途数量 { get; set; }

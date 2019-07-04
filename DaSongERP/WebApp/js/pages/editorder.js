@@ -24,15 +24,15 @@
     };
 
     let validate = function () {
-        var validationResult = validation.validate(['CreateOrder']);
+        var validationResult = validation.validate(['UpdateOrder']);
         if (validationResult !== true) {
-            $('#BtnCreateOrder').prop('disabled', false);
+            $('#BtnUpdateOrder').prop('disabled', false);
         }
 
         return validationResult;
     };
 
-    let btnCreateOrder_click = function () {
+    let btnUpdateOrder_click = function () {
         $(this).prop('disabled', true);
         if (!validate()) {
             return;
@@ -46,7 +46,7 @@
         //formData.append("file", $('#IptPicture')[0].files[0], "file");
         //formData.append("upload_file", true);
         $.ajax({
-            url: '/Order/ACreate',
+            url: '/Order/AUpdate',
             type: 'POST',
             dataType: 'JSON',
             data: formData,
@@ -61,7 +61,7 @@
     return {
         ready: function () {
             initValidation();
-            $('#BtnCreateOrder').click(btnCreateOrder_click);
+            $('#BtnUpdateOrder').click(btnUpdateOrder_click);
             $('#Txt货号').blur(txt货号_blur);
         }
     };

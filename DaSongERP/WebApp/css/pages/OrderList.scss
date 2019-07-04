@@ -1,0 +1,9 @@
+﻿body {
+    .vw-order-list {
+        #LblMessage {
+            &:empty {
+                display: none;
+            }
+        }
+    }
+}

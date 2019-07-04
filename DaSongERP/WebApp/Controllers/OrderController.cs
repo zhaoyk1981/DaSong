@@ -18,7 +18,7 @@ namespace WebApp.Controllers
 
         public ActionResult New()
         {
-            var vm = this.OrderBiz.GetEditOrderViewModel();
+            var vm = this.OrderBiz.GetCreateOrderViewModel();
             return View(vm);
         }
 
@@ -26,16 +26,59 @@ namespace WebApp.Controllers
         public ActionResult ACreate()
         {
             var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
-            var rowCount = this.OrderBiz.CreateOrder(order);
-            if (rowCount == 1)
-            {
-                Request.Files[0].SaveAs($"{this.OrderBiz.GetProductImagesPath()}\\{order.ID.Value}.jpg");
-            }
+            var rowCount = this.OrderBiz.Create(order);
+            //if (rowCount == 1)
+            //{
+            //    Request.Files[0].SaveAs($"{this.OrderBiz.GetProductImagesPath()}\\{order.ID.Value}.jpg");
+            //}
 
             return Json(new
             {
                 Success = rowCount == 1,
                 OrderID = order.ID.Value.ToString()
+            });
+        }
+
+        [HttpPost]
+        public ActionResult AGetOrderID()
+        {
+            var jd订单号 = (this.Request.Params["jdoid"] ?? string.Empty).Trim();
+            if (string.IsNullOrEmpty(jd订单号))
+            {
+                return Json(new
+                {
+                    Success = false
+                });
+            }
+
+            var order = this.OrderBiz.GetOrderBy(jd订单号);
+            return Json(new
+            {
+                Success = order != null,
+                OrderID = order == null ? null : order.ID.Value.ToString()
+            });
+        }
+
+        public ActionResult Edit(Guid id)
+        {
+            var vm = this.OrderBiz.GetEditOrderViewModel(id);
+            if (vm.Order == null)
+            {
+                return Redirect("/Order");
+            }
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AUpdate()
+        {
+            var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
+            var rowCount = this.OrderBiz.Update(order);
+
+            return Json(new
+            {
+                Success = rowCount == 1
             });
         }
     }

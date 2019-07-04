@@ -13,5 +13,13 @@ namespace WebApp.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult AGetStockInfo()
+        {
+            var 货号 = Request.Params["货号"] ?? string.Empty;
+            var stock = this.StockBiz.Get库存(货号);
+            return Json(stock);
+        }
     }
 }

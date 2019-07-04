@@ -7332,3 +7332,13 @@ table.main-table td:not(.main-cell) {
   padding-right: 15px; }
 
 /*#endregion components END */
+body .vw-order-form .product-image {
+  max-height: 150px; }
+
+body .vw-order-form #LblStockInfo {
+  min-height: 50px; }
+  body .vw-order-form #LblStockInfo:empty {
+    visibility: hidden; }
+
+body .vw-order-list #LblMessage:empty {
+  display: none; }
