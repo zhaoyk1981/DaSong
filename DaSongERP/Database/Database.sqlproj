@@ -59,6 +59,7 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\淘宝账号.sql" />
@@ -74,5 +75,16 @@
     <Build Include="dbo\Tables\Permissions.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetUserByUserName.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetUserByID.sql" />
+    <Build Include="dbo\Views\vw_Orders.sql" />
+    <Build Include="dbo\Stored Procedures\sp_UpdateOrder.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get淘宝账号.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get售后原因.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get售后操作.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get审单操作.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get库存.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get店铺.sql" />
+    <Build Include="dbo\Stored Procedures\sp_GetOrderByJD订单号.sql" />
+    <Build Include="dbo\Stored Procedures\sp_GetOrderByID.sql" />
+    <Build Include="dbo\Stored Procedures\sp_CreateOrder.sql" />
   </ItemGroup>
 </Project>
