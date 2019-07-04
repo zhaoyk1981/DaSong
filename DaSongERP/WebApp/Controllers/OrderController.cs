@@ -124,5 +124,28 @@ namespace WebApp.Controllers
                 未导入 = 未导入
             });
         }
+
+        public ActionResult ChaiBao(Guid id)
+        {
+            var vm = this.OrderBiz.GetChaiBaoOrderViewModel(id);
+            if (vm.Order == null)
+            {
+                return Redirect("/Order");
+            }
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AChaiBao()
+        {
+            var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
+            var rowCount = this.OrderBiz.Update拆包(order);
+
+            return Json(new
+            {
+                Success = rowCount == 1
+            });
+        }
     }
 }

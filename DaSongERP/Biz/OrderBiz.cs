@@ -89,5 +89,20 @@ namespace DaSongERP.Biz
         {
             return OrderDao.Count未导入();
         }
+
+        public int Update拆包(OrderModel order)
+        {
+            order.拆包人ID = this.UserID;
+            var rowCount = OrderDao.Update拆包(order);
+            return rowCount;
+        }
+
+        public EditOrderViewModel GetChaiBaoOrderViewModel(Guid id)
+        {
+            var vm = new EditOrderViewModel();
+            vm.审单操作DataSource = this.MetaDao.Get审单操作();
+            vm.Order = this.GetOrderBy(id);
+            return vm;
+        }
     }
 }

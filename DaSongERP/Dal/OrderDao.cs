@@ -64,5 +64,12 @@ namespace DaSongERP.Dal
             var result = (int)DBHelper.ExecuteScalar(cmd);
             return result;
         }
+
+        public int Update拆包(OrderModel order)
+        {
+            var cmd = ProcCommands.sp_Update拆包().SetParameterValues(order);
+            var result = (int)DBHelper.ExecuteScalar(cmd);
+            return result;
+        }
     }
 }

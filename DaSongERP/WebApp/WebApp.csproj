@@ -109,6 +109,7 @@
     <Content Include="js\KyleToolkit\settings.js" />
     <Content Include="js\KyleToolkit\validation.js" />
     <Content Include="js\KyleToolkit\validation_result_handler.js" />
+    <Content Include="js\pages\chaibaoorder.js" />
     <Content Include="js\pages\editorder.js" />
     <Content Include="js\pages\genjinorder.js" />
     <Content Include="js\pages\importorders.js" />
@@ -288,6 +289,7 @@
     <Content Include="Views\Order\Edit.cshtml" />
     <Content Include="Views\Order\GenJin.cshtml" />
     <Content Include="Views\Order\Import.cshtml" />
+    <Content Include="Views\Order\ChaiBao.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -172,5 +172,18 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_Count未导入
+
+        #region sp_Update拆包
+        public static SqlCommand sp_Update拆包()
+        {
+            var cmd = new SqlCommand("sp_Update拆包") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@审单操作ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@拆包人员备注", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@转发单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@拆包人ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Update拆包
     }
 }
