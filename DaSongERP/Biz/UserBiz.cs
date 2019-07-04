@@ -1,4 +1,4 @@
-﻿using Dal;
+﻿using DaSongERP.Dal;
 using DaSongERP.Models;
 using DaSongERP.ViewModels;
 using System;
@@ -11,7 +11,7 @@ namespace DaSongERP.Biz
 {
     public class UserBiz : Biz
     {
-        protected UserDao UserDao { get; set; } = new UserDao();
+        
 
         public UserModel ValidateUser(UserModel user)
         {

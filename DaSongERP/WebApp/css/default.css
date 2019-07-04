@@ -7020,8 +7020,315 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
+/*#region base START */
+/* https://blackrockdigital.github.io/startbootstrap-sb-admin-2/pages/buttons.html */
 label.file {
   padding-top: 5px; }
   label.file > input[type=file] {
     left: -9999px;
     position: absolute; }
+
+.form-control.has-error {
+  border-color: #a94442; }
+
+/*#endregion base END */
+/*#region components START */
+/*#region popup*/
+.pos-relative {
+  position: relative; }
+  .pos-relative [popup='absolute'] {
+    position: absolute; }
+
+[popup] {
+  z-index: 2000;
+  display: inline-block; }
+  [popup][display='block'] {
+    display: block; }
+  [popup]:not([visible='true']) {
+    display: none; }
+    [popup]:not([visible='true']) + .popup-mask {
+      display: none; }
+  [popup] .popup-close {
+    cursor: default;
+    display: inline-block; }
+  [popup] > .box {
+    z-index: 2200;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-shadow: 4px 4px rgba(0, 0, 0, 0.618);
+    overflow: visible;
+    position: relative; }
+    [popup] > .box > .top-right-circle-hex {
+      border: 1px solid black;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      font-size: 20px;
+      top: -10px;
+      right: -10px;
+      z-index: 2230;
+      background: white;
+      box-shadow: 4px 4px rgba(0, 0, 0, 0.618);
+      vertical-align: middle;
+      text-align: center;
+      position: absolute;
+      border-radius: 50%;
+      cursor: pointer; }
+    [popup] > .box > .arrow {
+      z-index: 2210;
+      background: white;
+      border: 1px solid black;
+      box-shadow: 4px 0 rgba(0, 0, 0, 0.618);
+      position: absolute;
+      border-radius: 0;
+      transform: rotate(45deg);
+      width: 28px;
+      height: 28px; }
+      [popup] > .box > .arrow[visible='false'] {
+        display: none; }
+      [popup] > .box > .arrow.top {
+        top: -10px;
+        left: 2%;
+        /*2% ~ 87%*/ }
+      [popup] > .box > .arrow.left {
+        left: -10px;
+        top: 4%;
+        /*4% ~ 78%*/ }
+      [popup] > .box > .arrow.right {
+        right: -10px;
+        top: 10%;
+        /*10% ~ 78%*/ }
+      [popup] > .box > .arrow.bottom {
+        bottom: -10px;
+        left: 2%;
+        /*2% ~ 89%*/ }
+    [popup] > .box > .content {
+      z-index: 2220;
+      background: white;
+      border-radius: 4px;
+      padding: 12px;
+      position: relative; }
+
+[popup='fixed'] {
+  z-index: 2210;
+  position: fixed;
+  display: inline-block;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  max-width: 550px;
+  max-height: 200px; }
+  [popup='fixed'] + .popup-mask {
+    background: rgba(0, 0, 0, 0.618);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2200; }
+  [popup='fixed'] > .box {
+    border: 1px solid black;
+    border-radius: 4px;
+    box-shadow: none;
+    background-color: white; }
+    [popup='fixed'] > .box > .top-right-circle-hex {
+      border: 1px solid black;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      font-size: 20px;
+      top: -10px;
+      right: -10px;
+      background: white;
+      box-shadow: none; }
+    [popup='fixed'] > .box > .content {
+      background: white;
+      border-radius: 4px;
+      padding: 0; }
+      [popup='fixed'] > .box > .content > .head {
+        background-color: #337ab7;
+        color: white;
+        position: relative;
+        padding: 10px; }
+        [popup='fixed'] > .box > .content > .head > div {
+          display: inline-block; }
+        [popup='fixed'] > .box > .content > .head > .popup-close {
+          position: absolute;
+          right: 10px;
+          top: 5px;
+          bottom: auto;
+          font-size: 20px;
+          cursor: default; }
+      [popup='fixed'] > .box > .content > form {
+        padding: 40px;
+        min-width: 550px; }
+        [popup='fixed'] > .box > .content > form > .form-group > label {
+          width: 20%;
+          text-align: right; }
+        [popup='fixed'] > .box > .content > form > .form-group > * {
+          vertical-align: middle; }
+
+/*#end popup*/
+.validator:not(.has-error) .error-message {
+  display: none; }
+
+.form-group.has-error .checkbox-wrapper.has-error label.checkbox-label {
+  color: #a94442; }
+
+.form-group.has-error .radio-wrapper.has-error label.radio-label {
+  color: #a94442; }
+
+div.hr {
+  border: 1px solid #dddddd;
+  height: 10px; }
+
+.form-filters > .form-group {
+  display: inline-block; }
+  .form-filters > .form-group.dp-block {
+    display: block; }
+  .form-filters > .form-group + .form-group:not(.dp-block) {
+    margin-left: 20px; }
+
+.form-filters-2 {
+  margin-top: 20px; }
+
+.row.buttons {
+  margin-top: 20px; }
+
+.repeater .btn-sort {
+  cursor: pointer;
+  text-decoration: underline;
+  white-space: nowrap; }
+  .repeater .btn-sort:before {
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f0de";
+    text-decoration: none;
+    float: right;
+    font-size: 20px;
+    position: relative;
+    top: 0;
+    margin-left: 0;
+    color: transparent;
+    right: -6px; }
+  .repeater .btn-sort[sort-desc=false]:before {
+    content: "\f0de";
+    color: black;
+    top: 4px; }
+  .repeater .btn-sort[sort-desc=true]:before {
+    content: "\f0dd";
+    color: black;
+    top: -4px; }
+
+.repeater > table > thead > tr > th {
+  cursor: default; }
+
+.repeater > table > tbody > tr.focus-item {
+  background-color: lightyellow; }
+
+.repeater > table > tbody > tr > td[status-id="1"] {
+  color: #f0ad4e; }
+
+.repeater > table > tbody > tr > td[status-id="2"] {
+  color: #337ab7; }
+
+.repeater > table > tbody > tr > td[status-id="3"] {
+  color: #d9534f; }
+
+.repeater > table > tbody > tr > td[status-id="4"] {
+  color: #5bb85d; }
+
+.repeater > table > tbody > tr > td > .case {
+  display: none; }
+
+.repeater > table > tbody > tr > td[switch='true'] > .case-true {
+  display: block; }
+
+.repeater > table > tbody > tr > td[switch='false'] > .case-false {
+  display: block; }
+
+.repeater > table > tbody > tr > td.vam {
+  vertical-align: middle; }
+
+.repeater > table > tbody > tr[view=view] .btn-update,
+.repeater > table > tbody > tr[view=view] .btn-cancel {
+  display: none; }
+
+.repeater > table > tbody > tr[view=edit] .btn-edit {
+  display: none; }
+
+.repeater .paging {
+  text-align: right;
+  padding: 10px; }
+  .repeater .paging > button {
+    border-radius: 0;
+    margin: -0.5px;
+    min-width: 45px;
+    min-height: 45px; }
+
+.repeater.media-list-0 .media-thumbnail {
+  text-align: center;
+  width: 40%;
+  vertical-align: middle;
+  position: relative; }
+  .repeater.media-list-0 .media-thumbnail > img.video {
+    max-width: 300px;
+    max-height: 200px;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 10; }
+  .repeater.media-list-0 .media-thumbnail > img,
+  .repeater.media-list-0 .media-thumbnail > video,
+  .repeater.media-list-0 .media-thumbnail > audio {
+    max-height: 200px;
+    max-width: 300px; }
+
+.repeater.media-list-0 [data-status-id] .btn-delete {
+  display: none; }
+
+.repeater.media-list-0 [data-status-id="1"] .btn-delete,
+.repeater.media-list-0 [data-status-id="3"] .btn-delete,
+.repeater.media-list-0 [data-status-id="5"] .btn-delete {
+  display: inline-block; }
+
+.repeater.media-list-0 [data-status-id] .btn-showrejectmessage {
+  display: none; }
+
+.repeater.media-list-0 [data-status-id="3"] .btn-showrejectmessage {
+  display: inline-block; }
+
+.repeater.media-list-0 [type-id="2"] img.video {
+  display: block; }
+
+ul.radio-list {
+  padding: 0;
+  list-style-type: none; }
+  ul.radio-list li {
+    display: inline-block;
+    cursor: pointer; }
+    ul.radio-list li:not(:first-of-type) {
+      margin-left: 20px; }
+    ul.radio-list li.btn-sort {
+      text-decoration: none; }
+      ul.radio-list li.btn-sort[sort-desc] {
+        color: #337ab7; }
+        ul.radio-list li.btn-sort[sort-desc]:before {
+          left: 2px; }
+
+table.main-table thead th.nowrap {
+  white-space: nowrap; }
+
+table.main-table td.main-cell {
+  width: 100%; }
+
+table.main-table td:not(.main-cell) {
+  white-space: nowrap;
+  padding-right: 15px; }
+
+/*#endregion components END */

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YK;
 
-namespace Dal
+namespace DaSongERP.Dal
 {
     public class UserDao : Dao
     {

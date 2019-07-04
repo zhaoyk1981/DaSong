@@ -1,0 +1,21 @@
+﻿/* https://blackrockdigital.github.io/startbootstrap-sb-admin-2/pages/buttons.html */
+$border: 1px solid #dddddd;
+$bgc-alt: #f5f5f5;
+$bgc-green: #5bb85d;
+$bgc-blue: #337ab7;
+$bgc-yellow: #f0ad4e;
+$bgc-red: #d9534f;
+
+
+label.file {
+    padding-top: 5px;
+
+    & > input[type=file] {
+        left: -9999px;
+        position: absolute;
+    }
+}
+
+.form-control.has-error {
+    border-color: #a94442;
+}

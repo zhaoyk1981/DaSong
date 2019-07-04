@@ -1,0 +1,205 @@
+﻿/*#region popup*/
+$popup-zIndex: 2000;
+$popup-border: 1px solid black;
+$modal-border: 1px solid black;
+$popup-background: white;
+$modal-background: white;
+$mask-background: rgba(0,0,0,0.618);
+$popup-box-shadow: 4px 4px rgba(0,0,0,0.618);
+$popup-arrow-shadow: 4px 0 rgba(0,0,0,0.618);
+$modal-box-shadow: none;
+$popup-border-radius: 4px;
+$modal-border-radius: 4px;
+$popup-circle-close-size: 20px;
+$modal-circle-close-size: 20px;
+$popup-content-padding: 12px;
+$modal-content-padding: 12px;
+
+.pos-relative {
+    position: relative;
+
+    & [popup='absolute'] {
+        position: absolute;
+    }
+}
+
+[popup] {
+    z-index: $popup-zIndex;
+    display: inline-block;
+
+    &[display='block'] {
+        display: block;
+    }
+
+    &:not([visible='true']) {
+        display: none;
+
+        & + .popup-mask {
+            display: none;
+        }
+    }
+
+    .popup-close {
+        cursor: default;
+        display: inline-block;
+    }
+
+    & > .box {
+        z-index: $popup-zIndex+200;
+        border: $popup-border;
+        border-radius: $popup-border-radius;
+        box-shadow: $popup-box-shadow;
+        overflow: visible;
+        position: relative;
+
+
+
+        & > .top-right-circle-hex {
+            border: $popup-border;
+            width: $popup-circle-close-size;
+            height: $popup-circle-close-size;
+            line-height: $popup-circle-close-size;
+            font-size: $popup-circle-close-size;
+            top: -($popup-circle-close-size/2);
+            right: -($popup-circle-close-size/2);
+            z-index: $popup-zIndex+230;
+            background: $popup-background;
+            box-shadow: $popup-box-shadow;
+            vertical-align: middle;
+            text-align: center;
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        & > .arrow {
+            z-index: $popup-zIndex+210;
+            background: $popup-background;
+            border: $popup-border;
+            box-shadow: $popup-arrow-shadow;
+            position: absolute;
+            border-radius: 0;
+            transform: rotate(45deg);
+            width: 28px;
+            height: 28px;
+
+
+            &[visible='false'] {
+                display: none;
+            }
+
+            &.top {
+                top: -10px;
+                left: 2%; /*2% ~ 87%*/
+            }
+
+            &.left {
+                left: -10px;
+                top: 4%; /*4% ~ 78%*/
+            }
+
+            &.right {
+                right: -10px;
+                top: 10%; /*10% ~ 78%*/
+            }
+
+            &.bottom {
+                bottom: -10px;
+                left: 2%; /*2% ~ 89%*/
+            }
+        }
+
+        & > .content {
+            z-index: $popup-zIndex+220;
+            background: $popup-background;
+            border-radius: $popup-border-radius;
+            padding: $popup-content-padding;
+            position: relative;
+        }
+    }
+}
+
+[popup='fixed'] {
+    z-index: $popup-zIndex+210;
+    position: fixed;
+    display: inline-block;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    max-width: 550px;
+    max-height: 200px;
+
+    & + .popup-mask {
+        background: $mask-background;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: $popup-zIndex+200;
+    }
+
+    & > .box {
+        border: $modal-border;
+        border-radius: $modal-border-radius;
+        box-shadow: $modal-box-shadow;
+        background-color: white;
+
+        & > .top-right-circle-hex {
+            border: $modal-border;
+            width: $modal-circle-close-size;
+            height: $modal-circle-close-size;
+            line-height: $modal-circle-close-size;
+            font-size: $modal-circle-close-size;
+            top: -($modal-circle-close-size/2);
+            right: -($modal-circle-close-size/2);
+            background: $modal-background;
+            box-shadow: $modal-box-shadow;
+        }
+
+        & > .content {
+            background: $modal-background;
+            border-radius: $modal-border-radius;
+            padding: 0;
+
+            & > .head {
+                background-color: #337ab7;
+                color: white;
+                position: relative;
+                padding: 10px;
+
+                & > div {
+                    display: inline-block;
+                }
+
+                & > .popup-close {
+                    position: absolute;
+                    right: 10px;
+                    top: 5px;
+                    bottom: auto;
+                    font-size: 20px;
+                    cursor: default;
+                }
+            }
+
+            & > form {
+                padding: 40px;
+                min-width: 550px;
+
+                & > .form-group {
+                    & > label {
+                        width: 20%;
+                        text-align: right;
+                    }
+
+                    & > * {
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+}
+/*#end popup*/

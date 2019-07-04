@@ -1,0 +1,24 @@
+﻿
+.validator {
+    &:not(.has-error) {
+        & .error-message {
+            display: none;
+        }
+    }
+}
+
+$error-color: #a94442;
+
+.form-group.has-error {
+    .checkbox-wrapper.has-error {
+        label.checkbox-label {
+            color: $error-color;
+        }
+    }
+
+    .radio-wrapper.has-error {
+        label.radio-label {
+            color: $error-color;
+        }
+    }
+}

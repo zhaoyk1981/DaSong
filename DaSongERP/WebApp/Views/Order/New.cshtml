@@ -1,66 +1,80 @@
-﻿
+﻿@model EditOrderViewModel
 @{
     ViewBag.Title = "New";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div>
-    <h2>新建采购订单</h2>
-    <form>
+<div class="vw-new-order" data-page-js="neworder">
+    <form validation-group="CreateOrder" autocomplete="off">
         <fieldset>
+            <legend>新建采购订单</legend>
+            <div class="form-group">
+                <label for="IptPicture">商品图片</label>
+                <input type="file" class="form-control" id="IptPicture" />
+                <span class="validator" id="vdPicture" data-required="" data-validate-target="#IptPicture"><span class="error-message text-danger">此项必填</span></span>
+            </div>
             <div class="form-group">
                 <label for="Txt货号">货号</label>
                 <input type="text" class="form-control" name="货号" id="Txt货号" maxlength="50" />
+                <span class="validator" id="vd货号" data-required="" data-validate-target="#Txt货号"><span class="error-message text-danger">此项必填</span></span>
             </div>
             <div class="form-group">
                 <label for="Txt进货数量">进货数量</label>
-                <input type="number" class="form-control" name="进货数量" min="1" step="1" />
+                <input type="number" class="form-control" name="进货数量" min="1" step="1" value="1" />
             </div>
             <div class="form-group">
-                <label>店铺名称</label>
-                <select class="form-control"></select>
+                <label for="Ddl店铺ID">店铺名称</label>
+                <select class="form-control" name="店铺ID" id="Ddl店铺ID">
+                    @foreach (var op in Model.店铺DataSource)
+                    {
+                        <option value="@op.ID.Value">@op.Name</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <label>JD订单号</label>
-                <input type="text" class="form-control" name="JD订单号" maxlength="50" />
+                <label for="TxtJD订单号">JD订单号</label>
+                <input type="text" class="form-control" name="JD订单号" id="TxtJD订单号" maxlength="50" />
+                <span class="validator" id="vdJD订单号" data-required="" data-validate-target="#TxtJD订单号"><span class="error-message text-danger">此项必填</span></span>
             </div>
             <div class="form-group">
-                <label>客人地址</label>
-                <textarea class="form-control" name="客人地址" maxlength="150"></textarea>
+                <label for="Txt客人地址">客人地址</label>
+                <input type="text" class="form-control" name="客人地址" id="Txt客人地址" maxlength="150" />
             </div>
             <div class="form-group">
-                <label>淘宝账号</label>
-                <select></select>
+                <label for="Ddl淘宝账号ID">淘宝账号</label>
+                <select class="form-control" name="淘宝账号ID" id="Ddl淘宝账号ID">
+                    @foreach (var op in Model.淘宝账号DataSource)
+                    {
+                        <option value="@op.ID.Value">@op.Name</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <label>淘宝订单号</label>
-                <input type="text" class="form-control" name="淘宝订单号" maxlength="50" />
+                <label for="Txt淘宝订单号">淘宝订单号</label>
+                <input type="text" class="form-control" name="淘宝订单号" id="Txt淘宝订单号" maxlength="50" />
+                <span class="validator" id="vd淘宝订单号" data-required="" data-validate-target="#Txt淘宝订单号"><span class="error-message text-danger">此项必填</span></span>
             </div>
             <div class="form-group">
-                <label>采购备注</label>
-                <textarea class="form-control" name="采购备注"></textarea>
+                <label for="Txt采购备注">采购备注</label>
+                <textarea class="form-control" name="采购备注" id="Txt采购备注"></textarea>
             </div>
             <div class="form-group">
-                <label>订单修改备注</label>
-                <textarea class="form-control" name="订单修改备注"></textarea>
+                <label for="Txt订单修改备注">订单修改备注</label>
+                <textarea class="form-control" name="订单修改备注" id="Txt订单修改备注"></textarea>
             </div>
             <div class="form-group">
-                <label>来-快递单号</label>
-                <input type="text" class="form-control" name="来快递单号"/>
+                <label for="Txt来快递单号">来-快递单号</label>
+                <input type="text" class="form-control" name="来快递单号" id="Txt来快递单号" />
             </div>
             <div class="form-group">
-                <label>发货时间</label>
-                <input type="datetime-local" class="form-control" name="发货时间" />
+                <label for="Txt京东价">京东价</label>
+                <input type="number" step="0.01" min="0" class="form-control" name="京东价" id="Txt京东价" />
             </div>
             <div class="form-group">
-                <label>京东价</label>
-                <input type="number" step="0.01" min="0" class="form-control" name="京东价" />
+                <label for="Txt成本价">成本价</label>
+                <input type="number" step="0.01" min="0" class="form-control" name="成本价" id="Txt成本价" />
             </div>
             <div class="form-group">
-                <label>成本价</label>
-                <input type="number" step="0.01" min="0" class="form-control" name="成本价" />
-            </div>
-            <div>
-                <button type="button">创建</button>
+                <button type="button" class="btn btn-primary" id="BtnCreateOrder">创建</button>
             </div>
         </fieldset>
     </form>

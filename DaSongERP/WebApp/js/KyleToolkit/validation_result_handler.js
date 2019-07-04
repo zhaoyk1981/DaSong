@@ -22,10 +22,10 @@
 
                 let controlWrapper = validator.target.closest('.form-control-wrapper');
                 if (controlWrapper.length == 0) {
-                    validator.target.toggleClass('has-error', invalid);
+                    validator.target.toggleClass('has-error border-danger', invalid);
                 }
                 else {
-                    controlWrapper.toggleClass('has-error', invalid);
+                    controlWrapper.toggleClass('has-error border-danger', invalid);
                 }
             }
             else {

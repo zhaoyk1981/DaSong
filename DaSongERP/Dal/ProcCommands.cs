@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal
+namespace DaSongERP.Dal
 {
     public class ProcCommands
     {
@@ -27,5 +27,77 @@ namespace Dal
             return cmd;
         }
         #endregion sp_GetUserByID
+
+        #region sp_Get店铺
+        public static SqlCommand sp_Get店铺()
+        {
+            var cmd = new SqlCommand("sp_Get店铺") { CommandType = CommandType.StoredProcedure };
+            return cmd;
+        }
+        #endregion sp_Get店铺
+
+        #region sp_Get审单操作
+        public static SqlCommand sp_Get审单操作()
+        {
+            var cmd = new SqlCommand("sp_Get审单操作") { CommandType = CommandType.StoredProcedure };
+            return cmd;
+        }
+        #endregion sp_Get审单操作
+
+        #region sp_Get售后操作
+        public static SqlCommand sp_Get售后操作()
+        {
+            var cmd = new SqlCommand("sp_Get售后操作") { CommandType = CommandType.StoredProcedure };
+            return cmd;
+        }
+        #endregion sp_Get售后操作
+
+        #region sp_Get售后原因
+        public static SqlCommand sp_Get售后原因()
+        {
+            var cmd = new SqlCommand("sp_Get售后原因") { CommandType = CommandType.StoredProcedure };
+            return cmd;
+        }
+        #endregion sp_Get售后原因
+
+        #region sp_Get淘宝账号
+        public static SqlCommand sp_Get淘宝账号()
+        {
+            var cmd = new SqlCommand("sp_Get淘宝账号") { CommandType = CommandType.StoredProcedure };
+            return cmd;
+        }
+        #endregion sp_Get淘宝账号
+
+        #region sp_Get库存
+        public static SqlCommand sp_Get库存()
+        {
+            var cmd = new SqlCommand("sp_Get库存") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Get库存
+
+        #region sp_CreateOrder
+        public static SqlCommand sp_CreateOrder()
+        {
+            var cmd = new SqlCommand("sp_CreateOrder") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@进货日期", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@进货数量", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@店铺ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客人地址", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@淘宝账号ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@采购备注", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单修改备注", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@来快递单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@发货时间", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@京东价", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@成本价", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@采购人ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_CreateOrder
     }
 }

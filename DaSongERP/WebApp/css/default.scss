@@ -1,10 +1,11 @@
 ﻿@import "../Content/bootstrap/bootstrap";
 
-label.file {
-    padding-top: 5px;
+/*#region base START */
+@import "base/global";
+/*#endregion base END */
 
-    & > input[type=file] {
-        left: -9999px;
-        position: absolute;
-    }
-}
+/*#region components START */
+@import "components/popup";
+@import "components/validation";
+@import "components/Repeater";
+/*#endregion components END */

@@ -216,8 +216,38 @@
         return tgt;
     };
 
+    let buildFormData = function (sourceModel, ignoreProps) {
+        ignoreProps = ignoreProps || [];
+        let tgt = new FormData();
+        for (let p in sourceModel) {
+            if (ignoreProps.indexOf(p) >= 0) {
+                continue;
+            }
+
+            tgt.append(p, sourceModel[p]());
+        }
+
+        return tgt;
+    };
+
+    let captureJSON = function (sourceModel, ignoreProps) {
+        ignoreProps = ignoreProps || [];
+        let tgt = {};
+        for (let p in sourceModel) {
+            if (ignoreProps.indexOf(p) >= 0) {
+                continue;
+            }
+
+            tgt[p] = sourceModel[p]();
+        }
+
+        return JSON.stringify(tgt);
+    };
+
     return {
         createModel: createModel,
-        capture: capture
+        capture: capture,
+        captureJSON: captureJSON,
+        buildFormData: buildFormData
     };
 });

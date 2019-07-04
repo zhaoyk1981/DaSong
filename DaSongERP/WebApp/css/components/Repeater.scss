@@ -1,0 +1,232 @@
+﻿
+div.hr {
+    border: $border;
+    height: 10px;
+}
+
+.form-filters {
+    & > .form-group {
+        display: inline-block;
+
+        &.dp-block {
+            display: block;
+        }
+
+        & + .form-group:not(.dp-block) {
+            margin-left: 20px;
+        }
+    }
+}
+
+.form-filters-2 {
+    margin-top: 20px;
+}
+
+.row.buttons {
+    margin-top: 20px;
+}
+
+.repeater {
+    .btn-sort {
+        cursor: pointer;
+        text-decoration: underline;
+        white-space: nowrap;
+
+        &:before {
+            font: normal normal normal 14px/1 FontAwesome;
+            content: "\f0de";
+            text-decoration: none;
+            float: right;
+            font-size: 20px;
+            position: relative;
+            top: 0;
+            margin-left: 0;
+            color: transparent;
+            right: -6px;
+        }
+
+        &[sort-desc=false]:before {
+            content: "\f0de";
+            color: black;
+            top: 4px;
+        }
+
+        &[sort-desc=true]:before {
+            content: "\f0dd";
+            color: black;
+            top: -4px;
+        }
+    }
+
+    & > table {
+        & > thead > tr > th {
+            cursor: default;
+        }
+
+        & > tbody > tr {
+            &.focus-item {
+                background-color: lightyellow;
+            }
+
+            & > td {
+                &[status-id="1"] {
+                    color: $bgc-yellow;
+                }
+
+                &[status-id="2"] {
+                    color: $bgc-blue;
+                }
+
+                &[status-id="3"] {
+                    color: $bgc-red;
+                }
+
+                &[status-id="4"] {
+                    color: $bgc-green;
+                }
+
+                & > .case {
+                    display: none;
+                }
+
+                &[switch='true'] {
+                    & > .case-true {
+                        display: block;
+                    }
+                }
+
+                &[switch='false'] {
+                    & > .case-false {
+                        display: block;
+                    }
+                }
+
+                &.vam {
+                    vertical-align: middle;
+                }
+            }
+
+            &[view=view] {
+                .btn-update,
+                .btn-cancel {
+                    display: none;
+                }
+            }
+
+            &[view=edit] {
+                .btn-edit {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    & .paging {
+        text-align: right;
+        padding: 10px;
+
+        & > button {
+            border-radius: 0;
+            margin: -0.5px;
+            min-width: 45px;
+            min-height: 45px;
+        }
+    }
+
+    &.media-list-0 {
+        .media-thumbnail {
+            text-align: center;
+            width: 40%;
+            vertical-align: middle;
+            position: relative;
+
+            & > img.video {
+                max-width: 300px;
+                max-height: 200px;
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                z-index: 10;
+            }
+
+            & > img,
+            & > video,
+            & > audio {
+                max-height: 200px;
+                max-width: 300px;
+            }
+        }
+
+        [data-status-id] .btn-delete {
+            display: none;
+        }
+
+        [data-status-id="1"] .btn-delete,
+        [data-status-id="3"] .btn-delete,
+        [data-status-id="5"] .btn-delete {
+            display: inline-block;
+        }
+
+        [data-status-id] .btn-showrejectmessage {
+            display: none;
+        }
+
+        [data-status-id="3"] .btn-showrejectmessage {
+            display: inline-block;
+        }
+
+        [type-id="2"] img.video {
+            display: block;
+        }
+    }
+}
+
+ul.radio-list {
+    padding: 0;
+    list-style-type: none;
+
+    li {
+        display: inline-block;
+        cursor: pointer;
+
+        &:not(:first-of-type) {
+            margin-left: 20px;
+        }
+
+        &.btn-sort {
+            text-decoration: none;
+
+            &[sort-desc] {
+                color: #337ab7;
+
+                &:before {
+                    left: 2px;
+                }
+            }
+        }
+    }
+}
+
+
+table.main-table {
+    thead {
+        th.nowrap {
+            white-space: nowrap;
+        }
+    }
+
+    td {
+        &.main-cell {
+            width: 100%;
+        }
+
+        &:not(.main-cell) {
+            white-space: nowrap;
+            padding-right: 15px;
+        }
+    }
+}

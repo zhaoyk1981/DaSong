@@ -111,6 +111,7 @@
     <Content Include="js\KyleToolkit\validation_result_handler.js" />
     <Content Include="js\pages\layout.js" />
     <Content Include="js\pages\main.js" />
+    <Content Include="js\pages\neworder.js" />
     <Content Include="js\pages\signin.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -222,6 +223,10 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="css\components\popup.scss" />
+    <Content Include="css\components\Repeater.scss" />
+    <Content Include="css\components\validation.scss" />
+    <Content Include="css\base\global.scss" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -258,6 +263,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
+    <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -283,8 +289,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="css\pages\" />
     <Folder Include="Models\" />
+    <Folder Include="ProductImages\" />
     <Folder Include="Views\Authorized\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Stock\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Biz\Biz.csproj">
