@@ -43,5 +43,12 @@ namespace DaSongERP.Dal
             var rowCount = (int)DBHelper.ExecuteScalar(cmd);
             return rowCount;
         }
+
+        public int 订单跟进(OrderModel order)
+        {
+            var cmd = ProcCommands.sp_订单跟进().SetParameterValues(order);
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
     }
 }

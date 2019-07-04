@@ -73,6 +73,25 @@ namespace DaSongERP.Models
 
         public string 发货备注 { get; set; }
 
+        public UserModel 跟进人 { get; set; }
+
+        public Guid? 跟进人ID
+        {
+            get
+            {
+                return this.跟进人?.ID;
+            }
+            set
+            {
+                if (this.跟进人 == null)
+                {
+                    this.跟进人 = new UserModel();
+                }
+
+                this.跟进人.ID = value;
+            }
+        }
+
         public decimal? 京东价 { get; set; }
 
         public decimal? 成本价 { get; set; }
@@ -124,9 +143,25 @@ namespace DaSongERP.Models
 
         public DateTime? 导入时间 { get; set; }
 
-        public bool? 是否能等 { get; set; }
+        public UserModel 电话客服 { get; set; }
 
-        public string 电话客服备注 { get; set; }
+        public Guid? 电话客服ID
+        {
+            get
+            {
+                return this.电话客服?.ID;
+            }
+            set
+            {
+                if (this.电话客服 == null)
+                {
+                    this.电话客服 = new UserModel();
+                }
+
+                this.电话客服.ID = value;
+            }
+        }
+        public string 电话情况 { get; set; }
 
         public MetaModel 审单操作 { get; set; }
 

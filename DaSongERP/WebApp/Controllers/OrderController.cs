@@ -81,5 +81,28 @@ namespace WebApp.Controllers
                 Success = rowCount == 1
             });
         }
+
+        public ActionResult GenJin(Guid id)
+        {
+            var vm = this.OrderBiz.GetEditOrderViewModel(id);
+            if (vm.Order == null)
+            {
+                return Redirect("/Order");
+            }
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AGenJin()
+        {
+            var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
+            var rowCount = this.OrderBiz.订单跟进(order);
+
+            return Json(new
+            {
+                Success = rowCount == 1
+            });
+        }
     }
 }

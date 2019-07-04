@@ -1,0 +1,45 @@
+﻿@model EditOrderViewModel
+@{
+    ViewBag.Title = "GenJin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="vw-genjin-order vw-order-form" data-page-js="genjinorder">
+    <div>
+        <a href="/Order">订单列表</a>
+    </div>
+    <form validation-group="default" autocomplete="off">
+        <fieldset>
+            <legend>订单跟进</legend>
+            <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
+            <div class="form-group">
+                <img src="@Model.Order.商品图片" class="product-image" />
+            </div>
+            <div class="form-group">
+                <label>采购人</label>
+                <div>@Model.Order.采购人.Name</div>
+            </div>
+            <div class="form-group">
+                <label>进货日期：</label>
+                <div>@Model.Order.进货日期.Value.ToString("yyyy-MM-dd HH:mm")</div>
+            </div>
+            <div class="form-group">
+                <label for="Txt货号">货号</label>
+                <div>@Model.Order.货号</div>
+            </div>
+            <div class="form-group">
+                <label for="Txt来快递单号">来-快递单号</label>
+                <input type="text" class="form-control" name="来快递单号" id="Txt来快递单号" value="@Model.Order.来快递单号" />
+            </div>
+            <div class="form-group">
+                <label for="Txt采购备注">发货备注</label>
+                <textarea class="form-control" name="发货备注" id="Txt发货备注">@Model.Order.发货备注</textarea>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+

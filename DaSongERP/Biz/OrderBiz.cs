@@ -56,7 +56,16 @@ namespace DaSongERP.Biz
 
         public int Update(OrderModel order)
         {
+            order.采购人ID = this.UserID;
             var rowCount = this.OrderDao.Update(order);
+            return rowCount;
+        }
+
+        public int 订单跟进(OrderModel order)
+        {
+            order.发货时间 = DateTime.Now;
+            order.跟进人ID = this.UserID;
+            var rowCount = this.OrderDao.订单跟进(order);
             return rowCount;
         }
     }

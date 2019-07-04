@@ -140,5 +140,18 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_UpdateOrder
+
+        #region sp_订单跟进
+        public static SqlCommand sp_订单跟进()
+        {
+            var cmd = new SqlCommand("sp_订单跟进") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@来快递单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@发货时间", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@发货备注", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@跟进人ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_订单跟进
     }
 }
