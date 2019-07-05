@@ -201,5 +201,17 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_Update售后
+
+        #region sp_Update客服
+        public static SqlCommand sp_Update客服()
+        {
+            var cmd = new SqlCommand("sp_Update客服") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客人地址", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单修改备注", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客服ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Update客服
     }
 }

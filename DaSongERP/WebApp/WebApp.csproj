@@ -113,6 +113,7 @@
     <Content Include="js\pages\editorder.js" />
     <Content Include="js\pages\genjinorder.js" />
     <Content Include="js\pages\importorders.js" />
+    <Content Include="js\pages\kefuorder.js" />
     <Content Include="js\pages\layout.js" />
     <Content Include="js\pages\main.js" />
     <Content Include="js\pages\neworder.js" />
@@ -293,6 +294,7 @@
     <Content Include="Views\Order\Import.cshtml" />
     <Content Include="Views\Order\ChaiBao.cshtml" />
     <Content Include="Views\Order\ShouHou.cshtml" />
+    <Content Include="Views\Order\KeFu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

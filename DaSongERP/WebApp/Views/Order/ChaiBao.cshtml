@@ -11,15 +11,12 @@
             <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
             <div class="form-group">
                 <label>进货日期</label>
-                <div>@Model.Order.进货日期.Value.ToString("yyyy-MM-dd HH:mm")</div>
+                <div>@DP.Txt(Model.Order.进货日期)</div>
             </div>
             <div class="form-group">
-                <label>产品图片</label>
-                <div>
-                    <a href="@Model.Order.商品图片">
-                        <img src="@Model.Order.商品图片" />
-                    </a>
-                </div>
+                <a href="@Model.Order.商品图片" target="_blank">
+                    <img src="@Model.Order.商品图片" class="product-image" />
+                </a>
             </div>
             <div class="form-group">
                 <label>货号</label>
@@ -96,10 +93,6 @@
             <div class="form-group">
                 <label>客人退回单号</label>
                 <div>@DP.Txt(Model.Order.客人退回单号)</div>
-            </div>
-            <div class="form-group">
-                <label>售后完结</label>
-                <div>@DP.Txt(Model.Order.售后完结)</div>
             </div>
             <div class="form-group">
                 <label for="Ddl审单操作">审单操作</label>

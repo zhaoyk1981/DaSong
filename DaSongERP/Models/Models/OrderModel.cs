@@ -278,5 +278,26 @@ namespace DaSongERP.Models
         public bool? 是否淘宝退回 { get; set; }
 
         public bool? 售后完结 { get; set; }
+
+        public UserModel 客服 { get; set; }
+
+        public Guid? 客服ID
+        {
+            get
+            {
+                return this.客服?.ID;
+            }
+            set
+            {
+                if (this.客服 == null)
+                {
+                    this.客服 = new UserModel();
+                }
+
+                this.客服.ID = value;
+            }
+        }
+
+        public DateTime? 客服时间 { get; set; }
     }
 }

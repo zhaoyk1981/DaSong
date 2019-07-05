@@ -3,36 +3,16 @@
 
     };
 
-    let txt货号_blur = function () {
-        var 货号 = $.trim($(this).val());
-        if (货号.length === 0) {
-            $('#LblStockInfo').empty();
-            return;
-        }
-
-        $.ajax({
-            url: '/Stock/AGetStockInfo',
-            type: 'POST',
-            dataType: 'JSON',
-            data: {
-                货号: 货号
-            },
-            success: function (data) {
-                $('#LblStockInfo').text('库存: ' + data.库存数量 + ' 在途：' + data.在途数量);
-            }
-        });
-    };
-
     let validate = function () {
-        var validationResult = validation.validate(['UpdateOrder']);
+        var validationResult = validation.validate(['default']);
         if (validationResult !== true) {
-            $('#BtnUpdateOrder').prop('disabled', false);
+            $('#BtnSubmit').prop('disabled', false);
         }
 
         return validationResult;
     };
 
-    let btnUpdateOrder_click = function () {
+    let btnSubmit_click = function () {
         $(this).prop('disabled', true);
         if (!validate()) {
             return;
@@ -46,7 +26,7 @@
         //formData.append("file", $('#IptPicture')[0].files[0], "file");
         //formData.append("upload_file", true);
         $.ajax({
-            url: '/Order/AUpdate',
+            url: '/Order/AKeFu',
             type: 'POST',
             dataType: 'JSON',
             data: formData,
@@ -61,8 +41,7 @@
     return {
         ready: function () {
             initValidation();
-            $('#BtnUpdateOrder').click(btnUpdateOrder_click);
-            //$('#Txt货号').blur(txt货号_blur);
+            $('#BtnSubmit').click(btnSubmit_click);
         }
     };
 });

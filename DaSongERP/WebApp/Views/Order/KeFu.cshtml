@@ -1,11 +1,11 @@
 ﻿@model EditOrderViewModel
 @{
-    ViewBag.Title = "售后";
+    ViewBag.Title = "客服";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="vw-shouhou-order vw-order-form" data-page-js="shouhouorder">
-    <h2>售后</h2>
+<div class="vw-kefu-order vw-order-form" data-page-js="kefuorder">
+    <h2>客服</h2>
     <form>
         <fieldset>
             <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
@@ -39,16 +39,8 @@
                 <div>@DP.Txt(Model.Order.JD订单号)</div>
             </div>
             <div class="form-group">
-                <label>客人地址</label>
-                <div>@DP.Txt(Model.Order.客人地址)</div>
-            </div>
-            <div class="form-group">
-                <label>淘宝账号</label>
-                <div>@DP.Txt(Model.Order.淘宝账号)</div>
-            </div>
-            <div class="form-group">
-                <label>淘宝订单号</label>
-                <div>@DP.Txt(Model.Order.淘宝订单号)</div>
+                <label for="Txt客人地址">客人地址</label>
+                <input type="text" class="form-control" name="客人地址" id="Txt客人地址" value="@DP.Txt(Model.Order.客人地址)" maxlength="150" />
             </div>
             <div class="form-group">
                 <label>京东SKU及采购备注</label>
@@ -56,7 +48,7 @@
             </div>
             <div class="form-group">
                 <label>订单修改备注</label>
-                <div>@DP.Txt(Model.Order.订单修改备注)</div>
+                <textarea class="form-control" name="订单修改备注" id="Txt订单修改备注">@Model.Order.订单修改备注</textarea>
             </div>
             <div class="form-group">
                 <label>来-快递单号</label>
@@ -107,47 +99,33 @@
                 <div>@(DP.Txt(Model.Order.拆包时间))</div>
             </div>
             <div class="form-group">
-                <label for="Ddl售后操作ID">售后操作</label>
-                <select class="form-control" name="售后操作ID" id="Ddl售后操作ID">
-                    @foreach (var op in Model.售后操作DataSource)
-                    {
-                        <option value="@op.ID.Value" @(Model.Order.售后操作ID == op.ID.Value ? "selected" : "")>@op.Name</option>
-                    }
-                </select>
+                <label>售后操作</label>
+                <div>@DP.Txt(Model.Order.售后操作)</div>
             </div>
             <div class="form-group">
-                <label for="Ddl售后原因ID">售后原因</label>
-                <select class="form-control" name="售后原因ID" id="Ddl售后原因ID">
-                    @foreach (var op in Model.售后原因DataSource)
-                    {
-                        <option value="@op.ID.Value" @(Model.Order.售后原因ID == op.ID.Value ? "selected" : "")>@op.Name</option>
-                    }
-                </select>
+                <label>售后原因</label>
+                <div>@DP.Txt(Model.Order.售后原因)</div>
             </div>
             <div class="form-group">
-                <label for="Txt售后备注">售后备注</label>
-                <textarea class="form-control" name="售后备注" id="Txt售后备注">@DP.Txt(Model.Order.售后备注, "")</textarea>
+                <label>售后备注</label>
+                <div>@DP.Txt(Model.Order.售后备注)</div>
             </div>
             <div class="form-group">
-                <label for="Txt客人退回单号">客人退回单号</label>
-                <input type="text" class="form-control" name="客人退回单号" id="Txt客人退回单号" maxlength="50" value="@DP.Txt(Model.Order.客人退回单号, "")" />
-                <span class="validator" id="vd客人退回单号" data-required="" data-validate-target="#Txt客人退回单号"><span class="error-message text-danger">此项必填</span></span>
+                <label>售后人</label>
+                <div>@DP.Txt(Model.Order.售后人员)</div>
             </div>
             <div class="form-group">
-                <label>是否淘宝退回</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="是否淘宝退回" data-type="bool" id="Chk是否淘宝退回" @(Model.Order.是否淘宝退回.GetValueOrDefault() ? "checked" : "") />
-                    <label class="form-check-label" for="Chk是否淘宝退回">是</label>
-                </div>
+                <label>售后时间</label>
+                <div>@DP.Txt(Model.Order.售后时间)</div>
+            </div>
+            <div class="form-group">
+                <label>客人退回单号</label>
+                <div>@DP.Txt(Model.Order.客人退回单号)</div>
             </div>
             <div class="form-group">
                 <label>售后完结</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="售后完结" data-type="bool" id="Chk售后完结" @(Model.Order.售后完结.GetValueOrDefault() ? "checked" : "") />
-                    <label class="form-check-label" for="Chk售后完结">是</label>
-                </div>
+                <div>@DP.Txt(Model.Order.售后完结)</div>
             </div>
-
             <div class="form-group">
                 <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
             </div>

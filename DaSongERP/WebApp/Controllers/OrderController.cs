@@ -170,5 +170,28 @@ namespace WebApp.Controllers
                 Success = rowCount == 1
             });
         }
+
+        public ActionResult KeFu(Guid id)
+        {
+            var vm = this.OrderBiz.Get客服OrderViewModel(id);
+            if (vm.Order == null)
+            {
+                return Redirect("/Orders");
+            }
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AKeFu()
+        {
+            var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
+            var rowCount = this.OrderBiz.Update客服(order);
+
+            return Json(new
+            {
+                Success = rowCount == 1
+            });
+        }
     }
 }

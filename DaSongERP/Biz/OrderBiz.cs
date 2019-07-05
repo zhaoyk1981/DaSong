@@ -120,5 +120,19 @@ namespace DaSongERP.Biz
             vm.Order = this.GetOrderBy(id);
             return vm;
         }
+
+        public EditOrderViewModel Get客服OrderViewModel(Guid id)
+        {
+            var vm = new EditOrderViewModel();
+            vm.Order = this.GetOrderBy(id);
+            return vm;
+        }
+
+        public int Update客服(OrderModel order)
+        {
+            order.客服ID = this.UserID;
+            var rowCount = OrderDao.Update客服(order);
+            return rowCount;
+        }
     }
 }

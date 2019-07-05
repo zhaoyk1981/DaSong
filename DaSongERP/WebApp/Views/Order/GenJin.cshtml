@@ -1,6 +1,6 @@
 ﻿@model EditOrderViewModel
 @{
-    ViewBag.Title = "GenJin";
+    ViewBag.Title = "订单跟进";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,7 +13,9 @@
             <legend>订单跟进</legend>
             <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
             <div class="form-group">
-                <img src="@Model.Order.商品图片" class="product-image" />
+                <a href="@Model.Order.商品图片" target="_blank">
+                    <img src="@Model.Order.商品图片" class="product-image" />
+                </a>
             </div>
             <div class="form-group">
                 <label>采购人</label>

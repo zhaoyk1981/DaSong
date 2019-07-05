@@ -62,7 +62,7 @@
         ready: function () {
             initValidation();
             $('#BtnCreateOrder').click(btnCreateOrder_click);
-            $('#Txt货号').blur(txt货号_blur);
+            //$('#Txt货号').blur(txt货号_blur);
         }
     };
 });
