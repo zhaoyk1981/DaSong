@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace DaSongERP.WebApp.Controllers
 {
-    public class DefaultController : AuthorizedController
+    public class UserController : AuthorizedController
     {
-        // GET: Default
+        // GET: User
         public ActionResult Index()
         {
             return View();

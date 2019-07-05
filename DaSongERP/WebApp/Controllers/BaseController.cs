@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WebApp.Controllers
+namespace DaSongERP.WebApp.Controllers
 {
     public class BaseController : Controller
     {

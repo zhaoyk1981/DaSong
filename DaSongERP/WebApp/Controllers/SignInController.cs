@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using DaSongERP.Models;
 using DaSongERP.ViewModels;
 
-namespace WebApp.Controllers
+namespace DaSongERP.WebApp.Controllers
 {
     public class SignInController : BaseController
     {

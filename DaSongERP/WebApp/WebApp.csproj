@@ -273,6 +273,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\StockController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -309,6 +310,7 @@
     <Folder Include="Views\Authorized\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Stock\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Biz\Biz.csproj">

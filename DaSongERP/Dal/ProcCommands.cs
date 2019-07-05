@@ -213,5 +213,48 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_Update客服
+
+        #region sp_GetAllUsers
+        public static SqlCommand sp_GetAllUsers()
+        {
+            var cmd = new SqlCommand("sp_GetAllUsers") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Search", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_GetAllUsers
+
+        #region sp_CreateUser
+        public static SqlCommand sp_CreateUser()
+        {
+            var cmd = new SqlCommand("sp_CreateUser") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@UserName", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Password", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PermissionID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_CreateUser
+
+        #region sp_UpdateUser
+        public static SqlCommand sp_UpdateUser()
+        {
+            var cmd = new SqlCommand("sp_UpdateUser") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@UserName", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Password", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PermissionID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_UpdateUser
+
+        #region sp_GetAllPermissions
+        public static SqlCommand sp_GetAllPermissions()
+        {
+            var cmd = new SqlCommand("sp_GetAllPermissions") { CommandType = CommandType.StoredProcedure };
+            return cmd;
+        }
+        #endregion sp_GetAllPermissions
     }
 }

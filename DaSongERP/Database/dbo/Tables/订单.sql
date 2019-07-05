@@ -34,8 +34,12 @@
     [客人退回单号] NVARCHAR (100)   CONSTRAINT [DF_订单_客人退回单号] DEFAULT ('') NOT NULL,
     [是否淘宝退回] BIT              NULL,
     [售后完结]   BIT              NULL,
+    [客服ID]   UNIQUEIDENTIFIER NULL,
+    [客服时间]   DATETIME2 (7)    NULL,
     CONSTRAINT [PK_订单] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 

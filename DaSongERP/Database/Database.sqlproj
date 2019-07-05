@@ -92,5 +92,9 @@
     <Build Include="dbo\Stored Procedures\sp_Update售后.sql" />
     <Build Include="dbo\Stored Procedures\sp_Update拆包.sql" />
     <Build Include="dbo\Stored Procedures\sp_InitData.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Update客服.sql" />
+    <Build Include="dbo\Stored Procedures\sp_UpdateUser.sql" />
+    <Build Include="dbo\Stored Procedures\sp_GetAllUsers.sql" />
+    <Build Include="dbo\Stored Procedures\sp_GetAllPermissions.sql" />
   </ItemGroup>
 </Project>
