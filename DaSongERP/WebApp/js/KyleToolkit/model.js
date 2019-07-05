@@ -107,7 +107,11 @@
                             return parseInt(ctrl.val());
                         }
 
-                        return ctrl.val();
+                        if (ctrl.attr('trim') === 'false' || ctrl.is('input[type=password]')) {
+                            return ctrl.val();
+                        }
+
+                        return $.trim(ctrl.val());
                     },
                     setter: function (value) {
                         ctrl.val(value);
