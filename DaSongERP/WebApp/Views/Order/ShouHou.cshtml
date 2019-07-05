@@ -132,8 +132,9 @@
                 <textarea class="form-control" name="售后备注" id="Txt售后备注">@DP.Txt(Model.Order.售后备注, "")</textarea>
             </div>
             <div class="form-group">
-                <label>客人退回单号</label>
+                <label for="Txt客人退回单号">客人退回单号</label>
                 <input type="text" class="form-control" name="客人退回单号" id="Txt客人退回单号" maxlength="50" value="@DP.Txt(Model.Order.客人退回单号, "")" />
+                <span class="validator" id="vd客人退回单号" data-required="" data-validate-target="#Txt客人退回单号"><span class="error-message text-danger">此项必填</span></span>
             </div>
             <div class="form-group">
                 <label>是否淘宝退回</label>

@@ -23,83 +23,83 @@
             </div>
             <div class="form-group">
                 <label>货号</label>
-                <div>@Model.Order.货号</div>
+                <div>@DP.Txt(Model.Order.货号)</div>
             </div>
             <div class="form-group">
                 <label>进货数量</label>
-                <div>@Model.Order.进货数量.Value</div>
+                <div>@DP.Txt(Model.Order.进货数量)</div>
             </div>
             <div class="form-group">
                 <label>店铺名称</label>
-                <div>@Model.Order.店铺.Name</div>
+                <div>@DP.Txt(Model.Order.店铺)</div>
             </div>
             <div class="form-group">
                 <label>JD订单号</label>
-                <div>@Model.Order.JD订单号</div>
+                <div>@DP.Txt(Model.Order.JD订单号)</div>
             </div>
             <div class="form-group">
                 <label>客人地址</label>
-                <div>@Model.Order.客人地址</div>
+                <div>@DP.Txt(Model.Order.客人地址)</div>
             </div>
             <div class="form-group">
                 <label>京东SKU及采购备注</label>
-                <div>@Model.Order.采购备注</div>
+                <div>@DP.Txt(Model.Order.采购备注)</div>
             </div>
             <div class="form-group">
                 <label>订单修改备注</label>
-                <div>@Model.Order.订单修改备注</div>
+                <div>@DP.Txt(Model.Order.订单修改备注)</div>
             </div>
             <div class="form-group">
                 <label>来-快递单号</label>
-                <div>@Model.Order.来快递单号</div>
+                <div>@DP.Txt(Model.Order.来快递单号)</div>
             </div>
             <div class="form-group">
                 <label>发货时间</label>
-                <div>@(Model.Order.发货时间.HasValue ? Model.Order.发货时间.Value.ToString("yyyy-MM-dd HH:mm") : "无")</div>
+                <div>@DP.Txt(Model.Order.发货时间)</div>
             </div>
             <div class="form-group">
                 <label>发货备注</label>
-                <div>@Model.Order.发货备注</div>
+                <div>@DP.Txt(Model.Order.发货备注)</div>
             </div>
             <div class="form-group">
                 <label>导入时间</label>
-                <div>@(Model.Order.导入时间.HasValue ? Model.Order.导入时间.Value.ToString("yyyy-MM-dd HH:mm") : "无")</div>
+                <div>@DP.Txt(Model.Order.导入时间)</div>
             </div>
             <div class="form-group">
                 <label>电话客服</label>
-                <div>@(Model.Order.电话客服ID.HasValue ? Model.Order.电话客服.Name : "无")</div>
+                <div>@DP.Txt(Model.Order.电话客服)</div>
             </div>
             <div class="form-group">
                 <label>电话情况</label>
-                <div>@(string.IsNullOrEmpty(Model.Order.电话情况) ? "无" : Model.Order.电话情况)</div>
+                <div>@DP.Txt(Model.Order.电话情况)</div>
             </div>
             <div class="form-group">
                 <label>售后操作</label>
-                <div>@(Model.Order.售后操作ID.HasValue ? Model.Order.售后操作.Name : "无")</div>
+                <div>@DP.Txt(Model.Order.售后操作)</div>
             </div>
             <div class="form-group">
                 <label>售后原因</label>
-                <div>@(Model.Order.售后原因ID.HasValue ? Model.Order.售后原因.Name : "无")</div>
+                <div>@DP.Txt(Model.Order.售后原因)</div>
             </div>
             <div class="form-group">
                 <label>售后备注</label>
-                <div>@(string.IsNullOrEmpty(Model.Order.售后备注) ? "无" : Model.Order.售后备注)</div>
+                <div>@DP.Txt(Model.Order.售后备注)</div>
             </div>
             <div class="form-group">
                 <label>售后人</label>
-                <div>@(Model.Order.售后人员ID.HasValue ? Model.Order.售后人员.Name : "无")</div>
+                <div>@DP.Txt(Model.Order.售后人员)</div>
             </div>
             <div class="form-group">
                 <label>售后时间</label>
-                <div>@(Model.Order.售后时间.HasValue ? Model.Order.售后时间.Value.ToString("yyyy-MM-dd HH:mm") : "无")</div>
+                <div>@DP.Txt(Model.Order.售后时间)</div>
             </div>
             <div class="form-group">
                 <label>客人退回单号</label>
-                <div>@(string.IsNullOrEmpty(Model.Order.客人退回单号) ? "无" : Model.Order.客人退回单号)</div>
+                <div>@DP.Txt(Model.Order.客人退回单号)</div>
             </div>
             <div class="form-group">
                 <label>售后完结</label>
-                <div>@(Model.Order.售后完结.HasValue ? (Model.Order.售后完结.Value ? "是" : "否") : "无")</div>
+                <div>@DP.Txt(Model.Order.售后完结)</div>
             </div>
             <div class="form-group">
                 <label for="Ddl审单操作">审单操作</label>
@@ -117,6 +117,7 @@
             <div class="form-group">
                 <label>转发单号</label>
                 <input type="text" class="form-control" name="转发单号" id="Txt转发单号" maxlength="50" value="@Model.Order.转发单号" />
+                <span class="validator" id="vd转发单号" data-required="" data-validate-target="#Txt转发单号"><span class="error-message text-danger">此项必填</span></span>
             </div>
             <div class="form-group">
                 <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
