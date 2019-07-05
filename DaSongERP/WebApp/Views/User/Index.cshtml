@@ -1,0 +1,47 @@
+﻿@model UserListViewModel
+@{
+    ViewBag.Title = "用户管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="vw-user-list" data-page-js="userlist">
+    <h2>用户管理</h2>
+    <div class="search-panel">
+        <div class="form-group">
+            <label>关键字</label>
+            <input type="text" class="form-control" id="TxtSearch" value="@Model.Search" />
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
+            <a href="/User/New" class="btn btn-primary" target="_blank">创建新用户</a>
+        </div>
+    </div>
+    <div>
+        <table class="repeater">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>用户名</th>
+                    <th>权限</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.Users.Count; i++)
+                {
+                    <tr data-id="@Model.Users[i].ID.Value">
+                        <td>@(i + 1)</td>
+                        <td>@DP.Txt(Model.Users[i].Name)</td>
+                        <td>@DP.Txt(Model.Users[i].UserName)</td>
+                        <td>@DP.Txt(Model.Users[i].权限)</td>
+                        <td>
+                            <a href="/User/Edit/@Model.Users[i].ID.Value" class="btn btn-primary btn-edit" target="_blank">编辑</a>
+                            <button type="button" class="btn btn-danger btn-remove">删除</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

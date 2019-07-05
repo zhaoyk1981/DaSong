@@ -96,5 +96,6 @@
     <Build Include="dbo\Stored Procedures\sp_UpdateUser.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetAllUsers.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetAllPermissions.sql" />
+    <Build Include="dbo\Stored Procedures\sp_RemoveUser.sql" />
   </ItemGroup>
 </Project>

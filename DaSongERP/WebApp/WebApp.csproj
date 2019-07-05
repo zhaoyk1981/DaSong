@@ -120,6 +120,7 @@
     <Content Include="js\pages\orderlist.js" />
     <Content Include="js\pages\shouhouorder.js" />
     <Content Include="js\pages\signin.js" />
+    <Content Include="js\pages\userlist.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -296,6 +297,7 @@
     <Content Include="Views\Order\ChaiBao.cshtml" />
     <Content Include="Views\Order\ShouHou.cshtml" />
     <Content Include="Views\Order\KeFu.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -310,7 +312,6 @@
     <Folder Include="Views\Authorized\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Stock\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Biz\Biz.csproj">

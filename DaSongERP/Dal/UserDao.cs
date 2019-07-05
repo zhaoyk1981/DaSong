@@ -10,11 +10,12 @@ namespace DaSongERP.Dal
 {
     public class UserDao : Dao
     {
-        public UserModel GetUserBy(string userName)
+        public UserModel GetUserBy(string userName, Guid? id = null)
         {
             var cmd = ProcCommands.sp_GetUserByUserName().SetParameterValues(new
             {
-                UserName = userName
+                UserName = userName,
+                ID = id
             });
 
             var list = this.DBHelper.ExecuteEntityList<UserModel>(cmd);
@@ -30,6 +31,34 @@ namespace DaSongERP.Dal
 
             var list = this.DBHelper.ExecuteEntityList<UserModel>(cmd);
             return list.FirstOrDefault();
+        }
+
+        public IList<UserModel> GetUserList(string search = null)
+        {
+            var cmd = ProcCommands.sp_GetAllUsers().SetParameterValues(new
+            {
+                Search = search
+            });
+            var list = this.DBHelper.ExecuteEntityList<UserModel>(cmd);
+            return list;
+        }
+
+        public int RemoveUser(Guid id)
+        {
+            var cmd = ProcCommands.sp_RemoveUser().SetParameterValues(new
+            {
+                ID = id
+            });
+
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
+
+        public IList<PermissionModel> GetAllPermissions()
+        {
+            var cmd = ProcCommands.sp_GetAllPermissions();
+            var list = DBHelper.ExecuteEntityList<PermissionModel>(cmd);
+            return list;
         }
     }
 }

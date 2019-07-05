@@ -15,6 +15,7 @@ namespace DaSongERP.Dal
         {
             var cmd = new SqlCommand("sp_GetUserByUserName") { CommandType = CommandType.StoredProcedure };
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@UserName", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_GetUserByUserName
@@ -256,5 +257,14 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_GetAllPermissions
+
+        #region sp_RemoveUser
+        public static SqlCommand sp_RemoveUser()
+        {
+            var cmd = new SqlCommand("sp_RemoveUser") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_RemoveUser
     }
 }

@@ -44,6 +44,7 @@
     <Compile Include="Models\MetaModel.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Models\PermissionModel.cs" />
     <Compile Include="Models\StockModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="ViewModels\OrderListViewModel.cs" />
     <Compile Include="ViewModels\PagedListViewModel.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
+    <Compile Include="ViewModels\UserListViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

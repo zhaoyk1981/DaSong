@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE sp_InitData
+CREATE PROCEDURE [dbo].[sp_InitData]
 	
 AS
 BEGIN
@@ -25,19 +25,21 @@ INSERT [dbo].[Roles] ([ID], [Name]) VALUES (5, N'售后')
 INSERT [dbo].[Roles] ([ID], [Name]) VALUES (6, N'客服')
 END
 
-IF NOT EXISTS (SELECT * FROM Users)
+IF NOT EXISTS (SELECT * FROM [Permissions])
 BEGIN
-INSERT [dbo].[Users] ([ID], [UserName], [Password], [Name], [RoleID]) VALUES (N'57d1b3c6-8950-435b-8b5d-1a265068ab7b', N'caiu', N'111', N'采购员', 2)
+INSERT [dbo].[Permissions] ([ID], [Name]) VALUES (1, N'管理员')
 
-INSERT [dbo].[Users] ([ID], [UserName], [Password], [Name], [RoleID]) VALUES (N'66120d08-c611-4214-9b54-20144f2436f1', N'chaibao', N'111', N'拆包审单', 4)
+INSERT [dbo].[Permissions] ([ID], [Name]) VALUES (2, N'采购')
 
-INSERT [dbo].[Users] ([ID], [UserName], [Password], [Name], [RoleID]) VALUES (N'0f127f42-6bad-4f75-b23e-39b901f5e36f', N'admin', N'111', N'管理员', 1)
+INSERT [dbo].[Permissions] ([ID], [Name]) VALUES (4, N'订单跟进')
 
-INSERT [dbo].[Users] ([ID], [UserName], [Password], [Name], [RoleID]) VALUES (N'363f1aa2-3cec-4308-8f78-5366defd7c82', N'shouhou', N'111', N'售后', 5)
+INSERT [dbo].[Permissions] ([ID], [Name]) VALUES (8, N'电话客服')
 
-INSERT [dbo].[Users] ([ID], [UserName], [Password], [Name], [RoleID]) VALUES (N'9be3c7fd-b82e-4cb3-8a05-69c0496aac93', N'dianhua', N'111', N'电话客服', 3)
+INSERT [dbo].[Permissions] ([ID], [Name]) VALUES (16, N'拆包审单')
 
-INSERT [dbo].[Users] ([ID], [UserName], [Password], [Name], [RoleID]) VALUES (N'a8137c2f-4eba-474a-86c0-90e64c212feb', N'kefu', N'111', N'客服', 6)
+INSERT [dbo].[Permissions] ([ID], [Name]) VALUES (32, N'售后')
+
+INSERT [dbo].[Permissions] ([ID], [Name]) VALUES (64, N'客服')
 END
 
 IF NOT EXISTS (SELECT * FROM 店铺)
