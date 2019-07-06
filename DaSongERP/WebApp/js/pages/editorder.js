@@ -58,10 +58,18 @@
         });
     };
 
+    let txtProductImage_input = function () {
+        var src = $.trim($(this).val());
+        let fg = $(this).closest('.form-group');
+        fg.find('img').prop('src', src);
+        fg.find('a.product-thumbnail-link').prop('href', src).toggle(src !== '');
+    };
+
     return {
         ready: function () {
             initValidation();
             $('#BtnUpdateOrder').click(btnUpdateOrder_click);
+            $('#Txt商品图片').on('input', txtProductImage_input);
             //$('#Txt货号').blur(txt货号_blur);
         }
     };

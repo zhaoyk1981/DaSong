@@ -1,7 +1,8 @@
 ﻿body {
     .vw-order-form {
-        .product-image {
-            max-height: 150px;
+        .product-image,
+        .product-thumbnail {
+            height: 120px;
         }
 
         #LblStockInfo {
