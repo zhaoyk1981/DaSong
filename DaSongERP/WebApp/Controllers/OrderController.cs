@@ -85,14 +85,14 @@ namespace DaSongERP.WebApp.Controllers
             }
 
             var orders = this.OrderBiz.GetOrdersBy来快递单号(来快递单号);
-            if(orders.Count == 1)
+            if (orders.Count == 1)
             {
                 return Json(new
                 {
                     ID = orders[0].ID.Value.ToString()
                 });
             }
-            
+
             return Json(new
             {
                 ID = string.Empty
@@ -178,7 +178,8 @@ namespace DaSongERP.WebApp.Controllers
                 return Redirect("/SignIn");
             }
 
-            return View();
+            var vm = this.OrderBiz.GetImportOrderListViewModel();
+            return View(vm);
         }
 
         [HttpPost]
@@ -195,7 +196,7 @@ namespace DaSongERP.WebApp.Controllers
             var excelStream = this.Request.Files[0].InputStream;
             bool isXlsx = string.Compare(Path.GetExtension(this.Request.Files[0].FileName), ".xlsx", true) == 0;
             var file = OrderBiz.电话客服导入(excelStream, isXlsx);
-            var 未导入 = OrderBiz.Count未导入();
+            var 未导入 = OrderBiz.Get未导入Orders().Count;
             return Json(new
             {
                 Success = true,

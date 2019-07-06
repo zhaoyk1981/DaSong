@@ -69,15 +69,6 @@ namespace DaSongERP.Dal
         }
         #endregion sp_Get淘宝账号
 
-        #region sp_Get库存
-        public static SqlCommand sp_Get库存()
-        {
-            var cmd = new SqlCommand("sp_Get库存") { CommandType = CommandType.StoredProcedure };
-            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
-            return cmd;
-        }
-        #endregion sp_Get库存
-
         #region sp_CreateOrder
         public static SqlCommand sp_CreateOrder()
         {
@@ -166,14 +157,6 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_Update电话备注
-
-        #region sp_Count未导入
-        public static SqlCommand sp_Count未导入()
-        {
-            var cmd = new SqlCommand("sp_Count未导入") { CommandType = CommandType.StoredProcedure };
-            return cmd;
-        }
-        #endregion sp_Count未导入
 
         #region sp_Update拆包
         public static SqlCommand sp_Update拆包()
@@ -278,13 +261,12 @@ namespace DaSongERP.Dal
         }
         #endregion sp_GetOrders
 
-        #region sp_GetOrdersBy来快递单号
-        public static SqlCommand sp_GetOrdersBy来快递单号()
+        #region sp_Get未导入Orders
+        public static SqlCommand sp_Get未导入Orders()
         {
-            var cmd = new SqlCommand("sp_GetOrdersBy来快递单号") { CommandType = CommandType.StoredProcedure };
-            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@来快递单号", Value = DBNull.Value });
+            var cmd = new SqlCommand("sp_Get未导入Orders") { CommandType = CommandType.StoredProcedure };
             return cmd;
         }
-        #endregion sp_GetOrdersBy来快递单号
+        #endregion sp_Get未导入Orders
     }
 }

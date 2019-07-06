@@ -34,6 +34,12 @@ namespace DaSongERP.WebApp.Controllers
             }
         }
 
+        protected override void OnAuthorization(AuthorizationContext filterContext)
+        {
+            base.OnAuthorization(filterContext);
+            ViewData["UserID"] = UserID;
+            ViewData["CurrentUser"] = LoggedAccount;
+        }
 
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {

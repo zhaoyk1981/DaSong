@@ -34,7 +34,7 @@ namespace DaSongERP.WebApp.Models
 
         public static bool Any(params UPM[] ps)
         {
-            if (User?.PermissionID.GetValueOrDefault() == 0)
+            if (User == null || User.PermissionID.GetValueOrDefault() == 0)
             {
                 return false;
             }

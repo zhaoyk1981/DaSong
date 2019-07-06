@@ -70,11 +70,11 @@ namespace DaSongERP.Dal
             return 导入结果;
         }
 
-        public int Count未导入()
+        public IList<OrderModel> Get未导入Orders()
         {
-            var cmd = ProcCommands.sp_Count未导入();
-            var result = (int)DBHelper.ExecuteScalar(cmd);
-            return result;
+            var cmd = ProcCommands.sp_Get未导入Orders();
+            var list = DBHelper.ExecuteEntityList<OrderModel>(cmd);
+            return list;
         }
 
         public int Update拆包(OrderModel order)

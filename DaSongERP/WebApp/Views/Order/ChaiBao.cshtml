@@ -5,6 +5,7 @@
 }
 
 <div class="vw-chaibao-order vw-order-form" data-page-js="chaibaoorder">
+    @Html.Partial("_Nav")
     <h2>拆包审单</h2>
     <form>
         <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />

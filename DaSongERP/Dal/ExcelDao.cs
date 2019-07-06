@@ -67,11 +67,6 @@ namespace DaSongERP.Dal
                 {
                     continue;
                 }
-                var cellJD订单号 = row.GetCell(idxJD订单号.Value);
-                if (cellJD订单号 == null)
-                {
-                    continue;
-                }
 
                 var cell电话备注 = row.GetCell(idx电话备注.Value);
                 if (cell电话备注 == null)
@@ -79,9 +74,10 @@ namespace DaSongERP.Dal
                     continue;
                 }
 
-                var JD订单号 = (cellJD订单号.StringCellValue ?? string.Empty).Trim();
                 var 电话备注 = (cell电话备注.StringCellValue ?? string.Empty).Trim();
-                if (string.IsNullOrEmpty(JD订单号))
+                var JD订单号 = string.Empty;
+                var cellJD订单号 = row.GetCell(idxJD订单号.Value);
+                if (cellJD订单号 == null)
                 {
                     if (lastOrder == null)
                     {
@@ -89,6 +85,27 @@ namespace DaSongERP.Dal
                     }
 
                     JD订单号 = lastOrder.JD订单号;
+                }
+                else
+                {
+                    JD订单号 = (cellJD订单号.StringCellValue ?? string.Empty).Trim();
+                }
+
+                if (string.IsNullOrEmpty(JD订单号))
+                {
+                    continue;
+                }
+
+                if (string.IsNullOrEmpty(电话备注))
+                {
+                    if (JD订单号 == lastOrder?.JD订单号)
+                    {
+                        电话备注 = lastOrder.电话情况;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
 
                 var o = new OrderModel();
@@ -122,27 +139,22 @@ namespace DaSongERP.Dal
             //获取第一行
             IRow headrow = sheet.GetRow(0);
 
-            int? idxJD订单号 = null;
             int? idx处理结果 = null;
             for (var i = 0; i < headrow.PhysicalNumberOfCells; i++)
             {
                 var value = (headrow.Cells[i].StringCellValue ?? string.Empty).Trim();
-                if (string.Compare(value, "销售平台单号", true) == 0)
-                {
-                    idxJD订单号 = i;
-                }
-                else if (string.Compare(value, "处理结果", true) == 0)
+                if (string.Compare(value, "处理结果", true) == 0)
                 {
                     idx处理结果 = i;
                 }
 
-                if (idxJD订单号.HasValue && idx处理结果.HasValue)
+                if (idx处理结果.HasValue)
                 {
                     break;
                 }
             }
 
-            if (!idxJD订单号.HasValue || !idx处理结果.HasValue)
+            if (!idx处理结果.HasValue)
             {
                 return false;
             }
@@ -154,16 +166,11 @@ namespace DaSongERP.Dal
                 {
                     continue;
                 }
-                var cellJD订单号 = row.GetCell(idxJD订单号.Value);
-                if (cellJD订单号 == null)
-                {
-                    continue;
-                }
 
                 var cell处理结果 = row.GetCell(idx处理结果.Value);
                 if (cell处理结果 == null)
                 {
-                    continue;
+                    cell处理结果 = row.CreateCell(idx处理结果.Value);
                 }
 
                 var order = orders.FirstOrDefault(m => m.RowIndex.GetValueOrDefault() == rowIndex);

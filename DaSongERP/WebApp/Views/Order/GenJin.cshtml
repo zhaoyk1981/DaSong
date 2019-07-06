@@ -5,9 +5,7 @@
 }
 
 <div class="vw-genjin-order vw-order-form" data-page-js="genjinorder">
-    <div>
-        <a href="/Order">订单列表</a>
-    </div>
+    @Html.Partial("_Nav")
     <h2>订单跟进</h2>
     <form validation-group="default" autocomplete="off">
         <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />

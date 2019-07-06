@@ -32,7 +32,7 @@
                 }
 
                 $("#LblMessage").text('未导入订单数量：' + data.未导入);
-                window.open(data.Url);
+                window.location = data.Url;
             }
         });
     };

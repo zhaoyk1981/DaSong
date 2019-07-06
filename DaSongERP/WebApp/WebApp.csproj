@@ -305,6 +305,7 @@
     <Content Include="Views\User\New.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Order\ChaiBaoList.cshtml" />
+    <Content Include="Views\Shared\_Nav.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

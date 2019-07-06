@@ -3,18 +3,15 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[sp_GetOrders]
-	@JD订单号 NVARCHAR(50),
-	@来快递单号 NVARCHAR(50)
+CREATE PROCEDURE dbo.sp_Get未导入Orders
+	
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-    SELECT * FROM vw_orders
-	WHERE (@JD订单号 IS NULL OR JD订单号 LIKE '%' + @JD订单号 + '%')
-		AND (@来快递单号 IS NULL OR 来快递单号 LIKE '%' + @来快递单号 + '%')
+    SELECT * FROM vw_Orders
+	WHERE 导入时间 IS NULL
 	ORDER BY 进货日期;
-
 END

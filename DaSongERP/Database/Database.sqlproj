@@ -83,7 +83,6 @@
     <Build Include="dbo\Stored Procedures\sp_CreateOrder.sql" />
     <Build Include="dbo\Stored Procedures\sp_订单跟进.sql" />
     <Build Include="dbo\Stored Procedures\sp_Update电话备注.sql" />
-    <Build Include="dbo\Stored Procedures\sp_Count未导入.sql" />
     <Build Include="dbo\Stored Procedures\sp_Update售后.sql" />
     <Build Include="dbo\Stored Procedures\sp_Update拆包.sql" />
     <Build Include="dbo\Stored Procedures\sp_InitData.sql" />
@@ -95,5 +94,6 @@
     <Build Include="dbo\Stored Procedures\sp_GetOrders.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetOrderBy订单号.sql" />
     <Build Include="dbo\Stored Procedures\sp_CreateUser.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get未导入Orders.sql" />
   </ItemGroup>
 </Project>

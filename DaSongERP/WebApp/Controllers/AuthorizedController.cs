@@ -15,8 +15,6 @@ namespace DaSongERP.WebApp.Controllers
             {
                 filterContext.Result = RedirectToAction("index", "SignIn");
             }
-
-            ViewData["CurrentUser"] = LoggedAccount;
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

@@ -95,9 +95,9 @@ namespace DaSongERP.Biz
             return file;
         }
 
-        public int Count未导入()
+        public IList<OrderModel> Get未导入Orders()
         {
-            return OrderDao.Count未导入();
+            return OrderDao.Get未导入Orders();
         }
 
         public int Update拆包(OrderModel order)
@@ -164,6 +164,13 @@ namespace DaSongERP.Biz
             var vm = new OrderListViewModel();
             vm.Orders = this.GetOrdersBy来快递单号(来快递单号);
             vm.来快递单号 = 来快递单号;
+            return vm;
+        }
+
+        public OrderListViewModel GetImportOrderListViewModel()
+        {
+            var vm = new OrderListViewModel();
+            vm.Orders = this.Get未导入Orders();
             return vm;
         }
     }

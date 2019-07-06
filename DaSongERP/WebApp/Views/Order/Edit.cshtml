@@ -4,9 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="vw-edit-order vw-order-form" data-page-js="editorder">
-    <div>
-        <a href="/Order">订单列表</a>
-    </div>
+    @Html.Partial("_Nav")
     <h2>编辑采购订单</h2>
     <form validation-group="UpdateOrder" autocomplete="off">
         <fieldset>
