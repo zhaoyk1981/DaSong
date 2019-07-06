@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[订单] (
+CREATE TABLE [dbo].[订单] (
     [ID]     UNIQUEIDENTIFIER NOT NULL,
     [进货日期]   DATETIME2 (7)    NULL,
     [货号]     NVARCHAR (50)    CONSTRAINT [DF_订单_货号] DEFAULT ('') NOT NULL,
@@ -46,7 +46,9 @@
 
 
 
+
+
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_订单_JD订单号]
-    ON [dbo].[订单]([JD订单号] ASC);
+CREATE UNIQUE NONCLUSTERED INDEX [IX_订单_JD订单号_淘宝订单号]
+    ON [dbo].[订单]([JD订单号] ASC, [淘宝订单号] ASC);
 

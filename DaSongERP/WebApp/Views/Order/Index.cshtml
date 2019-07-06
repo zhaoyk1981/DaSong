@@ -1,74 +1,118 @@
 ﻿@model OrderListViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "订单操作";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="vw-order-list" data-page-js="orderlist">
     <h2>订单操作</h2>
     <div class="search-conditions">
-        <div class="form-group">
-            <label for="">JD订单号</label>
-            <input type="text" class="form-control" name="JD订单号" id="TxtJD订单号" maxlength="50" />
-        </div>
-        <div class="form-group">
-            <button type="button" class="btn btn-primary" id="BtnEditOrder">修改订单</button>
+        <div class="form-group" default-button="#BtnGenJinOrder">
+            <label>快递单号</label>
+            <input type="text" class="form-control" name="来快递单号" id="Txt快递单号" maxlength="50" on-enter />
             <button type="button" class="btn btn-primary" id="BtnGenJinOrder">跟进订单</button>
-            <button type="button" class="btn btn-primary" id="BtnChaiBao">拆包审单</button>
-            <button type="button" class="btn btn-primary" id="BtnShouHou">售后</button>
-            <button type="button" class="btn btn-primary" id="BtnKeFu">客服</button>
         </div>
+        <fieldset default-button="#BtnSearch">
+            <div class="form-group">
+                <label for="">JD订单号</label>
+                <input type="text" class="form-control" name="JD订单号" id="TxtSearch" maxlength="50" on-enter />
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
+            </div>
+        </fieldset>
         <div id="LblMessage" class="alert alert-danger"></div>
     </div>
-    @*<div class="repeater" style="display:none;">
-        <div>当前记录：<span class="lbl-current-page-record-start"></span>~<span class="lbl-current-page-record-end"></span>/<span class="lbl-records-count"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页数：<span class="lbl-current-page-number"></span>/<span class="lbl-pages-count"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每页：<span class="lbl-page-size"></span></div>
-        <table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline main-table" role="grid">
+    <div>
+        <table class="table table-striped table-bordered table-hover dataTable">
             <thead>
                 <tr>
-                    <th class="nowrap">序号</th>
-                    <th class="btn-sort" sort="Manuscript.Title">标&nbsp;题</th>
-                    <th class="btn-sort" sort="Department.Path">送审部门</th>
-                    <th class="btn-sort" sort="ManuscriptCategory.Name">主&nbsp;题</th>
-                    <th class="btn-sort" sort="Manuscript.DateCreated" sort-desc-dflt="true">时&nbsp;间</th>
-                    <th class="btn-sort" sort="Author.Name">作&nbsp;者</th>
-                    <th>操&nbsp;作</th>
+                    <th>序号</th>
+                    <th>图片</th>
+                    <th>进货日期</th>
+                    <th>JD订单号</th>
+                    <th>进货数量</th>
+                    <th>来快递单号</th>
+                    <th>客人地址</th>
+                    <th>操作</th>
                 </tr>
             </thead>
-            <tbody class="repeat-items">
-                @foreach (var m in Model.Orders.DataSource)
+            <tbody>
+                @for (var i = 0; i < Model.Orders.Count; i++)
                 {
-                    <tr data-id="@m.ID" manuscript-status-id="@m.售后原因.SN.Value" role="row">
-                        <td>@m.SN.Value</td>
+                    <tr data-id="@Model.Orders[i].ID.Value">
+                        <td>@(i + 1)</td>
                         <td>
-                            <a href="@($"/ProductImages/{m.ID.Value}.jpg")" target="_blank">
-                                <img src="@($"/ProductImages/{m.ID.Value}.jpg")" alt="@m.货号" />
+                            <a href="@(Model.Orders[i].商品图片)" target="_blank">
+                                <img src="@(Model.Orders[i].商品图片)" class="product-thumbnail" />
                             </a>
                         </td>
-                        <td @m.货号</td>
-                        <td>@m.进货日期.Value.ToString("yy-MM-dd")</td>
-                        <td>@m.店铺.Name</td>
+                        <td>@DP.Txt(Model.Orders[i].进货日期)</td>
+                        <td>@DP.Txt(Model.Orders[i].JD订单号)</td>
+                        <td>@DP.Txt(Model.Orders[i].进货数量)</td>
+                        <td>@DP.Txt(Model.Orders[i].来快递单号)</td>
+                        <td>@DP.Txt(Model.Orders[i].客人地址)</td>
                         <td>
-                            <button type="button" class="btn-edit btn btn-primary">修改</button>
+                            <a href="/Order/Edit/@Model.Orders[i].ID.Value" class="btn btn-primary btn-edit">修改订单</a>
+                            <a href="/Order/GenJin/@Model.Orders[i].ID.Value" class="btn btn-primary btn-edit">跟进订单</a>
+                            <a href="/Order/ChaiDan/@Model.Orders[i].ID.Value" class="btn btn-primary btn-chaibao">拆包审单</a>
+                            <a href="/Order/ShouHou/@Model.Orders[i].ID.Value" class="btn btn-primary btn-shouhou">售后</a>
+                            <a href="/Order/KeFu/@Model.Orders[i].ID.Value" class="btn btn-primary btn-kefu">客服</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-        <div class="paging">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li>
-                        <a href="javascript:void(0)" aria-label="Previous" class="btn-first-page">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" aria-label="Next" class="btn-last-page">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>*@
+    </div>
+    @*<div class="repeater" style="display:none;">
+            <div>当前记录：<span class="lbl-current-page-record-start"></span>~<span class="lbl-current-page-record-end"></span>/<span class="lbl-records-count"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页数：<span class="lbl-current-page-number"></span>/<span class="lbl-pages-count"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每页：<span class="lbl-page-size"></span></div>
+            <table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline main-table" role="grid">
+                <thead>
+                    <tr>
+                        <th class="nowrap">序号</th>
+                        <th class="btn-sort" sort="Manuscript.Title">标&nbsp;题</th>
+                        <th class="btn-sort" sort="Department.Path">送审部门</th>
+                        <th class="btn-sort" sort="ManuscriptCategory.Name">主&nbsp;题</th>
+                        <th class="btn-sort" sort="Manuscript.DateCreated" sort-desc-dflt="true">时&nbsp;间</th>
+                        <th class="btn-sort" sort="Author.Name">作&nbsp;者</th>
+                        <th>操&nbsp;作</th>
+                    </tr>
+                </thead>
+                <tbody class="repeat-items">
+                    @foreach (var m in Model.Orders.DataSource)
+                    {
+                        <tr data-id="@m.ID" manuscript-status-id="@m.售后原因.SN.Value" role="row">
+                            <td>@m.SN.Value</td>
+                            <td>
+                                <a href="@($"/ProductImages/{m.ID.Value}.jpg")" target="_blank">
+                                    <img src="@($"/ProductImages/{m.ID.Value}.jpg")" alt="@m.货号" />
+                                </a>
+                            </td>
+                            <td @m.货号</td>
+                            <td>@m.进货日期.Value.ToString("yy-MM-dd")</td>
+                            <td>@m.店铺.Name</td>
+                            <td>
+                                <button type="button" class="btn-edit btn btn-primary">修改</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="paging">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                            <a href="javascript:void(0)" aria-label="Previous" class="btn-first-page">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" aria-label="Next" class="btn-last-page">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>*@
 </div>

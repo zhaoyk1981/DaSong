@@ -299,5 +299,7 @@ namespace DaSongERP.Models
         }
 
         public DateTime? 客服时间 { get; set; }
+
+        public int? RowIndex { get; set; }
     }
 }

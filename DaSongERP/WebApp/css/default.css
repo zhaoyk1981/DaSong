@@ -7345,3 +7345,6 @@ body .vw-order-form #LblStockInfo {
 
 body .vw-order-list #LblMessage:empty {
   display: none; }
+
+body .vw-order-list .product-thumbnail {
+  height: 120px; }

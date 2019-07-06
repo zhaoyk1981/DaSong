@@ -1,20 +1,39 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "菜单";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>菜单</h2>
 
+@if (PM.Any(UPM.采购))
+{
+    <div>
+        <a href="/Order/New">创建采购订单</a>
+    </div>
+}
+@if (PM.Any(UPM.采购, UPM.售后, UPM.客服, UPM.跟进))
+{
+    <div>
+        <a href="/Order">订单列表</a>
+    </div>
+}
+@if (PM.Any(UPM.电话))
+{
+    <div>
+        <a href="/Order/Import">电话客服订单导入</a>
+    </div>
+}
+@if (PM.Any(UPM.管理))
+{
+    <div>
+        <a href="/User">用户管理</a>
+    </div>
+}
+
+<br />
+<br />
+<br />
 <div>
-    <a href="/Order/New">创建采购订单</a>
-</div>
-<div>
-    <a href="/Order">订单列表</a>
-</div>
-<div>
-    <a href="/Order/Import">电话客服订单导入</a>
-</div>
-<div>
-    <a href="/User">用户管理</a>
+    <a href="/SignOut">登出</a>
 </div>

@@ -3,8 +3,9 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE sp_GetOrderByJD订单号
+CREATE PROCEDURE [dbo].[sp_GetOrderBy订单号]
 	@JD订单号 NVARCHAR(50),
+	@淘宝订单号 NVARCHAR(50),
 	@ID UNIQUEIDENTIFIER = NULL
 AS
 BEGIN
@@ -14,6 +15,7 @@ BEGIN
 
     SELECT * FROM vw_orders
 	WHERE JD订单号 = @JD订单号
+		AND [淘宝订单号] = @淘宝订单号
 		AND (@ID IS NULL OR ID <> @ID);
 
 END

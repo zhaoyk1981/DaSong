@@ -66,12 +66,9 @@
     <Build Include="dbo\Tables\售后原因.sql" />
     <Build Include="dbo\Tables\售后操作.sql" />
     <Build Include="dbo\Tables\审单操作.sql" />
-    <Build Include="dbo\Tables\库存.sql" />
     <Build Include="dbo\Tables\订单.sql" />
     <Build Include="dbo\Tables\店铺.sql" />
     <Build Include="dbo\Tables\Users.sql" />
-    <Build Include="dbo\Tables\Roles.sql" />
-    <Build Include="dbo\Tables\RolePermission.sql" />
     <Build Include="dbo\Tables\Permissions.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetUserByUserName.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetUserByID.sql" />
@@ -81,9 +78,7 @@
     <Build Include="dbo\Stored Procedures\sp_Get售后原因.sql" />
     <Build Include="dbo\Stored Procedures\sp_Get售后操作.sql" />
     <Build Include="dbo\Stored Procedures\sp_Get审单操作.sql" />
-    <Build Include="dbo\Stored Procedures\sp_Get库存.sql" />
     <Build Include="dbo\Stored Procedures\sp_Get店铺.sql" />
-    <Build Include="dbo\Stored Procedures\sp_GetOrderByJD订单号.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetOrderByID.sql" />
     <Build Include="dbo\Stored Procedures\sp_CreateOrder.sql" />
     <Build Include="dbo\Stored Procedures\sp_订单跟进.sql" />
@@ -97,5 +92,8 @@
     <Build Include="dbo\Stored Procedures\sp_GetAllUsers.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetAllPermissions.sql" />
     <Build Include="dbo\Stored Procedures\sp_RemoveUser.sql" />
+    <Build Include="dbo\Stored Procedures\sp_GetOrders.sql" />
+    <Build Include="dbo\Stored Procedures\sp_GetOrderBy订单号.sql" />
+    <Build Include="dbo\Stored Procedures\sp_CreateUser.sql" />
   </ItemGroup>
 </Project>

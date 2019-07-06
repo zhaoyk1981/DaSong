@@ -1,4 +1,5 @@
 ﻿using DaSongERP.Models;
+using DaSongERP.WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,11 +14,23 @@ namespace DaSongERP.WebApp.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            return View();
+            if (!PM.Any(UPM.售后, UPM.客服, UPM.跟进, UPM.采购))
+            {
+                return Redirect("/SignIn");
+            }
+
+            var jd订单号 = (Request.QueryString["search"] ?? string.Empty).Trim();
+            var vm = this.OrderBiz.GetOrderListViewModel(jd订单号);
+            return View(vm);
         }
 
         public ActionResult New()
         {
+            if (!PM.Any(UPM.采购))
+            {
+                return Redirect("/SignIn");
+            }
+
             var vm = this.OrderBiz.GetCreateOrderViewModel();
             return View(vm);
         }
@@ -25,6 +38,14 @@ namespace DaSongERP.WebApp.Controllers
         [HttpPost]
         public ActionResult ACreate()
         {
+            if (!PM.Any(UPM.采购))
+            {
+                return Json(new
+                {
+                    Success = false
+                });
+            }
+
             var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
             var rowCount = this.OrderBiz.Create(order);
             //if (rowCount == 1)
@@ -43,24 +64,35 @@ namespace DaSongERP.WebApp.Controllers
         public ActionResult AGetOrderID()
         {
             var jd订单号 = (this.Request.Params["jdoid"] ?? string.Empty).Trim();
-            if (string.IsNullOrEmpty(jd订单号))
+            var 淘宝订单号 = (this.Request.Params["tboid"] ?? string.Empty).Trim();
+            Guid? id = null;
+            if (Guid.TryParse((this.Request.Params["id"] ?? string.Empty).Trim(), out Guid tmp))
+            {
+                id = tmp;
+            }
+
+            if (string.IsNullOrEmpty(jd订单号) || string.IsNullOrEmpty(淘宝订单号))
             {
                 return Json(new
                 {
-                    Success = false
+                    ID = string.Empty
                 });
             }
 
-            var order = this.OrderBiz.GetOrderBy(jd订单号);
+            var order = this.OrderBiz.GetOrderBy(jd订单号, 淘宝订单号, id);
             return Json(new
             {
-                Success = order != null,
-                OrderID = order == null ? null : order.ID.Value.ToString()
+                OrderID = order == null ? string.Empty : order.ID.Value.ToString()
             });
         }
 
         public ActionResult Edit(Guid id)
         {
+            if (!PM.Any(UPM.采购))
+            {
+                return Redirect("/SignIn");
+            }
+
             var vm = this.OrderBiz.GetEditOrderViewModel(id);
             if (vm.Order == null)
             {
@@ -73,6 +105,15 @@ namespace DaSongERP.WebApp.Controllers
         [HttpPost]
         public ActionResult AUpdate()
         {
+            if (!PM.Any(UPM.采购))
+            {
+                return Json(new
+                {
+                    Success = false
+                });
+            }
+
+
             var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
             var rowCount = this.OrderBiz.Update(order);
 

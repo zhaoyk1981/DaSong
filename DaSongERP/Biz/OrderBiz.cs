@@ -25,7 +25,7 @@ namespace DaSongERP.Biz
             order.ID = Guid.NewGuid();
             order.采购人ID = this.UserID;
             order.进货日期 = DateTime.Now;
-            var co = this.GetOrderBy(order.JD订单号);
+            var co = this.GetOrderBy(order.JD订单号, order.淘宝订单号);
             if (co != null)
             {
                 return 2;
@@ -40,9 +40,14 @@ namespace DaSongERP.Biz
             return p;
         }
 
-        public OrderModel GetOrderBy(string jd订单号, Guid? id = null)
+        public OrderModel GetOrderBy(string jd订单号, string 淘宝订单号, Guid? id = null)
         {
-            return this.OrderDao.GetOrderBy(jd订单号, id);
+            return this.OrderDao.GetOrderBy(jd订单号, 淘宝订单号, id);
+        }
+
+        public IList<OrderModel> GetOrdersBy(string jd订单号, string 来快递单号)
+        {
+            return this.OrderDao.GetOrdersBy(jd订单号, 来快递单号);
         }
 
         public OrderModel GetOrderBy(Guid id)
@@ -62,7 +67,7 @@ namespace DaSongERP.Biz
         public int Update(OrderModel order)
         {
             order.采购人ID = this.UserID;
-            var co = this.GetOrderBy(order.JD订单号, order.ID);
+            var co = this.GetOrderBy(order.JD订单号, order.淘宝订单号, order.ID);
             if (co != null)
             {
                 return 2;
@@ -144,6 +149,14 @@ namespace DaSongERP.Biz
             order.客服ID = this.UserID;
             var rowCount = OrderDao.Update客服(order);
             return rowCount;
+        }
+
+        public OrderListViewModel GetOrderListViewModel(string jd订单号)
+        {
+            var vm = new OrderListViewModel();
+            vm.Orders = this.GetOrdersBy(jd订单号, null);
+            vm.JD订单号 = jd订单号;
+            return vm;
         }
     }
 }

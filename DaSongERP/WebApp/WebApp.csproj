@@ -275,12 +275,13 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
-    <Compile Include="Controllers\StockController.cs" />
+    <Compile Include="Controllers\SignOutController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DP.cs" />
+    <Compile Include="Models\PM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -315,6 +316,7 @@
     <Folder Include="ProductImages\" />
     <Folder Include="Views\Authorized\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\SignOut\" />
     <Folder Include="Views\Stock\" />
   </ItemGroup>
   <ItemGroup>

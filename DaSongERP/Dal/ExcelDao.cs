@@ -59,6 +59,7 @@ namespace DaSongERP.Dal
                 return orders;
             }
 
+            OrderModel lastOrder = null;
             for (var rowIndex = 1; rowIndex < sheet.PhysicalNumberOfRows; rowIndex++)
             {
                 var row = sheet.GetRow(rowIndex);
@@ -82,17 +83,24 @@ namespace DaSongERP.Dal
                 var 电话备注 = (cell电话备注.StringCellValue ?? string.Empty).Trim();
                 if (string.IsNullOrEmpty(JD订单号))
                 {
-                    break;
+                    if (lastOrder == null)
+                    {
+                        continue;
+                    }
+
+                    JD订单号 = lastOrder.JD订单号;
                 }
 
                 var o = new OrderModel();
                 orders.Add(o);
                 o.JD订单号 = JD订单号;
                 o.电话情况 = 电话备注;
+                o.RowIndex = rowIndex;
+                lastOrder = o;
             }
 
             wk.Close();
-            
+
             return orders;
         }
 
@@ -158,13 +166,7 @@ namespace DaSongERP.Dal
                     continue;
                 }
 
-                var JD订单号 = (cellJD订单号.StringCellValue ?? string.Empty).Trim();
-                if (string.IsNullOrEmpty(JD订单号))
-                {
-                    continue;
-                }
-
-                var order = orders.FirstOrDefault(m => m.JD订单号 == JD订单号);
+                var order = orders.FirstOrDefault(m => m.RowIndex.GetValueOrDefault() == rowIndex);
                 if (order == null)
                 {
                     continue;
@@ -174,7 +176,7 @@ namespace DaSongERP.Dal
                 {
                     continue;
                 }
-                
+
                 var 处理结果 = string.Empty;
                 switch (order.导入结果.Value)
                 {
@@ -198,7 +200,7 @@ namespace DaSongERP.Dal
             }
 
             wk.Close();
-            
+
             return true;
         }
     }

@@ -16,15 +16,27 @@ namespace DaSongERP.Dal
             return rowCount;
         }
 
-        public OrderModel GetOrderBy(string jd订单号, Guid? id = null)
+        public OrderModel GetOrderBy(string jd订单号, string 淘宝订单号, Guid? id = null)
         {
-            var cmd = ProcCommands.sp_GetOrderByJD订单号().SetParameterValues(new
+            var cmd = ProcCommands.sp_GetOrderBy订单号().SetParameterValues(new
             {
                 JD订单号 = jd订单号,
+                淘宝订单号 = 淘宝订单号,
                 ID = id
             });
             var list = DBHelper.ExecuteEntityList<OrderModel>(cmd);
             return list.FirstOrDefault();
+        }
+
+        public IList<OrderModel> GetOrdersBy(string jd订单号, string 来快递单号)
+        {
+            var cmd = ProcCommands.sp_GetOrders().SetParameterValues(new
+            {
+                JD订单号 = jd订单号,
+                来快递单号 = 来快递单号
+            });
+            var list = DBHelper.ExecuteEntityList<OrderModel>(cmd);
+            return list;
         }
 
         public OrderModel GetOrderBy(Guid id)

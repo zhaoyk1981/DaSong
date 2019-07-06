@@ -46,6 +46,7 @@
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\PermissionModel.cs" />
     <Compile Include="Models\StockModel.cs" />
+    <Compile Include="Models\UPM.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EditOrderViewModel.cs" />

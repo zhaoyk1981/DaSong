@@ -8,8 +8,11 @@ using YK.Model;
 
 namespace DaSongERP.ViewModels
 {
-    public class OrderListViewModel : PagedListViewModel
+    public class OrderListViewModel : ViewModel
     {
-        public PagedList<OrderModel> Orders { get; set; }
+        public string JD订单号 { get; set; }
+
+        public string 来快递单号 { get; set; }
+        public IList<OrderModel> Orders { get; set; }
     }
 }

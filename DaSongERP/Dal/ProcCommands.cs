@@ -101,15 +101,16 @@ namespace DaSongERP.Dal
         }
         #endregion sp_CreateOrder
 
-        #region sp_GetOrderByJD订单号
-        public static SqlCommand sp_GetOrderByJD订单号()
+        #region sp_GetOrderBy订单号
+        public static SqlCommand sp_GetOrderBy订单号()
         {
-            var cmd = new SqlCommand("sp_GetOrderByJD订单号") { CommandType = CommandType.StoredProcedure };
+            var cmd = new SqlCommand("sp_GetOrderBy订单号") { CommandType = CommandType.StoredProcedure };
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@淘宝订单号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
             return cmd;
         }
-        #endregion sp_GetOrderByJD订单号
+        #endregion sp_GetOrderBy订单号
 
         #region sp_GetOrderByID
         public static SqlCommand sp_GetOrderByID()
@@ -266,5 +267,15 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_RemoveUser
+
+        #region sp_GetOrders
+        public static SqlCommand sp_GetOrders()
+        {
+            var cmd = new SqlCommand("sp_GetOrders") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@来快递单号", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_GetOrders
     }
 }

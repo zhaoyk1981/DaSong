@@ -3,11 +3,11 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[sp_UpdateUser]
+CREATE PROCEDURE dbo.sp_CreateUser
 	@ID UNIQUEIDENTIFIER
-	, @UserName NVARCHAR(50)
-	, @Password NVARCHAR(50) = NULL
 	, @Name NVARCHAR(50)
+	, @UserName NVARCHAR(50)
+	, @Password NVARCHAR(50)
 	, @PermissionID INT
 AS
 BEGIN
@@ -15,12 +15,18 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-    UPDATE Users SET
-		UserName = @UserName
-		, [Password] = ISNULL(@Password, [Password])
-		, [Name] = @Name
-		, PermissionID = @PermissionID
-	WHERE ID = @ID;
+	INSERT INTO [dbo].[Users]
+           ([ID]
+           ,[UserName]
+           ,[Password]
+           ,[Name]
+           ,[PermissionID])
+     VALUES
+           (@ID
+           ,@UserName
+           ,@Password
+           ,@Name
+           ,@PermissionID);
 
 	SELECT @@ROWCOUNT [RowCount];
 END

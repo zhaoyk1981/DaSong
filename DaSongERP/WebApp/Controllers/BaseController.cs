@@ -110,11 +110,17 @@ namespace DaSongERP.WebApp.Controllers
             this.Response.Cookies.Add(cookie);
         }
 
-        /// <summary>
-        /// The logged account
-        /// </summary>
-        private UserModel _loggedAccount = null;
-
+        private UserModel SessionUser
+        {
+            get
+            {
+                return Session["SessionUser"] as UserModel;
+            }
+            set
+            {
+                Session["SessionUser"] = value;
+            }
+        }
         /// <summary>
         /// Gets or sets the logged account.
         /// </summary>
@@ -127,20 +133,20 @@ namespace DaSongERP.WebApp.Controllers
             {
                 if (!this.UserID.HasValue)
                 {
-                    _loggedAccount = null;
+                    SessionUser = null;
                     return null;
                 }
 
-                if (_loggedAccount == null || _loggedAccount.ID.GetValueOrDefault() != this.UserID.Value)
+                if (SessionUser == null || SessionUser.ID.GetValueOrDefault() != this.UserID.Value)
                 {
-                    _loggedAccount = this.UserBiz.GetUserBy(this.UserID.Value);
+                    SessionUser = this.UserBiz.GetUserBy(this.UserID.Value);
                 }
 
-                return _loggedAccount;
+                return SessionUser;
             }
             set
             {
-                _loggedAccount = value;
+                SessionUser = value;
             }
         }
 
