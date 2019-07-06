@@ -34,12 +34,6 @@ namespace DaSongERP.Biz
             return this.OrderDao.Create(order);
         }
 
-        public string GetProductImagesPath()
-        {
-            var p = HttpContext.Current.Server.MapPath("~/ProductImages");
-            return p;
-        }
-
         public OrderModel GetOrderBy(string jd订单号, string 淘宝订单号, Guid? id = null)
         {
             return this.OrderDao.GetOrderBy(jd订单号, 淘宝订单号, id);
@@ -156,6 +150,20 @@ namespace DaSongERP.Biz
             var vm = new OrderListViewModel();
             vm.Orders = this.GetOrdersBy(jd订单号, null);
             vm.JD订单号 = jd订单号;
+            return vm;
+        }
+
+        public IList<OrderModel> GetOrdersBy来快递单号(string 来快递单号)
+        {
+            var list = OrderDao.GetOrdersBy(null, 来快递单号);
+            return list;
+        }
+
+        public OrderListViewModel GetChaiBaoOrderListViewModel(string 来快递单号)
+        {
+            var vm = new OrderListViewModel();
+            vm.Orders = this.GetOrdersBy来快递单号(来快递单号);
+            vm.来快递单号 = 来快递单号;
             return vm;
         }
     }

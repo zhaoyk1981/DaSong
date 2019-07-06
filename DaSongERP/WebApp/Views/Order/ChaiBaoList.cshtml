@@ -1,21 +1,22 @@
 ﻿@model OrderListViewModel
 @{
-    ViewBag.Title = "订单操作";
+    ViewBag.Title = "拆包审单列表";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="vw-order-list" data-page-js="orderlist">
-    <h2>订单操作</h2>
+<div class="vw-order-list" data-page-js="chaibaolist">
+    <h2>拆包审单列表</h2>
     <div class="search-conditions">
-        <fieldset default-button="#BtnSearch">
+        <fieldset default-button="#BtnChaiBao">
             <div class="form-group">
-                <label for="">JD订单号</label>
-                <input type="text" class="form-control" name="JD订单号" id="TxtSearch" maxlength="50" on-enter />
+                <label for="TxtSearch">来快递单号</label>
+                <input type="text" class="form-control" name="来快递单号" id="TxtSearch" maxlength="50" on-enter />
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
+                <button type="button" class="dp-none" id="BtnChaiBao"></button>
             </div>
         </fieldset>
-        <div class="form-group">
-            <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
-        </div>
         <div id="LblMessage" class="alert alert-danger"></div>
     </div>
     <div>
@@ -48,10 +49,7 @@
                         <td>@DP.Txt(Model.Orders[i].来快递单号)</td>
                         <td>@DP.Txt(Model.Orders[i].客人地址)</td>
                         <td>
-                            <a href="/Order/Edit/@Model.Orders[i].ID.Value" class="btn btn-primary btn-edit">修改订单</a>
-                            <a href="/Order/GenJin/@Model.Orders[i].ID.Value" class="btn btn-primary btn-edit">跟进订单</a>
-                            <a href="/Order/ShouHou/@Model.Orders[i].ID.Value" class="btn btn-primary btn-shouhou">售后</a>
-                            <a href="/Order/KeFu/@Model.Orders[i].ID.Value" class="btn btn-primary btn-kefu">客服</a>
+                            <a href="/Order/ChaiDan/@Model.Orders[i].ID.Value" class="btn btn-primary btn-chaibao">拆包审单</a>
                         </td>
                     </tr>
                 }

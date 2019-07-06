@@ -7,8 +7,9 @@
 <div class="vw-shouhou-order vw-order-form" data-page-js="shouhouorder">
     <h2>售后</h2>
     <form>
+        <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
         <fieldset>
-            <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
+            <legend>采购</legend>
             <div class="form-group">
                 <label>进货日期</label>
                 <div>@DP.Txt(Model.Order.进货日期)</div>
@@ -59,6 +60,13 @@
                 <div>@DP.Txt(Model.Order.订单修改备注)</div>
             </div>
             <div class="form-group">
+                <label>京东价</label>
+                <div>@DP.Txt(Model.Order.京东价)</div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>跟进订单</legend>
+            <div class="form-group">
                 <label>来-快递单号</label>
                 <div>@DP.Txt(Model.Order.来快递单号)</div>
             </div>
@@ -70,10 +78,9 @@
                 <label>发货备注</label>
                 <div>@DP.Txt(Model.Order.发货备注)</div>
             </div>
-            <div class="form-group">
-                <label>京东价</label>
-                <div>@DP.Txt(Model.Order.京东价)</div>
-            </div>
+        </fieldset>
+        <fieldset>
+            <legend>电话客服导入</legend>
             <div class="form-group">
                 <label>导入时间</label>
                 <div>@DP.Txt(Model.Order.导入时间)</div>
@@ -86,6 +93,9 @@
                 <label>电话情况</label>
                 <div>@DP.Txt(Model.Order.电话情况)</div>
             </div>
+        </fieldset>
+        <fieldset>
+            <legend>拆包审单</legend>
             <div class="form-group">
                 <label>审单操作</label>
                 <div>@DP.Txt(Model.Order.审单操作)</div>
@@ -106,6 +116,9 @@
                 <label>拆包时间</label>
                 <div>@(DP.Txt(Model.Order.拆包时间))</div>
             </div>
+        </fieldset>
+        <fieldset>
+            <legend>售后</legend>
             <div class="form-group">
                 <label for="Ddl售后操作ID">售后操作</label>
                 <select class="form-control" name="售后操作ID" id="Ddl售后操作ID">
@@ -147,10 +160,9 @@
                     <label class="form-check-label" for="Chk售后完结">是</label>
                 </div>
             </div>
-
-            <div class="form-group">
-                <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
-            </div>
         </fieldset>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
+        </div>
     </form>
 </div>

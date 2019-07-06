@@ -277,5 +277,14 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_GetOrders
+
+        #region sp_GetOrdersBy来快递单号
+        public static SqlCommand sp_GetOrdersBy来快递单号()
+        {
+            var cmd = new SqlCommand("sp_GetOrdersBy来快递单号") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@来快递单号", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_GetOrdersBy来快递单号
     }
 }

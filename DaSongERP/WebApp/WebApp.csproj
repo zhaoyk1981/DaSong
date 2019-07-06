@@ -109,6 +109,7 @@
     <Content Include="js\KyleToolkit\settings.js" />
     <Content Include="js\KyleToolkit\validation.js" />
     <Content Include="js\KyleToolkit\validation_result_handler.js" />
+    <Content Include="js\pages\chaibaolist.js" />
     <Content Include="js\pages\chaibaoorder.js" />
     <Content Include="js\pages\editorder.js" />
     <Content Include="js\pages\edituser.js" />
@@ -303,6 +304,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\New.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Order\ChaiBaoList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

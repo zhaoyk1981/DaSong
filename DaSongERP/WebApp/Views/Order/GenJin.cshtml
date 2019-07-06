@@ -8,27 +8,55 @@
     <div>
         <a href="/Order">订单列表</a>
     </div>
+    <h2>订单跟进</h2>
     <form validation-group="default" autocomplete="off">
+        <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
         <fieldset>
-            <legend>订单跟进</legend>
-            <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
+            <legend>采购</legend>
+            <div class="form-group">
+                <label>进货日期</label>
+                <div>@DP.Txt(Model.Order.进货日期)</div>
+            </div>
             <div class="form-group">
                 <a href="@Model.Order.商品图片" target="_blank">
                     <img src="@Model.Order.商品图片" class="product-image" />
                 </a>
             </div>
             <div class="form-group">
-                <label>采购人</label>
-                <div>@DP.Txt(Model.Order.采购人)</div>
-            </div>
-            <div class="form-group">
-                <label>进货日期：</label>
-                <div>@DP.Txt(Model.Order.进货日期)</div>
-            </div>
-            <div class="form-group">
-                <label for="Txt货号">货号</label>
+                <label>货号</label>
                 <div>@DP.Txt(Model.Order.货号)</div>
             </div>
+            <div class="form-group">
+                <label>进货数量</label>
+                <div>@DP.Txt(Model.Order.进货数量)</div>
+            </div>
+            <div class="form-group">
+                <label>店铺名称</label>
+                <div>@DP.Txt(Model.Order.店铺)</div>
+            </div>
+            <div class="form-group">
+                <label>JD订单号</label>
+                <div>@DP.Txt(Model.Order.JD订单号)</div>
+            </div>
+            <div class="form-group">
+                <label>客人地址</label>
+                <div>@DP.Txt(Model.Order.客人地址)</div>
+            </div>
+            <div class="form-group">
+                <label>京东SKU及采购备注</label>
+                <div>@DP.Txt(Model.Order.采购备注)</div>
+            </div>
+            <div class="form-group">
+                <label>订单修改备注</label>
+                <div>@DP.Txt(Model.Order.订单修改备注)</div>
+            </div>
+            <div class="form-group">
+                <label>京东价</label>
+                <div>@DP.Txt(Model.Order.京东价)</div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>订单跟进</legend>
             <div class="form-group">
                 <label for="Txt来快递单号">来-快递单号</label>
                 <input type="text" class="form-control" name="来快递单号" id="Txt来快递单号" value="@Model.Order.来快递单号" />
@@ -38,10 +66,10 @@
                 <label for="Txt采购备注">发货备注</label>
                 <textarea class="form-control" name="发货备注" id="Txt发货备注">@Model.Order.发货备注</textarea>
             </div>
-            <div class="form-group">
-                <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
-            </div>
         </fieldset>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
+        </div>
     </form>
 </div>
 

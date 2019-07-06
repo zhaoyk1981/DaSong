@@ -97,5 +97,6 @@ namespace DaSongERP.Dal
             var result = (int)DBHelper.ExecuteScalar(cmd);
             return result;
         }
+
     }
 }

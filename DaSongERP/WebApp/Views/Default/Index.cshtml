@@ -15,7 +15,13 @@
 @if (PM.Any(UPM.采购, UPM.售后, UPM.客服, UPM.跟进))
 {
     <div>
-        <a href="/Order">订单列表</a>
+        <a href="/Order">修改，跟进，售后，客服</a>
+    </div>
+}
+@if (PM.Any(UPM.拆包))
+{
+    <div>
+        <a href="/Order/ChaiBaoList">拆包审单</a>
     </div>
 }
 @if (PM.Any(UPM.电话))

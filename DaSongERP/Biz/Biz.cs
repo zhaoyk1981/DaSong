@@ -18,8 +18,6 @@ namespace DaSongERP.Biz
 
         protected OrderDao OrderDao { get; set; } = new OrderDao();
 
-        protected StockDao StockDao { get; set; } = new StockDao();
-
         protected ExcelDao ExcelDao { get; set; } = new ExcelDao();
 
         protected Guid? UserID

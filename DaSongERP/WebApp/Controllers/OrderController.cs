@@ -11,7 +11,6 @@ namespace DaSongERP.WebApp.Controllers
 {
     public class OrderController : AuthorizedController
     {
-        // GET: Order
         public ActionResult Index()
         {
             if (!PM.Any(UPM.售后, UPM.客服, UPM.跟进, UPM.采购))
@@ -60,18 +59,24 @@ namespace DaSongERP.WebApp.Controllers
             });
         }
 
+        public ActionResult ChaiBaoList()
+        {
+            if (!PM.Any(UPM.拆包))
+            {
+                return Redirect("/SignIn");
+            }
+
+            var 来快递单号 = (Request.QueryString["search"] ?? string.Empty).Trim();
+            var vm = this.OrderBiz.GetChaiBaoOrderListViewModel(来快递单号);
+            return View(vm);
+        }
+
         [HttpPost]
         public ActionResult AGetOrderID()
         {
-            var jd订单号 = (this.Request.Params["jdoid"] ?? string.Empty).Trim();
-            var 淘宝订单号 = (this.Request.Params["tboid"] ?? string.Empty).Trim();
-            Guid? id = null;
-            if (Guid.TryParse((this.Request.Params["id"] ?? string.Empty).Trim(), out Guid tmp))
-            {
-                id = tmp;
-            }
-
-            if (string.IsNullOrEmpty(jd订单号) || string.IsNullOrEmpty(淘宝订单号))
+            //var jd订单号 = (this.Request.Params["jdoid"] ?? string.Empty).Trim();
+            var 来快递单号 = (this.Request.Params["来快递单号"] ?? string.Empty).Trim();
+            if (string.IsNullOrEmpty(来快递单号))
             {
                 return Json(new
                 {
@@ -79,10 +84,18 @@ namespace DaSongERP.WebApp.Controllers
                 });
             }
 
-            var order = this.OrderBiz.GetOrderBy(jd订单号, 淘宝订单号, id);
+            var orders = this.OrderBiz.GetOrdersBy来快递单号(来快递单号);
+            if(orders.Count == 1)
+            {
+                return Json(new
+                {
+                    ID = orders[0].ID.Value.ToString()
+                });
+            }
+            
             return Json(new
             {
-                OrderID = order == null ? string.Empty : order.ID.Value.ToString()
+                ID = string.Empty
             });
         }
 
@@ -113,7 +126,6 @@ namespace DaSongERP.WebApp.Controllers
                 });
             }
 
-
             var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
             var rowCount = this.OrderBiz.Update(order);
 
@@ -125,6 +137,11 @@ namespace DaSongERP.WebApp.Controllers
 
         public ActionResult GenJin(Guid id)
         {
+            if (!PM.Any(UPM.跟进))
+            {
+                return Redirect("/SignIn");
+            }
+
             var vm = this.OrderBiz.GetEditOrderViewModel(id);
             if (vm.Order == null)
             {
@@ -137,6 +154,14 @@ namespace DaSongERP.WebApp.Controllers
         [HttpPost]
         public ActionResult AGenJin()
         {
+            if (!PM.Any(UPM.跟进))
+            {
+                return Json(new
+                {
+                    Success = false
+                });
+            }
+
             var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
             var rowCount = this.OrderBiz.订单跟进(order);
 
@@ -148,12 +173,25 @@ namespace DaSongERP.WebApp.Controllers
 
         public ActionResult Import()
         {
+            if (!PM.Any(UPM.电话))
+            {
+                return Redirect("/SignIn");
+            }
+
             return View();
         }
 
         [HttpPost]
         public ActionResult AImport()
         {
+            if (!PM.Any(UPM.电话))
+            {
+                return Json(new
+                {
+                    Success = false
+                });
+            }
+
             var excelStream = this.Request.Files[0].InputStream;
             bool isXlsx = string.Compare(Path.GetExtension(this.Request.Files[0].FileName), ".xlsx", true) == 0;
             var file = OrderBiz.电话客服导入(excelStream, isXlsx);
@@ -168,6 +206,11 @@ namespace DaSongERP.WebApp.Controllers
 
         public ActionResult ChaiBao(Guid id)
         {
+            if (!PM.Any(UPM.拆包))
+            {
+                return Redirect("/SignIn");
+            }
+
             var vm = this.OrderBiz.GetChaiBaoOrderViewModel(id);
             if (vm.Order == null)
             {
@@ -180,6 +223,14 @@ namespace DaSongERP.WebApp.Controllers
         [HttpPost]
         public ActionResult AChaiBao()
         {
+            if (!PM.Any(UPM.拆包))
+            {
+                return Json(new
+                {
+                    Success = false
+                });
+            }
+
             var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
             var rowCount = this.OrderBiz.Update拆包(order);
 
@@ -191,6 +242,11 @@ namespace DaSongERP.WebApp.Controllers
 
         public ActionResult ShouHou(Guid id)
         {
+            if (!PM.Any(UPM.售后))
+            {
+                return Redirect("/SignIn");
+            }
+
             var vm = this.OrderBiz.Get售后OrderViewModel(id);
             if (vm.Order == null)
             {
@@ -203,6 +259,14 @@ namespace DaSongERP.WebApp.Controllers
         [HttpPost]
         public ActionResult AShouHou()
         {
+            if (!PM.Any(UPM.售后))
+            {
+                return Json(new
+                {
+                    Success = false
+                });
+            }
+
             var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
             var rowCount = this.OrderBiz.Update售后(order);
 
@@ -214,6 +278,11 @@ namespace DaSongERP.WebApp.Controllers
 
         public ActionResult KeFu(Guid id)
         {
+            if (!PM.Any(UPM.客服))
+            {
+                return Redirect("/SignIn");
+            }
+
             var vm = this.OrderBiz.Get客服OrderViewModel(id);
             if (vm.Order == null)
             {
@@ -226,6 +295,14 @@ namespace DaSongERP.WebApp.Controllers
         [HttpPost]
         public ActionResult AKeFu()
         {
+            if (!PM.Any(UPM.客服))
+            {
+                return Json(new
+                {
+                    Success = false
+                });
+            }
+
             var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
             var rowCount = this.OrderBiz.Update客服(order);
 

@@ -7,8 +7,9 @@
 <div class="vw-chaibao-order vw-order-form" data-page-js="chaibaoorder">
     <h2>拆包审单</h2>
     <form>
+        <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
         <fieldset>
-            <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
+            <legend>采购</legend>
             <div class="form-group">
                 <label>进货日期</label>
                 <div>@DP.Txt(Model.Order.进货日期)</div>
@@ -47,6 +48,13 @@
                 <div>@DP.Txt(Model.Order.订单修改备注)</div>
             </div>
             <div class="form-group">
+                <label>京东价</label>
+                <div>@DP.Txt(Model.Order.京东价)</div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>跟进</legend>
+            <div class="form-group">
                 <label>来-快递单号</label>
                 <div>@DP.Txt(Model.Order.来快递单号)</div>
             </div>
@@ -58,6 +66,9 @@
                 <label>发货备注</label>
                 <div>@DP.Txt(Model.Order.发货备注)</div>
             </div>
+        </fieldset>
+        <fieldset>
+            <legend>电话客服导入</legend>
             <div class="form-group">
                 <label>导入时间</label>
                 <div>@DP.Txt(Model.Order.导入时间)</div>
@@ -70,6 +81,9 @@
                 <label>电话情况</label>
                 <div>@DP.Txt(Model.Order.电话情况)</div>
             </div>
+        </fieldset>
+        <fieldset>
+            <legend>售后</legend>
             <div class="form-group">
                 <label>售后操作</label>
                 <div>@DP.Txt(Model.Order.售后操作)</div>
@@ -94,6 +108,9 @@
                 <label>客人退回单号</label>
                 <div>@DP.Txt(Model.Order.客人退回单号)</div>
             </div>
+        </fieldset>
+        <fieldset>
+            <legend>拆包审单</legend>
             <div class="form-group">
                 <label for="Ddl审单操作">审单操作</label>
                 <select class="form-control" id="Ddl审单操作" name="审单操作ID">
@@ -112,9 +129,9 @@
                 <input type="text" class="form-control" name="转发单号" id="Txt转发单号" maxlength="50" value="@Model.Order.转发单号" />
                 <span class="validator" id="vd转发单号" data-required="" data-validate-target="#Txt转发单号"><span class="error-message text-danger">此项必填</span></span>
             </div>
-            <div class="form-group">
-                <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
-            </div>
         </fieldset>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
+        </div>
     </form>
 </div>
