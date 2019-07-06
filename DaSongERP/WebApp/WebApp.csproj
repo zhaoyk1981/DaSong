@@ -111,6 +111,7 @@
     <Content Include="js\KyleToolkit\validation_result_handler.js" />
     <Content Include="js\pages\chaibaoorder.js" />
     <Content Include="js\pages\editorder.js" />
+    <Content Include="js\pages\edituser.js" />
     <Content Include="js\pages\genjinorder.js" />
     <Content Include="js\pages\importorders.js" />
     <Content Include="js\pages\kefuorder.js" />
@@ -300,6 +301,7 @@
     <Content Include="Views\Order\KeFu.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\New.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

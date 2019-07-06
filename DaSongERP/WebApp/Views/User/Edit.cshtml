@@ -1,0 +1,41 @@
+﻿@model EditUserViewModel
+@{
+    ViewBag.Title = "编辑用户";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="vw-user-form vw-edit-user" data-page-js="edituser">
+    <h2>编辑用户</h2>
+    <form validation-group="submit" autocomplete="off">
+        <fieldset>
+            <input type="hidden" name="ID" value="@Model.User.ID.Value" />
+            <div class="form-group">
+                <label for="TxtName">姓名</label>
+                <input type="text" class="form-control" maxlength="50" name="Name" id="TxtName" value="@Model.User.Name" />
+                <span class="validator" id="vdName" data-required="" data-validate-target="#TxtName"><span class="error-message text-danger">此项必填</span></span>
+            </div>
+            <div class="form-group">
+                <label for="TxtUserName">用户名</label>
+                <input type="text" class="form-control" maxlength="50" name="UserName" id="TxtUserName" value="@Model.User.UserName" />
+                <span class="validator" id="vdUserName" data-required="" data-validate-target="#TxtUserName"><span class="error-message text-danger">此项必填</span></span>
+            </div>
+            <div class="form-group">
+                <label for="">密码</label>
+                <input type="password" class="form-control" maxlength="50" name="Password" id="TxtPassword" />
+            </div>
+            <div class="form-group">
+                <label for="SlctPermissionID">权限</label>
+                <select class="form-control flag" multiple name="PermissionID" id="SlctPermissionID">
+                    @foreach (var p in Model.PermissionDataSource)
+                    {
+                        <option value="@p.ID.Value" @((Model.User.PermissionID.Value & p.ID.Value) == p.ID.Value ? "selected" : "")>@p.Name</option>
+                    }
+                </select>
+                <span class="validator" id="vdPermission" data-required="" data-validate-target="#SlctPermissionID"><span class="error-message text-danger">此项必填</span></span>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
+        </div>
+    </form>
+</div>

@@ -112,7 +112,7 @@ namespace DaSongERP.Biz
                 return 2;
             }
 
-            var rowCount = this.UserDao.Create(user);
+            var rowCount = this.UserDao.Update(user);
             return rowCount;
         }
 

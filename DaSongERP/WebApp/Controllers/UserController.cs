@@ -46,6 +46,23 @@ namespace DaSongERP.WebApp.Controllers
             });
         }
 
+        public ActionResult Edit(Guid id)
+        {
+            var vm = UserBiz.GetEditUserViewModel(id);
+            return View(vm);
+        }
 
+        [HttpPost]
+        public ActionResult AUpdate()
+        {
+            var user = this.DeserializeObject<UserModel>(Request.Params["FormJson"]);
+            var result = this.UserBiz.Update(user);
+            return Json(new
+            {
+                Success = result == 1,
+                ErrorMessage = result == 2 ? "用户名已存在" : string.Empty,
+                ID = user.ID
+            });
+        }
     }
 }
