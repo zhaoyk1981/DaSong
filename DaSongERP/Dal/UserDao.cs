@@ -60,5 +60,19 @@ namespace DaSongERP.Dal
             var list = DBHelper.ExecuteEntityList<PermissionModel>(cmd);
             return list;
         }
+
+        public int Create(UserModel user)
+        {
+            var cmd = ProcCommands.sp_CreateUser().SetParameterValues(user);
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
+
+        public int Update(UserModel user)
+        {
+            var cmd = ProcCommands.sp_UpdateUser().SetParameterValues(user);
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DaSongERP.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,5 +26,26 @@ namespace DaSongERP.WebApp.Controllers
                 Success = rowCount == 1
             });
         }
+
+        public ActionResult New()
+        {
+            var vm = UserBiz.GetNewUserViewModel();
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult ACreate()
+        {
+            var user = this.DeserializeObject<UserModel>(Request.Params["FormJson"]);
+            var result = this.UserBiz.Create(user);
+            return Json(new
+            {
+                Success = result == 1,
+                ErrorMessage = result == 2 ? "用户名已存在" : string.Empty,
+                ID = user.ID
+            });
+        }
+
+
     }
 }

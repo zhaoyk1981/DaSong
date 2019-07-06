@@ -89,5 +89,47 @@ namespace DaSongERP.Biz
                 .ToList();
             user.权限 = string.Join(", ", up);
         }
+
+        public int Create(UserModel user)
+        {
+            user.ID = Guid.NewGuid();
+            var cu = this.GetUserBy(user.UserName);
+            if (cu != null)
+            {
+                return 2;
+            }
+
+            var rowCount = this.UserDao.Create(user);
+            return rowCount;
+        }
+
+        public int Update(UserModel user)
+        {
+            user.Password = string.IsNullOrEmpty(user.Password) ? default(string) : user.Password;
+            var cu = this.GetUserBy(user.UserName, user.ID);
+            if (cu != null)
+            {
+                return 2;
+            }
+
+            var rowCount = this.UserDao.Create(user);
+            return rowCount;
+        }
+
+        public EditUserViewModel GetNewUserViewModel()
+        {
+            var vm = new EditUserViewModel();
+            vm.PermissionDataSource = this.GetAllPermissions();
+            return vm;
+        }
+
+        public EditUserViewModel GetEditUserViewModel(Guid id)
+        {
+            var vm = new EditUserViewModel();
+            vm.PermissionDataSource = this.GetAllPermissions();
+            vm.User = GetUserBy(id);
+            //SetPermissionDisplayText(vm.PermissionDataSource, vm.User);
+            return vm;
+        }
     }
 }

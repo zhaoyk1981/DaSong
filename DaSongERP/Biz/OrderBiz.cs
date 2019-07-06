@@ -25,6 +25,11 @@ namespace DaSongERP.Biz
             order.ID = Guid.NewGuid();
             order.采购人ID = this.UserID;
             order.进货日期 = DateTime.Now;
+            var co = this.GetOrderBy(order.JD订单号);
+            if (co != null)
+            {
+                return 2;
+            }
 
             return this.OrderDao.Create(order);
         }
@@ -57,6 +62,12 @@ namespace DaSongERP.Biz
         public int Update(OrderModel order)
         {
             order.采购人ID = this.UserID;
+            var co = this.GetOrderBy(order.JD订单号, order.ID);
+            if (co != null)
+            {
+                return 2;
+            }
+
             var rowCount = this.OrderDao.Update(order);
             return rowCount;
         }

@@ -117,6 +117,7 @@
     <Content Include="js\pages\layout.js" />
     <Content Include="js\pages\main.js" />
     <Content Include="js\pages\neworder.js" />
+    <Content Include="js\pages\newuser.js" />
     <Content Include="js\pages\orderlist.js" />
     <Content Include="js\pages\shouhouorder.js" />
     <Content Include="js\pages\signin.js" />
@@ -298,6 +299,7 @@
     <Content Include="Views\Order\ShouHou.cshtml" />
     <Content Include="Views\Order\KeFu.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\New.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
