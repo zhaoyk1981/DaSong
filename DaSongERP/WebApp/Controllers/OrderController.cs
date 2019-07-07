@@ -99,6 +99,17 @@ namespace DaSongERP.WebApp.Controllers
             });
         }
 
+        [HttpPost]
+        public ActionResult AHasOrder()
+        {
+            var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
+            var result = this.OrderBiz.GetOrderBy订单号(order);
+            return Json(new
+            {
+                HasOrder = result != null
+            });
+        }
+
         public ActionResult Edit(Guid id)
         {
             if (!PM.Any(UPM.采购))

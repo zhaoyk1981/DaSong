@@ -25,7 +25,7 @@ namespace DaSongERP.Biz
             order.ID = Guid.NewGuid();
             order.采购人ID = this.UserID;
             order.进货日期 = DateTime.Now;
-            var co = this.GetOrderBy(order.JD订单号, order.淘宝订单号);
+            var co = this.GetOrderBy订单号(order);
             if (co != null)
             {
                 return 2;
@@ -34,9 +34,9 @@ namespace DaSongERP.Biz
             return this.OrderDao.Create(order);
         }
 
-        public OrderModel GetOrderBy(string jd订单号, string 淘宝订单号, Guid? id = null)
+        public OrderModel GetOrderBy订单号(OrderModel order)
         {
-            return this.OrderDao.GetOrderBy(jd订单号, 淘宝订单号, id);
+            return this.OrderDao.GetOrderBy订单号(order);
         }
 
         public IList<OrderModel> GetOrdersBy(string jd订单号, string 来快递单号)
@@ -61,7 +61,7 @@ namespace DaSongERP.Biz
         public int Update(OrderModel order)
         {
             order.采购人ID = this.UserID;
-            var co = this.GetOrderBy(order.JD订单号, order.淘宝订单号, order.ID);
+            var co = this.GetOrderBy订单号(order);
             if (co != null)
             {
                 return 2;

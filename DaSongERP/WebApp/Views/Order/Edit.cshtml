@@ -57,6 +57,7 @@
                 <label for="TxtJD订单号">JD订单号</label>
                 <input type="text" class="form-control" name="JD订单号" id="TxtJD订单号" maxlength="50" value="@Model.Order.JD订单号" />
                 <span class="validator" id="vdJD订单号" data-required="" data-validate-target="#TxtJD订单号"><span class="error-message text-danger">此项必填</span></span>
+                <div id="LblOrderNumberExists" class="alert alert-danger hide-when-empty"></div>
             </div>
             <div class="form-group">
                 <label for="Txt客人地址">客人地址</label>

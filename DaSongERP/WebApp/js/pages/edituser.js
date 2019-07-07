@@ -1,4 +1,4 @@
-﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, enhance, model, validation) {
+﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation', 'select2', 'select2zhcn'], function ($, enhance, model, validation, select2, select2zhcn) {
     let validate = function () {
         let validationResult = validation.validate(['submit']);
         if (validationResult !== true) {
@@ -44,6 +44,12 @@
 
     return {
         ready: function () {
+            $('#SlctPermissionID').select2({
+                language: "zh-CN",
+                allowClear: true,
+                placeholder: "请选择权限"
+            });
+
             $('#BtnSubmit').click(btnSubmit_click);
         }
     };

@@ -16,14 +16,9 @@ namespace DaSongERP.Dal
             return rowCount;
         }
 
-        public OrderModel GetOrderBy(string jd订单号, string 淘宝订单号, Guid? id = null)
+        public OrderModel GetOrderBy订单号(OrderModel order)
         {
-            var cmd = ProcCommands.sp_GetOrderBy订单号().SetParameterValues(new
-            {
-                JD订单号 = jd订单号,
-                淘宝订单号 = 淘宝订单号,
-                ID = id
-            });
+            var cmd = ProcCommands.sp_GetOrderBy订单号().SetParameterValues(order);
             var list = DBHelper.ExecuteEntityList<OrderModel>(cmd);
             return list.FirstOrDefault();
         }

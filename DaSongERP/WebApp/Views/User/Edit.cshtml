@@ -12,17 +12,20 @@
             <input type="hidden" name="ID" value="@Model.User.ID.Value" />
             <div class="form-group">
                 <label for="TxtName">姓名</label>
-                <input type="text" class="form-control" maxlength="50" name="Name" id="TxtName" value="@Model.User.Name" />
+                <input type="password" style="display: none;" />
+                <input type="text" class="form-control" maxlength="50" name="Name" id="TxtName" value="@Model.User.Name" autocomplete="new-password" />
                 <span class="validator" id="vdName" data-required="" data-validate-target="#TxtName"><span class="error-message text-danger">此项必填</span></span>
             </div>
             <div class="form-group">
                 <label for="TxtUserName">用户名</label>
-                <input type="text" class="form-control" maxlength="50" name="UserName" id="TxtUserName" value="@Model.User.UserName" />
+                <input type="password" style="display: none;" />
+                <input type="text" class="form-control" maxlength="50" name="UserName" id="TxtUserName" value="@Model.User.UserName" autocomplete="new-password" />
                 <span class="validator" id="vdUserName" data-required="" data-validate-target="#TxtUserName"><span class="error-message text-danger">此项必填</span></span>
             </div>
             <div class="form-group">
                 <label for="">密码</label>
-                <input type="password" class="form-control" maxlength="50" name="Password" id="TxtPassword" />
+                <input type="password" style="display: none;" />
+                <input type="password" class="form-control" maxlength="50" name="Password" id="TxtPassword" autocomplete="new-password" />
             </div>
             <div class="form-group">
                 <label for="SlctPermissionID">权限</label>
