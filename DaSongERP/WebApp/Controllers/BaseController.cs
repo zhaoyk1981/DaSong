@@ -50,9 +50,9 @@ namespace DaSongERP.WebApp.Controllers
             base.OnActionExecuted(filterContext);
         }
 
-        protected T DeserializeObject<T>(string value)
+        protected T DeserializeObject<T>(string value, bool htmlDecode = true)
         {
-            return JsonConvert.DeserializeObject<T>(value);
+            return JsonConvert.DeserializeObject<T>(htmlDecode ? HttpUtility.HtmlDecode(value) : value);
         }
 
         protected string SerializeObject(object value)

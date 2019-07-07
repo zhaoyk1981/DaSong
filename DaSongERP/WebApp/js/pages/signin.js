@@ -9,7 +9,7 @@
             type: 'POST',
             dataType: 'JSON',
             data: {
-                FormJson: json
+                FormJson: enhance.HTMLEncode(json)
             },
             success: function (data) {
                 if (!data.Success) {

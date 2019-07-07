@@ -18,7 +18,7 @@
         var json = model.captureJSON(m);
 
         var formData = new FormData();
-        formData.append("formJson", json);
+        formData.append("formJson", enhance.HTMLEncode(json));
         //formData.append("file", $('#IptPicture')[0].files[0], "file");
         //formData.append("upload_file", true);
         $.ajax({
