@@ -10,9 +10,26 @@
     <div class="search-conditions">
         <fieldset default-button="#BtnSearch">
             <div class="form-group">
-                <label for="">JD订单号</label>
+                <label for="TxtSearch">JD订单号</label>
                 <input type="text" class="form-control" name="JD订单号" id="TxtSearch" maxlength="50" on-enter />
             </div>
+            @*@if (PM.Any(UPM.售后))
+            {
+                <div class="row shouhou-filters">
+                    <div class="form-group col-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="已售后但未完结" data-type="bool" id="Chk已售后但未完结" @(PM.Any(UPM.售后) ? "checked" : "") />
+                            <label class="form-check-label" for="Chk是否淘宝退回">已售后但未完结</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="只看我的" data-type="bool" id="Chk只看我的" @(PM.Any(UPM.售后) ? "checked" : "") />
+                            <label class="form-check-label" for="Chk是否淘宝退回">只看我的</label>
+                        </div>
+                    </div>
+                </div>
+            }*@
         </fieldset>
         <div class="form-group">
             <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
