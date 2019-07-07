@@ -1,6 +1,6 @@
 ﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, enhance, model, validation) {
     let validate = function () {
-        var validationResult = validation.validate(['default']);
+        let validationResult = validation.validate(['default']);
         if (validationResult !== true) {
             $('#BtnSubmit').prop('disabled', false);
         }
@@ -14,7 +14,7 @@
             return;
         }
 
-        var formData = new FormData();
+        let formData = new FormData();
         //formData.append("formJson", json);
         formData.append("file", $('#IptExcel')[0].files[0], $('#IptExcel')[0].files[0].name);
         formData.append("upload_file", true);

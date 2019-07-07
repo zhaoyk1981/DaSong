@@ -13,7 +13,6 @@ CREATE PROCEDURE [dbo].[sp_CreateOrder]
     ,@淘宝账号ID uniqueidentifier
 	,@淘宝订单号 NVARCHAR(50)
     ,@采购备注 nvarchar(max)
-    ,@订单修改备注 nvarchar(max)
     ,@京东价 money
     ,@成本价 money
 	,@采购人ID UNIQUEIDENTIFIER
@@ -35,7 +34,6 @@ BEGIN
            ,[淘宝账号ID]
 		   ,[淘宝订单号]
            ,[采购备注]
-           ,[订单修改备注]
            ,[京东价]
            ,[成本价]
 		   ,[采购人ID])
@@ -51,7 +49,6 @@ BEGIN
            ,@淘宝账号ID
 		   ,@淘宝订单号
            ,@采购备注
-           ,@订单修改备注
            ,@京东价
            ,@成本价
 		   ,@采购人ID;

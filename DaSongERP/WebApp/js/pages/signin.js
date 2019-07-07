@@ -1,8 +1,8 @@
 ﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model'], function ($, enhance, model) {
     let btnSubmit_click = function () {
-        var m = model.createModel();
-        var formData = model.capture(m);
-        var json = JSON.stringify(formData);
+        let m = model.createModel();
+        let formData = model.capture(m);
+        let json = JSON.stringify(formData);
 
         $.ajax({
             url: '/SignIn/AValidateUser',

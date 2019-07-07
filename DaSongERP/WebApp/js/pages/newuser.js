@@ -1,6 +1,6 @@
 ﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, enhance, model, validation) {
     let validate = function () {
-        var validationResult = validation.validate(['submit']);
+        let validationResult = validation.validate(['submit']);
         if (validationResult !== true) {
             $('#BtnSubmit').prop('disabled', false);
         }
@@ -14,13 +14,12 @@
             return;
         }
 
-        var m = model.createModel();
-        var json = model.captureJSON(m);
+        let m = model.createModel();
+        let json = model.captureJSON(m);
 
-        var formData = new FormData();
+        let formData = new FormData();
         formData.append("formJson", enhance.HTMLEncode(json));
-        //formData.append("file", $('#IptPicture')[0].files[0], "file");
-        //formData.append("upload_file", true);
+
         $.ajax({
             url: '/User/ACreate',
             type: 'POST',
@@ -29,12 +28,15 @@
             processData: false,
             contentType: false,
             success: function (data) {
-                var msg = data.Success === true ? '操作成功' : '操作失败';
+                let msg = data.Success === true ? '操作成功' : '操作失败';
                 if (data.ErrorMessage !== '') {
                     msg = data.ErrorMessage;
                 }
 
                 alert(msg);
+                if (data.Success === false) {
+                    $('#BtnSubmit').prop('disabled', false);
+                }
             }
         });
     };

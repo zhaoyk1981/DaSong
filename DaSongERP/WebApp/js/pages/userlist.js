@@ -1,15 +1,15 @@
 ﻿define(['jquery', 'kyle_toolkit_enhance'], function ($, enhance) {
-    var btnSearch_click = function () {
-        var s = encodeURI($.trim($('#TxtSearch').val()));
+    let btnSearch_click = function () {
+        let s = encodeURI($.trim($('#TxtSearch').val()));
         window.location = '/User?search=' + s;
     };
 
-    var btnRemove_click = function () {
+    let btnRemove_click = function () {
         if (!window.confirm('确实要删除吗？')) {
             return false;
         }
 
-        var id = encodeURI($(this).closest("[data-id]").attr('data-id'));
+        let id = encodeURI($(this).closest("[data-id]").attr('data-id'));
         $.ajax({
             url: '/User/ARemove',
             type: 'POST',

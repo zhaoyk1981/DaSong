@@ -10,20 +10,7 @@ BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-	IF NOT EXISTS (SELECT * FROM Roles)
-	BEGIN
-    INSERT [dbo].[Roles] ([ID], [Name]) VALUES (1, N'管理员')
 
-INSERT [dbo].[Roles] ([ID], [Name]) VALUES (2, N'采购员')
-
-INSERT [dbo].[Roles] ([ID], [Name]) VALUES (3, N'电话客服')
-
-INSERT [dbo].[Roles] ([ID], [Name]) VALUES (4, N'拆包审单')
-
-INSERT [dbo].[Roles] ([ID], [Name]) VALUES (5, N'售后')
-
-INSERT [dbo].[Roles] ([ID], [Name]) VALUES (6, N'客服')
-END
 
 IF NOT EXISTS (SELECT * FROM [Permissions])
 BEGIN

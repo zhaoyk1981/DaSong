@@ -1,10 +1,6 @@
 ﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, enhance, model, validation) {
-    let initValidation = function () {
-
-    };
-
     let validate = function () {
-        var validationResult = validation.validate(['default']);
+        let validationResult = validation.validate(['default']);
         if (validationResult !== true) {
             $('#BtnSubmit').prop('disabled', false);
         }
@@ -18,13 +14,12 @@
             return;
         }
 
-        var m = model.createModel();
-        var json = model.captureJSON(m);
+        let m = model.createModel();
+        let json = model.captureJSON(m);
 
-        var formData = new FormData();
+        let formData = new FormData();
         formData.append("formJson", enhance.HTMLEncode(json));
-        //formData.append("file", $('#IptPicture')[0].files[0], "file");
-        //formData.append("upload_file", true);
+
         $.ajax({
             url: '/Order/AShouHou',
             type: 'POST',
@@ -33,14 +28,19 @@
             processData: false,
             contentType: false,
             success: function (data) {
-                alert(data.Success === true ? '操作成功' : '操作失败');
+                if (data.Success) {
+                    alert('操作成功');
+                }
+                else {
+                    alert('操作失败');
+                    $('#BtnSubmit').prop('disabled', false);
+                }
             }
         });
     };
 
     return {
         ready: function () {
-            initValidation();
             $('#BtnSubmit').click(btnSubmit_click);
         }
     };
