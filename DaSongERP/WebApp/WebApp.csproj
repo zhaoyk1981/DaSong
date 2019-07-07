@@ -242,6 +242,7 @@
     <Content Include="css\base\global.scss" />
     <Content Include="css\pages\OrderForm.scss" />
     <Content Include="css\pages\OrderList.scss" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\i18n\af.js" />
     <Content Include="Scripts\i18n\ar.js" />

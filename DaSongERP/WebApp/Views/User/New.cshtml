@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label for="SlctPermissionID">权限</label>
-                <select class="form-control flag" multiple name="PermissionID" id="SlctPermissionID">
+                <select class="custom-select flag" multiple name="PermissionID" id="SlctPermissionID">
                     @foreach (var p in Model.PermissionDataSource)
                     {
                         <option value="@p.ID.Value">@p.Name</option>

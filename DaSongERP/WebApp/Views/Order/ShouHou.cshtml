@@ -128,45 +128,48 @@
         </fieldset>
         <fieldset>
             <legend>售后</legend>
-            <div class="form-group">
-                <label for="Ddl售后操作ID">售后操作</label>
-                <select class="form-control" name="售后操作ID" id="Ddl售后操作ID">
-                    @foreach (var op in Model.售后操作DataSource)
-                    {
-                        <option value="@op.ID.Value" @(Model.Order.售后操作ID == op.ID.Value ? "selected" : "")>@op.Name</option>
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="Ddl售后原因ID">售后原因</label>
-                <select class="form-control" name="售后原因ID" id="Ddl售后原因ID">
-                    @foreach (var op in Model.售后原因DataSource)
-                    {
-                        <option value="@op.ID.Value" @(Model.Order.售后原因ID == op.ID.Value ? "selected" : "")>@op.Name</option>
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="Txt售后备注">售后备注</label>
-                <textarea class="form-control" name="售后备注" id="Txt售后备注">@DP.Txt(Model.Order.售后备注, "")</textarea>
-            </div>
-            <div class="form-group">
-                <label for="Txt客人退回单号">客人退回单号</label>
-                <input type="text" class="form-control" name="客人退回单号" id="Txt客人退回单号" maxlength="50" value="@DP.Txt(Model.Order.客人退回单号, "")" />
-                <span class="validator" id="vd客人退回单号" data-required="" data-validate-target="#Txt客人退回单号"><span class="error-message text-danger">此项必填</span></span>
-            </div>
-            <div class="form-group">
-                <label>是否淘宝退回</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="是否淘宝退回" data-type="bool" id="Chk是否淘宝退回" @(Model.Order.是否淘宝退回.GetValueOrDefault() ? "checked" : "") />
-                    <label class="form-check-label" for="Chk是否淘宝退回">是</label>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="Ddl售后操作ID">售后操作</label>
+                    <select class="custom-select" name="售后操作ID" id="Ddl售后操作ID">
+                        @foreach (var op in Model.售后操作DataSource)
+                        {
+                            <option value="@op.ID.Value" @(Model.Order.售后操作ID == op.ID.Value ? "selected" : "")>@op.Name</option>
+                        }
+                    </select>
                 </div>
-            </div>
-            <div class="form-group">
-                <label>售后完结</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="售后完结" data-type="bool" id="Chk售后完结" @(Model.Order.售后完结.GetValueOrDefault() ? "checked" : "") />
-                    <label class="form-check-label" for="Chk售后完结">是</label>
+
+                <div class="form-group col-6">
+                    <label for="Ddl售后原因ID">售后原因</label>
+                    <select class="custom-select" name="售后原因ID" id="Ddl售后原因ID">
+                        @foreach (var op in Model.售后原因DataSource)
+                        {
+                            <option value="@op.ID.Value" @(Model.Order.售后原因ID == op.ID.Value ? "selected" : "")>@op.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-6">
+                    <label for="Txt客人退回单号">客人退回单号</label>
+                    <input type="text" class="form-control" name="客人退回单号" id="Txt客人退回单号" maxlength="50" value="@DP.Txt(Model.Order.客人退回单号, "")" />
+                    <span class="validator" id="vd客人退回单号" data-required="" data-validate-target="#Txt客人退回单号"><span class="error-message text-danger">此项必填</span></span>
+                </div>
+                <div class="form-group col-6">
+                    <label>是否淘宝退回</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="是否淘宝退回" data-type="bool" id="Chk是否淘宝退回" @(Model.Order.是否淘宝退回.GetValueOrDefault() ? "checked" : "") />
+                        <label class="form-check-label" for="Chk是否淘宝退回">是</label>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label>售后完结</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="售后完结" data-type="bool" id="Chk售后完结" @(Model.Order.售后完结.GetValueOrDefault() ? "checked" : "") />
+                        <label class="form-check-label" for="Chk售后完结">是</label>
+                    </div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="Txt售后备注">售后备注</label>
+                    <textarea class="form-control" name="售后备注" id="Txt售后备注">@DP.Txt(Model.Order.售后备注, "")</textarea>
                 </div>
             </div>
         </fieldset>
