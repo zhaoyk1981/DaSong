@@ -1,8 +1,4 @@
 ﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, enhance, model, validation) {
-    let initValidation = function () {
-
-    };
-    
     let validate = function () {
         let validationResult = validation.validate(['default']);
         if (validationResult !== true) {
@@ -44,10 +40,16 @@
         });
     };
 
+    let btnCopyCustAddr_click = function () {
+        var copyText = document.getElementById("TxtCustAddr");
+        copyText.select();
+        document.execCommand("copy");
+    };
+
     return {
         ready: function () {
-            initValidation();
             $('#BtnSubmit').click(btnSubmit_click);
+            $('.btn-copy-cust-addr').click(btnCopyCustAddr_click);
         }
     };
 });

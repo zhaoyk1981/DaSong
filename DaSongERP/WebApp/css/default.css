@@ -7038,6 +7038,13 @@ label.file {
 .dp-none {
   display: none; }
 
+.clip-copy {
+  border: none;
+  width: 1px;
+  height: 1px;
+  color: transparent;
+  background: transparent; }
+
 /*#endregion base END */
 /*#region components START */
 /*#region popup*/

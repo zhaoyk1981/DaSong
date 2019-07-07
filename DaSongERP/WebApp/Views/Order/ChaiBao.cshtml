@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group col-6">
                     <label>客人地址</label>
-                    <div>@DP.Txt(Model.Order.客人地址)</div>
+                    <div id="LblCustAddr">@DP.Txt(Model.Order.客人地址)</div>
                 </div>
                 <div class="form-group col-6">
                     <label>京东SKU及采购备注</label>
@@ -120,6 +120,10 @@
         </fieldset>
         <fieldset>
             <legend>拆包审单</legend>
+            <div class="form-group">
+                <a href="javascript:void(0)" class="btn-copy-cust-addr">点击复制客户地址</a>
+                <input type="text" id="TxtCustAddr" readonly class="clip-copy" value="@Model.Order.客人地址" />
+            </div>
             <div class="form-group">
                 <label for="Ddl审单操作">审单操作</label>
                 <select class="form-control" id="Ddl审单操作" name="审单操作ID">
