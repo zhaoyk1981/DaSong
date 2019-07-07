@@ -95,5 +95,6 @@
     <Build Include="dbo\Stored Procedures\sp_GetOrderBy订单号.sql" />
     <Build Include="dbo\Stored Procedures\sp_CreateUser.sql" />
     <Build Include="dbo\Stored Procedures\sp_Get未导入Orders.sql" />
+    <Build Include="dbo\Stored Procedures\sp_BackupDB.sql" />
   </ItemGroup>
 </Project>

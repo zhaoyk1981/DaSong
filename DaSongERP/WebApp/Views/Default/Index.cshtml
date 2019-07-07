@@ -13,10 +13,10 @@
             <a href="/Order/New">新建采购订单</a>
         </div>
     }
-    @if (PM.Any(UPM.采购, UPM.售后, UPM.客服, UPM.跟进))
+    @if (PM.Any(UPM.采购, UPM.跟进))
     {
         <div>
-            <a href="/Order">修改，跟进，售后，客服</a>
+            <a href="/Order">修改，跟进</a>
         </div>
     }
     @if (PM.Any(UPM.拆包))
@@ -29,6 +29,18 @@
     {
         <div>
             <a href="/Order/Import">电话客服订单导入</a>
+        </div>
+    }
+    @if (PM.Any(UPM.售后))
+    {
+        <div>
+            <a href="/Order/ShouHouList">售后列表</a>
+        </div>
+    }
+    @if (PM.Any(UPM.客服))
+    {
+        <div>
+            <a href="/Order/KeFuList">客服列表</a>
         </div>
     }
     @if (PM.Any(UPM.管理))

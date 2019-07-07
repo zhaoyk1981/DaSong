@@ -11,7 +11,7 @@
                     <a class="nav-link" href="/Order/New">新建采购订单</a>
                 </li>
             }
-            @if (PM.Any(UPM.采购, UPM.售后, UPM.客服, UPM.跟进))
+            @if (PM.Any(UPM.采购, UPM.跟进))
             {
                 <li class="nav-item">
                     <a class="nav-link" href="/Order">订单操作</a>
@@ -29,6 +29,18 @@
                     <a class="nav-link" href="/Order/Import">电话客服订单导入</a>
                 </li>
             }
+            @if (PM.Any(UPM.售后))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="/Order/ShouHouList">售后列表</a>
+                </li>
+            }
+            @if (PM.Any(UPM.客服))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="/Order/KeFuList">客服列表</a>
+                </li>
+            }
             @if (PM.Any(UPM.管理))
             {
                 <li class="nav-item">
@@ -39,7 +51,9 @@
         <div class="form-inline my-2 my-lg-0">
             @if (ViewData["UserID"] != null)
             {
-                <a href="/SignOut">注销</a>
+                <a href="/SignOut">
+                    注销
+                </a>
             }
         </div>
     </div>

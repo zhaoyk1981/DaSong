@@ -256,6 +256,12 @@ namespace DaSongERP.Dal
             var cmd = new SqlCommand("sp_GetOrders") { CommandType = CommandType.StoredProcedure };
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@来快递单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后人员ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后完结", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客服ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已跟进", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已导入", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已拆包", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_GetOrders

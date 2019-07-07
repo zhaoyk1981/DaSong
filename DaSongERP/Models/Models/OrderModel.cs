@@ -301,5 +301,13 @@ namespace DaSongERP.Models
         public DateTime? 客服时间 { get; set; }
 
         public int? RowIndex { get; set; }
+
+        public bool? 已跟进 { get; set; }
+
+        public bool? 已导入 { get; set; }
+
+        public bool? 已审单 { get; set; }
+
+        public bool? Search { get; set; }
     }
 }

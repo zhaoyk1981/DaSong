@@ -159,6 +159,20 @@ namespace DaSongERP.Biz
             return list;
         }
 
+        public IList<OrderModel> GetOrdersBy(OrderModel condition)
+        {
+            var list = OrderDao.GetOrdersBy(condition);
+            return list;
+        }
+
+        public OrderListViewModel GetOrderListViewModel(OrderModel condition)
+        {
+            var vm = new OrderListViewModel();
+            vm.Orders = condition.Search.GetValueOrDefault() ? OrderDao.GetOrdersBy(condition) : new List<OrderModel>();
+            vm.Condition = condition;
+            return vm;
+        }
+
         public OrderListViewModel GetChaiBaoOrderListViewModel(string 来快递单号)
         {
             var vm = new OrderListViewModel();

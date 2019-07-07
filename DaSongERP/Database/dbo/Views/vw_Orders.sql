@@ -5,7 +5,9 @@ SELECT  o.ID, o.进货日期, o.货号, o.商品图片, o.进货数量, o.店铺
                o.拆包人员备注, o.转发单号, o.拆包人ID, o.拆包时间, o.售后操作ID, o.售后原因ID, o.售后备注, o.售后人员ID, o.售后时间, o.客人退回单号, 
                o.是否淘宝退回, o.售后完结, o.客服ID, o.客服时间, s.Name AS [店铺.Name], cg.Name AS [采购人.Name], tb.Name AS [淘宝账号.Name], 
                sd.Name AS [审单操作.Name], cb.Name AS [拆包人.Name], sho.Name AS [售后操作.Name], sho.SN AS [售后操作.SN], shr.Name AS [售后原因.Name], 
-               shr.SN AS [售后原因.SN], sh.Name AS [售后人员.Name], gj.Name AS [跟进人.Name], kf.Name AS [客服.Name]
+               shr.SN AS [售后原因.SN], sh.Name AS [售后人员.Name], gj.Name AS [跟进人.Name], kf.Name AS [客服.Name], CAST(CASE WHEN o.[发货时间] IS NULL 
+               THEN 0 ELSE 1 END AS BIT) AS 已跟进, CAST(CASE WHEN o.[导入时间] IS NULL THEN 0 ELSE 1 END AS BIT) AS 已导入, 
+               CAST(CASE WHEN o.[拆包时间] IS NULL THEN 0 ELSE 1 END AS BIT) AS 已拆包
 FROM     dbo.订单 AS o LEFT OUTER JOIN
                dbo.店铺 AS s ON s.ID = o.店铺ID LEFT OUTER JOIN
                dbo.Users AS cg ON cg.ID = o.采购人ID LEFT OUTER JOIN

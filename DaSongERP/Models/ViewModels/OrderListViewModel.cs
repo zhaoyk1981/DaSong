@@ -14,5 +14,7 @@ namespace DaSongERP.ViewModels
 
         public string 来快递单号 { get; set; }
         public IList<OrderModel> Orders { get; set; }
+
+        public OrderModel Condition { get; set; }
     }
 }

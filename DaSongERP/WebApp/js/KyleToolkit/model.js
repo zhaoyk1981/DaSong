@@ -156,10 +156,10 @@
                                     vals.push(val);
                                 }
                             });
-                            return vals;
+                            return vals.length == 1 ? vals[0] : vals;
                         },
                         setter: function (value) {
-                            let vals = value;
+                            let vals = type(value) === "array" ? value : [value];
                             ctrls.each(function () {
                                 this.checked = vals.length > 0 && vals.indexOf(this.value) >= 0;
                             });
@@ -248,10 +248,25 @@
         return JSON.stringify(tgt);
     };
 
+    let captureParams = function (sourceModel, ignoreProps) {
+        ignoreProps = ignoreProps || [];
+        let tgt = {};
+        for (let p in sourceModel) {
+            if (ignoreProps.indexOf(p) >= 0) {
+                continue;
+            }
+
+            tgt[p] = sourceModel[p]();
+        }
+
+        return $.param(tgt);
+    };
+
     return {
         createModel: createModel,
         capture: capture,
         captureJSON: captureJSON,
-        buildFormData: buildFormData
+        buildFormData: buildFormData,
+        captureParams: captureParams
     };
 });

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using YK;
 
 namespace DaSongERP.WebApp.Controllers
 {
@@ -322,6 +323,30 @@ namespace DaSongERP.WebApp.Controllers
             {
                 Success = rowCount == 1
             });
+        }
+
+        public ActionResult ShouHouList()
+        {
+            if (!PM.Any(UPM.售后))
+            {
+                return Redirect("/SignIn");
+            }
+
+            var conditions = Request.QueryString.Map<OrderModel>();
+            var vm = this.OrderBiz.GetOrderListViewModel(conditions);
+            return View(vm);
+        }
+
+        public ActionResult KeFuList()
+        {
+            if (!PM.Any(UPM.客服))
+            {
+                return Redirect("/SignIn");
+            }
+
+            var conditions = Request.QueryString.Map<OrderModel>();
+            var vm = this.OrderBiz.GetOrderListViewModel(conditions);
+            return View(vm);
         }
     }
 }

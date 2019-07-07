@@ -44,6 +44,13 @@ namespace DaSongERP.Dal
             return list.FirstOrDefault();
         }
 
+        public IList<OrderModel> GetOrdersBy(OrderModel condition)
+        {
+            var cmd = ProcCommands.sp_GetOrders().SetParameterValues(condition);
+            var list = DBHelper.ExecuteEntityList<OrderModel>(cmd);
+            return list;
+        }
+
         public int Update(OrderModel order)
         {
             var cmd = ProcCommands.sp_UpdateOrder().SetParameterValues(order);
