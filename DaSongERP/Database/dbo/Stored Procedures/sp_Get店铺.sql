@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE dbo.sp_Get店铺
+CREATE PROCEDURE [dbo].[sp_Get店铺]
 	
 AS
 BEGIN
@@ -12,5 +12,5 @@ BEGIN
 	SET NOCOUNT ON;
 
 	SELECT * FROM [dbo].[店铺]
-	ORDER BY SN;
+	ORDER BY SN, [Name];
 END

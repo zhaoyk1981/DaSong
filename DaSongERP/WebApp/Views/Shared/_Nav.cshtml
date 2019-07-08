@@ -17,16 +17,16 @@
                     <a class="nav-link" href="/Order">订单操作</a>
                 </li>
             }
-            @if (PM.Any(UPM.拆包))
-            {
-                <li class="nav-item">
-                    <a class="nav-link" href="/Order/ChaiBaoList">拆包审单</a>
-                </li>
-            }
             @if (PM.Any(UPM.电话))
             {
                 <li class="nav-item">
                     <a class="nav-link" href="/Order/Import">电话客服订单导入</a>
+                </li>
+            }
+            @if (PM.Any(UPM.拆包))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="/Order/ChaiBaoList">拆包审单</a>
                 </li>
             }
             @if (PM.Any(UPM.售后))

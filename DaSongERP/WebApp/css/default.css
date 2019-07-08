@@ -7045,6 +7045,9 @@ label.file {
   color: transparent;
   background: transparent; }
 
+label.static-label {
+  font-weight: bold; }
+
 /*#endregion base END */
 /*#region components START */
 /*#region popup*/
@@ -7236,7 +7239,8 @@ div.hr {
     top: -4px; }
 
 .repeater > table > thead > tr > th {
-  cursor: default; }
+  cursor: default;
+  background-color: #f5f7f9; }
 
 .repeater > table > tbody > tr.focus-item {
   background-color: lightyellow; }

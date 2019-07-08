@@ -12,74 +12,75 @@
         <fieldset>
             <legend>采购</legend>
             <div class="row">
-                <div class="form-group col-6">
-                    <label>进货日期</label>
-                    <div>@DP.Txt(Model.Order.进货日期)</div>
-                </div>
-                <div class="form-group col-6">
+                <div class="form-group col-12">
                     <a href="@Model.Order.商品图片" target="_blank">
                         <img src="@Model.Order.商品图片" class="product-image" />
                     </a>
                 </div>
                 <div class="form-group col-6">
-                    <label>采购人</label>
-                    <div>@DP.Txt(Model.Order.采购人)</div>
+                    <label class="static-label">进货日期：</label>
+                    <span>@DP.Txt(Model.Order.进货日期)</span>
                 </div>
                 <div class="form-group col-6">
-                    <label>货号</label>
-                    <div>@DP.Txt(Model.Order.货号)</div>
+                    <label class="static-label">采购人：</label>
+                    <span>@DP.Txt(Model.Order.采购人)</span>
                 </div>
                 <div class="form-group col-6">
-                    <label>进货数量</label>
-                    <div>@DP.Txt(Model.Order.进货数量)</div>
+                    <label class="static-label">JD订单号：</label>
+                    <span>@DP.Txt(Model.Order.JD订单号)</span>
                 </div>
                 <div class="form-group col-6">
-                    <label>店铺名称</label>
-                    <div>@DP.Txt(Model.Order.店铺)</div>
+                    <label class="static-label">货号：</label>
+                    <span>@DP.Txt(Model.Order.货号)</span>
                 </div>
                 <div class="form-group col-6">
-                    <label>JD订单号</label>
-                    <div>@DP.Txt(Model.Order.JD订单号)</div>
+                    <label class="static-label">店铺名称：</label>
+                    <span>@DP.Txt(Model.Order.店铺)</span>
                 </div>
                 <div class="form-group col-6">
-                    <label>客人地址</label>
+                    <label class="static-label">京东价：</label>
+                    <span>@DP.Txt(Model.Order.京东价)</span>
+                </div>
+                <div class="form-group col-12">
+                    <label class="static-label">客人地址：</label>
                     <div>@DP.Txt(Model.Order.客人地址)</div>
                 </div>
-                <div class="form-group col-6">
-                    <label>淘宝账号</label>
-                    <div>@DP.Txt(Model.Order.淘宝账号)</div>
-                </div>
-                <div class="form-group col-6">
-                    <label>淘宝订单号</label>
-                    <div>@DP.Txt(Model.Order.淘宝订单号)</div>
-                </div>
-                <div class="form-group col-6">
-                    <label>京东SKU及采购备注</label>
+                <div class="form-group col-12">
+                    <label class="static-label">京东SKU及采购备注：</label>
                     <div>@DP.Txt(Model.Order.采购备注)</div>
                 </div>
                 <div class="form-group col-6">
-                    <label>订单修改备注</label>
-                    <div>@DP.Txt(Model.Order.订单修改备注)</div>
+                    <label class="static-label">淘宝账号：</label>
+                    <span>@DP.Txt(Model.Order.淘宝账号)</span>
                 </div>
                 <div class="form-group col-6">
-                    <label>京东价</label>
-                    <div>@DP.Txt(Model.Order.京东价)</div>
+                    <label class="static-label">淘宝订单号：</label>
+                    <span>@DP.Txt(Model.Order.淘宝订单号)</span>
                 </div>
+                <div class="form-group col-6">
+                    <label class="static-label">进货数量：</label>
+                    <span>@DP.Txt(Model.Order.进货数量)</span>
+                </div>
+                <div class="form-group col-12">
+                    <label class="static-label">订单修改备注：</label>
+                    <div>@DP.Txt(Model.Order.订单修改备注)</div>
+                </div>
+
             </div>
         </fieldset>
         <fieldset>
             <legend>跟进订单</legend>
             <div class="row">
                 <div class="form-group col-6">
-                    <label>来-快递单号</label>
-                    <div>@DP.Txt(Model.Order.来快递单号)</div>
+                    <label class="static-label">来-快递单号：</label>
+                    <span>@DP.Txt(Model.Order.来快递单号)</span>
                 </div>
                 <div class="form-group col-6">
-                    <label>发货时间</label>
-                    <div>@DP.Txt(Model.Order.发货时间)</div>
+                    <label class="static-label">发货时间：</label>
+                    <span>@DP.Txt(Model.Order.发货时间)</span>
                 </div>
-                <div class="form-group col-6">
-                    <label>发货备注</label>
+                <div class="form-group col-12">
+                    <label class="static-label">发货备注：</label>
                     <div>@DP.Txt(Model.Order.发货备注)</div>
                 </div>
             </div>
@@ -88,15 +89,15 @@
             <legend>电话客服导入</legend>
             <div class="row">
                 <div class="form-group col-6">
-                    <label>导入时间</label>
-                    <div>@DP.Txt(Model.Order.导入时间)</div>
+                    <label class="static-label">导入时间：</label>
+                    <span>@DP.Txt(Model.Order.导入时间)</span>
                 </div>
                 <div class="form-group col-6">
-                    <label>电话客服</label>
-                    <div>@DP.Txt(Model.Order.电话客服)</div>
+                    <label class="static-label">电话客服：</label>
+                    <span>@DP.Txt(Model.Order.电话客服)</span>
                 </div>
-                <div class="form-group col-6">
-                    <label>电话情况</label>
+                <div class="form-group col-12">
+                    <label class="static-label">电话情况：</label>
                     <div>@DP.Txt(Model.Order.电话情况)</div>
                 </div>
             </div>
@@ -105,24 +106,24 @@
             <legend>拆包审单</legend>
             <div class="row">
                 <div class="form-group col-6">
-                    <label>审单操作</label>
-                    <div>@DP.Txt(Model.Order.审单操作)</div>
+                    <label class="static-label">审单操作：</label>
+                    <span>@DP.Txt(Model.Order.审单操作)</span>
                 </div>
                 <div class="form-group col-6">
-                    <label>拆包人员备注</label>
+                    <label class="static-label">转发单号：</label>
+                    <span>@DP.Txt(Model.Order.转发单号)</span>
+                </div>
+                <div class="form-group col-6">
+                    <label class="static-label">拆包人：</label>
+                    <span>@DP.Txt(Model.Order.拆包人)</span>
+                </div>
+                <div class="form-group col-6">
+                    <label class="static-label">拆包时间：</label>
+                    <span>@(DP.Txt(Model.Order.拆包时间))</span>
+                </div>
+                <div class="form-group col-12">
+                    <label class="static-label">拆包人员备注：</label>
                     <div>@DP.Txt(Model.Order.拆包人员备注)</div>
-                </div>
-                <div class="form-group col-6">
-                    <label>转发单号</label>
-                    <div>@DP.Txt(Model.Order.转发单号)</div>
-                </div>
-                <div class="form-group col-6">
-                    <label>拆包人</label>
-                    <div>@DP.Txt(Model.Order.拆包人)</div>
-                </div>
-                <div class="form-group col-6">
-                    <label>拆包时间</label>
-                    <div>@(DP.Txt(Model.Order.拆包时间))</div>
                 </div>
             </div>
         </fieldset>
@@ -130,7 +131,7 @@
             <legend>售后</legend>
             <div class="row">
                 <div class="form-group col-6">
-                    <label for="Ddl售后操作ID">售后操作</label>
+                    <label for="Ddl售后操作ID">售后操作：</label>
                     <select class="custom-select" name="售后操作ID" id="Ddl售后操作ID">
                         @foreach (var op in Model.售后操作DataSource)
                         {
@@ -140,7 +141,7 @@
                 </div>
 
                 <div class="form-group col-6">
-                    <label for="Ddl售后原因ID">售后原因</label>
+                    <label for="Ddl售后原因ID">售后原因：</label>
                     <select class="custom-select" name="售后原因ID" id="Ddl售后原因ID">
                         @foreach (var op in Model.售后原因DataSource)
                         {
@@ -149,26 +150,26 @@
                     </select>
                 </div>
                 <div class="form-group col-6">
-                    <label for="Txt客人退回单号">客人退回单号</label>
+                    <label for="Txt客人退回单号">客人退回单号：</label>
                     <input type="text" class="form-control" name="客人退回单号" id="Txt客人退回单号" maxlength="50" value="@DP.Txt(Model.Order.客人退回单号, "")" />
                     <span class="validator" id="vd客人退回单号" data-required="" data-validate-target="#Txt客人退回单号"><span class="error-message text-danger">此项必填</span></span>
                 </div>
                 <div class="form-group col-6">
-                    <label>是否淘宝退回</label>
+                    <label>是否淘宝退回：</label>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="是否淘宝退回" data-type="bool" id="Chk是否淘宝退回" @(Model.Order.是否淘宝退回.GetValueOrDefault() ? "checked" : "") />
                         <label class="form-check-label" for="Chk是否淘宝退回">是</label>
                     </div>
                 </div>
                 <div class="form-group col-6">
-                    <label>售后完结</label>
+                    <label>售后完结：</label>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="售后完结" data-type="bool" id="Chk售后完结" @(Model.Order.售后完结.GetValueOrDefault() ? "checked" : "") />
                         <label class="form-check-label" for="Chk售后完结">是</label>
                     </div>
                 </div>
                 <div class="form-group col-12">
-                    <label for="Txt售后备注">售后备注</label>
+                    <label for="Txt售后备注">售后备注：</label>
                     <textarea class="form-control" name="售后备注" id="Txt售后备注">@DP.Txt(Model.Order.售后备注, "")</textarea>
                 </div>
             </div>

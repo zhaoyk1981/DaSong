@@ -31,11 +31,57 @@ END
 
 IF NOT EXISTS (SELECT * FROM 店铺)
 BEGIN
-INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'6093cbc7-28c6-472b-af27-3310b7f7d416', N'店铺1', 1)
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'8560009b-c4ca-49cb-8a03-04db240eb2f3', N'乐鹏灯饰照明专营店', 0)
 
-INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'c54cf0e0-dc0d-46c7-bbf0-534f8ff22e99', N'店铺3', 3)
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'08bcf65c-650a-47f1-a11c-1123b64bc87a', N'CHIC DOLL/琪可朵旗舰店', 0)
 
-INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'afc99f3d-bdae-4ab0-97a6-c51cdf112ce4', N'店铺2', 2)
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'765bbcde-9699-4a55-8604-1a612f2f1a2b', N'大福福清洁用品专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'7ef2242d-22dd-4fde-aade-23cca0df77da', N'乐鹏礼品专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'31f07fbd-70fc-466e-a3b1-23d8576b5782', N'宇天下家居拼购店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'eb91bc0f-e2a3-44da-bf94-2ad31553036c', N'太阳景家装建材拼购店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'a8383e46-3ad3-474b-b6e6-4aafb501e782', N'福乐乐家具专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'9d2feeec-0931-43dd-875e-58f40d8e61ba', N'鹏乐个人护理专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'514286b7-e7ff-4764-a1ac-5d03690262bc', N'鹏乐女装专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'c504209b-f4e2-40a9-9ffd-63ad2fe3f3a6', N'鹏乐美妆专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'62238e10-5a02-472a-922d-63b9008d2436', N'大福福个护专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'63ebf03b-a074-44b7-9d80-6882fd955b45', N'怡壹澜陆服饰拼购店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'731519b5-71e7-4a23-b829-6a33f86f614b', N'福乐乐家具专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'9021f4bf-4884-4d02-bbcf-6ebc3be9794c', N'鹏乐洗护专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'8a6fc1bf-0491-4dfa-a3de-7208fa0ed6ee', N'鹏乐个护专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'd6067b35-bfc6-446d-ab50-7b3a8b5c5362', N'御龙象家装建材拼购店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'4b9ff5ea-7430-45cd-9c15-8986d5ed2cf7', N'鹏乐清洁用品专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'7d467fc0-4a54-4c01-8bfb-99f172fa1274', N'秀华天家装建材拼购店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'263f788c-6d3b-4cf3-b938-a43c07fe1334', N'乐鹏餐具专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'cd2f8857-fda6-4c2f-9fdf-a6e53704ed05', N'乐鹏家装建材专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'cc69c3ad-17cf-478a-b523-af79ce6f950e', N'乐鹏服饰专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'86d2d2a7-1a7f-4e86-9cd5-b15fb0c413b5', N'泰聚金家装建材拼购店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'afbb6232-96ff-4dfc-a7cb-b49b567dfdf4', N'大福福洗护专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'0928f58c-5c2c-41a6-be2a-c5a6fa5f620f', N'靳继家装建材拼购店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'5f42618d-6c26-414e-875f-e4b71a69b74a', N'大福福化妆品专营店', 0)
+
+INSERT [dbo].[店铺] ([ID], [Name], [SN]) VALUES (N'febadf75-3bbe-4e43-82a4-fc0bde8acbe4', N'福乐乐运动户外专营店', 0)
 END
 
 IF NOT EXISTS (SELECT * FROM 审单操作)

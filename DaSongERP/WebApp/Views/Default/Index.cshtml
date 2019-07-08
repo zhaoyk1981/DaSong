@@ -3,57 +3,57 @@
     ViewBag.Title = "菜单";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div>
-    @Html.Partial("_Nav")
-    <h2>菜单</h2>
-
-    @if (PM.Any(UPM.采购))
-    {
-        <div>
-            <a href="/Order/New">新建采购订单</a>
-        </div>
-    }
-    @if (PM.Any(UPM.采购, UPM.跟进))
-    {
-        <div>
-            <a href="/Order">修改，跟进</a>
-        </div>
-    }
-    @if (PM.Any(UPM.拆包))
-    {
-        <div>
-            <a href="/Order/ChaiBaoList">拆包审单</a>
-        </div>
-    }
-    @if (PM.Any(UPM.电话))
-    {
-        <div>
-            <a href="/Order/Import">电话客服订单导入</a>
-        </div>
-    }
-    @if (PM.Any(UPM.售后))
-    {
-        <div>
-            <a href="/Order/ShouHouList">售后列表</a>
-        </div>
-    }
-    @if (PM.Any(UPM.客服))
-    {
-        <div>
-            <a href="/Order/KeFuList">客服列表</a>
-        </div>
-    }
-    @if (PM.Any(UPM.管理))
-    {
-        <div>
-            <a href="/User">用户管理</a>
-        </div>
-    }
-
-    <br />
-    <br />
-    <br />
     <div>
-        <a href="/SignOut">登出</a>
+        @Html.Partial("_Nav")
+        <h2>菜单</h2>
+
+        @if (PM.Any(UPM.采购))
+        {
+            <div>
+                <a href="/Order/New">新建采购订单</a>
+            </div>
+        }
+        @if (PM.Any(UPM.采购, UPM.跟进))
+        {
+            <div>
+                <a href="/Order">修改，跟进</a>
+            </div>
+        }
+        @if (PM.Any(UPM.电话))
+        {
+            <div>
+                <a href="/Order/Import">电话客服订单导入</a>
+            </div>
+        }
+        @if (PM.Any(UPM.拆包))
+        {
+            <div>
+                <a href="/Order/ChaiBaoList">拆包审单</a>
+            </div>
+        }
+        @if (PM.Any(UPM.售后))
+        {
+            <div>
+                <a href="/Order/ShouHouList">售后列表</a>
+            </div>
+        }
+        @if (PM.Any(UPM.客服))
+        {
+            <div>
+                <a href="/Order/KeFuList">客服列表</a>
+            </div>
+        }
+        @if (PM.Any(UPM.管理))
+        {
+            <div>
+                <a href="/User">用户管理</a>
+            </div>
+        }
+
+        <br />
+        <br />
+        <br />
+        <div>
+            <a href="/SignOut">登出</a>
+        </div>
     </div>
-</div>
