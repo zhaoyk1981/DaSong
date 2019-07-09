@@ -273,5 +273,20 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_Get未导入Orders
+
+        #region sp_跟进List
+        public static SqlCommand sp_跟进List()
+        {
+            var cmd = new SqlCommand("sp_跟进List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@跟进人ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@拆包超时", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_跟进List
     }
 }

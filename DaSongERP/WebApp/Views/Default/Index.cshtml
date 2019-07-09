@@ -13,10 +13,16 @@
                 <a href="/Order/New">新建采购订单</a>
             </div>
         }
-        @if (PM.Any(UPM.采购, UPM.跟进))
+        @if (PM.Any(UPM.采购))
         {
             <div>
-                <a href="/Order">修改，跟进</a>
+                <a href="/Order">修改</a>
+            </div>
+        }
+        @if (PM.Any(UPM.跟进))
+        {
+            <div>
+                <a href="/Order/GenJinList">跟进</a>
             </div>
         }
         @if (PM.Any(UPM.电话))

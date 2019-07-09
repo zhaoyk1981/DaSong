@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conditions\OrderCondition.cs" />
     <Compile Include="Models\MetaModel.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\OrderModel.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="ViewModels\UserListViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="ViewModels\跟进ListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YKUtils\YKUtils.csproj">

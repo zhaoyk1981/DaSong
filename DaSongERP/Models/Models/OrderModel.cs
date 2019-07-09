@@ -14,6 +14,14 @@ namespace DaSongERP.Models
 
         public DateTime? 进货日期 { get; set; }
 
+        public string Str进货日期
+        {
+            get
+            {
+                return this.进货日期.HasValue ? this.进货日期.Value.ToString("yyyy-MM-dd HH:mm") : string.Empty;
+            }
+        }
+
         public string 货号 { get; set; }
 
         public string 商品图片 { get; set; }

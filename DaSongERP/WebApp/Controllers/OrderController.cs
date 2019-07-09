@@ -1,4 +1,5 @@
-﻿using DaSongERP.Models;
+﻿using DaSongERP.Conditions;
+using DaSongERP.Models;
 using DaSongERP.WebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -347,6 +348,27 @@ namespace DaSongERP.WebApp.Controllers
             var conditions = Request.QueryString.Map<OrderModel>();
             var vm = this.OrderBiz.GetOrderListViewModel(conditions);
             return View(vm);
+        }
+
+        public ActionResult GenJinList()
+        {
+            var vm = this.OrderBiz.Get跟进ListViewModel();
+            vm.Json = SerializeObject(new
+            {
+                AllIDs = new string[] { },
+                currentSortPaging = vm.Orders.GetCurrentSortPaging()
+            });
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AGenJinList()
+        {
+            var condition = this.Request.Params.Map<OrderCondition>();
+            condition.PageIndex = int.Parse(this.Request.Params["PageIndex"]);
+
+            var list = this.OrderBiz.Get跟进List(condition);
+            return this.Json(list);
         }
     }
 }

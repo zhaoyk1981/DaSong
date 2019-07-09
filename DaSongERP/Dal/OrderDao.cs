@@ -1,10 +1,13 @@
-﻿using DaSongERP.Models;
+﻿using DaSongERP.Conditions;
+using DaSongERP.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YK;
+using YK.Model;
+
 namespace DaSongERP.Dal
 {
     public class OrderDao : Dao
@@ -100,5 +103,13 @@ namespace DaSongERP.Dal
             return result;
         }
 
+
+        public PagedList<OrderModel> Get跟进List(OrderCondition condition)
+        {
+            var cmd = ProcCommands.sp_跟进List().SetParameterValues(condition);
+            var dataSet = DBHelper.ExecuteDataSet(cmd);
+            var pagedList = new PagedList<OrderModel>(condition, dataSet);
+            return pagedList;
+        }
     }
 }

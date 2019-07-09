@@ -60,6 +60,7 @@
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\Views\" />
+    <Folder Include="dbo\Functions\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\淘宝账号.sql" />
@@ -96,5 +97,8 @@
     <Build Include="dbo\Stored Procedures\sp_CreateUser.sql" />
     <Build Include="dbo\Stored Procedures\sp_Get未导入Orders.sql" />
     <Build Include="dbo\Stored Procedures\sp_BackupDB.sql" />
+    <Build Include="dbo\Tables\快递.sql" />
+    <Build Include="dbo\Functions\InitPagingParams.sql" />
+    <Build Include="dbo\Stored Procedures\sp_跟进List.sql" />
   </ItemGroup>
 </Project>

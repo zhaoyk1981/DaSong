@@ -115,6 +115,7 @@
     <Content Include="js\pages\chaibaoorder.js" />
     <Content Include="js\pages\editorder.js" />
     <Content Include="js\pages\edituser.js" />
+    <Content Include="js\pages\genjinlist.js" />
     <Content Include="js\pages\genjinorder.js" />
     <Content Include="js\pages\importorders.js" />
     <Content Include="js\pages\kefulist.js" />
@@ -374,6 +375,7 @@
     <Content Include="Views\Shared\_Nav.cshtml" />
     <Content Include="Views\Order\ShouHouList.cshtml" />
     <Content Include="Views\Order\KeFuList.cshtml" />
+    <Content Include="Views\Order\GenJinList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

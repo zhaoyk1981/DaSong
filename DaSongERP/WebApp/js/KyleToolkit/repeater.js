@@ -1,14 +1,15 @@
 ﻿define(['jquery', 'mustache'], function ($, mustache) {
     // #region input output
     let _options = {
+        id: 'ID',
         target: null,
         pageNumStart: -2,
         pageNumEnd: 2,
         tmplItem: null,
         newFilters: function () { return {}; },
         url: null,
-        tmplPageButton: "<li class='page-num'><a href='javascript:void(0)' class='btn-page-num' page-index='{{pageIndex}}'>{{{text}}}</a></li>",
-        tmplActivePage: "<li class='active page-num'><a href='javascript:void(0)'>{{{text}}}</a></li>",
+        tmplPageButton: "<li class='page-num page-item'><a href='javascript:void(0)' class='btn-page-num page-link' page-index='{{pageIndex}}'>{{{text}}}</a></li>",
+        tmplActivePage: "<li class='active page-num page-item'><a href='javascript:void(0)' class='page-link'>{{{text}}}</a></li>",
         onDataBound: function (data) { },
         selectedIDs: [],
         allIDs: [],
@@ -195,11 +196,11 @@
         _options.allIDs = result.IDList;
         for (let i = 0; i < result.DataSource.length; i++) {
             let item = $(mustache.render(_options.tmplItem, result.DataSource[i]));
-            if (result.DataSource[i].Id === result.PageById) {
+            if (result.DataSource[i][_options.id] === result.PageById) {
                 $(item).toggleClass('focus-item', true);
             }
 
-            item.find('.row-select').prop('checked', $('.select-all').prop('checked') === true || _options.selectedIDs.indexOf(result.DataSource[i].Id.toLowerCase()) >= 0);
+            item.find('.row-select').prop('checked', $('.select-all').prop('checked') === true || _options.selectedIDs.indexOf(result.DataSource[i][_options.id].toLowerCase()) >= 0);
 
             rptItems.append(item);
         }

@@ -1,4 +1,5 @@
-﻿using DaSongERP.Models;
+﻿using DaSongERP.Conditions;
+using DaSongERP.Models;
 using DaSongERP.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using YK.Model;
 
 namespace DaSongERP.Biz
 {
@@ -186,6 +188,21 @@ namespace DaSongERP.Biz
             var vm = new OrderListViewModel();
             vm.Orders = this.Get未导入Orders();
             return vm;
+        }
+
+        public 跟进ListViewModel Get跟进ListViewModel()
+        {
+            var vm = new 跟进ListViewModel();
+            vm.Orders = new PagedList<OrderModel>();
+            vm.Orders.PageSize = 300;
+            return vm;
+        }
+
+        public PagedList<OrderModel> Get跟进List(OrderCondition condition)
+        {
+            condition.Trim();
+            var list = this.OrderDao.Get跟进List(condition);
+            return list;
         }
     }
 }
