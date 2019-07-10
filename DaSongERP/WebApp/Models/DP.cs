@@ -33,7 +33,7 @@ namespace DaSongERP.WebApp.Models
             return num.HasValue ? num.Value.ToString() : dflt;
         }
 
-        public static string Txt(MetaModel m, string dflt = "无")
+        public static string Txt(MetaModel<Guid> m, string dflt = "无")
         {
             return string.IsNullOrEmpty(m?.Name) ? dflt : m.Name.Trim();
         }

@@ -65,6 +65,10 @@ div.hr {
         }
 
         & > tbody > tr {
+            &[data-high-light='true'] {
+                background-color: lightyellow;
+            }
+
             &.focus-item {
                 background-color: lightyellow;
             }

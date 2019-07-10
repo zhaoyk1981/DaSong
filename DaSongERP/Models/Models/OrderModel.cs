@@ -10,7 +10,17 @@ namespace DaSongERP.Models
     {
         public Guid? ID { get; set; }
 
-        public int? SN { get; set; }
+        public int? RowIndex { get; set; }
+
+        public int? RowNumber
+        {
+            get
+            {
+                return RowIndex.HasValue ? RowIndex.Value + 1 : default(int?);
+            }
+        }
+
+        public bool? 高亮 { get; set; }
 
         public DateTime? 进货日期 { get; set; }
 
@@ -28,7 +38,7 @@ namespace DaSongERP.Models
 
         public int? 进货数量 { get; set; }
 
-        public MetaModel 店铺 { get; set; }
+        public MetaModel<Guid> 店铺 { get; set; }
 
         public Guid? 店铺ID
         {
@@ -40,7 +50,7 @@ namespace DaSongERP.Models
             {
                 if (this.店铺 == null)
                 {
-                    this.店铺 = new MetaModel();
+                    this.店铺 = new MetaModel<Guid>();
                 }
 
                 this.店铺.ID = value;
@@ -51,7 +61,7 @@ namespace DaSongERP.Models
 
         public string 客人地址 { get; set; }
 
-        public MetaModel 淘宝账号 { get; set; }
+        public MetaModel<Guid> 淘宝账号 { get; set; }
 
         public Guid? 淘宝账号ID
         {
@@ -63,7 +73,7 @@ namespace DaSongERP.Models
             {
                 if (this.淘宝账号 == null)
                 {
-                    this.淘宝账号 = new MetaModel();
+                    this.淘宝账号 = new MetaModel<Guid>();
                 }
                 this.淘宝账号.ID = value;
             }
@@ -74,6 +84,8 @@ namespace DaSongERP.Models
         public string 采购备注 { get; set; }
 
         public string 订单修改备注 { get; set; }
+
+        public string 来快递 { get; set; }
 
         public string 来快递单号 { get; set; }
 
@@ -176,7 +188,7 @@ namespace DaSongERP.Models
         /// </summary>
         public int? 导入结果 { get; set; }
 
-        public MetaModel 审单操作 { get; set; }
+        public MetaModel<Guid> 审单操作 { get; set; }
 
         public Guid? 审单操作ID
         {
@@ -188,7 +200,7 @@ namespace DaSongERP.Models
             {
                 if (this.审单操作 == null)
                 {
-                    this.审单操作 = new MetaModel();
+                    this.审单操作 = new MetaModel<Guid>();
                 }
 
                 this.审单操作.ID = value;
@@ -220,7 +232,7 @@ namespace DaSongERP.Models
 
         public DateTime? 拆包时间 { get; set; }
 
-        public MetaModel 售后操作 { get; set; }
+        public MetaModel<Guid> 售后操作 { get; set; }
 
         public Guid? 售后操作ID
         {
@@ -232,14 +244,14 @@ namespace DaSongERP.Models
             {
                 if (this.售后操作 == null)
                 {
-                    this.售后操作 = new MetaModel();
+                    this.售后操作 = new MetaModel<Guid>();
                 }
 
                 this.售后操作.ID = value;
             }
         }
 
-        public MetaModel 售后原因 { get; set; }
+        public MetaModel<Guid> 售后原因 { get; set; }
 
         public Guid? 售后原因ID
         {
@@ -251,7 +263,7 @@ namespace DaSongERP.Models
             {
                 if (this.售后原因 == null)
                 {
-                    this.售后原因 = new MetaModel();
+                    this.售后原因 = new MetaModel<Guid>();
                 }
 
                 this.售后原因.ID = value;
@@ -308,13 +320,13 @@ namespace DaSongERP.Models
 
         public DateTime? 客服时间 { get; set; }
 
-        public int? RowIndex { get; set; }
-
         public bool? 已跟进 { get; set; }
 
         public bool? 已导入 { get; set; }
 
         public bool? 已审单 { get; set; }
+
+        public bool? 已售后 { get; set; }
 
         public bool? Search { get; set; }
     }

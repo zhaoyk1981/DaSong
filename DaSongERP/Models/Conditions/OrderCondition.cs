@@ -103,9 +103,13 @@ namespace DaSongERP.Conditions
 
         public bool? 已审单 { get; set; }
 
+        public bool? 已售后 { get; set; }
+
         public bool? Search { get; set; }
 
         public int? 拆包超时 { get; set; }
+
+        public bool? My { get; set; }
 
         public void Trim()
         {

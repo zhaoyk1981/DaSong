@@ -12,10 +12,11 @@ CREATE PROCEDURE [dbo].[sp_UpdateOrder]
     ,@淘宝账号ID uniqueidentifier
 	,@淘宝订单号 NVARCHAR(50)
     ,@采购备注 nvarchar(max)
-    ,@订单修改备注 nvarchar(max)
     ,@京东价 money
     ,@成本价 money
+	,@订单修改备注 nvarchar(max)
 	,@采购人ID UNIQUEIDENTIFIER
+	,@高亮 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -32,10 +33,11 @@ BEGIN
            ,[淘宝账号ID] = @淘宝账号ID
 		   ,[淘宝订单号] = @淘宝订单号
            ,[采购备注] = @采购备注
-           ,[订单修改备注] = @订单修改备注
+           --,[订单修改备注] = @订单修改备注
            ,[京东价] = @京东价
            ,[成本价] = @成本价
 		   ,[采购人ID] = @采购人ID
+		   ,[高亮] = @高亮
 		WHERE ID = @ID;
 
 	SELECT @@ROWCOUNT AS [RowCount];

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DaSongERP.Models
 {
-    public class MetaModel : Model
+    public class MetaModel<T> : Model where T : struct
     {
-        public Guid? ID { get; set; }
+        public T? ID { get; set; }
 
         public string Name { get; set; }
 

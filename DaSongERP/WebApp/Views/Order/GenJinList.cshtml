@@ -6,8 +6,8 @@
 
 @section Head{
     <script id="tmplRow" type="x-tmpl-mustache">
-        <tr data-id="{{ID}}">
-            <td>{{SN}}</td>
+        <tr data-id="{{ID}}" data-high-light="{{高亮}}">
+            <td>{{RowNumber}}</td>
             <td>
                 <a href="{{商品图片}}" target="_blank">
                     <img src="{{商品图片}}" class="product-thumbnail" />
@@ -20,7 +20,7 @@
             <td>{{来快递单号}}</td>
             <td>{{客人地址}}</td>
             <td>
-                <a href="/Order/GenJin/{{ID}}" class="btn btn-primary btn-edit">跟进订单</a>
+                <a href="/Order/GenJin/{{ID}}" class="btn btn-primary btn-edit" target="_blank">跟进订单</a>
             </td>
         </tr>
     </script>
@@ -32,25 +32,41 @@
     <div class="filters">
         <form autocomplete="off">
             <fieldset>
-                <div class="form-group">
-                    <label>JD订单号</label>
-                    <input type="text" name="JD订单号" class="form-control" id="TxtJD订单号" autocomplete="new-password" />
-                </div>
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="拆包超时" id="Chk拆包超时" />
-                        <label class="form-check-label" for="Chk售后完结">
-                            超过<select id="Ddl拆包超时">
-                                @for (var i = 2; i <= 10; i++)
-                                {
-                                    <option value="@i">@i</option>
-                                }
-                            </select>天未拆包
-                        </label>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label>JD订单号</label>
+                        <input type="text" name="JD订单号" class="form-control" id="TxtJD订单号" autocomplete="new-password" />
                     </div>
+                    <div class="form-group col-6">
+                        <label for="Ddl跟进状态">跟进状态</label>
+                        <select id="Ddl跟进状态" class="form-control" name="已跟进" data-type="bool">
+                            <option value="">全部</option>
+                            <option value="true">已跟进</option>
+                            <option value="false" selected>未跟进</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="拆包超时" id="Chk拆包超时" />
+                            <label class="form-check-label" for="Chk售后完结">
+                                超过<select id="Ddl拆包超时">
+                                    @for (var i = 2; i <= 10; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                </select>天未拆包
+                            </label>
+                        </div>
+                    </div>
+                    @*<div class="form-group col-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="My" data-type="bool" id="ChkMy" />
+                            <label class="form-check-label" for="ChkMy">只看我的</label>
+                        </div>
+                    </div>*@
                 </div>
             </fieldset>
-            <div>
+            <div class="form-group">
                 <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
             </div>
         </form>

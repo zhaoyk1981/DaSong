@@ -60,6 +60,14 @@ namespace DaSongERP.Biz
             return vm;
         }
 
+        public EditOrderViewModel Get跟进ViewModel(Guid id)
+        {
+            var vm = new EditOrderViewModel();
+            vm.来快递DataSource = this.OrderDao.GetAll快递();
+            vm.Order = this.GetOrderBy(id);
+            return vm;
+        }
+
         public int Update(OrderModel order)
         {
             order.采购人ID = this.UserID;
@@ -201,6 +209,11 @@ namespace DaSongERP.Biz
         public PagedList<OrderModel> Get跟进List(OrderCondition condition)
         {
             condition.Trim();
+            if (condition.My.GetValueOrDefault())
+            {
+                condition.跟进人ID = this.UserID;
+            }
+
             var list = this.OrderDao.Get跟进List(condition);
             return list;
         }

@@ -155,7 +155,7 @@ namespace DaSongERP.WebApp.Controllers
                 return Redirect("/SignIn");
             }
 
-            var vm = this.OrderBiz.GetEditOrderViewModel(id);
+            var vm = this.OrderBiz.Get跟进ViewModel(id);
             if (vm.Order == null)
             {
                 return Redirect("/Order");

@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE dbo.sp_Update客服
+CREATE PROCEDURE [dbo].[sp_Update客服]
 	@ID UNIQUEIDENTIFIER
 	, @客人地址 NVARCHAR(150)
 	, @订单修改备注 NVARCHAR(500)
@@ -16,7 +16,7 @@ BEGIN
 
     UPDATE [dbo].[订单] SET
 		[客人地址] = @客人地址
-		, [订单修改备注] = @订单修改备注
+		--, [订单修改备注] = @订单修改备注
 		, [客服ID] = @客服ID
 		, [客服时间] = GETDATE()
 	WHERE ID = @ID;

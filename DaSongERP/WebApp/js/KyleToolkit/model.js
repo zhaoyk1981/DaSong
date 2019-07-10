@@ -107,6 +107,18 @@
                             return parseInt(ctrl.val());
                         }
 
+                        if (ctrl.attr('data-type') === 'bool') {
+                            let v = ctrl.val().toLowerCase();
+                            if (v === 'true') {
+                                return true;
+                            }
+                            else if (v === 'false') {
+                                return false;
+                            }
+
+                            return null;
+                        }
+
                         if (ctrl.attr('trim') === 'false' || ctrl.is('input[type=password]')) {
                             return ctrl.val();
                         }

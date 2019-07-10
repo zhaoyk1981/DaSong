@@ -87,6 +87,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@京东价", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@成本价", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@采购人ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_CreateOrder
@@ -129,6 +130,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@京东价", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@成本价", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@采购人ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_UpdateOrder
@@ -138,6 +140,7 @@ namespace DaSongERP.Dal
         {
             var cmd = new SqlCommand("sp_订单跟进") { CommandType = CommandType.StoredProcedure };
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@来快递", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@来快递单号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@发货时间", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@发货备注", Value = DBNull.Value });
@@ -182,6 +185,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客人退回单号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@是否淘宝退回", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后完结", Value = DBNull.Value });
+            //cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Update售后
@@ -194,6 +198,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客人地址", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单修改备注", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客服ID", Value = DBNull.Value });
+            //cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Update客服
@@ -285,8 +290,17 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@跟进人ID", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@拆包超时", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已跟进", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_跟进List
+
+        #region sp_GetAll快递
+        public static SqlCommand sp_GetAll快递()
+        {
+            var cmd = new SqlCommand("sp_GetAll快递") { CommandType = CommandType.StoredProcedure };
+            return cmd;
+        }
+        #endregion sp_GetAll快递
     }
 }

@@ -7242,6 +7242,9 @@ div.hr {
   cursor: default;
   background-color: #f5f7f9; }
 
+.repeater > table > tbody > tr[data-high-light='true'] {
+  background-color: lightyellow; }
+
 .repeater > table > tbody > tr.focus-item {
   background-color: lightyellow; }
 

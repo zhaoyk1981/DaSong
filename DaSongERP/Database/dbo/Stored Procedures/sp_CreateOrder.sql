@@ -16,6 +16,7 @@ CREATE PROCEDURE [dbo].[sp_CreateOrder]
     ,@京东价 money
     ,@成本价 money
 	,@采购人ID UNIQUEIDENTIFIER
+	,@高亮 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -36,7 +37,8 @@ BEGIN
            ,[采购备注]
            ,[京东价]
            ,[成本价]
-		   ,[采购人ID])
+		   ,[采购人ID]
+		   ,[高亮])
      SELECT
            @ID
            ,@进货日期
@@ -51,6 +53,7 @@ BEGIN
            ,@采购备注
            ,@京东价
            ,@成本价
-		   ,@采购人ID;
+		   ,@采购人ID
+		   ,@高亮;
 	SELECT @@ROWCOUNT AS [RowCount];
 END

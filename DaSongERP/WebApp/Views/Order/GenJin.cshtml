@@ -46,7 +46,7 @@
                     <div>@DP.Txt(Model.Order.客人地址)</div>
                 </div>
                 <div class="form-group col-12">
-                    <label class="static-label">京东SKU及采购备注：</label>
+                    <label class="static-label">SKU及采购备注：</label>
                     <div>@DP.Txt(Model.Order.采购备注)</div>
                 </div>
                 <div class="form-group col-12">
@@ -57,10 +57,21 @@
         </fieldset>
         <fieldset>
             <legend>订单跟进</legend>
-            <div class="form-group">
-                <label for="Txt来快递单号">来-快递单号：</label>
-                <input type="text" class="form-control" name="来快递单号" id="Txt来快递单号" value="@Model.Order.来快递单号" />
-                <span class="validator" id="vd来快递单号" data-required="" data-validate-target="#Txt来快递单号"><span class="error-message text-danger">此项必填</span></span>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="Ddl来快递">来-快递</label>
+                    <select class="form-control" name="来快递" id="Ddl来快递">
+                        @foreach (var k in Model.来快递DataSource)
+                        {
+                            <option value="@k.Name" @(@Model.Order.来快递 == k.Name ? "selected" : "")>@k.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-6">
+                    <label for="Txt来快递单号">来-快递单号：</label>
+                    <input type="text" class="form-control" name="来快递单号" id="Txt来快递单号" value="@Model.Order.来快递单号" />
+                    <span class="validator" id="vd来快递单号" data-required="" data-validate-target="#Txt来快递单号"><span class="error-message text-danger">此项必填</span></span>
+                </div>
             </div>
             <div class="form-group">
                 <label for="Txt采购备注">发货备注：</label>
