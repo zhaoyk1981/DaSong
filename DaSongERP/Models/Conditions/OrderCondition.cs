@@ -12,7 +12,6 @@ namespace DaSongERP.Conditions
     {
         public OrderCondition() : base()
         {
-            this.PageSize = 300;
         }
 
         public Guid? ID { get; set; }

@@ -57,6 +57,7 @@
     <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="ViewModels\UserListViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="ViewModels\电话客服ListViewModel.cs" />
     <Compile Include="ViewModels\跟进ListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

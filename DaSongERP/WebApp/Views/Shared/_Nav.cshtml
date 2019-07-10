@@ -11,10 +11,16 @@
                     <a class="nav-link" href="/Order/New">新建采购订单</a>
                 </li>
             }
-            @if (PM.Any(UPM.采购, UPM.跟进))
+            @if (PM.Any(UPM.采购))
             {
                 <li class="nav-item">
-                    <a class="nav-link" href="/Order">订单操作</a>
+                    <a class="nav-link" href="/Order">修改</a>
+                </li>
+            }
+            @if (PM.Any(UPM.跟进))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="/Order/GenJinList">跟进</a>
                 </li>
             }
             @if (PM.Any(UPM.电话))

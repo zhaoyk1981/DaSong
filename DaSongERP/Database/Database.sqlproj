@@ -101,5 +101,6 @@
     <Build Include="dbo\Functions\InitPagingParams.sql" />
     <Build Include="dbo\Stored Procedures\sp_跟进List.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetAll快递.sql" />
+    <Build Include="dbo\Stored Procedures\sp_电话客服List.sql" />
   </ItemGroup>
 </Project>

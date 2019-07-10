@@ -127,5 +127,14 @@ namespace DaSongERP.Dal
                 list.DataSource[i].RowIndex = i * list.PageSize + list.PageIndex;
             }
         }
+
+        public PagedList<OrderModel> Get电话客服List(OrderCondition condition)
+        {
+            var cmd = ProcCommands.sp_电话客服List().SetParameterValues(condition);
+            var dataSet = DBHelper.ExecuteDataSet(cmd);
+            var pagedList = new PagedList<OrderModel>(condition, dataSet);
+            this.SetRowIndex(pagedList);
+            return pagedList;
+        }
     }
 }

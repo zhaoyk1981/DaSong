@@ -217,5 +217,25 @@ namespace DaSongERP.Biz
             var list = this.OrderDao.Get跟进List(condition);
             return list;
         }
+
+        public 电话客服ListViewModel Get电话客服ListViewModel()
+        {
+            var vm = new 电话客服ListViewModel();
+            vm.Orders = new PagedList<OrderModel>();
+            vm.Orders.PageSize = 300;
+            return vm;
+        }
+
+        public PagedList<OrderModel> Get电话客服List(OrderCondition condition)
+        {
+            condition.Trim();
+            if (condition.My.GetValueOrDefault())
+            {
+                condition.电话客服ID = this.UserID;
+            }
+
+            var list = this.OrderDao.Get电话客服List(condition);
+            return list;
+        }
     }
 }

@@ -302,5 +302,21 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_GetAll快递
+
+        #region sp_电话客服List
+        public static SqlCommand sp_电话客服List()
+        {
+            var cmd = new SqlCommand("sp_电话客服List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@电话客服ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客人地址", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已导入", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_电话客服List
     }
 }

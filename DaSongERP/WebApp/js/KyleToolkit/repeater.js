@@ -159,9 +159,10 @@
                 text: (idx + 1).toString()
             };
 
-            let row = $(mustache.render(idx == result.PageIndex ? _options.tmplActivePage : _options.tmplPageButton, btnPage));
-
-            $(_options.target).find('.pagination > *:last').before(row);
+            $(_options.target).find('.pagination').each(function () {
+                let row = $(mustache.render(idx === result.PageIndex ? _options.tmplActivePage : _options.tmplPageButton, btnPage));
+                $(this).children('*:last').before(row);
+            });
         }
 
         $(_options.target).find('.btn-previous-page, .btn-first-page').closest('li').toggleClass('disabled', result.PageIndex <= 0);

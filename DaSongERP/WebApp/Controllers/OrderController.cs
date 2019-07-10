@@ -191,7 +191,12 @@ namespace DaSongERP.WebApp.Controllers
                 return Redirect("/SignIn");
             }
 
-            var vm = this.OrderBiz.GetImportOrderListViewModel();
+            var vm = this.OrderBiz.Get电话客服ListViewModel();
+            vm.Json = SerializeObject(new
+            {
+                AllIDs = new string[] { },
+                currentSortPaging = vm.Orders.GetCurrentSortPaging()
+            });
             return View(vm);
         }
 
@@ -207,6 +212,16 @@ namespace DaSongERP.WebApp.Controllers
             }
 
             var excelStream = this.Request.Files[0].InputStream;
+            var ext = Path.GetExtension(this.Request.Files[0].FileName).ToLower();
+            if (ext != ".xlsx" && ext != ".xls")
+            {
+                return Json(new
+                {
+                    Success = false,
+                    ErrorMessage = $"不支持 {ext} 文件"
+                });
+            }
+
             bool isXlsx = string.Compare(Path.GetExtension(this.Request.Files[0].FileName), ".xlsx", true) == 0;
             var file = OrderBiz.电话客服导入(excelStream, isXlsx);
             var 未导入 = OrderBiz.Get未导入Orders().Count;
@@ -216,6 +231,16 @@ namespace DaSongERP.WebApp.Controllers
                 Url = $"/Excel/{file}",
                 未导入 = 未导入
             });
+        }
+
+        [HttpPost]
+        public ActionResult ADianHuaKeFuList()
+        {
+            var condition = this.Request.Params.Map<OrderCondition>();
+            condition.PageIndex = int.Parse(this.Request.Params["PageIndex"]);
+
+            var list = this.OrderBiz.Get电话客服List(condition);
+            return this.Json(list);
         }
 
         public ActionResult ChaiBao(Guid id)

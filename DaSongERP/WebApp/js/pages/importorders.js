@@ -1,4 +1,4 @@
-﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, enhance, model, validation) {
+﻿define(['jquery', 'mustache', 'kyle_toolkit_repeater', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, mustache, repeater, enhance, model, validation) {
     let validate = function () {
         let validationResult = validation.validate(['default']);
         if (validationResult !== true) {
@@ -27,7 +27,7 @@
             contentType: false,
             success: function (data) {
                 if (data.Success !== true) {
-                    alert('操作失败');
+                    alert('操作失败,' + (data.ErrorMessage || ''));
                     return;
                 }
 
@@ -37,9 +37,37 @@
         });
     };
 
+    let chkMy_click = function () {
+        if ($(this).prop('checked') === true) {
+            $('#Ddl导入状态').val('true');
+        }
+
+        return true;
+    };
+
+    let btnSearch_click = function (event) {
+        repeater.dataBind(true);
+    };
+
     return {
-        ready: function () {
+        ready: function (vm) {
+            repeater.init({
+                target: $('.repeater'),
+                tmplItem: $('#tmplRow').html(),
+                newFilters: function () {
+                    let m = model.createModel({
+                        formWrapper: $('#FormConditions')
+                    });
+                    let newCondition = model.capture(m);
+                    return newCondition;
+                },
+                url: '/Order/ADianHuaKeFuList',
+                currentSortPaging: vm.currentSortPaging
+            }, true);
+
+            $('#ChkMy').click(chkMy_click);
             $('#BtnSubmit').click(btnSubmit_click);
+            $('#BtnSearch').click(btnSearch_click).click();
         }
     };
 });
