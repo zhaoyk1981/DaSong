@@ -38,46 +38,13 @@ namespace DaSongERP.Models
 
         public int? 进货数量 { get; set; }
 
-        public MetaModel<Guid> 店铺 { get; set; }
-
-        public Guid? 店铺ID
-        {
-            get
-            {
-                return this.店铺?.ID;
-            }
-            set
-            {
-                if (this.店铺 == null)
-                {
-                    this.店铺 = new MetaModel<Guid>();
-                }
-
-                this.店铺.ID = value;
-            }
-        }
+        public string 店铺 { get; set; }
 
         public string JD订单号 { get; set; }
 
         public string 客人地址 { get; set; }
 
-        public MetaModel<Guid> 淘宝账号 { get; set; }
-
-        public Guid? 淘宝账号ID
-        {
-            get
-            {
-                return this.淘宝账号?.ID;
-            }
-            set
-            {
-                if (this.淘宝账号 == null)
-                {
-                    this.淘宝账号 = new MetaModel<Guid>();
-                }
-                this.淘宝账号.ID = value;
-            }
-        }
+        public string 淘宝账号 { get; set; }
 
         public string 淘宝订单号 { get; set; }
 

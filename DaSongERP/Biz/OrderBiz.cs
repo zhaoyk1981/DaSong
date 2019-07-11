@@ -17,8 +17,6 @@ namespace DaSongERP.Biz
         public EditOrderViewModel GetCreateOrderViewModel()
         {
             var vm = new EditOrderViewModel();
-            vm.店铺DataSource = this.MetaDao.Get店铺();
-            vm.淘宝账号DataSource = this.MetaDao.Get淘宝账号();
             return vm;
         }
 
@@ -54,8 +52,6 @@ namespace DaSongERP.Biz
         public EditOrderViewModel GetEditOrderViewModel(Guid id)
         {
             var vm = new EditOrderViewModel();
-            vm.店铺DataSource = this.MetaDao.Get店铺();
-            vm.淘宝账号DataSource = this.MetaDao.Get淘宝账号();
             vm.Order = this.GetOrderBy(id);
             return vm;
         }
