@@ -6,7 +6,7 @@
 <div class="vw-edit-order vw-order-form" data-page-js="editorder">
     @Html.Partial("_Nav")
     <h2>编辑采购订单</h2>
-    <form validation-group="UpdateOrder" autocomplete="off">
+    <div class="form" validation-group="UpdateOrder" autocomplete="off">
         <fieldset>
             <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
             <div class="row">
@@ -96,5 +96,5 @@
         <div class="form-group">
             <button type="button" class="btn btn-primary" id="BtnSubmit">修改</button>
         </div>
-    </form>
+    </div>
 </div>

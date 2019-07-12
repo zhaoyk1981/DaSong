@@ -1,0 +1,43 @@
+﻿@model MetaListViewModel
+@{
+    ViewBag.Title = "售后操作维护";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head{
+    <script id="tmplRow" type="x-tmpl-mustache">
+        <tr data-id="{{ID}}">
+            <td>{{Name}}</td>
+            <td>{{SN}}</td>
+            <td>
+                <a href="/Meta/Editshouhou/{{ID}}" class="btn btn-primary btn-edit" target="_blank">编辑</a>
+                <button type="button" class="btn btn-danger btn-delete">删除</button>
+            </td>
+        </tr>
+    </script>
+}
+
+<div class="vw-meta-list vw-shouhou-list" data-page-js="shouhoucaozuolist" vm-json="@Model.Json">
+    @Html.Partial("_Nav")
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <div class="form" default-button="#BtnSearch">
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
+            <a href="/Meta/Newshouhou" target="_blank" class="btn btn-primary">新建售后操作</a>
+        </div>
+    </div>
+    <hr />
+    <div class="repeater">
+        <table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline main-table" role="grid">
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>SN</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody class="repeat-items"></tbody>
+        </table>
+    </div>
+</div>

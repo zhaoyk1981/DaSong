@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conditions\MetaCondition.cs" />
     <Compile Include="Conditions\OrderCondition.cs" />
+    <Compile Include="Conditions\UserCondition.cs" />
     <Compile Include="Models\MetaModel.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\OrderModel.cs" />
@@ -50,15 +52,21 @@
     <Compile Include="Models\UPM.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\EditMetaViewModel.cs" />
     <Compile Include="ViewModels\EditOrderViewModel.cs" />
     <Compile Include="ViewModels\EditUserViewModel.cs" />
+    <Compile Include="ViewModels\MetaListViewModel.cs" />
     <Compile Include="ViewModels\OrderListViewModel.cs" />
     <Compile Include="ViewModels\PagedListViewModel.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="ViewModels\UserListViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="ViewModels\售后ListViewModel.cs" />
+    <Compile Include="ViewModels\客服ListViewModel.cs" />
+    <Compile Include="ViewModels\拆包审单ListViewModel.cs" />
     <Compile Include="ViewModels\电话客服ListViewModel.cs" />
     <Compile Include="ViewModels\跟进ListViewModel.cs" />
+    <Compile Include="ViewModels\采购ListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YKUtils\YKUtils.csproj">

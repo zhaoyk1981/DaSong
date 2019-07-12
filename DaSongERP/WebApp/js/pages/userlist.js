@@ -1,10 +1,9 @@
-﻿define(['jquery', 'kyle_toolkit_enhance'], function ($, enhance) {
-    let btnSearch_click = function () {
-        let s = encodeURI($.trim($('#TxtSearch').val()));
-        window.location = '/User?search=' + s;
+﻿define(['jquery', 'mustache', 'kyle_toolkit_repeater', 'kyle_toolkit_enhance'], function ($, mustache, repeater, enhance) {
+    let btnSearch_click = function (event) {
+        repeater.dataBind(true);
     };
 
-    let btnRemove_click = function () {
+    let btnDelete_click = function () {
         if (!window.confirm('确实要删除吗？')) {
             return false;
         }
@@ -30,9 +29,22 @@
     };
 
     return {
-        ready: function () {
-            $('#BtnSearch').click(btnSearch_click);
-            $('.btn-remove').click(btnRemove_click);
+        ready: function (vm) {
+            repeater.init({
+                target: $('.repeater'),
+                tmplItem: $('#tmplRow').html(),
+                newFilters: function () {
+                    //let m = model.createModel();
+                    //let newCondition = model.capture(m);
+                    //return newCondition;
+                    return {};
+                },
+                url: '/User/AIndex',
+                currentSortPaging: vm.currentSortPaging
+            }, true);
+
+            $('.repeater').delegate('.btn-delete', 'click', btnDelete_click);
+            $('#BtnSearch').click(btnSearch_click).click();
         }
     };
 });

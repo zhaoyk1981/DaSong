@@ -13,17 +13,17 @@ namespace DaSongERP.WebApp.Controllers
 {
     public class OrderController : AuthorizedController
     {
-        public ActionResult Index()
-        {
-            if (!PM.Any(UPM.售后, UPM.客服, UPM.跟进, UPM.采购))
-            {
-                return Redirect("/SignIn");
-            }
+        //public ActionResult Index()
+        //{
+        //    if (!PM.Any(UPM.售后, UPM.客服, UPM.跟进, UPM.采购))
+        //    {
+        //        return Redirect("/SignIn");
+        //    }
 
-            var jd订单号 = (Request.QueryString["search"] ?? string.Empty).Trim();
-            var vm = this.OrderBiz.GetOrderListViewModel(jd订单号);
-            return View(vm);
-        }
+        //    var jd订单号 = (Request.QueryString["search"] ?? string.Empty).Trim();
+        //    var vm = this.OrderBiz.GetOrderListViewModel(jd订单号);
+        //    return View(vm);
+        //}
 
         public ActionResult New()
         {
@@ -68,9 +68,23 @@ namespace DaSongERP.WebApp.Controllers
                 return Redirect("/SignIn");
             }
 
-            var 来快递单号 = (Request.QueryString["search"] ?? string.Empty).Trim();
-            var vm = this.OrderBiz.GetChaiBaoOrderListViewModel(来快递单号);
+            var vm = this.OrderBiz.Get拆包审单ListViewModel();
+            vm.Json = SerializeObject(new
+            {
+                AllIDs = new string[] { },
+                currentSortPaging = vm.Orders.GetCurrentSortPaging()
+            });
             return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AChaiBaoList()
+        {
+            var condition = this.Request.Params.Map<OrderCondition>();
+            condition.PageIndex = int.Parse(this.Request.Params["PageIndex"]);
+
+            var list = this.OrderBiz.Get拆包审单List(condition);
+            return this.Json(list);
         }
 
         [HttpPost]
@@ -243,6 +257,31 @@ namespace DaSongERP.WebApp.Controllers
             return this.Json(list);
         }
 
+        public ActionResult DianHuaKeFu(Guid id)
+        {
+            var vm = this.OrderBiz.Get电话客服ViewModel(id);
+            return this.View(vm);
+        }
+
+        public ActionResult ADianHuaKeFu()
+        {
+            if (!PM.Any(UPM.电话))
+            {
+                return Json(new
+                {
+                    Success = false
+                });
+            }
+
+            var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
+            var rowCount = this.OrderBiz.Update电话客服(order);
+
+            return Json(new
+            {
+                Success = rowCount == 1
+            });
+        }
+
         public ActionResult ChaiBao(Guid id)
         {
             if (!PM.Any(UPM.拆包))
@@ -358,9 +397,23 @@ namespace DaSongERP.WebApp.Controllers
                 return Redirect("/SignIn");
             }
 
-            var conditions = Request.QueryString.Map<OrderModel>();
-            var vm = this.OrderBiz.GetOrderListViewModel(conditions);
+            var vm = this.OrderBiz.Get售后ListViewModel();
+            vm.Json = SerializeObject(new
+            {
+                AllIDs = new string[] { },
+                currentSortPaging = vm.Orders.GetCurrentSortPaging()
+            });
             return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AShouHouList()
+        {
+            var condition = this.Request.Params.Map<OrderCondition>();
+            condition.PageIndex = int.Parse(this.Request.Params["PageIndex"]);
+
+            var list = this.OrderBiz.Get售后List(condition);
+            return this.Json(list);
         }
 
         public ActionResult KeFuList()
@@ -370,13 +423,32 @@ namespace DaSongERP.WebApp.Controllers
                 return Redirect("/SignIn");
             }
 
-            var conditions = Request.QueryString.Map<OrderModel>();
-            var vm = this.OrderBiz.GetOrderListViewModel(conditions);
+            var vm = this.OrderBiz.Get客服ListViewModel();
+            vm.Json = SerializeObject(new
+            {
+                AllIDs = new string[] { },
+                currentSortPaging = vm.Orders.GetCurrentSortPaging()
+            });
             return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AKeFuList()
+        {
+            var condition = this.Request.Params.Map<OrderCondition>();
+            condition.PageIndex = int.Parse(this.Request.Params["PageIndex"]);
+
+            var list = this.OrderBiz.Get客服List(condition);
+            return this.Json(list);
         }
 
         public ActionResult GenJinList()
         {
+            if (!PM.Any(UPM.跟进))
+            {
+                return Redirect("/SignIn");
+            }
+
             var vm = this.OrderBiz.Get跟进ListViewModel();
             vm.Json = SerializeObject(new
             {
@@ -395,5 +467,32 @@ namespace DaSongERP.WebApp.Controllers
             var list = this.OrderBiz.Get跟进List(condition);
             return this.Json(list);
         }
+
+        public ActionResult CaiGouList()
+        {
+            if (!PM.Any(UPM.采购))
+            {
+                return Redirect("/SignIn");
+            }
+
+            var vm = this.OrderBiz.Get采购ListViewModel();
+            vm.Json = SerializeObject(new
+            {
+                AllIDs = new string[] { },
+                currentSortPaging = vm.Orders.GetCurrentSortPaging()
+            });
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult ACaiGouList()
+        {
+            var condition = this.Request.Params.Map<OrderCondition>();
+            condition.PageIndex = int.Parse(this.Request.Params["PageIndex"]);
+
+            var list = this.OrderBiz.Get采购List(condition);
+            return this.Json(list);
+        }
+
     }
 }

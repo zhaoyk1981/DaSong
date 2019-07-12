@@ -19,7 +19,7 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-    SELECT TOP(300) * FROM vw_orders
+    SELECT * FROM vw_orders
 	WHERE (@JD订单号 IS NULL OR JD订单号 LIKE '%' + @JD订单号 + '%')
 		AND (@来快递单号 IS NULL OR 来快递单号 LIKE '%' + @来快递单号 + '%')
 		AND (@售后人员ID IS NULL OR [售后人员ID] = @售后人员ID)

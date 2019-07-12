@@ -6,8 +6,9 @@
 
 <div class="vw-user-form vw-new-user" data-page-js="newuser">
     @Html.Partial("_Nav")
-    <h2>新建用户</h2>
-    <form validation-group="submit" autocomplete="off">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <div class="form" validation-group="submit" autocomplete="off">
         <fieldset>
             <div class="form-group">
                 <label for="TxtName">姓名</label>
@@ -41,5 +42,5 @@
         <div class="form-group">
             <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
         </div>
-    </form>
+    </div>
 </div>

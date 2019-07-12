@@ -100,7 +100,7 @@ namespace DaSongERP.Dal
                 {
                     if (JD订单号 == lastOrder?.JD订单号)
                     {
-                        电话备注 = lastOrder.电话情况;
+                        电话备注 = lastOrder.电话备注;
                     }
                     else
                     {
@@ -111,7 +111,7 @@ namespace DaSongERP.Dal
                 var o = new OrderModel();
                 orders.Add(o);
                 o.JD订单号 = JD订单号;
-                o.电话情况 = 电话备注;
+                o.电话备注 = 电话备注;
                 o.RowIndex = rowIndex;
                 lastOrder = o;
             }

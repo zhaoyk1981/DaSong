@@ -100,7 +100,7 @@ namespace DaSongERP.Conditions
 
         public bool? 已导入 { get; set; }
 
-        public bool? 已审单 { get; set; }
+        public bool? 已拆包 { get; set; }
 
         public bool? 已售后 { get; set; }
 

@@ -17,7 +17,7 @@
             <td>{{JD订单号}}</td>
             <td>{{淘宝订单号}}</td>
             <td>{{进货数量}}</td>
-            <td>{{来快递单号}}</td>
+            <td><a href="https://www.baidu.com/s?wd={{来快递单号}}" target="_blank">{{来快递单号}}</a></td>
             <td>{{客人地址}}</td>
             <td>
                 <a href="/Order/GenJin/{{ID}}" class="btn btn-primary btn-edit" target="_blank">跟进订单</a>
@@ -31,12 +31,12 @@
     <h2>@ViewBag.Title</h2>
     <hr />
     <div class="filters">
-        <form autocomplete="off">
+        <div class="form" autocomplete="off" default-button="#BtnSearch">
             <fieldset>
                 <div class="row">
                     <div class="form-group col-6">
                         <label>JD订单号</label>
-                        <input type="text" name="JD订单号" class="form-control" id="TxtJD订单号" autocomplete="off" />
+                        <input type="text" name="JD订单号" class="form-control" id="TxtJD订单号" autocomplete="off" on-enter />
                     </div>
                     <div class="form-group col-6">
                         <label for="Ddl跟进状态">跟进状态</label>
@@ -60,6 +60,7 @@
                         </div>
                     </div>
                     @*<div class="form-group col-6">
+                        <label>&nbsp;</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="My" data-type="bool" id="ChkMy" />
                                 <label class="form-check-label" for="ChkMy">只看我的</label>
@@ -70,7 +71,7 @@
             <div class="form-group">
                 <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
             </div>
-        </form>
+        </div>
     </div>
     <hr />
     <div class="repeater">

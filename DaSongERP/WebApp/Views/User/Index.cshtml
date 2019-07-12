@@ -4,45 +4,42 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="vw-user-list" data-page-js="userlist">
+@section Head{
+    <script id="tmplRow" type="x-tmpl-mustache">
+        <tr data-id="{{ID}}">
+            <td>{{Name}}</td>
+            <td>{{UserName}}</td>
+            <td>{{权限}}</td>
+            <td>
+                <a href="/User/Edit/{{ID}}" class="btn btn-primary btn-edit" target="_blank">编辑</a>
+                <button type="button" class="btn btn-danger btn-delete">删除</button>
+            </td>
+        </tr>
+    </script>
+}
+
+<div class="vw-user-list" data-page-js="userlist" vm-json="@Model.Json">
     @Html.Partial("_Nav")
     <h2>用户管理</h2>
-    <div class="search-panel">
-        <div class="form-group">
-            <label>关键字</label>
-            <input type="text" class="form-control" id="TxtSearch" value="@Model.Search" />
-        </div>
+    <hr />
+    <div class="form">
         <div class="form-group">
             <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
             <a href="/User/New" class="btn btn-primary" target="_blank">创建新用户</a>
         </div>
     </div>
-    <div>
-        <table class="table table-striped table-bordered table-hover dataTable">
+    <hr />
+    <div class="repeater">
+        <table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline main-table" role="grid">
             <thead>
                 <tr>
-                    <th>序号</th>
                     <th>姓名</th>
                     <th>用户名</th>
                     <th>权限</th>
                     <th>操作</th>
                 </tr>
             </thead>
-            <tbody>
-                @for (var i = 0; i < Model.Users.Count; i++)
-                {
-                    <tr data-id="@Model.Users[i].ID.Value">
-                        <td>@(i + 1)</td>
-                        <td>@DP.Txt(Model.Users[i].Name)</td>
-                        <td>@DP.Txt(Model.Users[i].UserName)</td>
-                        <td>@DP.Txt(Model.Users[i].权限)</td>
-                        <td>
-                            <a href="/User/Edit/@Model.Users[i].ID.Value" class="btn btn-primary btn-edit" target="_blank">编辑</a>
-                            <button type="button" class="btn btn-danger btn-remove">删除</button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
+            <tbody class="repeat-items"></tbody>
         </table>
     </div>
 </div>

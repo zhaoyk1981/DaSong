@@ -75,6 +75,13 @@ namespace DaSongERP.Dal
             return 导入结果;
         }
 
+        public int Update电话客服(OrderModel order)
+        {
+            var cmd = ProcCommands.sp_Update电话客服().SetParameterValues(order);
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
+
         public IList<OrderModel> Get未导入Orders()
         {
             var cmd = ProcCommands.sp_Get未导入Orders();
@@ -124,13 +131,49 @@ namespace DaSongERP.Dal
         {
             for (var i = 0; i < list.DataSource.Count; i++)
             {
-                list.DataSource[i].RowIndex = i * list.PageSize + list.PageIndex;
+                list.DataSource[i].RowIndex = list.PageIndex * list.PageSize + i;
             }
         }
 
         public PagedList<OrderModel> Get电话客服List(OrderCondition condition)
         {
             var cmd = ProcCommands.sp_电话客服List().SetParameterValues(condition);
+            var dataSet = DBHelper.ExecuteDataSet(cmd);
+            var pagedList = new PagedList<OrderModel>(condition, dataSet);
+            this.SetRowIndex(pagedList);
+            return pagedList;
+        }
+
+        public PagedList<OrderModel> Get采购List(OrderCondition condition)
+        {
+            var cmd = ProcCommands.sp_采购List().SetParameterValues(condition);
+            var dataSet = DBHelper.ExecuteDataSet(cmd);
+            var pagedList = new PagedList<OrderModel>(condition, dataSet);
+            this.SetRowIndex(pagedList);
+            return pagedList;
+        }
+
+        public PagedList<OrderModel> Get拆包审单List(OrderCondition condition)
+        {
+            var cmd = ProcCommands.sp_拆包审单List().SetParameterValues(condition);
+            var dataSet = DBHelper.ExecuteDataSet(cmd);
+            var pagedList = new PagedList<OrderModel>(condition, dataSet);
+            this.SetRowIndex(pagedList);
+            return pagedList;
+        }
+
+        public PagedList<OrderModel> Get售后List(OrderCondition condition)
+        {
+            var cmd = ProcCommands.sp_售后List().SetParameterValues(condition);
+            var dataSet = DBHelper.ExecuteDataSet(cmd);
+            var pagedList = new PagedList<OrderModel>(condition, dataSet);
+            this.SetRowIndex(pagedList);
+            return pagedList;
+        }
+
+        public PagedList<OrderModel> Get客服List(OrderCondition condition)
+        {
+            var cmd = ProcCommands.sp_客服List().SetParameterValues(condition);
             var dataSet = DBHelper.ExecuteDataSet(cmd);
             var pagedList = new PagedList<OrderModel>(condition, dataSet);
             this.SetRowIndex(pagedList);

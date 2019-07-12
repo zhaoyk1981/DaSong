@@ -29,7 +29,7 @@
         options = options || {};
         options.model = options.model || {};
         options.procNames = [];
-        options.formWrapper = $(options.formWrapper || 'form');
+        options.formWrapper = $(options.formWrapper || '.form');
         if (options.formWrapper.length == 0) {
             return options.model;
         }

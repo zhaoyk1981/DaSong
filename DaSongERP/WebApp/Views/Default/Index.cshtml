@@ -10,13 +10,10 @@
         @if (PM.Any(UPM.采购))
         {
             <div>
-                <a href="/Order/New">新建采购订单</a>
+                <a href="/Order/New">新建采购</a>
             </div>
-        }
-        @if (PM.Any(UPM.采购))
-        {
             <div>
-                <a href="/Order">修改</a>
+                <a href="/Order/CaiGouList">采购列表</a>
             </div>
         }
         @if (PM.Any(UPM.跟进))
@@ -53,6 +50,15 @@
         {
             <div>
                 <a href="/User">用户管理</a>
+            </div>
+            <div>
+                <a href="/Meta/ShenDanList">审单操作维护</a>
+            </div>
+            <div>
+                <a href="/Meta/ShouHouList">售后操作维护</a>
+            </div>
+            <div>
+                <a href="/Meta/ShouHouReasonList">售后原因维护</a>
             </div>
         }
 

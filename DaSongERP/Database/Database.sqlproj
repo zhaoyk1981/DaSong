@@ -102,5 +102,26 @@
     <Build Include="dbo\Stored Procedures\sp_跟进List.sql" />
     <Build Include="dbo\Stored Procedures\sp_GetAll快递.sql" />
     <Build Include="dbo\Stored Procedures\sp_电话客服List.sql" />
+    <Build Include="dbo\Stored Procedures\sp_售后原因List.sql" />
+    <Build Include="dbo\Stored Procedures\sp_售后操作List.sql" />
+    <Build Include="dbo\Stored Procedures\sp_售后List.sql" />
+    <Build Include="dbo\Stored Procedures\sp_审单操作List.sql" />
+    <Build Include="dbo\Stored Procedures\sp_客服List.sql" />
+    <Build Include="dbo\Stored Procedures\sp_拆包审单List.sql" />
+    <Build Include="dbo\Stored Procedures\sp_采购List.sql" />
+    <Build Include="dbo\Stored Procedures\sp_UserList.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Update售后原因.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Update售后操作.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Update审单操作.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Update电话客服.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get售后原因ByID.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get售后操作ByID.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get审单操作ByID.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Delete售后原因.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Delete售后操作.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Delete审单操作.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Create售后原因.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Create售后操作.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Create审单操作.sql" />
   </ItemGroup>
 </Project>

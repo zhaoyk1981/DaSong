@@ -111,9 +111,14 @@
     <Content Include="js\KyleToolkit\settings.js" />
     <Content Include="js\KyleToolkit\validation.js" />
     <Content Include="js\KyleToolkit\validation_result_handler.js" />
+    <Content Include="js\pages\caigoulist.js" />
     <Content Include="js\pages\chaibaolist.js" />
     <Content Include="js\pages\chaibaoorder.js" />
+    <Content Include="js\pages\dianhuakefuorder.js" />
     <Content Include="js\pages\editorder.js" />
+    <Content Include="js\pages\editshendan.js" />
+    <Content Include="js\pages\editshouhou.js" />
+    <Content Include="js\pages\editshouhoureason.js" />
     <Content Include="js\pages\edituser.js" />
     <Content Include="js\pages\genjinlist.js" />
     <Content Include="js\pages\genjinorder.js" />
@@ -123,10 +128,16 @@
     <Content Include="js\pages\layout.js" />
     <Content Include="js\pages\main.js" />
     <Content Include="js\pages\neworder.js" />
+    <Content Include="js\pages\newshendan.js" />
+    <Content Include="js\pages\newshouhou.js" />
+    <Content Include="js\pages\newshouhoureason.js" />
     <Content Include="js\pages\newuser.js" />
     <Content Include="js\pages\orderlist.js" />
+    <Content Include="js\pages\shendanlist.js" />
+    <Content Include="js\pages\shouhoucaozuolist.js" />
     <Content Include="js\pages\shouhoulist.js" />
     <Content Include="js\pages\shouhouorder.js" />
+    <Content Include="js\pages\shouhoureasonlist.js" />
     <Content Include="js\pages\signin.js" />
     <Content Include="js\pages\userlist.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -341,6 +352,7 @@
     <Compile Include="Controllers\AuthorizedController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\MetaController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\SignOutController.cs" />
@@ -376,6 +388,17 @@
     <Content Include="Views\Order\ShouHouList.cshtml" />
     <Content Include="Views\Order\KeFuList.cshtml" />
     <Content Include="Views\Order\GenJinList.cshtml" />
+    <Content Include="Views\Order\DianHuaKeFu.cshtml" />
+    <Content Include="Views\Order\CaiGouList.cshtml" />
+    <Content Include="Views\Meta\ShenDanList.cshtml" />
+    <Content Include="Views\Meta\NewShenDan.cshtml" />
+    <Content Include="Views\Meta\EditShenDan.cshtml" />
+    <Content Include="Views\Meta\ShouHouList.cshtml" />
+    <Content Include="Views\Meta\NewShouHou.cshtml" />
+    <Content Include="Views\Meta\EditShouHou.cshtml" />
+    <Content Include="Views\Meta\ShouHouReasonList.cshtml" />
+    <Content Include="Views\Meta\NewShouHouReason.cshtml" />
+    <Content Include="Views\Meta\EditShouHouReason.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

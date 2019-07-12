@@ -1,14 +1,23 @@
-﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, enhance, model, validation) {
-    let btnSearch_click = function () {
-        let m = model.createModel();
-        let p = model.captureParams(m);
-        let url = '/Order/KeFuList?Search=true&' + p;
-        window.location = url;
+﻿define(['jquery', 'mustache', 'kyle_toolkit_repeater', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, mustache, repeater, model, validation) {
+    let btnSearch_click = function (event) {
+        repeater.dataBind(true);
     };
 
     return {
-        ready: function () {
-            $('#BtnSearch').click(btnSearch_click);
+        ready: function (vm) {
+            repeater.init({
+                target: $('.repeater'),
+                tmplItem: $('#tmplRow').html(),
+                newFilters: function () {
+                    let m = model.createModel();
+                    let newCondition = model.capture(m);
+                    return newCondition;
+                },
+                url: '/Order/AKeFuList',
+                currentSortPaging: vm.currentSortPaging
+            }, true);
+
+            $('#BtnSearch').click(btnSearch_click).click();
         }
     };
 });

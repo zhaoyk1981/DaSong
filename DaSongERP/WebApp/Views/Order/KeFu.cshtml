@@ -7,7 +7,7 @@
 <div class="vw-kefu-order vw-order-form" data-page-js="kefuorder">
     @Html.Partial("_Nav")
     <h2>客服</h2>
-    <form>
+    <div class="form">
         <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
         <fieldset>
             <legend>采购</legend>
@@ -52,17 +52,18 @@
             </div>
             <div class="form-group">
                 <label for="Txt客人地址">客人地址：</label>
-                <input type="text" class="form-control" name="客人地址" id="Txt客人地址" value="@DP.Txt(Model.Order.客人地址)" maxlength="150" />
+                <input type="text" class="form-control" name="客人地址" id="Txt客人地址" value="@(Model.Order.客人地址)" maxlength="150" />
+                <span class="validator" id="vd客人地址" data-required="" data-validate-target="#Txt客人地址"><span class="error-message text-danger">此项必填</span></span>
             </div>
         </fieldset>
-        @if (!Model.Order.已跟进.GetValueOrDefault())
+        @if (Model.Order.已跟进.GetValueOrDefault())
         {
             <fieldset>
                 <legend>跟进订单</legend>
                 <div class="row">
                     <div class="form-group col-6">
                         <label class="static-label">来-快递单号：</label>
-                        <span>@DP.Txt(Model.Order.来快递单号)</span>
+                        <span>@Html.Raw(DP.Baidu(Model.Order.来快递单号))</span>
                     </div>
                     <div class="form-group col-6">
                         <label class="static-label">发货时间：</label>
@@ -75,7 +76,7 @@
                 </div>
             </fieldset>
         }
-        @if (!Model.Order.已导入.GetValueOrDefault())
+        @if (Model.Order.已导入.GetValueOrDefault())
         {
             <fieldset>
                 <legend>电话客服导入</legend>
@@ -90,12 +91,12 @@
                     </div>
                     <div class="form-group col-12">
                         <label class="static-label">电话情况：</label>
-                        <div>@DP.Txt(Model.Order.电话情况)</div>
+                        <div>@DP.Txt(Model.Order.电话备注)</div>
                     </div>
                 </div>
             </fieldset>
         }
-        @if (!Model.Order.已审单.GetValueOrDefault())
+        @if (Model.Order.已拆包.GetValueOrDefault())
         {
             <fieldset>
                 <legend>拆包审单</legend>
@@ -123,7 +124,7 @@
                 </div>
             </fieldset>
         }
-        @if (!Model.Order.已售后.GetValueOrDefault())
+        @if (Model.Order.已售后.GetValueOrDefault())
         {
             <fieldset>
                 <legend>售后</legend>
@@ -162,5 +163,5 @@
         <div class="form-group">
             <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
         </div>
-    </form>
+    </div>
 </div>

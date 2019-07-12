@@ -1,12 +1,12 @@
-﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, enhance, model, validation) {
+﻿define(['jquery', 'mustache', 'kyle_toolkit_repeater', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, mustache, repeater, enhance, model, validation) {
     let btnSearch_click = function () {
-        let s = encodeURI($.trim($('#TxtSearch').val()));
-        window.location = '/Order/ChaiBaoList?search=' + s;
+        repeater.dataBind(true);
     };
 
     let btnChaiBao_click = function () {
-        let 来快递单号 = $.trim($('#TxtSearch').val());
+        let 来快递单号 = $.trim($('#Txt来快递单号').val());
         if (来快递单号 === '') {
+            btnSearch_click();
             return false;
         }
 
@@ -29,9 +29,21 @@
     };
 
     return {
-        ready: function () {
-            $('#BtnSearch').click(btnSearch_click);
+        ready: function (vm) {
+            repeater.init({
+                target: $('.repeater'),
+                tmplItem: $('#tmplRow').html(),
+                newFilters: function () {
+                    let m = model.createModel();
+                    let newCondition = model.capture(m);
+                    return newCondition;
+                },
+                url: '/Order/AChaiBaoList',
+                currentSortPaging: vm.currentSortPaging
+            }, true);
+
             $('#BtnChaiBao').click(btnChaiBao_click);
+            $('#BtnSearch').click(btnSearch_click).click();
             $('#TxtSearch').focus();
         }
     };

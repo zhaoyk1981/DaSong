@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YK.Model;
 
 namespace DaSongERP.ViewModels
 {
-    public class UserListViewModel : ViewModel
+    public class UserListViewModel : PagedListViewModel
     {
-        public string Search { get; set; }
-        public IList<UserModel> Users { get; set; }
+        public PagedList<UserModel> Users { get; set; }
     }
 }

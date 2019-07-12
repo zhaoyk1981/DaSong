@@ -160,6 +160,17 @@ namespace DaSongERP.Dal
         }
         #endregion sp_Update电话备注
 
+        #region sp_Update电话客服
+        public static SqlCommand sp_Update电话客服()
+        {
+            var cmd = new SqlCommand("sp_Update电话客服") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@电话客服ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@电话备注", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Update电话客服
+
         #region sp_Update拆包
         public static SqlCommand sp_Update拆包()
         {
@@ -318,5 +329,233 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_电话客服List
+
+        #region sp_采购List
+        public static SqlCommand sp_采购List()
+        {
+            var cmd = new SqlCommand("sp_采购List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@采购人ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_采购List
+
+        #region sp_拆包审单List
+        public static SqlCommand sp_拆包审单List()
+        {
+            var cmd = new SqlCommand("sp_拆包审单List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@拆包人ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@来快递单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已拆包", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_拆包审单List
+
+        #region sp_售后List
+        public static SqlCommand sp_售后List()
+        {
+            var cmd = new SqlCommand("sp_售后List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后人员ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已售后", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后完结", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_售后List
+
+        #region sp_客服List
+        public static SqlCommand sp_客服List()
+        {
+            var cmd = new SqlCommand("sp_客服List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_客服List
+
+        #region sp_审单操作List
+        public static SqlCommand sp_审单操作List()
+        {
+            var cmd = new SqlCommand("sp_审单操作List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_审单操作List
+
+        #region sp_Create审单操作
+        public static SqlCommand sp_Create审单操作()
+        {
+            var cmd = new SqlCommand("sp_Create审单操作") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SN", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Create审单操作
+
+        #region sp_Update审单操作
+        public static SqlCommand sp_Update审单操作()
+        {
+            var cmd = new SqlCommand("sp_Update审单操作") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SN", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Update审单操作
+
+        #region sp_Delete审单操作
+        public static SqlCommand sp_Delete审单操作()
+        {
+            var cmd = new SqlCommand("sp_Delete审单操作") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Delete审单操作
+
+        #region sp_Get审单操作ByID
+        public static SqlCommand sp_Get审单操作ByID()
+        {
+            var cmd = new SqlCommand("sp_Get审单操作ByID") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Get审单操作ByID
+
+        #region sp_售后操作List
+        public static SqlCommand sp_售后操作List()
+        {
+            var cmd = new SqlCommand("sp_售后操作List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_售后操作List
+
+        #region sp_Create售后操作
+        public static SqlCommand sp_Create售后操作()
+        {
+            var cmd = new SqlCommand("sp_Create售后操作") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SN", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Create售后操作
+
+        #region sp_Update售后操作
+        public static SqlCommand sp_Update售后操作()
+        {
+            var cmd = new SqlCommand("sp_Update售后操作") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SN", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Update售后操作
+
+        #region sp_Delete售后操作
+        public static SqlCommand sp_Delete售后操作()
+        {
+            var cmd = new SqlCommand("sp_Delete售后操作") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Delete售后操作
+
+        #region sp_Get售后操作ByID
+        public static SqlCommand sp_Get售后操作ByID()
+        {
+            var cmd = new SqlCommand("sp_Get售后操作ByID") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Get售后操作ByID
+
+
+        #region sp_售后原因List
+        public static SqlCommand sp_售后原因List()
+        {
+            var cmd = new SqlCommand("sp_售后原因List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_售后原因List
+
+        #region sp_Create售后原因
+        public static SqlCommand sp_Create售后原因()
+        {
+            var cmd = new SqlCommand("sp_Create售后原因") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SN", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Create售后原因
+
+        #region sp_Update售后原因
+        public static SqlCommand sp_Update售后原因()
+        {
+            var cmd = new SqlCommand("sp_Update售后原因") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SN", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Update售后原因
+
+        #region sp_Delete售后原因
+        public static SqlCommand sp_Delete售后原因()
+        {
+            var cmd = new SqlCommand("sp_Delete售后原因") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Delete售后原因
+
+        #region sp_Get售后原因ByID
+        public static SqlCommand sp_Get售后原因ByID()
+        {
+            var cmd = new SqlCommand("sp_Get售后原因ByID") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Get售后原因ByID
+
+        #region sp_UserList
+        public static SqlCommand sp_UserList()
+        {
+            var cmd = new SqlCommand("sp_UserList") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_UserList
     }
 }

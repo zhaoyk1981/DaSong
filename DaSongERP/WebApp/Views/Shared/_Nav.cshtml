@@ -8,25 +8,22 @@
             @if (PM.Any(UPM.采购))
             {
                 <li class="nav-item">
-                    <a class="nav-link" href="/Order/New">新建采购订单</a>
+                    <a class="nav-link" href="/Order/New">新建采购</a>
                 </li>
-            }
-            @if (PM.Any(UPM.采购))
-            {
                 <li class="nav-item">
-                    <a class="nav-link" href="/Order">修改</a>
+                    <a class="nav-link" href="/Order/CaiGouList">采购列表</a>
                 </li>
             }
             @if (PM.Any(UPM.跟进))
             {
                 <li class="nav-item">
-                    <a class="nav-link" href="/Order/GenJinList">跟进</a>
+                    <a class="nav-link" href="/Order/GenJinList">跟进订单</a>
                 </li>
             }
             @if (PM.Any(UPM.电话))
             {
                 <li class="nav-item">
-                    <a class="nav-link" href="/Order/Import">电话客服订单导入</a>
+                    <a class="nav-link" href="/Order/Import">电话客服</a>
                 </li>
             }
             @if (PM.Any(UPM.拆包))
@@ -49,8 +46,17 @@
             }
             @if (PM.Any(UPM.管理))
             {
-                <li class="nav-item">
-                    <a class="nav-link" href="/User">用户管理</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        管理
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/User">用户</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Meta/ShenDanList">审单操作</a>
+                        <a class="dropdown-item" href="/Meta/ShouHouList">售后操作</a>
+                        <a class="dropdown-item" href="/Meta/ShouHouReasonList">售后原因</a>
+                    </div>
                 </li>
             }
         </ul>

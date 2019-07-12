@@ -18,7 +18,7 @@
     @RenderSection("Head", false)
     <script data-main="/js/pages/main.js?buildver=@buildVer" src="~/scripts/require.js?buildver=@buildVer"></script>
 </head>
-<body>
+<body data-page-js="layout">
     <div class="container-fluid">
         @RenderBody()
     </div>

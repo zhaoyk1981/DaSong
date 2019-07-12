@@ -7,7 +7,7 @@
 <div class="vw-shouhou-order vw-order-form" data-page-js="shouhouorder">
     @Html.Partial("_Nav")
     <h2>售后</h2>
-    <form>
+    <div class="form">
         <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
         <fieldset>
             <legend>采购</legend>
@@ -68,14 +68,14 @@
 
             </div>
         </fieldset>
-        @if (!Model.Order.已跟进.GetValueOrDefault())
+        @if (Model.Order.已跟进.GetValueOrDefault())
         {
             <fieldset>
                 <legend>跟进订单</legend>
                 <div class="row">
                     <div class="form-group col-6">
                         <label class="static-label">来-快递单号：</label>
-                        <span>@DP.Txt(Model.Order.来快递单号)</span>
+                        <span>@Html.Raw(DP.Baidu(Model.Order.来快递单号))</span>
                     </div>
                     <div class="form-group col-6">
                         <label class="static-label">发货时间：</label>
@@ -88,7 +88,7 @@
                 </div>
             </fieldset>
         }
-        @if (!Model.Order.已导入.GetValueOrDefault())
+        @if (Model.Order.已导入.GetValueOrDefault())
         {
             <fieldset>
                 <legend>电话客服导入</legend>
@@ -103,12 +103,12 @@
                     </div>
                     <div class="form-group col-12">
                         <label class="static-label">电话情况：</label>
-                        <div>@DP.Txt(Model.Order.电话情况)</div>
+                        <div>@DP.Txt(Model.Order.电话备注)</div>
                     </div>
                 </div>
             </fieldset>
         }
-        @if (!Model.Order.已审单.GetValueOrDefault())
+        @if (Model.Order.已拆包.GetValueOrDefault())
         {
             <fieldset>
                 <legend>拆包审单</legend>
@@ -186,5 +186,5 @@
         <div class="form-group">
             <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
         </div>
-    </form>
+    </div>
 </div>

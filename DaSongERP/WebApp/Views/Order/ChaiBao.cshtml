@@ -1,13 +1,13 @@
 ﻿@model EditOrderViewModel
 @{
-    ViewBag.Title = "ChaiBao";
+    ViewBag.Title = "拆包审单";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="vw-chaibao-order vw-order-form" data-page-js="chaibaoorder">
     @Html.Partial("_Nav")
-    <h2>拆包审单</h2>
-    <form>
+    <h2>@ViewBag.Title</h2>
+    <div class="form">
         <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
         <fieldset>
             <legend>采购</legend>
@@ -55,73 +55,82 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset>
-            <legend>跟进</legend>
-            <div class="row">
-                <div class="form-group col-6">
-                    <label class="static-label">来-快递：</label>
-                    <span>@DP.Txt(Model.Order.来快递)</span>
+        @if (Model.Order.已跟进.GetValueOrDefault())
+        {
+            <fieldset>
+                <legend>跟进</legend>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label class="static-label">来-快递：</label>
+                        <span>@DP.Txt(Model.Order.来快递)</span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="static-label">来-快递单号：</label>
+                        <span>@Html.Raw(DP.Baidu(Model.Order.来快递单号))</span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="static-label">发货时间：</label>
+                        <span>@DP.Txt(Model.Order.发货时间)</span>
+                    </div>
+                    <div class="form-group col-12">
+                        <label class="static-label">发货备注：</label>
+                        <div>@DP.Txt(Model.Order.发货备注)</div>
+                    </div>
                 </div>
-                <div class="form-group col-6">
-                    <label class="static-label">来-快递单号：</label>
-                    <span>@DP.Txt(Model.Order.来快递单号)</span>
+            </fieldset>
+        }
+        @if (Model.Order.已导入.GetValueOrDefault())
+        {
+            <fieldset>
+                <legend>电话客服导入</legend>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label class="static-label">导入时间：</label>
+                        <span>@DP.Txt(Model.Order.导入时间)</span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="static-label">电话客服：</label>
+                        <span>@DP.Txt(Model.Order.电话客服)</span>
+                    </div>
+                    <div class="form-group col-12">
+                        <label class="static-label">电话情况：</label>
+                        <span>@DP.Txt(Model.Order.电话备注)</span>
+                    </div>
                 </div>
-                <div class="form-group col-6">
-                    <label class="static-label">发货时间：</label>
-                    <span>@DP.Txt(Model.Order.发货时间)</span>
+            </fieldset>
+        }
+        @if (Model.Order.已售后.GetValueOrDefault())
+        {
+            <fieldset>
+                <legend>售后</legend>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label class="static-label">售后操作：</label>
+                        <span>@DP.Txt(Model.Order.售后操作)</span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="static-label">售后原因：</label>
+                        <span>@DP.Txt(Model.Order.售后原因)</span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="static-label">售后人：</label>
+                        <span>@DP.Txt(Model.Order.售后人员)</span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="static-label">售后时间：</label>
+                        <span>@DP.Txt(Model.Order.售后时间)</span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="static-label">客人退回单号：</label>
+                        <span>@DP.Txt(Model.Order.客人退回单号)</span>
+                    </div>
+                    <div class="form-group col-12">
+                        <label class="static-label">售后备注：</label>
+                        <div>@DP.Txt(Model.Order.售后备注)</div>
+                    </div>
                 </div>
-                <div class="form-group col-12">
-                    <label class="static-label">发货备注：</label>
-                    <div>@DP.Txt(Model.Order.发货备注)</div>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>电话客服导入</legend>
-            <div class="row">
-                <div class="form-group col-6">
-                    <label class="static-label">导入时间：</label>
-                    <span>@DP.Txt(Model.Order.导入时间)</span>
-                </div>
-                <div class="form-group col-6">
-                    <label class="static-label">电话客服：</label>
-                    <span>@DP.Txt(Model.Order.电话客服)</span>
-                </div>
-                <div class="form-group col-12">
-                    <label class="static-label">电话情况：</label>
-                    <span>@DP.Txt(Model.Order.电话情况)</span>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>售后</legend>
-            <div class="row">
-                <div class="form-group col-6">
-                    <label class="static-label">售后操作：</label>
-                    <span>@DP.Txt(Model.Order.售后操作)</span>
-                </div>
-                <div class="form-group col-6">
-                    <label class="static-label">售后原因：</label>
-                    <span>@DP.Txt(Model.Order.售后原因)</span>
-                </div>
-                <div class="form-group col-6">
-                    <label class="static-label">售后人：</label>
-                    <span>@DP.Txt(Model.Order.售后人员)</span>
-                </div>
-                <div class="form-group col-6">
-                    <label class="static-label">售后时间：</label>
-                    <span>@DP.Txt(Model.Order.售后时间)</span>
-                </div>
-                <div class="form-group col-6">
-                    <label class="static-label">客人退回单号：</label>
-                    <span>@DP.Txt(Model.Order.客人退回单号)</span>
-                </div>
-                <div class="form-group col-12">
-                    <label class="static-label">售后备注：</label>
-                    <div>@DP.Txt(Model.Order.售后备注)</div>
-                </div>
-            </div>
-        </fieldset>
+            </fieldset>
+        }
         <fieldset>
             <legend>拆包审单</legend>
             <div class="row">
@@ -132,7 +141,7 @@
                 <div class="form-group col-6">
                     <label for="Ddl审单操作">审单操作：</label>
                     <select class="form-control" id="Ddl审单操作" name="审单操作ID">
-                        @foreach (MetaModel m in Model.审单操作DataSource)
+                        @foreach (var m in Model.审单操作DataSource)
                         {
                             <option value="@m.ID.Value" @(Model.Order.审单操作ID.GetValueOrDefault() == m.ID.Value ? "selected" : "")>@m.Name</option>
                         }
@@ -152,5 +161,5 @@
         <div class="form-group">
             <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
         </div>
-    </form>
+    </div>
 </div>

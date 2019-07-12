@@ -5,3 +5,10 @@
     CONSTRAINT [PK_售后操作] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_售后操作_Name]
+    ON [dbo].[售后操作]([Name] ASC);
+

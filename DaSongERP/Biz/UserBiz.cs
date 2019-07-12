@@ -1,4 +1,5 @@
-﻿using DaSongERP.Dal;
+﻿using DaSongERP.Conditions;
+using DaSongERP.Dal;
 using DaSongERP.Models;
 using DaSongERP.ViewModels;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YK.Model;
 
 namespace DaSongERP.Biz
 {
@@ -42,14 +44,6 @@ namespace DaSongERP.Biz
         public SignInViewModel GetSignInViewModel()
         {
             return new SignInViewModel();
-        }
-
-        public UserListViewModel GetUserListViewModel(string search = null)
-        {
-            var vm = new UserListViewModel();
-            vm.Users = this.GetUserList(search, true);
-            vm.Search = (search ?? string.Empty).Trim();
-            return vm;
         }
 
         public IList<UserModel> GetUserList(string search, bool fillPermissionsText = false)
@@ -129,6 +123,26 @@ namespace DaSongERP.Biz
             vm.PermissionDataSource = this.GetAllPermissions();
             vm.User = GetUserBy(id);
             //SetPermissionDisplayText(vm.PermissionDataSource, vm.User);
+            return vm;
+        }
+
+        public PagedList<UserModel> GetUserList(UserCondition condition)
+        {
+            var list = this.UserDao.GetUserList(condition);
+            var plist = this.GetAllPermissions();
+            foreach (var u in list.DataSource)
+            {
+                this.SetPermissionDisplayText(plist, u);
+            }
+
+            return list;
+        }
+
+        public UserListViewModel GetUserListViewModel()
+        {
+            var vm = new UserListViewModel();
+            vm.Users = new PagedList<UserModel>();
+            vm.Users.PageSize = 300;
             return vm;
         }
     }

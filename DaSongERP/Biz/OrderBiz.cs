@@ -233,5 +233,99 @@ namespace DaSongERP.Biz
             var list = this.OrderDao.Get电话客服List(condition);
             return list;
         }
+
+        public EditOrderViewModel Get电话客服ViewModel(Guid id)
+        {
+            var vm = new EditOrderViewModel();
+            vm.Order = this.GetOrderBy(id);
+            return vm;
+        }
+
+        public int Update电话客服(OrderModel order)
+        {
+            order.电话客服ID = this.UserID;
+            var rowCount = this.OrderDao.Update电话客服(order);
+            return rowCount;
+        }
+
+        public 采购ListViewModel Get采购ListViewModel()
+        {
+            var vm = new 采购ListViewModel();
+            vm.Orders = new PagedList<OrderModel>();
+            vm.Orders.PageSize = 300;
+            return vm;
+        }
+
+        public PagedList<OrderModel> Get采购List(OrderCondition condition)
+        {
+            condition.Trim();
+            if (condition.My.GetValueOrDefault())
+            {
+                condition.采购人ID = this.UserID;
+            }
+
+            var list = this.OrderDao.Get采购List(condition);
+            return list;
+        }
+
+        public 拆包审单ListViewModel Get拆包审单ListViewModel()
+        {
+            var vm = new 拆包审单ListViewModel();
+            vm.Orders = new PagedList<OrderModel>();
+            vm.Orders.PageSize = 300;
+            return vm;
+        }
+
+        public PagedList<OrderModel> Get拆包审单List(OrderCondition condition)
+        {
+            condition.Trim();
+            if (condition.My.GetValueOrDefault())
+            {
+                condition.拆包人ID = this.UserID;
+            }
+
+            var list = this.OrderDao.Get拆包审单List(condition);
+            return list;
+        }
+
+        public 售后ListViewModel Get售后ListViewModel()
+        {
+            var vm = new 售后ListViewModel();
+            vm.Orders = new PagedList<OrderModel>();
+            vm.Orders.PageSize = 300;
+            return vm;
+        }
+
+        public PagedList<OrderModel> Get售后List(OrderCondition condition)
+        {
+            condition.Trim();
+            if (condition.My.GetValueOrDefault())
+            {
+                condition.售后人员ID = this.UserID;
+            }
+
+            var list = this.OrderDao.Get售后List(condition);
+            return list;
+        }
+
+        public 客服ListViewModel Get客服ListViewModel()
+        {
+            var vm = new 客服ListViewModel();
+            vm.Orders = new PagedList<OrderModel>();
+            vm.Orders.PageSize = 300;
+            return vm;
+        }
+
+        public PagedList<OrderModel> Get客服List(OrderCondition condition)
+        {
+            condition.Trim();
+            if (condition.My.GetValueOrDefault())
+            {
+                condition.客服ID = this.UserID;
+            }
+
+            var list = this.OrderDao.Get客服List(condition);
+            return list;
+        }
     }
 }

@@ -148,7 +148,7 @@ namespace DaSongERP.Models
                 this.电话客服.ID = value;
             }
         }
-        public string 电话情况 { get; set; }
+        public string 电话备注 { get; set; }
 
         /// <summary>
         /// 0 没找到， 1 无需导入， 2 已更新
@@ -291,7 +291,7 @@ namespace DaSongERP.Models
 
         public bool? 已导入 { get; set; }
 
-        public bool? 已审单 { get; set; }
+        public bool? 已拆包 { get; set; }
 
         public bool? 已售后 { get; set; }
 

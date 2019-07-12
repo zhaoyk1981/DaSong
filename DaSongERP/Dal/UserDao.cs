@@ -1,10 +1,12 @@
-﻿using DaSongERP.Models;
+﻿using DaSongERP.Conditions;
+using DaSongERP.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YK;
+using YK.Model;
 
 namespace DaSongERP.Dal
 {
@@ -73,6 +75,14 @@ namespace DaSongERP.Dal
             var cmd = ProcCommands.sp_UpdateUser().SetParameterValues(user);
             var rowCount = (int)DBHelper.ExecuteScalar(cmd);
             return rowCount;
+        }
+
+        public PagedList<UserModel> GetUserList(UserCondition condition)
+        {
+            var cmd = ProcCommands.sp_UserList().SetParameterValues(condition);
+            var dataSet = DBHelper.ExecuteDataSet(cmd);
+            var pagedList = new PagedList<UserModel>(condition, dataSet);
+            return pagedList;
         }
     }
 }

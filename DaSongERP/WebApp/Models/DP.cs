@@ -42,5 +42,15 @@ namespace DaSongERP.WebApp.Models
         {
             return string.IsNullOrEmpty(u?.Name) ? dflt : u.Name.Trim();
         }
+
+        public static string Baidu(string str, string dflt = "无")
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return dflt;
+            }
+
+            return $"<a href=\"https://www.baidu.com/s?wd={str}\" target=\"_blank\">{str}</a>";
+        }
     }
 }

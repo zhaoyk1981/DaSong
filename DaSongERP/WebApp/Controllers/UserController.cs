@@ -1,10 +1,12 @@
-﻿using DaSongERP.Models;
+﻿using DaSongERP.Conditions;
+using DaSongERP.Models;
 using DaSongERP.WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using YK;
 
 namespace DaSongERP.WebApp.Controllers
 {
@@ -18,8 +20,23 @@ namespace DaSongERP.WebApp.Controllers
                 return Redirect("/SignIn");
             }
 
-            var vm = this.UserBiz.GetUserListViewModel(this.Request.QueryString["search"]);
+            var vm = this.UserBiz.GetUserListViewModel();
+            vm.Json = SerializeObject(new
+            {
+                AllIDs = new string[] { },
+                currentSortPaging = vm.Users.GetCurrentSortPaging()
+            });
             return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AIndex()
+        {
+            var condition = this.Request.Params.Map<UserCondition>();
+            condition.PageIndex = int.Parse(this.Request.Params["PageIndex"]);
+
+            var list = this.UserBiz.GetUserList(condition);
+            return this.Json(list);
         }
 
         [HttpPost]

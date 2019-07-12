@@ -5,3 +5,10 @@
     CONSTRAINT [PK_售后原因] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_售后原因_Name]
+    ON [dbo].[售后原因]([Name] ASC);
+

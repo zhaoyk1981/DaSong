@@ -7,7 +7,7 @@
 <div class="vw-genjin-order vw-order-form" data-page-js="genjinorder">
     @Html.Partial("_Nav")
     <h2>订单跟进</h2>
-    <form validation-group="default" autocomplete="off">
+    <div class="form" validation-group="default" autocomplete="off">
         <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
         <fieldset>
             <legend>采购</legend>
@@ -81,7 +81,7 @@
         <div class="form-group">
             <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
         </div>
-    </form>
+    </div>
 </div>
 
 
