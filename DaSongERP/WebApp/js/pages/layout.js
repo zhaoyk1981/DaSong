@@ -1,18 +1,30 @@
 ﻿define(['jquery', 'bootstrap'], function ($, bs) {
     return {
         ready: function () {
-            //$('.menu-static').on('click', function () {
-            //    $(this).closest('.menu-v').toggleClass('exp');
-            //});
+            $.ajax({
+                url: '/Order/AGetOrderCount',
+                type: 'POST',
+                dataType: 'JSON',
+                data: {},
+                success: function (data) {
+                    $('.genjin-number,.import-number,.chaibao-number,.shouhou-number').empty();
+                    if (data.未跟进 > 0) {
+                        $('.genjin-number').text(data.未跟进);
+                    }
 
-            //$('.collapse-ctrl').on('click', function () {
-            //    $('.body').toggleClass('collapsed');
-            //});
+                    if (data.未导入 > 0) {
+                        $('.import-number').text(data.未导入);
+                    }
 
-            //$('.menu-active').each(function () {
-            //    let menu = $("[menu-id='" + $(this).val() + "']");
-            //    menu.addClass('active').closest('.menu-item').addClass('exp');
-            //});
+                    if (data.未拆包 > 0) {
+                        $('.chaibao-number').text(data.未拆包);
+                    }
+
+                    if (data.未完结售后 > 0) {
+                        $('.shouhou-number').text(data.未完结售后);
+                    }
+                }
+            });
         }
     };
 });

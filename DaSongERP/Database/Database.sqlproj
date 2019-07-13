@@ -123,5 +123,6 @@
     <Build Include="dbo\Stored Procedures\sp_Create售后原因.sql" />
     <Build Include="dbo\Stored Procedures\sp_Create售后操作.sql" />
     <Build Include="dbo\Stored Procedures\sp_Create审单操作.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get待处理订单数量.sql" />
   </ItemGroup>
 </Project>

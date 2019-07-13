@@ -494,5 +494,11 @@ namespace DaSongERP.WebApp.Controllers
             return this.Json(list);
         }
 
+        [HttpPost]
+        public ActionResult AGetOrderCount()
+        {
+            var m = this.OrderBiz.Get待处理订单数量();
+            return this.Json(m);
+        }
     }
 }

@@ -7048,6 +7048,33 @@ label.file {
 label.static-label {
   font-weight: bold; }
 
+.nav-item {
+  margin-right: 20px; }
+
+.notify-number {
+  position: relative; }
+  .notify-number .number {
+    position: absolute;
+    height: 20px;
+    line-height: 20px;
+    background-color: red;
+    color: white;
+    top: -3px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 13px;
+    min-width: 20px;
+    padding: 0 3px 0 2px; }
+    .notify-number .number.word4 {
+      left: 66px; }
+    .notify-number .number.word6 {
+      left: 99px; }
+    .notify-number .number:empty {
+      display: none; }
+
+[data-high-light='true'] {
+  background-color: #ffc107 !important; }
+
 /*#endregion base END */
 /*#region components START */
 /*#region popup*/
@@ -7241,9 +7268,6 @@ div.hr {
 .repeater > table > thead > tr > th {
   cursor: default;
   background-color: #f5f7f9; }
-
-.repeater > table > tbody > tr[data-high-light='true'] {
-  background-color: lightyellow; }
 
 .repeater > table > tbody > tr.focus-item {
   background-color: lightyellow; }

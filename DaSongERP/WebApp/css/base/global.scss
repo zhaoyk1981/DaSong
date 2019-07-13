@@ -39,3 +39,41 @@ label.file {
 label.static-label {
     font-weight: bold;
 }
+
+.nav-item {
+    margin-right: 20px;
+}
+
+.notify-number {
+    position: relative;
+
+    .number {
+        &.word4 {
+            left: 66px;
+        }
+
+        &.word6 {
+            left: 99px;
+        }
+
+        &:empty {
+            display: none;
+        }
+
+        position: absolute;
+        height: 20px;
+        line-height: 20px;
+        background-color: red;
+        color: white;
+        top: -3px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 13px;
+        min-width: 20px;
+        padding: 0 3px 0 2px;
+    }
+}
+
+[data-high-light='true'] {
+    background-color: #ffc107!important;
+}

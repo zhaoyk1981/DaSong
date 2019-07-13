@@ -46,6 +46,7 @@
     <Compile Include="Conditions\UserCondition.cs" />
     <Compile Include="Models\MetaModel.cs" />
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\OrderCountModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\PermissionModel.cs" />
     <Compile Include="Models\StockModel.cs" />

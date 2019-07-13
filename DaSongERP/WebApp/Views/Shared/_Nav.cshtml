@@ -8,34 +8,38 @@
             @if (PM.Any(UPM.采购))
             {
                 <li class="nav-item">
-                    <a class="nav-link" href="/Order/New">新建采购</a>
+                    <a class="nav-link" href="/Order/New">新建采购订单</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Order/CaiGouList">采购列表</a>
+                    <a class="nav-link" href="/Order/CaiGouList">采购订单列表</a>
                 </li>
             }
             @if (PM.Any(UPM.跟进))
             {
-                <li class="nav-item">
-                    <a class="nav-link" href="/Order/GenJinList">跟进订单</a>
+                <li class="nav-item notify-number">
+                    <a class="nav-link" href="/Order/GenJinList">快递跟进</a>
+                    <div class="number word4 rounded-circle genjin-number"></div>
                 </li>
             }
             @if (PM.Any(UPM.电话))
             {
-                <li class="nav-item">
+                <li class="nav-item notify-number">
                     <a class="nav-link" href="/Order/Import">电话客服</a>
+                    <div class="number word4 rounded-circle import-number"></div>
                 </li>
             }
             @if (PM.Any(UPM.拆包))
             {
-                <li class="nav-item">
+                <li class="nav-item notify-number">
                     <a class="nav-link" href="/Order/ChaiBaoList">拆包审单</a>
+                    <div class="number word4 rounded-circle chaibao-number"></div>
                 </li>
             }
             @if (PM.Any(UPM.售后))
             {
-                <li class="nav-item">
-                    <a class="nav-link" href="/Order/ShouHouList">售后列表</a>
+                <li class="nav-item notify-number">
+                    <a class="nav-link" href="/Order/ShouHouList">售后订单列表</a>
+                    <div class="number word6 rounded-circle shouhou-number"></div>
                 </li>
             }
             @if (PM.Any(UPM.客服))

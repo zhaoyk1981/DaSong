@@ -13,7 +13,7 @@
                     let newCondition = model.capture(m);
                     return newCondition;
                 },
-                url: '/Order/AGenJinList',
+                url: '/Order/ACaiGouList',
                 currentSortPaging: vm.currentSortPaging
             }, true);
 

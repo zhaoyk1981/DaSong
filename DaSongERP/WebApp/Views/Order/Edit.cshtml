@@ -35,7 +35,7 @@
                     <span>@DP.Txt(Model.Order.采购人)</span>
                 </div>
 
-                <div class="form-group col-6">
+                <div class="form-group col-6" @(Model.Order.高亮.GetValueOrDefault() ? "data-high-light=true" : "")>
                     <label for="TxtJD订单号">JD订单号：</label>
                     <input type="text" class="id-JD订单号 form-control" name="JD订单号" id="TxtJD订单号" maxlength="50" value="@Model.Order.JD订单号" />
                     <span class="validator" id="vdJD订单号" data-required="" data-validate-target="#TxtJD订单号"><span class="error-message text-danger">此项必填</span></span>
@@ -87,7 +87,7 @@
                 </div>
                 <div class="form-group col-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="高亮" data-type="bool" id="Chk高亮" @(Model.Order.高亮.GetValueOrDefault() ? "checked" : "" )/>
+                        <input class="form-check-input" type="checkbox" name="高亮" data-type="bool" id="Chk高亮" @(Model.Order.高亮.GetValueOrDefault() ? "checked" : "") />
                         <label class="form-check-label" for="Chk高亮">高亮</label>
                     </div>
                 </div>
@@ -96,5 +96,12 @@
         <div class="form-group">
             <button type="button" class="btn btn-primary" id="BtnSubmit">修改</button>
         </div>
+        @if (!string.IsNullOrEmpty(Model.Order.订单修改备注))
+        {
+            <div class="form-group">
+                <label class="static-label">订单修改备注</label>
+                <div>@Html.Raw(DP.Txt(Model.Order.订单修改备注, raw: true))</div>
+            </div>
+        }
     </div>
 </div>

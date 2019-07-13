@@ -124,6 +124,7 @@ namespace DaSongERP.Biz
         public int Update售后(OrderModel order)
         {
             order.售后人员ID = this.UserID;
+            order.订单修改备注 = this.生成订单修改备注(order, "售后");
             var rowCount = OrderDao.Update售后(order);
             return rowCount;
         }
@@ -147,6 +148,7 @@ namespace DaSongERP.Biz
         public int Update客服(OrderModel order)
         {
             order.客服ID = this.UserID;
+            order.订单修改备注 = this.生成订单修改备注(order, "客服");
             var rowCount = OrderDao.Update客服(order);
             return rowCount;
         }
@@ -244,8 +246,22 @@ namespace DaSongERP.Biz
         public int Update电话客服(OrderModel order)
         {
             order.电话客服ID = this.UserID;
+            order.订单修改备注 = this.生成订单修改备注(order, "电话客服");
             var rowCount = this.OrderDao.Update电话客服(order);
             return rowCount;
+        }
+
+        private string 生成订单修改备注(OrderModel newOrder, string role)
+        {
+            var oldOrder = this.GetOrderBy(newOrder.ID.Value);
+            if (oldOrder.客人地址 == newOrder.客人地址)
+            {
+                return string.Empty;
+            }
+
+            var user = this.UserDao.GetUserBy(this.UserID.Value);
+
+            return $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - {role} {user.Name} 修改了客人地址(JD订单号:{oldOrder.JD订单号})，\r\n原值为\"{oldOrder.客人地址}\"，\r\n新值为\"{newOrder.客人地址}\"。\r\n";
         }
 
         public 采购ListViewModel Get采购ListViewModel()
@@ -326,6 +342,11 @@ namespace DaSongERP.Biz
 
             var list = this.OrderDao.Get客服List(condition);
             return list;
+        }
+
+        public OrderCountModel Get待处理订单数量()
+        {
+            return OrderDao.Get待处理订单数量();
         }
     }
 }

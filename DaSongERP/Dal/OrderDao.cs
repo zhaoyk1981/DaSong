@@ -179,5 +179,12 @@ namespace DaSongERP.Dal
             this.SetRowIndex(pagedList);
             return pagedList;
         }
+
+        public OrderCountModel Get待处理订单数量()
+        {
+            var cmd = ProcCommands.sp_Get待处理订单数量();
+            var m = DBHelper.ExecuteEntityList<OrderCountModel>(cmd).FirstOrDefault();
+            return m;
+        }
     }
 }

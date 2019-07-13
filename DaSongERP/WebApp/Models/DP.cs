@@ -13,9 +13,15 @@ namespace DaSongERP.WebApp.Models
             return dt.HasValue ? dt.Value.ToString(format) : dflt;
         }
 
-        public static string Txt(string s, string dflt = "无")
+        public static string Txt(string s, string dflt = "无", bool raw = false)
         {
-            return string.IsNullOrWhiteSpace(s) ? dflt : s.Trim();
+            var v = string.IsNullOrWhiteSpace(s) ? dflt : s.Trim();
+            if (raw)
+            {
+                v = v.Replace("\r\n", "<br/>");
+            }
+
+            return v;
         }
 
         public static string Txt(bool? b, string t = "是", string f = "否", string dflt = "无")

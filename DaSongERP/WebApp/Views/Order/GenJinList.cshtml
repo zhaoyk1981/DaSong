@@ -7,18 +7,17 @@
 @section Head{
     <script id="tmplRow" type="x-tmpl-mustache">
         <tr data-id="{{ID}}" data-high-light="{{高亮}}">
-            <td>{{RowNumber}}</td>
+            <td>{{店铺}}</td>
+            <td>{{JD订单号}}</td>
             <td>
                 <a href="{{商品图片}}" target="_blank">
                     <img src="{{商品图片}}" class="product-thumbnail" />
                 </a>
             </td>
             <td>{{Str进货日期}}</td>
-            <td>{{JD订单号}}</td>
-            <td>{{淘宝订单号}}</td>
             <td>{{进货数量}}</td>
+            <td>{{采购备注}}</td>
             <td><a href="https://www.baidu.com/s?wd={{来快递单号}}" target="_blank">{{来快递单号}}</a></td>
-            <td>{{客人地址}}</td>
             <td>
                 <a href="/Order/GenJin/{{ID}}" class="btn btn-primary btn-edit" target="_blank">跟进订单</a>
             </td>
@@ -95,14 +94,13 @@
         <table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline main-table" role="grid">
             <thead>
                 <tr>
-                    <th>序号</th>
-                    <th>图片</th>
-                    <th>进货日期</th>
+                    <th>店铺</th>
                     <th>JD订单号</th>
-                    <th>淘宝订单号</th>
+                    <th>图片</th>
+                    <th>订货日期</th>
                     <th>进货数量</th>
+                    <th>SKU及采购备注</th>
                     <th>来快递单号</th>
-                    <th>客人地址</th>
                     <th>操作</th>
                 </tr>
             </thead>
