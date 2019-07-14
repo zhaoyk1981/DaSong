@@ -18,7 +18,7 @@ namespace DaSongERP.WebApp.Models
             var v = string.IsNullOrWhiteSpace(s) ? dflt : s.Trim();
             if (raw)
             {
-                v = v.Replace("\r\n", "<br/>");
+                v = HttpUtility.HtmlEncode(v).Replace("\r\n", "<br/>");
             }
 
             return v;
