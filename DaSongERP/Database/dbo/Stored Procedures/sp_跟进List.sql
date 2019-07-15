@@ -37,7 +37,7 @@ BEGIN
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@拆包超时 IS NULL OR DATEDIFF(DAY, o.进货日期, GETDATE()) >= @拆包超时)
 		AND (@已跟进 IS NULL OR o.已跟进 = @已跟进)
-	ORDER BY o.进货日期
+	ORDER BY o.进货日期 DESC
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 
 	SELECT @PageIndex [PageIndex], @RecordsCount [RecordsCount], @PagesCount [PagesCount], @PageSize [PageSize];

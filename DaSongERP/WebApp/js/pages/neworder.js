@@ -36,7 +36,7 @@
                     $('#BtnSubmit').prop('disabled', false);
                 }
 
-                let copyText = document.getElementById("divCopy");
+                let copyText = document.getElementById("txtCopy");
                 copyText.select();
                 document.execCommand("copy");
             }
@@ -44,10 +44,13 @@
     };
 
     let txtProductImage_change = function () {
-        let src = $.trim($(this).val());
-        let fg = $(this).closest('.form-group');
-        fg.find('img').prop('src', src);
+        let src = $.trim($('#Txt商品图片').val());
+        let fg = $('#Txt商品图片').closest('.form-group');
         fg.find('a.product-thumbnail-link').prop('href', src).toggle(src !== '');
+        fg.find('img').prop('src', src);
+        if (src !== '' && timer !== null) {
+            clearInterval(timer);
+        }
     };
 
     let txtOrderNumbers_change = function () {
@@ -78,11 +81,14 @@
         return true;
     };
 
+    let timer = null;
+
     return {
         ready: function () {
             $('#BtnSubmit').click(btnSubmit_click);
-            $('#Txt商品图片').on('change paste', txtProductImage_change);
+            $('#Txt商品图片').on('change', txtProductImage_change);
             $('#TxtJD订单号,#Txt淘宝订单号').on('change', txtOrderNumbers_change);
+            timer = setInterval(txtProductImage_change, 1000);
         }
     };
 });
