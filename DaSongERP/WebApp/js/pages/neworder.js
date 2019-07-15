@@ -35,6 +35,10 @@
                     alert('操作失败');
                     $('#BtnSubmit').prop('disabled', false);
                 }
+
+                let copyText = document.getElementById("divCopy");
+                copyText.select();
+                document.execCommand("copy");
             }
         });
     };
@@ -77,7 +81,7 @@
     return {
         ready: function () {
             $('#BtnSubmit').click(btnSubmit_click);
-            $('#Txt商品图片').on('change', txtProductImage_change);
+            $('#Txt商品图片').on('change paste', txtProductImage_change);
             $('#TxtJD订单号,#Txt淘宝订单号').on('change', txtOrderNumbers_change);
         }
     };

@@ -41,7 +41,7 @@
     };
 
     let btnCopyCustAddr_click = function () {
-        var copyText = document.getElementById("TxtCustAddr");
+        let copyText = document.getElementById("TxtCustAddr");
         copyText.select();
         document.execCommand("copy");
     };
