@@ -337,6 +337,11 @@ namespace DaSongERP.WebApp.Controllers
 
         public ActionResult NewShop()
         {
+            if (!PM.Any(UPM.管理))
+            {
+                return Redirect("/SignIn");
+            }
+
             var vm = MetaBiz.GetNewShopViewModel();
             return View(vm);
         }
@@ -354,6 +359,11 @@ namespace DaSongERP.WebApp.Controllers
 
         public ActionResult EditShop(Guid id)
         {
+            if (!PM.Any(UPM.管理))
+            {
+                return Redirect("/SignIn");
+            }
+
             var vm = MetaBiz.GetEditShopViewModel(id);
             return View(vm);
         }
