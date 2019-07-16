@@ -124,5 +124,10 @@
     <Build Include="dbo\Stored Procedures\sp_Create售后操作.sql" />
     <Build Include="dbo\Stored Procedures\sp_Create审单操作.sql" />
     <Build Include="dbo\Stored Procedures\sp_Get待处理订单数量.sql" />
+    <Build Include="dbo\Stored Procedures\sp_店铺List.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Update店铺.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get店铺ByID.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Delete店铺.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Create店铺.sql" />
   </ItemGroup>
 </Project>

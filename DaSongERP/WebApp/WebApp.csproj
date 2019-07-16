@@ -130,6 +130,7 @@
     <Content Include="js\pages\dianhuakefuorder.js" />
     <Content Include="js\pages\editorder.js" />
     <Content Include="js\pages\editshendan.js" />
+    <Content Include="js\pages\editshop.js" />
     <Content Include="js\pages\editshouhou.js" />
     <Content Include="js\pages\editshouhoureason.js" />
     <Content Include="js\pages\edituser.js" />
@@ -142,11 +143,13 @@
     <Content Include="js\pages\main.js" />
     <Content Include="js\pages\neworder.js" />
     <Content Include="js\pages\newshendan.js" />
+    <Content Include="js\pages\newshop.js" />
     <Content Include="js\pages\newshouhou.js" />
     <Content Include="js\pages\newshouhoureason.js" />
     <Content Include="js\pages\newuser.js" />
     <Content Include="js\pages\orderlist.js" />
     <Content Include="js\pages\shendanlist.js" />
+    <Content Include="js\pages\shoplist.js" />
     <Content Include="js\pages\shouhoucaozuolist.js" />
     <Content Include="js\pages\shouhoulist.js" />
     <Content Include="js\pages\shouhouorder.js" />
@@ -412,6 +415,9 @@
     <Content Include="Views\Meta\ShouHouReasonList.cshtml" />
     <Content Include="Views\Meta\NewShouHouReason.cshtml" />
     <Content Include="Views\Meta\EditShouHouReason.cshtml" />
+    <Content Include="Views\Meta\ShopList.cshtml" />
+    <Content Include="Views\Meta\NewShop.cshtml" />
+    <Content Include="Views\Meta\EditShop.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

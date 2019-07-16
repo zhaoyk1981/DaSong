@@ -1,0 +1,43 @@
+﻿@model 店铺ListViewModel
+@{
+    ViewBag.Title = "店铺维护";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head{
+    <script id="tmplRow" type="x-tmpl-mustache">
+        <tr data-id="{{ID}}">
+            <td>{{Name}}</td>
+            <td>{{Prefix}}_*</td>
+            <td>
+                <a href="/Meta/EditShop/{{ID}}" class="btn btn-primary btn-edit" target="_blank">编辑</a>
+                <button type="button" class="btn btn-danger btn-delete">删除</button>
+            </td>
+        </tr>
+    </script>
+}
+
+<div class="vw-meta-list vw-shop-list" data-page-js="shoplist" vm-json="@Model.Json">
+    @Html.Partial("_Nav")
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <div class="form" default-button="#BtnSearch">
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
+            <a href="/Meta/NewShop" target="_blank" class="btn btn-primary">新建店铺</a>
+        </div>
+    </div>
+    <hr />
+    <div class="repeater">
+        <table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline main-table" role="grid">
+            <thead>
+                <tr>
+                    <th>店铺名称</th>
+                    <th>账号前缀</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody class="repeat-items"></tbody>
+        </table>
+    </div>
+</div>

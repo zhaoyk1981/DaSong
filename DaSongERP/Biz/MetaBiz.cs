@@ -178,5 +178,60 @@ namespace DaSongERP.Biz
             vm.Meta = MetaDao.Get售后原因By(id);
             return vm;
         }
+
+        public EditShopViewModel GetNewShopViewModel()
+        {
+            var vm = new EditShopViewModel();
+            return vm;
+        }
+
+        public EditShopViewModel GetEditShopViewModel(Guid id)
+        {
+            var vm = new EditShopViewModel();
+            vm.Shop = MetaDao.Get店铺By(id);
+            return vm;
+        }
+
+        public 店铺ListViewModel Get店铺ListViewModel()
+        {
+            var vm = new 店铺ListViewModel();
+            vm.Shops = new PagedList<店铺Model>();
+            vm.Shops.PageSize = 300;
+            return vm;
+        }
+
+        public PagedList<店铺Model> Get店铺List(ShopCondition condition)
+        {
+            return this.MetaDao.Get店铺List(condition);
+        }
+
+        public int Create店铺(店铺Model shop)
+        {
+            shop.ID = Guid.NewGuid();
+            var rowCount = this.MetaDao.Create店铺(shop);
+            return rowCount;
+        }
+
+        public int Update店铺(店铺Model shop)
+        {
+            var rowCount = this.MetaDao.Update店铺(shop);
+            return rowCount;
+        }
+
+        public int Delete店铺(Guid id)
+        {
+            var rowCount = this.MetaDao.Delete店铺(id);
+            return rowCount;
+        }
+
+        public 店铺Model Get店铺By(Guid id)
+        {
+            return this.MetaDao.Get店铺By(id);
+        }
+
+        public IList<店铺Model> GetAll店铺()
+        {
+            return this.MetaDao.GetAll店铺();
+        }
     }
 }

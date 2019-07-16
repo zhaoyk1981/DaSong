@@ -278,5 +278,95 @@ namespace DaSongERP.WebApp.Controllers
                 Success = rowCount == 1
             });
         }
+
+
+
+        public ActionResult ShopList()
+        {
+            if (!PM.Any(UPM.管理))
+            {
+                return Redirect("/SignIn");
+            }
+
+            var vm = this.MetaBiz.Get店铺ListViewModel();
+            vm.Json = SerializeObject(new
+            {
+                AllIDs = new string[] { },
+                currentSortPaging = vm.Shops.GetCurrentSortPaging()
+            });
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AShopList()
+        {
+            var condition = this.Request.Params.Map<ShopCondition>();
+            condition.PageIndex = int.Parse(this.Request.Params["PageIndex"]);
+
+            var list = this.MetaBiz.Get店铺List(condition);
+            return this.Json(list);
+        }
+
+        [HttpPost]
+        public ActionResult ADeleteShop()
+        {
+            Guid id;
+            if (!Guid.TryParse(Request.Params["id"], out id))
+            {
+                return Json(new
+                {
+                    Success = false,
+                    ErrorMessage = string.Empty
+                });
+            }
+
+            var rowCount = this.MetaBiz.Delete店铺(id);
+            if (rowCount == 0)
+            {
+                return Json(new
+                {
+                    Success = false
+                });
+            }
+
+            return Json(new
+            {
+                Success = true
+            });
+        }
+
+        public ActionResult NewShop()
+        {
+            var vm = MetaBiz.GetNewShopViewModel();
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult ACreateShop()
+        {
+            var shop = this.DeserializeObject<店铺Model>(Request.Params["FormJson"]);
+            var rowCount = this.MetaBiz.Create店铺(shop);
+            return Json(new
+            {
+                Success = rowCount == 1
+            });
+        }
+
+        public ActionResult EditShop(Guid id)
+        {
+            var vm = MetaBiz.GetEditShopViewModel(id);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AUpdateShop()
+        {
+            var shop = this.DeserializeObject<店铺Model>(Request.Params["FormJson"]);
+            var rowCount = this.MetaBiz.Update店铺(shop);
+            return Json(new
+            {
+                Success = rowCount == 1
+            });
+        }
     }
 }

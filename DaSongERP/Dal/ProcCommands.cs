@@ -29,14 +29,6 @@ namespace DaSongERP.Dal
         }
         #endregion sp_GetUserByID
 
-        #region sp_Get店铺
-        public static SqlCommand sp_Get店铺()
-        {
-            var cmd = new SqlCommand("sp_Get店铺") { CommandType = CommandType.StoredProcedure };
-            return cmd;
-        }
-        #endregion sp_Get店铺
-
         #region sp_Get审单操作
         public static SqlCommand sp_Get审单操作()
         {
@@ -569,5 +561,65 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_Get待处理订单数量
+
+        #region sp_Update店铺
+        public static SqlCommand sp_Update店铺()
+        {
+            var cmd = new SqlCommand("sp_Update店铺") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Prefix", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Update店铺
+
+        #region sp_Get店铺
+        public static SqlCommand sp_Get店铺()
+        {
+            var cmd = new SqlCommand("sp_Get店铺") { CommandType = CommandType.StoredProcedure };
+            return cmd;
+        }
+        #endregion sp_Get店铺
+
+        #region sp_Get店铺ByID
+        public static SqlCommand sp_Get店铺ByID()
+        {
+            var cmd = new SqlCommand("sp_Get店铺ByID") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Get店铺ByID
+
+        #region sp_Delete店铺
+        public static SqlCommand sp_Delete店铺()
+        {
+            var cmd = new SqlCommand("sp_Delete店铺") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Delete店铺
+
+        #region sp_Create店铺
+        public static SqlCommand sp_Create店铺()
+        {
+            var cmd = new SqlCommand("sp_Create店铺") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Prefix", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Create店铺
+
+        #region sp_店铺List
+        public static SqlCommand sp_店铺List()
+        {
+            var cmd = new SqlCommand("sp_店铺List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_店铺List
     }
 }

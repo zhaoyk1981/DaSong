@@ -36,23 +36,30 @@ namespace DaSongERP.Biz
 
         public OrderModel GetOrderBy订单号(OrderModel order)
         {
-            return this.OrderDao.GetOrderBy订单号(order);
+            var o = this.OrderDao.GetOrderBy订单号(order);
+            Set店铺(o);
+            return o;
         }
 
         public IList<OrderModel> GetOrdersBy(string jd订单号, string 来快递单号)
         {
-            return this.OrderDao.GetOrdersBy(jd订单号, 来快递单号);
+            var orders = this.OrderDao.GetOrdersBy(jd订单号, 来快递单号);
+            Set店铺(orders);
+            return orders;
         }
 
         public OrderModel GetOrderBy(Guid id)
         {
-            return this.OrderDao.GetOrderBy(id);
+            var order = this.OrderDao.GetOrderBy(id);
+            Set店铺(order);
+            return order;
         }
 
         public EditOrderViewModel GetEditOrderViewModel(Guid id)
         {
             var vm = new EditOrderViewModel();
             vm.Order = this.GetOrderBy(id);
+            Set店铺(vm.Order);
             return vm;
         }
 
@@ -61,6 +68,7 @@ namespace DaSongERP.Biz
             var vm = new EditOrderViewModel();
             vm.来快递DataSource = this.OrderDao.GetAll快递();
             vm.Order = this.GetOrderBy(id);
+            Set店铺(vm.Order);
             return vm;
         }
 
@@ -103,7 +111,9 @@ namespace DaSongERP.Biz
 
         public IList<OrderModel> Get未导入Orders()
         {
-            return OrderDao.Get未导入Orders();
+            var orders = OrderDao.Get未导入Orders();
+            Set店铺(orders);
+            return orders;
         }
 
         public int Update拆包(OrderModel order)
@@ -118,6 +128,7 @@ namespace DaSongERP.Biz
             var vm = new EditOrderViewModel();
             vm.审单操作DataSource = this.MetaDao.Get审单操作();
             vm.Order = this.GetOrderBy(id);
+            Set店铺(vm.Order);
             return vm;
         }
 
@@ -135,6 +146,7 @@ namespace DaSongERP.Biz
             vm.售后操作DataSource = MetaDao.Get售后操作();
             vm.售后原因DataSource = MetaDao.Get售后原因();
             vm.Order = this.GetOrderBy(id);
+            Set店铺(vm.Order);
             return vm;
         }
 
@@ -142,6 +154,7 @@ namespace DaSongERP.Biz
         {
             var vm = new EditOrderViewModel();
             vm.Order = this.GetOrderBy(id);
+            Set店铺(vm.Order);
             return vm;
         }
 
@@ -164,6 +177,7 @@ namespace DaSongERP.Biz
         public IList<OrderModel> GetOrdersBy来快递单号(string 来快递单号)
         {
             var list = OrderDao.GetOrdersBy(null, 来快递单号);
+            Set店铺(list);
             return list;
         }
 
@@ -213,6 +227,7 @@ namespace DaSongERP.Biz
             }
 
             var list = this.OrderDao.Get跟进List(condition);
+            Set店铺(list.DataSource);
             return list;
         }
 
@@ -233,6 +248,7 @@ namespace DaSongERP.Biz
             }
 
             var list = this.OrderDao.Get电话客服List(condition);
+            Set店铺(list.DataSource);
             return list;
         }
 
@@ -240,6 +256,7 @@ namespace DaSongERP.Biz
         {
             var vm = new EditOrderViewModel();
             vm.Order = this.GetOrderBy(id);
+            Set店铺(vm.Order);
             return vm;
         }
 
@@ -281,6 +298,7 @@ namespace DaSongERP.Biz
             }
 
             var list = this.OrderDao.Get采购List(condition);
+            Set店铺(list.DataSource);
             return list;
         }
 
@@ -301,6 +319,7 @@ namespace DaSongERP.Biz
             }
 
             var list = this.OrderDao.Get拆包审单List(condition);
+            Set店铺(list.DataSource);
             return list;
         }
 
@@ -321,6 +340,7 @@ namespace DaSongERP.Biz
             }
 
             var list = this.OrderDao.Get售后List(condition);
+            Set店铺(list.DataSource);
             return list;
         }
 
@@ -341,12 +361,57 @@ namespace DaSongERP.Biz
             }
 
             var list = this.OrderDao.Get客服List(condition);
+            Set店铺(list.DataSource);
             return list;
         }
 
         public OrderCountModel Get待处理订单数量()
         {
             return OrderDao.Get待处理订单数量();
+        }
+
+        private IList<店铺Model> 店铺List { get; set; }
+
+        private void Set店铺(IList<OrderModel> orders)
+        {
+            if (orders == null)
+            {
+                return;
+            }
+
+            foreach (var o in orders)
+            {
+                Set店铺(o);
+            }
+        }
+
+        private void Set店铺(OrderModel order)
+        {
+            if (order == null)
+            {
+                return;
+            }
+
+            order.店铺名称 = $"店铺账号：{order.店铺}";
+            if (店铺List == null)
+            {
+                店铺List = this.MetaDao.GetAll店铺();
+            }
+
+            var idx = (order.店铺 ?? string.Empty).IndexOf("_");
+            var prefix = idx <= 0 ? (order.店铺 ?? string.Empty).Trim() : order.店铺.Substring(0, idx).Trim();
+            if (string.IsNullOrWhiteSpace(prefix))
+            {
+                return;
+            }
+
+            var shop = 店铺List.FirstOrDefault(m => string.Compare(m.Prefix, prefix, true) == 0);
+            if (shop == null)
+            {
+                return;
+            }
+
+            order.店铺名称 = shop.Name;
         }
     }
 }

@@ -1,7 +1,14 @@
 ﻿CREATE TABLE [dbo].[店铺] (
-    [ID]   UNIQUEIDENTIFIER NOT NULL,
-    [Name] NVARCHAR (50)    NOT NULL,
-    [SN]   INT              NOT NULL,
+    [ID]     UNIQUEIDENTIFIER NOT NULL,
+    [Prefix] NVARCHAR (50)    NOT NULL,
+    [Name]   NVARCHAR (50)    NOT NULL,
     CONSTRAINT [PK_店铺] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_店铺_Prefix]
+    ON [dbo].[店铺]([Prefix] ASC);
 

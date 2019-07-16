@@ -40,6 +40,8 @@ namespace DaSongERP.Models
 
         public string 店铺 { get; set; }
 
+        public string 店铺名称 { get; set; }
+
         public string JD订单号 { get; set; }
 
         public string 客人地址 { get; set; }

@@ -1,0 +1,30 @@
+﻿@model EditShopViewModel
+@{
+    ViewBag.Title = "编辑店铺";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="vw-meta-form vw-edit-shop" data-page-js="editshop">
+    @Html.Partial("_Nav")
+    <h2>@ViewBag.Title</h2>
+    <div class="form" validation-group="submit" autocomplete="off">
+        <fieldset>
+            <input type="hidden" name="ID" value="@Model.Shop.ID" />
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="TxtName">店铺名称</label>
+                    <input type="text" class="form-control" maxlength="50" name="Name" id="TxtName" autocomplete="off" value="@Model.Shop.Name" />
+                    <span class="validator" id="vdName" data-required="" data-validate-target="#TxtName"><span class="error-message text-danger">此项必填</span></span>
+                </div>
+                <div class="form-group col-6">
+                    <label for="TxtSN">账号前缀</label>
+                    <input type="text" class="form-control" name="Prefix" id="TxtPrefix" autocomplete="off" value="@Model.Shop.Prefix"/>
+                    <span class="validator" id="vdPrefix" data-required="" data-validate-target="#TxtPrefix"><span class="error-message text-danger">此项必填</span></span>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
+        </div>
+    </div>
+</div>

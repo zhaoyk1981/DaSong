@@ -174,5 +174,54 @@ namespace DaSongERP.Dal
 
             return DBHelper.ExecuteEntityList<MetaModel<Guid>>(cmd).FirstOrDefault();
         }
+
+
+        public PagedList<店铺Model> Get店铺List(ShopCondition condition)
+        {
+            var cmd = ProcCommands.sp_店铺List().SetParameterValues(condition);
+            var dataSet = DBHelper.ExecuteDataSet(cmd);
+            var pagedList = new PagedList<店铺Model>(condition, dataSet);
+            return pagedList;
+        }
+
+        public int Create店铺(店铺Model shop)
+        {
+            var cmd = ProcCommands.sp_Create店铺().SetParameterValues(shop);
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
+
+        public int Update店铺(店铺Model shop)
+        {
+            var cmd = ProcCommands.sp_Update店铺().SetParameterValues(shop);
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
+
+        public int Delete店铺(Guid id)
+        {
+            var cmd = ProcCommands.sp_Delete店铺().SetParameterValues(new
+            {
+                ID = id
+            });
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
+
+        public 店铺Model Get店铺By(Guid id)
+        {
+            var cmd = ProcCommands.sp_Get店铺ByID().SetParameterValues(new
+            {
+                ID = id
+            });
+
+            return DBHelper.ExecuteEntityList<店铺Model>(cmd).FirstOrDefault();
+        }
+
+        public IList<店铺Model> GetAll店铺()
+        {
+            var cmd = ProcCommands.sp_Get店铺();
+            return DBHelper.ExecuteEntityList<店铺Model>(cmd);
+        }
     }
 }
