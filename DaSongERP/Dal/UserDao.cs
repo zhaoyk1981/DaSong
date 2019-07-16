@@ -35,15 +35,15 @@ namespace DaSongERP.Dal
             return list.FirstOrDefault();
         }
 
-        public IList<UserModel> GetUserList(string search = null)
-        {
-            var cmd = ProcCommands.sp_GetAllUsers().SetParameterValues(new
-            {
-                Search = search
-            });
-            var list = this.DBHelper.ExecuteEntityList<UserModel>(cmd);
-            return list;
-        }
+        //public IList<UserModel> GetUserList(string search = null)
+        //{
+        //    var cmd = ProcCommands.sp_GetAllUsers().SetParameterValues(new
+        //    {
+        //        Search = search
+        //    });
+        //    var list = this.DBHelper.ExecuteEntityList<UserModel>(cmd);
+        //    return list;
+        //}
 
         public int RemoveUser(Guid id)
         {

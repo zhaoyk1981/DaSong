@@ -224,14 +224,14 @@ namespace DaSongERP.Biz
             return rowCount;
         }
 
-        public 店铺Model Get店铺By(Guid id)
-        {
-            return this.MetaDao.Get店铺By(id);
-        }
+        //public 店铺Model Get店铺By(Guid id)
+        //{
+        //    return this.MetaDao.Get店铺By(id);
+        //}
 
-        public IList<店铺Model> GetAll店铺()
-        {
-            return this.MetaDao.GetAll店铺();
-        }
+        //public IList<店铺Model> GetAll店铺()
+        //{
+        //    return this.MetaDao.GetAll店铺();
+        //}
     }
 }

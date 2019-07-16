@@ -13,18 +13,6 @@ namespace DaSongERP.WebApp.Controllers
 {
     public class OrderController : AuthorizedController
     {
-        //public ActionResult Index()
-        //{
-        //    if (!PM.Any(UPM.售后, UPM.客服, UPM.跟进, UPM.采购))
-        //    {
-        //        return Redirect("/SignIn");
-        //    }
-
-        //    var jd订单号 = (Request.QueryString["search"] ?? string.Empty).Trim();
-        //    var vm = this.OrderBiz.GetOrderListViewModel(jd订单号);
-        //    return View(vm);
-        //}
-
         public ActionResult New()
         {
             if (!PM.Any(UPM.采购))
@@ -49,10 +37,6 @@ namespace DaSongERP.WebApp.Controllers
 
             var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
             var rowCount = this.OrderBiz.Create(order);
-            //if (rowCount == 1)
-            //{
-            //    Request.Files[0].SaveAs($"{this.OrderBiz.GetProductImagesPath()}\\{order.ID.Value}.jpg");
-            //}
 
             return Json(new
             {
@@ -90,7 +74,6 @@ namespace DaSongERP.WebApp.Controllers
         [HttpPost]
         public ActionResult AGetOrderID()
         {
-            //var jd订单号 = (this.Request.Params["jdoid"] ?? string.Empty).Trim();
             var 来快递单号 = (this.Request.Params["来快递单号"] ?? string.Empty).Trim();
             if (string.IsNullOrEmpty(来快递单号))
             {

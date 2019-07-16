@@ -210,14 +210,14 @@ namespace DaSongERP.Dal
         }
         #endregion sp_Update客服
 
-        #region sp_GetAllUsers
-        public static SqlCommand sp_GetAllUsers()
-        {
-            var cmd = new SqlCommand("sp_GetAllUsers") { CommandType = CommandType.StoredProcedure };
-            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Search", Value = DBNull.Value });
-            return cmd;
-        }
-        #endregion sp_GetAllUsers
+        //#region sp_GetAllUsers
+        //public static SqlCommand sp_GetAllUsers()
+        //{
+        //    var cmd = new SqlCommand("sp_GetAllUsers") { CommandType = CommandType.StoredProcedure };
+        //    cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Search", Value = DBNull.Value });
+        //    return cmd;
+        //}
+        //#endregion sp_GetAllUsers
 
         #region sp_CreateUser
         public static SqlCommand sp_CreateUser()

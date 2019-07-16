@@ -46,22 +46,22 @@ namespace DaSongERP.Biz
             return new SignInViewModel();
         }
 
-        public IList<UserModel> GetUserList(string search, bool fillPermissionsText = false)
-        {
-            var s = (search ?? string.Empty).Trim();
-            s = string.IsNullOrWhiteSpace(s) ? default(string) : s;
-            var list = this.UserDao.GetUserList(s);
-            if (fillPermissionsText)
-            {
-                var plist = this.GetAllPermissions();
-                foreach (var u in list)
-                {
-                    this.SetPermissionDisplayText(plist, u);
-                }
-            }
+        //public IList<UserModel> GetUserList(string search, bool fillPermissionsText = false)
+        //{
+        //    var s = (search ?? string.Empty).Trim();
+        //    s = string.IsNullOrWhiteSpace(s) ? default(string) : s;
+        //    var list = this.UserDao.GetUserList(s);
+        //    if (fillPermissionsText)
+        //    {
+        //        var plist = this.GetAllPermissions();
+        //        foreach (var u in list)
+        //        {
+        //            this.SetPermissionDisplayText(plist, u);
+        //        }
+        //    }
 
-            return list;
-        }
+        //    return list;
+        //}
 
         public int RemoveUser(Guid id)
         {
@@ -122,7 +122,6 @@ namespace DaSongERP.Biz
             var vm = new EditUserViewModel();
             vm.PermissionDataSource = this.GetAllPermissions();
             vm.User = GetUserBy(id);
-            //SetPermissionDisplayText(vm.PermissionDataSource, vm.User);
             return vm;
         }
 

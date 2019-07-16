@@ -147,7 +147,6 @@
     <Content Include="js\pages\newshouhou.js" />
     <Content Include="js\pages\newshouhoureason.js" />
     <Content Include="js\pages\newuser.js" />
-    <Content Include="js\pages\orderlist.js" />
     <Content Include="js\pages\shendanlist.js" />
     <Content Include="js\pages\shoplist.js" />
     <Content Include="js\pages\shouhoucaozuolist.js" />
@@ -389,7 +388,6 @@
     <Content Include="Views\SignIn\Index.cshtml" />
     <Content Include="Views\Default\Index.cshtml" />
     <Content Include="Views\Order\New.cshtml" />
-    <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\Edit.cshtml" />
     <Content Include="Views\Order\GenJin.cshtml" />
     <Content Include="Views\Order\Import.cshtml" />
