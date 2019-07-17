@@ -233,5 +233,10 @@ namespace DaSongERP.Biz
         //{
         //    return this.MetaDao.GetAll店铺();
         //}
+
+        public IList<快递Model> GetAll快递()
+        {
+            return MetaDao.GetAll快递();
+        }
     }
 }

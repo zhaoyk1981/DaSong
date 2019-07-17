@@ -20,14 +20,16 @@ BEGIN
 
 	SELECT @RecordsCount = COUNT(DISTINCT o.Id)
 	FROM vw_Orders o
-	WHERE (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%');
+	WHERE ISNULL(o.订单终结, 0) = 0
+		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%');
 
 	SELECT @PagesCount = PagesCount, @PageSize = PageSize, @PageIndex = PageIndex
 	FROM [dbo].[InitPagingParams](@PageSize, @PageIndex, NULL, @RecordsCount);
 
 	SELECT o.*
 	FROM vw_Orders o
-	WHERE (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+	WHERE ISNULL(o.订单终结, 0) = 0
+		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 	ORDER BY o.进货日期 DESC
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 

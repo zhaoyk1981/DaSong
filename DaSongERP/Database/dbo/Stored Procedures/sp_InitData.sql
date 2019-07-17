@@ -80,33 +80,33 @@ IF NOT EXISTS (SELECT * FROM 快递)
 BEGIN
 SET IDENTITY_INSERT [dbo].[快递] ON 
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (1, N'中通', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (1, N'中通', 1, N'Z')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (2, N'邮政', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (2, N'邮政', 1, N'Y')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (3, N'顺丰', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (3, N'顺丰', 1, N'S')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (4, N'韵达', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (4, N'韵达', 1, N'Y')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (5, N'圆通', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (5, N'圆通', 1, N'Y')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (6, N'申通', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (6, N'申通', 1, N'S')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (7, N'汇通', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (7, N'汇通', 1, N'H')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (8, N'国通', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (8, N'国通', 1, N'G')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (9, N'全峰', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (9, N'全峰', 1, N'Q')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (10, N'优速', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (10, N'优速', 1, N'Y')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (11, N'天天', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (11, N'天天', 1, N'T')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (12, N'百世汇通', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (12, N'百世汇通', 1, N'B')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (13, N'宅急送', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (13, N'宅急送', 1, N'Z')
 
-INSERT [dbo].[快递] ([ID], [Name], [SN]) VALUES (14, N'德邦', 0)
+INSERT [dbo].[快递] ([ID], [Name], [SN], [GroupLetter]) VALUES (14, N'德邦', 1, N'D')
 
 SET IDENTITY_INSERT [dbo].[快递] OFF
 END

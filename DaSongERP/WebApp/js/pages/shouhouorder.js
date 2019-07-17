@@ -1,4 +1,4 @@
-﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, enhance, model, validation) {
+﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation', 'clipboard'], function ($, enhance, model, validation, ClipBoardJS) {
     let validate = function () {
         let validationResult = validation.validate(['default']);
         if (validationResult !== true) {
@@ -41,6 +41,7 @@
 
     return {
         ready: function () {
+            new ClipBoardJS('.btn-copy-clipboard');
             $('#BtnSubmit').click(btnSubmit_click);
         }
     };

@@ -11,10 +11,10 @@ CREATE PROCEDURE [dbo].[sp_Update售后]
 	, @售后人员ID UNIQUEIDENTIFIER
 	, @客人退回单号 NVARCHAR(50)
 	, @客人地址 NVARCHAR(150)
-	, @是否淘宝退回 BIT
 	, @高亮 BIT
 	, @售后完结 BIT
 	, @订单修改备注 NVARCHAR(MAX)
+	, @淘宝退回单号 NVARCHAR(50)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -28,7 +28,7 @@ BEGIN
 		, [售后时间] = GETDATE()
 		, [售后备注] = @售后备注
 		, [客人退回单号] = @客人退回单号
-		, [是否淘宝退回] = @是否淘宝退回
+		, [淘宝退回单号] = @淘宝退回单号
 		, [客人地址] = @客人地址
 		, 高亮 = CASE WHEN [客人地址] <> @客人地址 THEN 1 ELSE @高亮 END
 		, [售后完结] = @售后完结

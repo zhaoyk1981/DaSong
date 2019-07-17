@@ -33,13 +33,17 @@
     [售后人员ID] UNIQUEIDENTIFIER NULL,
     [售后时间]   DATETIME2 (7)    NULL,
     [客人退回单号] NVARCHAR (100)   CONSTRAINT [DF_订单_客人退回单号] DEFAULT ('') NOT NULL,
-    [是否淘宝退回] BIT              NULL,
     [售后完结]   BIT              NULL,
     [客服ID]   UNIQUEIDENTIFIER NULL,
     [客服时间]   DATETIME2 (7)    NULL,
-    [高亮]     BIT              NOT NULL,
+    [高亮]     BIT              CONSTRAINT [DF_订单_高亮] DEFAULT ((0)) NOT NULL,
+    [订单终结]   BIT              CONSTRAINT [DF_订单_订单终结] DEFAULT ((0)) NOT NULL,
+    [订单终结备注] NVARCHAR (MAX)   CONSTRAINT [DF_订单_订单终结备注] DEFAULT ('') NOT NULL,
+    [淘宝退回单号] NVARCHAR (50)    CONSTRAINT [DF_订单_淘宝退回单号] DEFAULT ('') NOT NULL,
     CONSTRAINT [PK_订单] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 

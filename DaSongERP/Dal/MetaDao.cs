@@ -223,5 +223,12 @@ namespace DaSongERP.Dal
             var cmd = ProcCommands.sp_Get店铺();
             return DBHelper.ExecuteEntityList<店铺Model>(cmd);
         }
+
+        public IList<快递Model> GetAll快递()
+        {
+            var cmd = ProcCommands.sp_GetAll快递();
+            var list = DBHelper.ExecuteEntityList<快递Model>(cmd);
+            return list;
+        }
     }
 }

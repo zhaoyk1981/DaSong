@@ -27,11 +27,13 @@
                 </div>
                 <div class="form-group col-6" @(Model.Order.高亮.GetValueOrDefault() ? "data-high-light=true" : "")>
                     <label class="static-label">JD订单号：</label>
-                    <span>@DP.Txt(Model.Order.JD订单号)</span>
+                    <span id="LblJD订单号">@DP.Txt(Model.Order.JD订单号)</span>
+                    <a href="javascript:void(0)" class="btn-copy-clipboard" data-clipboard-target="#LblJD订单号">复制</a>
                 </div>
                 <div class="form-group col-6">
                     <label class="static-label">货号：</label>
-                    <span>@DP.Txt(Model.Order.货号)</span>
+                    <span id="Lbl货号">@DP.Txt(Model.Order.货号)</span>
+                    <a href="javascript:void(0)" class="btn-copy-clipboard" data-clipboard-target="#Lbl货号">复制</a>
                 </div>
                 <div class="form-group col-6">
                     <label class="static-label">店铺名称：</label>
@@ -61,6 +63,10 @@
             <fieldset>
                 <legend>跟进订单</legend>
                 <div class="row">
+                    <div class="form-group col-6">
+                        <label class="static-label">来-快递：</label>
+                        <span>@DP.Txt(Model.Order.来快递)</span>
+                    </div>
                     <div class="form-group col-6">
                         <label class="static-label">来-快递单号：</label>
                         <span>@Html.Raw(DP.Baidu(Model.Order.来快递单号))</span>

@@ -120,13 +120,6 @@ namespace DaSongERP.Dal
             return pagedList;
         }
 
-        public IList<MetaModel<int>> GetAll快递()
-        {
-            var cmd = ProcCommands.sp_GetAll快递();
-            var list = DBHelper.ExecuteEntityList<MetaModel<int>>(cmd);
-            return list;
-        }
-
         private void SetRowIndex(PagedList<OrderModel> list)
         {
             for (var i = 0; i < list.DataSource.Count; i++)

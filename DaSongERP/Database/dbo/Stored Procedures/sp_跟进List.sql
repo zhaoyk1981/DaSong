@@ -23,7 +23,8 @@ BEGIN
 
 	SELECT @RecordsCount = COUNT(DISTINCT o.Id)
 	FROM vw_Orders o
-	WHERE (@跟进人ID IS NULL OR o.[跟进人ID] = @跟进人ID)
+	WHERE  ISNULL(o.订单终结, 0) = 0
+		AND (@跟进人ID IS NULL OR o.[跟进人ID] = @跟进人ID)
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@拆包超时 IS NULL OR DATEDIFF(DAY, o.进货日期, GETDATE()) >= @拆包超时)
 		AND (@已跟进 IS NULL OR o.已跟进 = @已跟进);
@@ -33,7 +34,8 @@ BEGIN
 
 	SELECT o.*
 	FROM vw_Orders o
-	WHERE (@跟进人ID IS NULL OR o.[跟进人ID] = @跟进人ID)
+	WHERE ISNULL(o.订单终结, 0) = 0
+		AND (@跟进人ID IS NULL OR o.[跟进人ID] = @跟进人ID)
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@拆包超时 IS NULL OR DATEDIFF(DAY, o.进货日期, GETDATE()) >= @拆包超时)
 		AND (@已跟进 IS NULL OR o.已跟进 = @已跟进)

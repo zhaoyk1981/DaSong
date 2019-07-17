@@ -1,13 +1,15 @@
 ﻿CREATE VIEW dbo.vw_Orders
 AS
-SELECT    o.ID, o.进货日期, o.货号, o.商品图片, o.进货数量, o.店铺, o.JD订单号, o.客人地址, o.淘宝账号, o.淘宝订单号, o.采购备注, o.订单修改备注, o.来快递, o.来快递单号, o.发货时间, o.发货备注, 
-               o.跟进人ID, o.京东价, o.成本价, o.采购人ID, o.导入时间, o.电话客服ID, o.电话备注, o.审单操作ID, o.拆包人员备注, o.转发单号, o.拆包人ID, o.拆包时间, o.售后操作ID, o.售后原因ID, 
-               o.售后备注, o.售后人员ID, o.售后时间, o.客人退回单号, o.是否淘宝退回, o.售后完结, o.客服ID, o.客服时间, o.高亮, cg.Name AS [采购人.Name], sd.Name AS [审单操作.Name], 
-               cb.Name AS [拆包人.Name], sho.Name AS [售后操作.Name], sho.SN AS [售后操作.SN], shr.Name AS [售后原因.Name], shr.SN AS [售后原因.SN], sh.Name AS [售后人员.Name], 
-               gj.Name AS [跟进人.Name], kf.Name AS [客服.Name], CAST(CASE WHEN o.[发货时间] IS NULL THEN 0 ELSE 1 END AS BIT) AS 已跟进, CAST(CASE WHEN o.[导入时间] IS NULL 
-               THEN 0 ELSE 1 END AS BIT) AS 已导入, CAST(CASE WHEN o.[拆包时间] IS NULL THEN 0 ELSE 1 END AS BIT) AS 已拆包, CAST(CASE WHEN o.售后操作ID IS NULL 
-               THEN 0 ELSE 1 END AS BIT) AS 已售后, dhkf.Name AS [电话客服.Name]
-FROM       dbo.订单 AS o LEFT OUTER JOIN
+SELECT  o.ID, o.进货日期, o.货号, o.商品图片, o.进货数量, o.店铺, o.JD订单号, o.客人地址, o.淘宝账号, o.淘宝订单号, o.采购备注, o.订单修改备注, o.来快递, 
+               o.来快递单号, o.发货时间, o.发货备注, o.跟进人ID, o.京东价, o.成本价, o.采购人ID, o.导入时间, o.电话客服ID, o.电话备注, o.审单操作ID, 
+               o.拆包人员备注, o.转发单号, o.拆包人ID, o.拆包时间, o.售后操作ID, o.售后原因ID, o.售后备注, o.售后人员ID, o.售后时间, o.客人退回单号, o.售后完结, 
+               o.客服ID, o.客服时间, o.高亮, cg.Name AS [采购人.Name], sd.Name AS [审单操作.Name], cb.Name AS [拆包人.Name], sho.Name AS [售后操作.Name], 
+               sho.SN AS [售后操作.SN], shr.Name AS [售后原因.Name], shr.SN AS [售后原因.SN], sh.Name AS [售后人员.Name], gj.Name AS [跟进人.Name], 
+               kf.Name AS [客服.Name], CAST(CASE WHEN o.[来快递] = '' THEN 0 ELSE 1 END AS BIT) AS 已跟进, CAST(CASE WHEN o.[导入时间] IS NULL 
+               THEN 0 ELSE 1 END AS BIT) AS 已导入, CAST(CASE WHEN o.[拆包时间] IS NULL THEN 0 ELSE 1 END AS BIT) AS 已拆包, 
+               CAST(CASE WHEN o.售后操作ID IS NULL THEN 0 ELSE 1 END AS BIT) AS 已售后, dhkf.Name AS [电话客服.Name], o.订单终结, o.订单终结备注, 
+               o.淘宝退回单号
+FROM     dbo.订单 AS o LEFT OUTER JOIN
                dbo.Users AS cg ON cg.ID = o.采购人ID LEFT OUTER JOIN
                dbo.审单操作 AS sd ON sd.ID = o.审单操作ID LEFT OUTER JOIN
                dbo.Users AS cb ON cb.ID = o.拆包人ID LEFT OUTER JOIN
@@ -22,17 +24,7 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
-         Begin Table = "gj"
-            Begin Extent = 
-               Top = 9
-               Left = 2279
-               Bottom = 201
-               Right = 2473
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'         End
          Begin Table = "kf"
             Begin Extent = 
                Top = 9
@@ -53,6 +45,16 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
             DisplayFlags = 280
             TopColumn = 0
          End
+         Begin Table = "o"
+            Begin Extent = 
+               Top = 9
+               Left = 57
+               Bottom = 201
+               Right = 269
+            End
+            DisplayFlags = 280
+            TopColumn = 34
+         End
       End
    End
    Begin SQLPane = 
@@ -60,8 +62,54 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 9
+      Begin ColumnWidths = 55
          Width = 284
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
          Width = 1000
          Width = 1000
          Width = 1000
@@ -75,7 +123,7 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
          Column = 1440
-         Alias = 900
+         Alias = 3140
          Table = 1170
          Output = 720
          Append = 1400
@@ -91,6 +139,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_Orders';
+
+
 
 
 
@@ -173,16 +223,6 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "o"
-            Begin Extent = 
-               Top = 9
-               Left = 57
-               Bottom = 201
-               Right = 269
-            End
-            DisplayFlags = 280
-            TopColumn = 35
-         End
          Begin Table = "cg"
             Begin Extent = 
                Top = 9
@@ -242,7 +282,19 @@ Begin DesignProperties =
             End
             DisplayFlags = 280
             TopColumn = 0
-   ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_Orders';
+         End
+         Begin Table = "gj"
+            Begin Extent = 
+               Top = 9
+               Left = 2279
+               Bottom = 201
+               Right = 2473
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_Orders';
+
+
 
 
 

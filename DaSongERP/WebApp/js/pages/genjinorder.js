@@ -1,4 +1,4 @@
-﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation', 'clipboard'], function ($, enhance, model, validation, clipboard) {
+﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation', 'clipboard'], function ($, enhance, model, validation, ClipBoardJS) {
     let validate = function () {
         let validationResult = validation.validate(['default']);
         if (validationResult !== true) {
@@ -40,9 +40,20 @@
         });
     };
 
+    //let Ddl来快递_change = function () {
+    //    let selectedValue = $('#Ddl来快递').val();
+    //    let 没订货 = selectedValue === '没订货';
+    //    $('#Txt来快递单号').prop('disabled', 没订货);
+    //    if (没订货 === true) {
+    //        $('#Txt来快递单号').val('');
+    //        validation.validate(['default']);
+    //    }
+    //};
+
     return {
         ready: function () {
-            new clipboard.ClipboardJS('.btn-copy-clipboard');
+            new ClipBoardJS('.btn-copy-clipboard');
+            //$('#Ddl来快递').change(Ddl来快递_change).change();
             $('#BtnSubmit').click(btnSubmit_click);
         }
     };

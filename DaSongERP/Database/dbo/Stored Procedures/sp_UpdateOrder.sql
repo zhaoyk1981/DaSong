@@ -17,6 +17,8 @@ CREATE PROCEDURE [dbo].[sp_UpdateOrder]
 	,@订单修改备注 nvarchar(max)
 	,@采购人ID UNIQUEIDENTIFIER
 	,@高亮 BIT
+	,@订单终结 BIT
+	,@订单终结备注 NVARCHAR(MAX)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -33,11 +35,12 @@ BEGIN
            ,[淘宝账号] = @淘宝账号
 		   ,[淘宝订单号] = @淘宝订单号
            ,[采购备注] = @采购备注
-           --,[订单修改备注] = @订单修改备注
            ,[京东价] = @京东价
            ,[成本价] = @成本价
 		   ,[采购人ID] = @采购人ID
 		   ,[高亮] = @高亮
+		   ,[订单终结] = @订单终结
+		   ,[订单终结备注] = @订单终结备注
 		WHERE ID = @ID;
 
 	SELECT @@ROWCOUNT AS [RowCount];

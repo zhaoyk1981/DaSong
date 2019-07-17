@@ -66,7 +66,7 @@ namespace DaSongERP.Biz
         public EditOrderViewModel Get跟进ViewModel(Guid id)
         {
             var vm = new EditOrderViewModel();
-            vm.来快递DataSource = this.OrderDao.GetAll快递();
+            vm.来快递DataSource = this.MetaDao.GetAll快递();
             vm.Order = this.GetOrderBy(id);
             Set店铺(vm.Order);
             return vm;

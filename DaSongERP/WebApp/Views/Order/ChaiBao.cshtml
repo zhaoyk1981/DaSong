@@ -27,11 +27,13 @@
                 </div>
                 <div class="form-group col-6" @(Model.Order.高亮.GetValueOrDefault() ? "data-high-light=true" : "")>
                     <label class="static-label">JD订单号：</label>
-                    <span>@DP.Txt(Model.Order.JD订单号)</span>
+                    <span id="LblJD订单号">@DP.Txt(Model.Order.JD订单号)</span>
+                    <a href="javascript:void(0)" class="btn-copy-clipboard" data-clipboard-target="#LblJD订单号">复制</a>
                 </div>
                 <div class="form-group col-6">
                     <label class="static-label">货号：</label>
-                    <span>@DP.Txt(Model.Order.货号)</span>
+                    <span id="Lbl货号">@DP.Txt(Model.Order.货号)</span>
+                    <a href="javascript:void(0)" class="btn-copy-clipboard" data-clipboard-target="#Lbl货号">复制</a>
                 </div>
                 <div class="form-group col-6">
                     <label class="static-label">店铺名称：</label>
@@ -43,15 +45,12 @@
                 </div>
                 <div class="form-group col-12">
                     <label class="static-label">客人地址：</label>
-                    <div id="LblCustAddr">@DP.Txt(Model.Order.客人地址)</div>
+                    <a href="javascript:void(0)" class="btn-copy-clipboard" data-clipboard-target="#Lbl客人地址">复制</a>
+                    <div id="Lbl客人地址">@DP.Txt(Model.Order.客人地址)</div>
                 </div>
                 <div class="form-group col-12">
                     <label class="static-label">SKU及采购备注：</label>
                     <div>@DP.Txt(Model.Order.采购备注)</div>
-                </div>
-                <div class="form-group col-12">
-                    <label class="static-label">订单修改备注：</label>
-                    <div>@DP.Txt(Model.Order.订单修改备注)</div>
                 </div>
             </div>
         </fieldset>
@@ -134,10 +133,6 @@
         <fieldset>
             <legend>拆包审单</legend>
             <div class="row">
-                <div class="form-group col-12">
-                    <a href="javascript:void(0)" class="btn-copy-cust-addr">点击复制客户地址</a>
-                    <input type="text" id="TxtCustAddr" readonly class="clip-copy" value="@Model.Order.客人地址" />
-                </div>
                 <div class="form-group col-6">
                     <label for="Ddl审单操作">审单操作：</label>
                     <select class="form-control" id="Ddl审单操作" name="审单操作ID">

@@ -23,7 +23,8 @@ BEGIN
 
 	SELECT @RecordsCount = COUNT(DISTINCT o.Id)
 	FROM vw_Orders o
-	WHERE (@售后人员ID IS NULL OR o.[售后人员ID] = @售后人员ID)
+	WHERE ISNULL(o.订单终结, 0) = 0
+		AND (@售后人员ID IS NULL OR o.[售后人员ID] = @售后人员ID)
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@已售后 IS NULL OR o.[已售后] = @已售后)
 		AND (@售后完结 IS NULL OR ISNULL(o.[售后完结], 0) = @售后完结);
@@ -33,7 +34,8 @@ BEGIN
 
 	SELECT o.*
 	FROM vw_Orders o
-	WHERE (@售后人员ID IS NULL OR o.[售后人员ID] = @售后人员ID)
+	WHERE ISNULL(o.订单终结, 0) = 0
+		AND (@售后人员ID IS NULL OR o.[售后人员ID] = @售后人员ID)
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@已售后 IS NULL OR o.[已售后] = @已售后)
 		AND (@售后完结 IS NULL OR ISNULL(o.[售后完结], 0) = @售后完结)

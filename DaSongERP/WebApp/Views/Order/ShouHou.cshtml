@@ -27,11 +27,13 @@
                 </div>
                 <div class="form-group col-6" @(Model.Order.高亮.GetValueOrDefault() ? "data-high-light=true" : "")>
                     <label class="static-label">JD订单号：</label>
-                    <span>@DP.Txt(Model.Order.JD订单号)</span>
+                    <span id="LblJD订单号">@DP.Txt(Model.Order.JD订单号)</span>
+                    <a href="javascript:void(0)" class="btn-copy-clipboard" data-clipboard-target="#LblJD订单号">复制</a>
                 </div>
                 <div class="form-group col-6">
                     <label class="static-label">货号：</label>
-                    <span>@DP.Txt(Model.Order.货号)</span>
+                    <span id="Lbl货号">@DP.Txt(Model.Order.货号)</span>
+                    <a href="javascript:void(0)" class="btn-copy-clipboard" data-clipboard-target="#Lbl货号">复制</a>
                 </div>
                 <div class="form-group col-6">
                     <label class="static-label">店铺名称：</label>
@@ -56,7 +58,8 @@
                 </div>
                 <div class="form-group col-6">
                     <label class="static-label">淘宝订单号：</label>
-                    <span>@DP.Txt(Model.Order.淘宝订单号)</span>
+                    <span id="Lbl淘宝订单号">@DP.Txt(Model.Order.淘宝订单号)</span>
+                    <a href="javascript:void(0)" class="btn-copy-clipboard" data-clipboard-target="#Lbl淘宝订单号">复制</a>
                 </div>
                 <div class="form-group col-6">
                     <label class="static-label">进货数量：</label>
@@ -69,6 +72,10 @@
             <fieldset>
                 <legend>跟进订单</legend>
                 <div class="row">
+                    <div class="form-group col-6">
+                        <label class="static-label">来-快递：</label>
+                        <span>@DP.Txt(Model.Order.来快递)</span>
+                    </div>
                     <div class="form-group col-6">
                         <label class="static-label">来-快递单号：</label>
                         <span>@Html.Raw(DP.Baidu(Model.Order.来快递单号))</span>
@@ -157,14 +164,10 @@
                 <div class="form-group col-6">
                     <label for="Txt客人退回单号">客人退回单号：</label>
                     <input type="text" class="form-control" name="客人退回单号" id="Txt客人退回单号" maxlength="50" value="@DP.Txt(Model.Order.客人退回单号, "")" />
-                    <span class="validator" id="vd客人退回单号" data-required="" data-validate-target="#Txt客人退回单号"><span class="error-message text-danger">此项必填</span></span>
                 </div>
                 <div class="form-group col-6">
-                    <label>是否淘宝退回：</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="是否淘宝退回" data-type="bool" id="Chk是否淘宝退回" @(Model.Order.是否淘宝退回.GetValueOrDefault() ? "checked" : "") />
-                        <label class="form-check-label" for="Chk是否淘宝退回">是</label>
-                    </div>
+                    <label for="Txt淘宝退回单号">退回淘宝单号：</label>
+                    <input type="text" class="form-control" name="淘宝退回单号" id="Txt淘宝退回单号" maxlength="50" value="@DP.Txt(Model.Order.淘宝退回单号, "")" />
                 </div>
                 <div class="form-group col-6">
                     <label>售后完结：</label>

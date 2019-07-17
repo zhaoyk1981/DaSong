@@ -23,7 +23,8 @@ BEGIN
 
 	SELECT @RecordsCount = COUNT(DISTINCT o.Id)
 	FROM vw_Orders o
-	WHERE (@电话客服ID IS NULL OR o.[跟进人ID] = @电话客服ID)
+	WHERE ISNULL(o.订单终结, 0) = 0
+		AND (@电话客服ID IS NULL OR o.[跟进人ID] = @电话客服ID)
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@客人地址 IS NULL OR o.[客人地址] LIKE '%' + @客人地址 + '%')
 		AND (@已导入 IS NULL OR o.已导入 = @已导入);
@@ -33,7 +34,8 @@ BEGIN
 
 	SELECT o.*
 	FROM vw_Orders o
-	WHERE (@电话客服ID IS NULL OR o.[跟进人ID] = @电话客服ID)
+	WHERE ISNULL(o.订单终结, 0) = 0
+		AND (@电话客服ID IS NULL OR o.[跟进人ID] = @电话客服ID)
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@客人地址 IS NULL OR o.[客人地址] LIKE '%' + @客人地址 + '%')
 		AND (@已导入 IS NULL OR o.已导入 = @已导入)

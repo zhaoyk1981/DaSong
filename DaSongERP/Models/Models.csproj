@@ -54,6 +54,7 @@
     <Compile Include="Models\UPM.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\店铺Model.cs" />
+    <Compile Include="Models\快递Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EditMetaViewModel.cs" />
     <Compile Include="ViewModels\EditOrderViewModel.cs" />

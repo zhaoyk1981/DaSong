@@ -1,4 +1,4 @@
-﻿define(['jquery', 'mustache', 'kyle_toolkit_repeater', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, mustache, repeater, model, validation) {
+﻿define(['jquery', 'mustache', 'kyle_toolkit_repeater', 'kyle_toolkit_model', 'kyle_toolkit_validation', 'clipboard'], function ($, mustache, repeater, model, validation, ClipBoardJS) {
     let btnSearch_click = function (event) {
         repeater.dataBind(true);
     };
@@ -25,7 +25,10 @@
                     return newCondition;
                 },
                 url: '/Order/AGenJinList',
-                currentSortPaging: vm.currentSortPaging
+                currentSortPaging: vm.currentSortPaging,
+                onDataBound: function (dat) {
+                    new ClipBoardJS('.btn-copy-clipboard');
+                }
             }, true);
 
             $('#Chk拆包超时').click(chk拆包超时_click);

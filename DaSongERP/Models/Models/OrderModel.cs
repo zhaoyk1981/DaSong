@@ -264,7 +264,7 @@ namespace DaSongERP.Models
 
         public string 客人退回单号 { get; set; }
 
-        public bool? 是否淘宝退回 { get; set; }
+        public string 淘宝退回单号 { get; set; }
 
         public bool? 售后完结 { get; set; }
 
@@ -289,6 +289,10 @@ namespace DaSongERP.Models
 
         public DateTime? 客服时间 { get; set; }
 
+        public bool? 订单终结 { get; set; }
+
+        public string 订单终结备注 { get; set; }
+
         public bool? 已跟进 { get; set; }
 
         public bool? 已导入 { get; set; }
@@ -297,6 +301,5 @@ namespace DaSongERP.Models
 
         public bool? 已售后 { get; set; }
 
-        public bool? Search { get; set; }
     }
 }

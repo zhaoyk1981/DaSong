@@ -16,6 +16,10 @@
             </td>
             <td>{{Str进货日期}}</td>
             <td>{{进货数量}}</td>
+            <td>
+                <span id="Lbl淘宝订单号{{RowIndex}}">{{淘宝订单号}}</span>
+                <a href="javascript:void(0)" class="btn-copy-clipboard" data-clipboard-target="#Lbl淘宝订单号{{RowIndex}}">复制</a>
+            </td>
             <td>{{采购备注}}</td>
             <td><a href="https://www.baidu.com/s?wd={{来快递单号}}" target="_blank">{{来快递单号}}</a></td>
             <td>
@@ -99,6 +103,7 @@
                     <th>图片</th>
                     <th>订货日期</th>
                     <th>进货数量</th>
+                    <th>淘宝订单号</th>
                     <th>SKU及采购备注</th>
                     <th>来快递单号</th>
                     <th>操作</th>

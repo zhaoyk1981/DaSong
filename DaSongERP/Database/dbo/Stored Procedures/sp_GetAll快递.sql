@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE dbo.sp_GetAll快递
+CREATE PROCEDURE [dbo].[sp_GetAll快递]
 	
 AS
 BEGIN
@@ -12,5 +12,5 @@ BEGIN
 	SET NOCOUNT ON;
 
     SELECT * FROM 快递
-	ORDER BY SN, [Name];
+	ORDER BY SN, GroupLetter, [Name];
 END
