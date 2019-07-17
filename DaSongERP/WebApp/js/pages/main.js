@@ -22,6 +22,7 @@ require.config({
         mustache: '/scripts/mustache',
         select2: '/scripts/select2.min',
         select2zhcn: '/scripts/i18n/zh-CN',
+        clipboard: '/scripts/clipboard.min'
     },
     shim: {
         bootstrap: ["jquery"],

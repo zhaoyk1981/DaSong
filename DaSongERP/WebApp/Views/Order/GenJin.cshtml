@@ -26,8 +26,9 @@
                     <span>@DP.Txt(Model.Order.进货数量)</span>
                 </div>
                 <div class="form-group col-6" @(Model.Order.高亮.GetValueOrDefault() ? "data-high-light=true" : "")>
-                    <label class="static-label">JD订单号：</label>
+                    <label class="static-label" id="LblJD订单号">JD订单号：</label>
                     <span>@DP.Txt(Model.Order.JD订单号)</span>
+                    <a href="javascript:void(0)" class="btn-copy-clipboard" data-clipboard-target="#LblJD订单号">复制</a>
                 </div>
                 <div class="form-group col-6">
                     <label class="static-label">货号：</label>
