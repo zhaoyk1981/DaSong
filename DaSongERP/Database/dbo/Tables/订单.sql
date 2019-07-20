@@ -11,8 +11,8 @@
     [淘宝订单号]  NVARCHAR (50)    CONSTRAINT [DF_订单_淘宝订单号] DEFAULT ('') NOT NULL,
     [采购备注]   NVARCHAR (MAX)   CONSTRAINT [DF_订单_采购备注] DEFAULT ('') NOT NULL,
     [订单修改备注] NVARCHAR (MAX)   CONSTRAINT [DF_订单_订单修改备注] DEFAULT ('') NOT NULL,
-    [来快递]    NVARCHAR (50)    CONSTRAINT [DF_订单_快递] DEFAULT ('') NOT NULL,
-    [来快递单号]  NVARCHAR (50)    CONSTRAINT [DF_订单_来快递单号] DEFAULT ('') NOT NULL,
+    [来快递]    NVARCHAR (150)   CONSTRAINT [DF_订单_快递] DEFAULT ('') NOT NULL,
+    [来快递单号]  NVARCHAR (150)   CONSTRAINT [DF_订单_来快递单号] DEFAULT ('') NOT NULL,
     [发货时间]   DATETIME2 (7)    NULL,
     [发货备注]   NVARCHAR (MAX)   CONSTRAINT [DF_订单_发货备注] DEFAULT ('') NOT NULL,
     [跟进人ID]  UNIQUEIDENTIFIER NULL,
@@ -42,6 +42,8 @@
     [淘宝退回单号] NVARCHAR (50)    CONSTRAINT [DF_订单_淘宝退回单号] DEFAULT ('') NOT NULL,
     CONSTRAINT [PK_订单] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 

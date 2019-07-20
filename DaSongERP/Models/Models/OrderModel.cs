@@ -58,6 +58,16 @@ namespace DaSongERP.Models
 
         public string 来快递单号 { get; set; }
 
+        public string Baidu来快递单号
+        {
+            get
+            {
+                var list = (来快递单号 ?? string.Empty).Split(" ,;".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                    .Select(m => $"<a target=\"_blank\" href=\"https://www.baidu.com/s?wd={m}\">{m}</a>").ToList();
+                return string.Join("<br/>", list);
+            }
+        }
+
         public DateTime? 发货时间 { get; set; }
 
         public string 发货备注 { get; set; }

@@ -5,8 +5,8 @@
 -- =============================================
 CREATE PROCEDURE [dbo].[sp_订单跟进]
 	@ID UNIQUEIDENTIFIER
-	, @来快递 NVARCHAR(50)
-	, @来快递单号 NVARCHAR(50)
+	, @来快递 NVARCHAR(150)
+	, @来快递单号 NVARCHAR(150)
 	, @发货时间 DATETIME2(7)
 	, @发货备注 NVARCHAR(MAX)
 	, @跟进人ID UNIQUEIDENTIFIER

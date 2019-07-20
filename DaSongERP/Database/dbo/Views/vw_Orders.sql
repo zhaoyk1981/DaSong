@@ -24,7 +24,17 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'         End
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
+         Begin Table = "gj"
+            Begin Extent = 
+               Top = 9
+               Left = 2279
+               Bottom = 201
+               Right = 2473
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
          Begin Table = "kf"
             Begin Extent = 
                Top = 9
@@ -44,16 +54,6 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'         E
             End
             DisplayFlags = 280
             TopColumn = 0
-         End
-         Begin Table = "o"
-            Begin Extent = 
-               Top = 9
-               Left = 57
-               Bottom = 201
-               Right = 269
-            End
-            DisplayFlags = 280
-            TopColumn = 34
          End
       End
    End
@@ -151,6 +151,8 @@ End
 
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
@@ -223,6 +225,16 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
+         Begin Table = "o"
+            Begin Extent = 
+               Top = 9
+               Left = 57
+               Bottom = 201
+               Right = 269
+            End
+            DisplayFlags = 280
+            TopColumn = 34
+         End
          Begin Table = "cg"
             Begin Extent = 
                Top = 9
@@ -282,17 +294,9 @@ Begin DesignProperties =
             End
             DisplayFlags = 280
             TopColumn = 0
-         End
-         Begin Table = "gj"
-            Begin Extent = 
-               Top = 9
-               Left = 2279
-               Bottom = 201
-               Right = 2473
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_Orders';
+   ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_Orders';
+
+
 
 
 

@@ -68,10 +68,10 @@
             <div class="row">
                 <div class="form-group col-6">
                     <label for="Ddl来快递">来-快递</label>
-                    <select class="form-control" name="来快递" id="Ddl来快递">
+                    <select class="form-control" name="来快递" id="Ddl来快递" multiple>
                         @foreach (var k in Model.来快递DataSource)
                         {
-                            <option value="@k.Name" @(@Model.Order.来快递 == k.Name ? "selected" : "")>@k.NameWithGroup</option>
+                            <option value="@k.Name" @((Model.Order.来快递 ?? string.Empty).Contains(k.Name) ? "selected" : "")>@k.NameWithGroup</option>
                         }
                     </select>
                 </div>

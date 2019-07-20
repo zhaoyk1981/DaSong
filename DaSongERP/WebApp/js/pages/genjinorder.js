@@ -1,4 +1,4 @@
-﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation', 'clipboard'], function ($, enhance, model, validation, ClipBoardJS) {
+﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation', 'clipboard', 'select2', 'select2zhcn'], function ($, enhance, model, validation, ClipBoardJS, select2, select2zhcn) {
     let validate = function () {
         let validationResult = validation.validate(['default']);
         if (validationResult !== true) {
@@ -54,6 +54,12 @@
         ready: function () {
             new ClipBoardJS('.btn-copy-clipboard');
             //$('#Ddl来快递').change(Ddl来快递_change).change();
+            $('#Ddl来快递').select2({
+                language: "zh-CN",
+                allowClear: true,
+                placeholder: "请选择快递"
+            });
+
             $('#BtnSubmit').click(btnSubmit_click);
         }
     };
