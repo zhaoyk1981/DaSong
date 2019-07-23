@@ -12,5 +12,10 @@
                 visibility: hidden;
             }
         }
+
+        .id-京东价备注:not(:placeholder-shown) {
+            color: white;
+            background-color: #dc3545;
+        }
     }
 }

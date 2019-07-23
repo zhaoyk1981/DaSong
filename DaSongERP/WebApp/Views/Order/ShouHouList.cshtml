@@ -42,8 +42,8 @@
                         <label for="Ddl售后状态">售后状态</label>
                         <select id="Ddl售后状态" class="form-control" name="已售后" data-type="bool">
                             <option value="">全部</option>
-                            <option value="true" selected>已售后</option>
-                            <option value="false">未售后</option>
+                            <option value="true">已售后</option>
+                            <option value="false" selected>未售后</option>
                         </select>
                     </div>
                     <div class="form-group col-6">
@@ -54,7 +54,7 @@
                     </div>
                     <div class="form-group col-6">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="My" data-type="bool" id="ChkMy" checked />
+                            <input class="form-check-input" type="checkbox" name="My" data-type="bool" id="ChkMy" />
                             <label class="form-check-label" for="ChkMy">只看我的</label>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
             </nav>
         </div>
         <div>当前记录：<span class="lbl-current-page-record-start"></span>~<span class="lbl-current-page-record-end"></span>/<span class="lbl-records-count"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页数：<span class="lbl-current-page-number"></span>/<span class="lbl-pages-count"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每页：<span class="lbl-page-size"></span></div>
-        <table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline main-table" role="grid">
+        <table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" role="grid">
             <thead>
                 <tr>
                     <th>店铺</th>
