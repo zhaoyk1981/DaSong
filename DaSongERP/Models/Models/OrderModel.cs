@@ -311,5 +311,6 @@ namespace DaSongERP.Models
 
         public bool? 已售后 { get; set; }
 
+        public bool? 自采 { get; set; }
     }
 }

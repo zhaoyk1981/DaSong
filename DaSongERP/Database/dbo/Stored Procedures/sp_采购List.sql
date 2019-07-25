@@ -10,6 +10,8 @@ CREATE PROCEDURE [dbo].[sp_采购List]
 	, @OrderByDesc BIT = 1
 	, @采购人ID UNIQUEIDENTIFIER
 	, @JD订单号 NVARCHAR(50)
+	, @货号 NVARCHAR(50)
+	, @自采 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -22,7 +24,9 @@ BEGIN
 	SELECT @RecordsCount = COUNT(DISTINCT o.Id)
 	FROM vw_Orders o
 	WHERE (@采购人ID IS NULL OR o.[采购人ID] = @采购人ID)
-		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%');
+		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+		AND (@货号 IS NULL OR o.[货号] LIKE '%' + @货号 + '%')
+		AND (@自采 IS NULL OR o.[自采] = @自采);
 
 	SELECT @PagesCount = PagesCount, @PageSize = PageSize, @PageIndex = PageIndex
 	FROM [dbo].[InitPagingParams](@PageSize, @PageIndex, NULL, @RecordsCount);
@@ -31,6 +35,8 @@ BEGIN
 	FROM vw_Orders o
 	WHERE (@采购人ID IS NULL OR o.[采购人ID] = @采购人ID)
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+		AND (@货号 IS NULL OR o.[货号] LIKE '%' + @货号 + '%')
+		AND (@自采 IS NULL OR o.[自采] = @自采)
 	ORDER BY o.进货日期 DESC
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 

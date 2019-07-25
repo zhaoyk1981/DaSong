@@ -6,7 +6,7 @@
 
 @section Head{
     <script id="tmplRow" type="x-tmpl-mustache">
-        <tr data-id="{{ID}}" data-high-light="{{高亮}}">
+        <tr data-id="{{ID}}" data-high-light="{{高亮}}" data-zicai="{{自采}}">
             <td>{{店铺名称}}</td>
             <td>{{JD订单号}}</td>
             <td>
@@ -27,7 +27,7 @@
 
 <div class="vw-import-order vw-order-list" data-page-js="importorders" vm-json="@Model.Json">
     @Html.Partial("_Nav")
-    <h2>电话客服导入</h2>
+    <h2>@ViewBag.Title</h2>
     <hr />
     <div>
         <div class="form" validation-group="default" autocomplete="off">

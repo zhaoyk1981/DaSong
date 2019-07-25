@@ -48,28 +48,28 @@
     };
 
     let txtOrderNumbers_change = function () {
-        let jd = $.trim($('#TxtJD订单号').val());
-        let tb = $.trim($('#Txt淘宝订单号').val());
-        if (jd === '' || tb === '') {
+        $('#LblOrderNumberExists').empty();
+        $('#BtnSubmit').prop('disabled', false);
+        let m = model.createModel();
+        let order = model.capture(m);
+        if (order.JD订单号 === '' && order.货号 === '' && order.淘宝订单号 === '' && order.采购备注 === '') {
             return true;
         }
 
-        $('#LblOrderNumberExists').empty();
-        let json = enhance.HTMLEncode(JSON.stringify({
-            JD订单号: jd,
-            淘宝订单号: tb,
-            ID: $('#LblOrderID').val()
-        }));
+        let json = JSON.stringify(order);
+        let formData = new FormData();
+        formData.append("formJson", enhance.HTMLEncode(json));
         $.ajax({
             url: '/Order/AHasOrder',
             type: 'POST',
             dataType: 'JSON',
-            data: {
-                FormJson: json
-            },
+            data: formData,
+            processData: false,
+            contentType: false,
             success: function (data) {
                 if (data.HasOrder === true) {
-                    $('#LblOrderNumberExists').text('JD订单号和淘宝订单号已存在');
+                    $('#BtnSubmit').prop('disabled', true);
+                    $('#LblOrderNumberExists').text('JD订单号、淘宝订单号、货号和SKU及采购备注 已存在');
                 }
             }
         });
@@ -80,7 +80,7 @@
         ready: function () {
             $('#BtnSubmit').click(btnSubmit_click);
             $('#Txt商品图片').on('change', txtProductImage_change);
-            $('#TxtJD订单号,#Txt淘宝订单号').on('change', txtOrderNumbers_change);
+            $('#TxtJD订单号,#Txt淘宝订单号,#Txt货号,#Txt采购备注').on('change', txtOrderNumbers_change);
         }
     };
 });

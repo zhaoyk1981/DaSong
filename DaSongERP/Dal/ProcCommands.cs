@@ -90,6 +90,8 @@ namespace DaSongERP.Dal
             var cmd = new SqlCommand("sp_GetOrderBy订单号") { CommandType = CommandType.StoredProcedure };
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@淘宝订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@采购备注", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
             return cmd;
         }
@@ -300,6 +302,8 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@拆包超时", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已跟进", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@自采", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_跟进List
@@ -338,6 +342,8 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@采购人ID", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@自采", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_采购List
@@ -355,6 +361,8 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@来快递单号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已拆包", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@拆包超时", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@自采", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_拆包审单List
@@ -384,6 +392,8 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@自采", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_客服List

@@ -7073,6 +7073,9 @@ label.static-label {
     .notify-number .number:empty {
       display: none; }
 
+[data-zicai='true'] {
+  background-color: skyblue !important; }
+
 [data-high-light='true'] {
   background-color: #ffc107 !important; }
 

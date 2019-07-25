@@ -1,11 +1,11 @@
 ﻿@model EditOrderViewModel
 @{
-    ViewBag.Title = "New";
+    ViewBag.Title = "新建采购订单";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="vw-new-order vw-order-form" data-page-js="neworder">
     @Html.Partial("_Nav")
-    <h2>新建采购订单</h2>
+    <h2>@ViewBag.Title</h2>
     <div class="form" validation-group="CreateOrder" autocomplete="off">
         <fieldset>
             <div class="row">
@@ -22,8 +22,6 @@
                 <div class="form-group col-6">
                     <label for="TxtJD订单号">JD订单号：</label>
                     <input type="text" class="id-JD订单号 form-control" name="JD订单号" id="TxtJD订单号" maxlength="50" />
-                    <span class="validator" id="vdJD订单号" data-required="" data-validate-target="#TxtJD订单号"><span class="error-message text-danger">此项必填</span></span>
-                    <div id="LblOrderNumberExists" class="alert alert-danger hide-when-empty"></div>
                 </div>
                 <div class="form-group col-6">
                     <label for="Txt货号">货号：</label>
@@ -83,6 +81,6 @@
         <div class="form-group">
             <button type="button" class="btn btn-primary" id="BtnSubmit">创建</button>
         </div>
-        @*<input type="text" id="txtCopy" class="clip-copy" readonly value=" "/>*@
+        <div id="LblOrderNumberExists" class="alert alert-danger hide-when-empty"></div>
     </div>
 </div>

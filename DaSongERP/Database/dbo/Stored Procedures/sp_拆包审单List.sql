@@ -13,6 +13,8 @@ CREATE PROCEDURE [dbo].[sp_拆包审单List]
 	, @来快递单号 NVARCHAR(50)
 	, @已拆包 BIT
 	, @拆包超时 INT
+	, @货号 NVARCHAR(50)
+	, @自采 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -29,7 +31,9 @@ BEGIN
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@来快递单号 IS NULL OR o.[来快递单号] LIKE '%' + @来快递单号 + '%')
 		AND (@已拆包 IS NULL OR o.[已拆包] = @已拆包)
-		AND (@拆包超时 IS NULL OR DATEDIFF(DAY, o.进货日期, GETDATE()) >= @拆包超时);
+		AND (@拆包超时 IS NULL OR DATEDIFF(DAY, o.进货日期, GETDATE()) >= @拆包超时)
+		AND (@货号 IS NULL OR o.[货号] LIKE '%' + @货号 + '%')
+		AND (@自采 IS NULL OR o.[自采] = @自采);
 
 	SELECT @PagesCount = PagesCount, @PageSize = PageSize, @PageIndex = PageIndex
 	FROM [dbo].[InitPagingParams](@PageSize, @PageIndex, NULL, @RecordsCount);
@@ -42,6 +46,8 @@ BEGIN
 		AND (@来快递单号 IS NULL OR o.[来快递单号] LIKE '%' + @来快递单号 + '%')
 		AND (@已拆包 IS NULL OR o.[已拆包] = @已拆包)
 		AND (@拆包超时 IS NULL OR DATEDIFF(DAY, o.进货日期, GETDATE()) >= @拆包超时)
+		AND (@货号 IS NULL OR o.[货号] LIKE '%' + @货号 + '%')
+		AND (@自采 IS NULL OR o.[自采] = @自采)
 	ORDER BY o.进货日期 DESC
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 

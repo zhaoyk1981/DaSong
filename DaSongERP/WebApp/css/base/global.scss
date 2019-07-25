@@ -74,6 +74,10 @@ label.static-label {
     }
 }
 
+[data-zicai='true'] {
+    background-color: skyblue !important;
+}
+
 [data-high-light='true'] {
-    background-color: #ffc107!important;
+    background-color: #ffc107 !important;
 }

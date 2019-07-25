@@ -8,7 +8,7 @@ SELECT  o.ID, o.进货日期, o.货号, o.商品图片, o.进货数量, o.店铺
                kf.Name AS [客服.Name], CAST(CASE WHEN o.[来快递] = '' THEN 0 ELSE 1 END AS BIT) AS 已跟进, CAST(CASE WHEN o.[导入时间] IS NULL 
                THEN 0 ELSE 1 END AS BIT) AS 已导入, CAST(CASE WHEN o.[拆包时间] IS NULL THEN 0 ELSE 1 END AS BIT) AS 已拆包, 
                CAST(CASE WHEN o.售后操作ID IS NULL THEN 0 ELSE 1 END AS BIT) AS 已售后, dhkf.Name AS [电话客服.Name], o.订单终结, o.订单终结备注, 
-               o.淘宝退回单号
+               o.淘宝退回单号, CAST(CASE WHEN o.JD订单号 = '' THEN 1 ELSE 0 END AS BIT) AS 自采
 FROM     dbo.订单 AS o LEFT OUTER JOIN
                dbo.Users AS cg ON cg.ID = o.采购人ID LEFT OUTER JOIN
                dbo.审单操作 AS sd ON sd.ID = o.审单操作ID LEFT OUTER JOIN
@@ -24,7 +24,7 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'     End
          Begin Table = "gj"
             Begin Extent = 
                Top = 9
@@ -153,6 +153,8 @@ End
 
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
@@ -233,7 +235,7 @@ Begin DesignProperties =
                Right = 269
             End
             DisplayFlags = 280
-            TopColumn = 34
+            TopColumn = 4
          End
          Begin Table = "cg"
             Begin Extent = 
@@ -294,7 +296,9 @@ Begin DesignProperties =
             End
             DisplayFlags = 280
             TopColumn = 0
-   ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_Orders';
+    ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_Orders';
+
+
 
 
 

@@ -116,5 +116,7 @@ namespace DaSongERP.Conditions
             客人地址 = string.IsNullOrEmpty(客人地址) ? default(string) : 客人地址;
             来快递单号 = string.IsNullOrEmpty(来快递单号) ? default(string) : 来快递单号;
         }
+
+        public bool? 自采 { get; set; }
     }
 }

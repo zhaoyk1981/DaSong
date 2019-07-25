@@ -1,11 +1,11 @@
 ﻿@model EditOrderViewModel
 @{
-    ViewBag.Title = "New";
+    ViewBag.Title = "编辑采购订单";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="vw-edit-order vw-order-form" data-page-js="editorder">
     @Html.Partial("_Nav")
-    <h2>编辑采购订单</h2>
+    <h2>@ViewBag.Title</h2>
     <div class="form" validation-group="UpdateOrder" autocomplete="off">
         <fieldset>
             <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
@@ -38,8 +38,7 @@
                 <div class="form-group col-6" @(Model.Order.高亮.GetValueOrDefault() ? "data-high-light=true" : "")>
                     <label for="TxtJD订单号">JD订单号：</label>
                     <input type="text" class="id-JD订单号 form-control" name="JD订单号" id="TxtJD订单号" maxlength="50" value="@Model.Order.JD订单号" />
-                    <span class="validator" id="vdJD订单号" data-required="" data-validate-target="#TxtJD订单号"><span class="error-message text-danger">此项必填</span></span>
-                    <div id="LblOrderNumberExists" class="alert alert-danger hide-when-empty"></div>
+
                 </div>
                 <div class="form-group col-6">
                     <label for="Txt货号">货号：</label>
@@ -107,6 +106,7 @@
         <div class="form-group">
             <button type="button" class="btn btn-primary" id="BtnSubmit">修改</button>
         </div>
+        <div id="LblOrderNumberExists" class="alert alert-danger hide-when-empty"></div>
         @if (!string.IsNullOrEmpty(Model.Order.订单修改备注))
         {
             <div class="form-group">

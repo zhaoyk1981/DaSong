@@ -44,79 +44,57 @@
         let fg = $('#Txt商品图片').closest('.form-group');
         fg.find('a.product-thumbnail-link').prop('href', src).toggle(src !== '');
         fg.find('img').prop('src', src);
-        if (src !== '' && timer !== null) {
+        if (src !== '' && timer != null) {
             clearInterval(timer);
+            timer = null;
         }
     };
 
     let txtOrderNumbers_change = function () {
-        let jd = $.trim($('#TxtJD订单号').val());
-        let tb = $.trim($('#Txt淘宝订单号').val());
-        if (jd === '' || tb === '') {
+        $('#LblOrderNumberExists').empty();
+        $('#BtnSubmit').prop('disabled', false);
+        let m = model.createModel();
+        let order = model.capture(m);
+        if (order.JD订单号 === '' && order.货号 === '' && order.淘宝订单号 === '' && order.采购备注 === '') {
             return true;
         }
 
-        $('#LblOrderNumberExists').empty();
-        let json = enhance.HTMLEncode(JSON.stringify({
-            JD订单号: jd,
-            淘宝订单号: tb
-        }));
+        let json = JSON.stringify(order);
+        let formData = new FormData();
+        formData.append("formJson", enhance.HTMLEncode(json));
+
         $.ajax({
             url: '/Order/AHasOrder',
             type: 'POST',
             dataType: 'JSON',
-            data: {
-                FormJson: json
-            },
+            data: formData,
+            processData: false,
+            contentType: false,
             success: function (data) {
                 if (data.HasOrder === true) {
-                    $('#LblOrderNumberExists').text('JD订单号和淘宝订单号已存在');
+                    $('#BtnSubmit').prop('disabled', true);
+                    $('#LblOrderNumberExists').text('JD订单号、淘宝订单号、货号和SKU及采购备注 已存在');
+                }
+
+                if (timer2 != null) {
+                    clearInterval(timer2);
+                    timer2 = null;
                 }
             }
         });
         return true;
     };
 
-    let fireKeyEvent = function (el, evtType, keyCode) {
-        var doc = el.ownerDocument,
-            win = doc.defaultView || doc.parentWindow,
-            evtObj;
-        if (doc.createEvent) {
-            if (win.KeyEvent) {
-                evtObj = doc.createEvent('KeyEvents');
-                evtObj.initKeyEvent(evtType, true, true, win, false, false, false, false, keyCode, 0);
-            }
-            else {
-                evtObj = doc.createEvent('UIEvents');
-                Object.defineProperty(evtObj, 'keyCode', {
-                    get: function () { return this.keyCodeVal; }
-                });
-                Object.defineProperty(evtObj, 'which', {
-                    get: function () { return this.keyCodeVal; }
-                });
-                evtObj.initUIEvent(evtType, true, true, win, 1);
-                evtObj.keyCodeVal = keyCode;
-                if (evtObj.keyCode !== keyCode) {
-                    console.log("keyCode " + evtObj.keyCode + " 和 (" + evtObj.which + ") 不匹配");
-                }
-            }
-            el.dispatchEvent(evtObj);
-        }
-        else if (doc.createEventObject) {
-            evtObj = doc.createEventObject();
-            evtObj.keyCode = keyCode;
-            el.fireEvent('on' + evtType, evtObj);
-        }
-    };
-
     let timer = null;
+    let timer2 = null;
 
     return {
         ready: function () {
             $('#BtnSubmit').click(btnSubmit_click);
             $('#Txt商品图片').on('change', txtProductImage_change);
-            $('#TxtJD订单号,#Txt淘宝订单号').on('change', txtOrderNumbers_change);
+            $('#TxtJD订单号,#Txt淘宝订单号,#Txt货号,#Txt采购备注').on('change', txtOrderNumbers_change);
             timer = setInterval(txtProductImage_change, 1000);
+            timer2 = setInterval(txtOrderNumbers_change, 1000);
         }
     };
 });
