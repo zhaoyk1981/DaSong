@@ -15,7 +15,7 @@ namespace DaSongERP.Dal
 {
     public class ExcelDao : Dao
     {
-        public IList<OrderModel> Read(Stream excelStream, bool isXlsx)
+        public IList<OrderModel> ReadExcel电话客服(Stream excelStream, bool isXlsx)
         {
             excelStream.Position = 0;
             IList<OrderModel> orders = new List<OrderModel>();
@@ -121,7 +121,72 @@ namespace DaSongERP.Dal
             return orders;
         }
 
-        public bool Write(Stream excelStream, bool isXlsx, IList<OrderModel> orders, string file)
+        public IList<OrderModel> ReadExcel拆包审单(Stream excelStream, bool isXlsx)
+        {
+            excelStream.Position = 0;
+            IList<OrderModel> orders = new List<OrderModel>();
+            IWorkbook wk = null;
+            if (isXlsx)
+            {
+                wk = new XSSFWorkbook(excelStream);
+            }
+            else
+            {
+                wk = new HSSFWorkbook(excelStream);
+            }
+
+            //获取第一个sheet
+            ISheet sheet = wk.GetSheetAt(0);
+            //获取第一行
+            IRow headrow = sheet.GetRow(0);
+
+            int idxJD订单号 = 0;
+            int idx运单号 = 1;
+
+            for (var rowIndex = 1; rowIndex < sheet.PhysicalNumberOfRows; rowIndex++)
+            {
+                var o = new OrderModel();
+                var row = sheet.GetRow(rowIndex);
+                if (row == null)
+                {
+                    continue;
+                }
+
+                var cell运单号 = row.GetCell(idx运单号);
+                if (cell运单号 == null)
+                {
+                    continue;
+                }
+
+                o.来快递单号 = (cell运单号.StringCellValue ?? string.Empty).Trim();
+
+                var cellJD订单号 = row.GetCell(idxJD订单号);
+                if (cellJD订单号 == null)
+                {
+                    continue;
+                }
+
+                o.JD订单号 = (cellJD订单号.StringCellValue ?? string.Empty).Trim();
+
+                if (string.IsNullOrEmpty(o.JD订单号))
+                {
+                    continue;
+                }
+
+                if (string.IsNullOrEmpty(o.来快递单号))
+                {
+                    continue;
+                }
+                
+                orders.Add(o);
+            }
+
+            wk.Close();
+
+            return orders;
+        }
+
+        public bool WriteExcel电话客服(Stream excelStream, bool isXlsx, IList<OrderModel> orders, string file)
         {
             excelStream.Position = 0;
             IWorkbook wk = null;

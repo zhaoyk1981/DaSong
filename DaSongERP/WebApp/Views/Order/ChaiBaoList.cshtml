@@ -31,6 +31,24 @@
     @Html.Partial("_Nav")
     <h2>@ViewBag.Title</h2>
     <hr />
+    <div>
+        <div class="form" validation-group="default" autocomplete="off">
+            <fieldset>
+                <div class="form-group">
+                    <label for="IptExcel">Excel</label>
+                    <input type="file" class="form-control-file" id="IptExcel" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                    <span class="validator" id="vdFile" data-required="" data-validate-target="#IptExcel"><span class="error-message text-danger">此项必填</span></span>
+                </div>
+            </fieldset>
+            <div>
+                <button type="button" class="btn btn-primary" id="BtnSubmit">上传</button>
+            </div>
+            <br />
+            <br />
+            <a href="/Order/Import" id="LblMessage" class="alert alert-info hide-when-empty"></a>
+        </div>
+    </div>
+    <hr />
     <div class="search-conditions">
         <div class="form" autocomplete="off" default-button="#BtnSearch">
             <div class="row">

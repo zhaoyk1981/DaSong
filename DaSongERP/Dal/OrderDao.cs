@@ -179,5 +179,12 @@ namespace DaSongERP.Dal
             var m = DBHelper.ExecuteEntityList<OrderCountModel>(cmd).FirstOrDefault();
             return m;
         }
+
+        public int Update拆包4Excel(OrderModel order)
+        {
+            var cmd = ProcCommands.sp_Update拆包4Excel().SetParameterValues(order);
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
     }
 }

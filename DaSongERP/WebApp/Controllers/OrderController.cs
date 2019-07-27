@@ -62,6 +62,29 @@ namespace DaSongERP.WebApp.Controllers
         }
 
         [HttpPost]
+        public ActionResult AChaiBaoUpload()
+        {
+            var excelStream = this.Request.Files[0].InputStream;
+            var ext = Path.GetExtension(this.Request.Files[0].FileName).ToLower();
+            if (ext != ".xlsx" && ext != ".xls")
+            {
+                return Json(new
+                {
+                    Success = false,
+                    ErrorMessage = $"不支持 {ext} 文件"
+                });
+            }
+
+            bool isXlsx = string.Compare(Path.GetExtension(this.Request.Files[0].FileName), ".xlsx", true) == 0;
+            var file = OrderBiz.批量导入运单号(excelStream, isXlsx);
+            //var 未导入 = OrderBiz.Get未导入Orders().Count;
+            return Json(new
+            {
+                Success = true
+            });
+        }
+
+        [HttpPost]
         public ActionResult AChaiBaoList()
         {
             var condition = this.Request.Params.Map<OrderCondition>();
@@ -70,6 +93,8 @@ namespace DaSongERP.WebApp.Controllers
             var list = this.OrderBiz.Get拆包审单List(condition);
             return this.Json(list);
         }
+
+        
 
         [HttpPost]
         public ActionResult AGetOrderID()

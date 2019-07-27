@@ -634,5 +634,15 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_店铺List
+
+        #region sp_Update拆包4Excel
+        public static SqlCommand sp_Update拆包4Excel()
+        {
+            var cmd = new SqlCommand("sp_Update拆包4Excel") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@来快递单号", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Update拆包4Excel
     }
 }

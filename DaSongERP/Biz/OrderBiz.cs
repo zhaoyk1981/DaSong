@@ -97,7 +97,7 @@ namespace DaSongERP.Biz
         {
             var memStream = new MemoryStream();
             excelStream.CopyTo(memStream);
-            var ordersInExcel = ExcelDao.Read(excelStream, isXlsx);
+            var ordersInExcel = ExcelDao.ReadExcel电话客服(excelStream, isXlsx);
             foreach (var order in ordersInExcel)
             {
                 order.导入结果 = OrderDao.Update电话备注(order);
@@ -105,8 +105,25 @@ namespace DaSongERP.Biz
 
             var file = $"导入结果_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xls{(isXlsx ? "x" : "")}";
             var path = $"{HttpContext.Current.Server.MapPath("~/Excel")}\\{file}";
-            ExcelDao.Write(memStream, isXlsx, ordersInExcel, path);
+            ExcelDao.WriteExcel电话客服(memStream, isXlsx, ordersInExcel, path);
             return file;
+        }
+
+        public string 批量导入运单号(Stream excelStream, bool isXlsx)
+        {
+            var memStream = new MemoryStream();
+            excelStream.CopyTo(memStream);
+            var ordersInExcel = ExcelDao.ReadExcel拆包审单(excelStream, isXlsx);
+            foreach (var order in ordersInExcel)
+            {
+                order.导入结果 = OrderDao.Update拆包4Excel(order);
+            }
+
+            //var file = $"导入结果_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xls{(isXlsx ? "x" : "")}";
+            //var path = $"{HttpContext.Current.Server.MapPath("~/Excel")}\\{file}";
+            //ExcelDao.WriteExcel电话客服(memStream, isXlsx, ordersInExcel, path);
+            //return file;
+            return string.Empty;
         }
 
         public IList<OrderModel> Get未导入Orders()

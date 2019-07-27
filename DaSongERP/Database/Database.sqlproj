@@ -128,5 +128,6 @@
     <Build Include="dbo\Stored Procedures\sp_Get店铺ByID.sql" />
     <Build Include="dbo\Stored Procedures\sp_Delete店铺.sql" />
     <Build Include="dbo\Stored Procedures\sp_Create店铺.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Update拆包4Excel.sql" />
   </ItemGroup>
 </Project>
