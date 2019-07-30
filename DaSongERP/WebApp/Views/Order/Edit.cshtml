@@ -48,12 +48,10 @@
                 <div class="form-group col-6">
                     <label for="Ddl店铺ID">店铺名称：</label>
                     <input type="text" class="id-店铺 form-control" id="Txt店铺" maxlength="50" name="店铺" value="@Model.Order.店铺" />
-                    <span class="validator" id="vd店铺" data-required="" data-validate-target="#Txt店铺"><span class="error-message text-danger">此项必填</span></span>
                 </div>
                 <div class="form-group col-6">
                     <label for="Txt京东价">京东价：</label>
-                    <input type="number" step="0.01" min="0" class="id-京东价 form-control" name="京东价" id="Txt京东价" value="@Model.Order.京东价.Value.ToString("F")" />
-                    <span class="validator" id="vd京东价" data-required="" data-validate-target="#Txt京东价"><span class="error-message text-danger">此项必填</span></span>
+                    <input type="number" step="0.01" min="0" class="id-京东价 form-control" name="京东价" id="Txt京东价" value="@(Model.Order.京东价.HasValue ? Model.Order.京东价.Value.ToString("F") : string.Empty)" />
                 </div>
                 <div class="form-group col-12">
                     <label for="Txt客人地址">客人地址：</label>
