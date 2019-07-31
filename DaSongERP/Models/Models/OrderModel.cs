@@ -44,6 +44,9 @@ namespace DaSongERP.Models
 
         public string JD订单号 { get; set; }
 
+        public string 客人姓名 { get; set; }
+
+        public string 客人电话 { get; set; }
         public string 客人地址 { get; set; }
 
         public string 淘宝账号 { get; set; }

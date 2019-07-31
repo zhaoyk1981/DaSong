@@ -30,6 +30,10 @@ namespace DaSongERP.Conditions
 
         public string JD订单号 { get; set; }
 
+        public string 客人姓名 { get; set; }
+
+        public string 客人电话 { get; set; }
+
         public string 客人地址 { get; set; }
 
         public Guid? 淘宝账号ID { get; set; }
@@ -118,5 +122,7 @@ namespace DaSongERP.Conditions
         }
 
         public bool? 自采 { get; set; }
+
+        public bool? 高亮 { get; set; }
     }
 }

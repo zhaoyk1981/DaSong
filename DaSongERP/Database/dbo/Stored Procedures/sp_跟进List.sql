@@ -14,6 +14,7 @@ CREATE PROCEDURE [dbo].[sp_跟进List]
 	, @已跟进 BIT
 	, @货号 NVARCHAR(50)
 	, @自采 BIT
+	, @高亮 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -31,7 +32,8 @@ BEGIN
 		AND (@拆包超时 IS NULL OR DATEDIFF(DAY, o.进货日期, GETDATE()) >= @拆包超时)
 		AND (@已跟进 IS NULL OR o.已跟进 = @已跟进)
 		AND (@货号 IS NULL OR o.[货号] LIKE '%' + @货号 + '%')
-		AND (@自采 IS NULL OR o.[自采] = @自采);
+		AND (@自采 IS NULL OR o.[自采] = @自采)
+		AND (@高亮 IS NULL OR o.[高亮] = @高亮);
 
 	SELECT @PagesCount = PagesCount, @PageSize = PageSize, @PageIndex = PageIndex
 	FROM [dbo].[InitPagingParams](@PageSize, @PageIndex, NULL, @RecordsCount);
@@ -45,6 +47,7 @@ BEGIN
 		AND (@已跟进 IS NULL OR o.已跟进 = @已跟进)
 		AND (@货号 IS NULL OR o.[货号] LIKE '%' + @货号 + '%')
 		AND (@自采 IS NULL OR o.[自采] = @自采)
+		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
 	ORDER BY o.进货日期 DESC
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 

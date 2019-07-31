@@ -288,14 +288,31 @@ namespace DaSongERP.Biz
         private string 生成订单修改备注(OrderModel newOrder, string role)
         {
             var oldOrder = this.GetOrderBy(newOrder.ID.Value);
-            if (oldOrder.客人地址 == newOrder.客人地址)
+            var b = new StringBuilder();
+
+            if (oldOrder.客人姓名 != newOrder.客人姓名)
+            {
+                b.Append($"修改了客人姓名，\r\n原值为\"{oldOrder.客人姓名}\"，\r\n新值为\"{newOrder.客人姓名}\"。\r\n");
+            }
+
+            if (oldOrder.客人电话 != newOrder.客人电话)
+            {
+                b.Append($"修改了客人电话，\r\n原值为\"{oldOrder.客人电话}\"，\r\n新值为\"{newOrder.客人电话}\"。\r\n");
+            }
+
+            if (oldOrder.客人地址 != newOrder.客人地址)
+            {
+                b.Append($"修改了客人地址，\r\n原值为\"{oldOrder.客人地址}\"，\r\n新值为\"{newOrder.客人地址}\"。\r\n");
+            }
+
+            if (b.Length == 0)
             {
                 return string.Empty;
             }
 
             var user = this.UserDao.GetUserBy(this.UserID.Value);
 
-            return $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - {role} {user.Name} 修改了客人地址(JD订单号:{oldOrder.JD订单号})，\r\n原值为\"{oldOrder.客人地址}\"，\r\n新值为\"{newOrder.客人地址}\"。\r\n";
+            return $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - {role}: {user.Name}, JD订单号:{oldOrder.JD订单号}\r\n{b.ToString()}";
         }
 
         public 采购ListViewModel Get采购ListViewModel()

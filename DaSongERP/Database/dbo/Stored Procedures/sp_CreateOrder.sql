@@ -9,6 +9,8 @@ CREATE PROCEDURE [dbo].[sp_CreateOrder]
     ,@进货数量 int
     ,@店铺 nvarchar(50)
     ,@JD订单号 nvarchar(50)
+	,@客人姓名 nvarchar(50)
+	,@客人电话 nvarchar(50)
     ,@客人地址 nvarchar(150)
     ,@淘宝账号 nvarchar(50)
 	,@淘宝订单号 NVARCHAR(50)
@@ -31,6 +33,8 @@ BEGIN
            ,[进货数量]
            ,[店铺]
            ,[JD订单号]
+		   ,[客人姓名]
+		   ,[客人电话]
            ,[客人地址]
            ,[淘宝账号]
 		   ,[淘宝订单号]
@@ -47,6 +51,8 @@ BEGIN
            ,@进货数量
            ,@店铺
            ,@JD订单号
+		   ,@客人姓名
+		   ,@客人电话
            ,@客人地址
            ,@淘宝账号
 		   ,@淘宝订单号

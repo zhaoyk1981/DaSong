@@ -10,6 +10,7 @@ CREATE PROCEDURE [dbo].[sp_订单跟进]
 	, @发货时间 DATETIME2(7)
 	, @发货备注 NVARCHAR(MAX)
 	, @跟进人ID UNIQUEIDENTIFIER
+	, @高亮 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -22,6 +23,7 @@ BEGIN
 		, 发货时间 = @发货时间
 		, 发货备注 = @发货备注
 		, 跟进人ID = @跟进人ID
+		, [高亮] = @高亮
 	WHERE ID = @ID;
 
 	SELECT @@ROWCOUNT AS [RowCount];

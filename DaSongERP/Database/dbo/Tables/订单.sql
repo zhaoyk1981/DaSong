@@ -6,6 +6,8 @@
     [进货数量]   INT              NULL,
     [店铺]     NVARCHAR (50)    NOT NULL,
     [JD订单号]  NVARCHAR (50)    CONSTRAINT [DF_订单_京东订单号] DEFAULT ('') NOT NULL,
+    [客人姓名]   NVARCHAR (50)    CONSTRAINT [DF_订单_客人姓名] DEFAULT ('') NOT NULL,
+    [客人电话]   NVARCHAR (50)    CONSTRAINT [DF_订单_客人电话] DEFAULT ('') NOT NULL,
     [客人地址]   NVARCHAR (150)   CONSTRAINT [DF_订单_客人地址] DEFAULT ('') NOT NULL,
     [淘宝账号]   NVARCHAR (50)    NOT NULL,
     [淘宝订单号]  NVARCHAR (50)    CONSTRAINT [DF_订单_淘宝订单号] DEFAULT ('') NOT NULL,
@@ -42,6 +44,8 @@
     [淘宝退回单号] NVARCHAR (50)    CONSTRAINT [DF_订单_淘宝退回单号] DEFAULT ('') NOT NULL,
     CONSTRAINT [PK_订单] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 

@@ -11,6 +11,7 @@ CREATE PROCEDURE [dbo].[sp_客服List]
 	, @JD订单号 NVARCHAR(50)
 	, @货号 NVARCHAR(50)
 	, @自采 BIT
+	, @高亮 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -25,7 +26,8 @@ BEGIN
 	WHERE ISNULL(o.订单终结, 0) = 0
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@货号 IS NULL OR o.[货号] LIKE '%' + @货号 + '%')
-		AND (@自采 IS NULL OR o.[自采] = @自采);
+		AND (@自采 IS NULL OR o.[自采] = @自采)
+		AND (@高亮 IS NULL OR o.[高亮] = @高亮);
 
 	SELECT @PagesCount = PagesCount, @PageSize = PageSize, @PageIndex = PageIndex
 	FROM [dbo].[InitPagingParams](@PageSize, @PageIndex, NULL, @RecordsCount);
@@ -36,6 +38,7 @@ BEGIN
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@货号 IS NULL OR o.[货号] LIKE '%' + @货号 + '%')
 		AND (@自采 IS NULL OR o.[自采] = @自采)
+		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
 	ORDER BY o.进货日期 DESC
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 

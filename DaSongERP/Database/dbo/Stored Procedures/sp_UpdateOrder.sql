@@ -8,6 +8,8 @@ CREATE PROCEDURE [dbo].[sp_UpdateOrder]
     ,@进货数量 int
     ,@店铺 nvarchar(50)
     ,@JD订单号 nvarchar(50)
+	,@客人姓名 nvarchar(50)
+	,@客人电话 nvarchar(50)
     ,@客人地址 nvarchar(150)
     ,@淘宝账号 nvarchar(50)
 	,@淘宝订单号 NVARCHAR(50)
@@ -31,7 +33,9 @@ BEGIN
            ,[进货数量] = @进货数量
            ,[店铺] = @店铺
            ,[JD订单号] = @JD订单号
-           ,[客人地址] = @客人地址
+		   ,[客人姓名] = CASE WHEN ISNULL(@客人姓名, '') = '' THEN [客人姓名] ELSE @客人姓名 END,
+		[客人电话] = CASE WHEN ISNULL(@客人电话, '') = '' THEN [客人电话] ELSE @客人电话 END,
+		[客人地址] = CASE WHEN ISNULL(@客人地址, '') = '' THEN [客人地址] ELSE @客人地址 END
            ,[淘宝账号] = @淘宝账号
 		   ,[淘宝订单号] = @淘宝订单号
            ,[采购备注] = @采购备注

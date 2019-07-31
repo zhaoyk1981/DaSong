@@ -24,11 +24,9 @@ BEGIN
 
     UPDATE [dbo].[订单] SET
 		电话客服ID = @电话客服ID,
-		电话备注 = @电话备注,
+		电话备注 = CASE WHEN ISNULL(@电话备注, '') = '' THEN [电话备注] ELSE @电话备注 END,
 		导入时间 = GETDATE()
-	WHERE	JD订单号 = @JD订单号
-		AND 电话备注 <> @电话备注
-		AND ISNULL(@电话备注, '') <> '';
+	WHERE	JD订单号 = @JD订单号;
 
 	SELECT @Count + CASE WHEN @@ROWCOUNT >= 1 THEN 1 ELSE 0 END AS [Result];
 END

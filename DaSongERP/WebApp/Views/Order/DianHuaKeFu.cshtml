@@ -43,6 +43,16 @@
                     <label class="static-label">京东价：</label>
                     <span>@DP.Txt(Model.Order.京东价)</span>
                 </div>
+                <div class="form-group col-6">
+                    <label for="Txt客人姓名">客人姓名：</label>
+                    <input type="text" class="id-客人姓名 form-control" name="客人姓名" id="Txt客人姓名" maxlength="50" value="@(Model.Order.客人姓名)"/>
+                    <span class="validator" id="vd客人姓名" data-required="" data-validate-target="#Txt客人姓名"><span class="error-message text-danger">此项必填</span></span>
+                </div>
+                <div class="form-group col-6">
+                    <label for="Txt客人电话">客人电话：</label>
+                    <input type="text" class="id-客人电话 form-control" name="客人电话" id="Txt客人电话" maxlength="50" value="@(Model.Order.客人电话)" />
+                    <span class="validator" id="vd客人电话" data-required="" data-validate-target="#Txt客人电话"><span class="error-message text-danger">此项必填</span></span>
+                </div>
                 <div class="form-group col-12">
                     <label for="Txt客人地址">客人地址：</label>
                     <input type="text" class="form-control" name="客人地址" id="Txt客人地址" value="@(Model.Order.客人地址)" maxlength="150" />
@@ -101,7 +111,7 @@
                 <div class="form-group col-6">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="高亮" data-type="bool" id="Chk高亮" @(Model.Order.高亮.GetValueOrDefault() ? "checked" : "") />
-                        <label class="form-check-label" for="Chk高亮">高亮</label>
+                        <label class="form-check-label" for="Chk高亮">异常订单</label>
                     </div>
                 </div>
             </div>

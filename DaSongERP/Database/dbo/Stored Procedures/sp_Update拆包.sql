@@ -10,6 +10,7 @@ CREATE PROCEDURE [dbo].[sp_Update拆包]
 	, @转发单号 NVARCHAR(50)
 	, @拆包人ID UNIQUEIDENTIFIER
 	, @订单终结 BIT
+	, @高亮 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -23,6 +24,7 @@ BEGIN
 		, [转发单号] = @转发单号
 		, [订单终结] = @订单终结
 		, [拆包时间] = GETDATE()
+		, [高亮] = @高亮
 	WHERE ID = @ID;
 
 	SELECT @@ROWCOUNT [RowCount];
