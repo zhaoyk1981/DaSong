@@ -34,7 +34,7 @@
                 alert('操作成功');
                 btnSearch_click();
                 //$("#LblMessage").text('未导入订单数量：' + data.未导入);
-                //window.location = data.Url;
+                window.location = data.Url;
             }
         });
     };

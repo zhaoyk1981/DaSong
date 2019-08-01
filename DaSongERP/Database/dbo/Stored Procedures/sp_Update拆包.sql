@@ -10,6 +10,7 @@ CREATE PROCEDURE [dbo].[sp_Update拆包]
 	, @转发单号 NVARCHAR(50)
 	, @拆包人ID UNIQUEIDENTIFIER
 	, @订单终结 BIT
+	,@订单终结备注 NVARCHAR(MAX)
 	, @高亮 BIT
 AS
 BEGIN
@@ -23,6 +24,7 @@ BEGIN
 		, [拆包人员备注] = @拆包人员备注
 		, [转发单号] = @转发单号
 		, [订单终结] = @订单终结
+		,[订单终结备注] = @订单终结备注
 		, [拆包时间] = GETDATE()
 		, [高亮] = @高亮
 	WHERE ID = @ID;

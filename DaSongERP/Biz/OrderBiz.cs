@@ -103,9 +103,26 @@ namespace DaSongERP.Biz
                 order.导入结果 = OrderDao.Update电话备注(order);
             }
 
-            var file = $"导入结果_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xls{(isXlsx ? "x" : "")}";
+            var file = $"电话客服导入结果_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xls{(isXlsx ? "x" : "")}";
             var path = $"{HttpContext.Current.Server.MapPath("~/Excel")}\\{file}";
-            ExcelDao.WriteExcel电话客服(memStream, isXlsx, ordersInExcel, path);
+            ExcelDao.WriteExcel导入结果Update(memStream, "处理结果", isXlsx, ordersInExcel, path);
+            return file;
+        }
+
+        public string 导入采购订单(Stream excelStream, bool isXlsx)
+        {
+            var memStream = new MemoryStream();
+            excelStream.CopyTo(memStream);
+            var ordersInExcel = ExcelDao.ReadExcel采购订单(excelStream, isXlsx);
+            foreach (var order in ordersInExcel)
+            {
+                order.采购人ID = this.UserID;
+                order.导入结果 = OrderDao.Create4Excel(order);
+            }
+
+            var file = $"采购订单导入结果_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xls{(isXlsx ? "x" : "")}";
+            var path = $"{HttpContext.Current.Server.MapPath("~/Excel")}\\{file}";
+            ExcelDao.WriteExcel导入结果Create(memStream, "处理结果", isXlsx, ordersInExcel, path);
             return file;
         }
 
@@ -119,11 +136,10 @@ namespace DaSongERP.Biz
                 order.导入结果 = OrderDao.Update拆包4Excel(order);
             }
 
-            //var file = $"导入结果_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xls{(isXlsx ? "x" : "")}";
-            //var path = $"{HttpContext.Current.Server.MapPath("~/Excel")}\\{file}";
-            //ExcelDao.WriteExcel电话客服(memStream, isXlsx, ordersInExcel, path);
-            //return file;
-            return string.Empty;
+            var file = $"导入运单号结果_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xls{(isXlsx ? "x" : "")}";
+            var path = $"{HttpContext.Current.Server.MapPath("~/Excel")}\\{file}";
+            ExcelDao.WriteExcel导入结果Update(memStream, "处理结果", isXlsx, ordersInExcel, path);
+            return file;
         }
 
         public IList<OrderModel> Get未导入Orders()
@@ -426,13 +442,13 @@ namespace DaSongERP.Biz
                 return;
             }
 
-            order.店铺名称 = $"店铺账号：{order.店铺}";
+            order.店铺名称 = $"{order.店铺}";
             if (店铺List == null)
             {
                 店铺List = this.MetaDao.GetAll店铺();
             }
 
-            var idx = (order.店铺 ?? string.Empty).IndexOf("_");
+            var idx = (order.店铺 ?? string.Empty).LastIndexOf("_");
             var prefix = idx <= 0 ? (order.店铺 ?? string.Empty).Trim() : order.店铺.Substring(0, idx).Trim();
             if (string.IsNullOrWhiteSpace(prefix))
             {

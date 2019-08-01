@@ -3,72 +3,75 @@
     ViewBag.Title = "菜单";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <div>
-        @Html.Partial("_Nav")
-        <h2>@ViewBag.Title</h2>
+<div>
+    @Html.Partial("_Nav")
+    <h2>@ViewBag.Title</h2>
 
-        @if (PM.Any(UPM.采购))
-        {
-            <div>
-                <a href="/Order/New">新建采购订单</a>
-            </div>
-            <div>
-                <a href="/Order/CaiGouList">采购订单列表</a>
-            </div>
-        }
-        @if (PM.Any(UPM.跟进))
-        {
-            <div>
-                <a href="/Order/GenJinList">快递跟进</a>
-            </div>
-        }
-        @if (PM.Any(UPM.电话))
-        {
-            <div>
-                <a href="/Order/Import">电话客服</a>
-            </div>
-        }
-        @if (PM.Any(UPM.拆包))
-        {
-            <div>
-                <a href="/Order/ChaiBaoList">拆包审单</a>
-            </div>
-        }
-        @if (PM.Any(UPM.售后))
-        {
-            <div>
-                <a href="/Order/ShouHouList">售后订单列表</a>
-            </div>
-        }
-        @if (PM.Any(UPM.客服))
-        {
-            <div>
-                <a href="/Order/KeFuList">客服列表</a>
-            </div>
-        }
-        @if (PM.Any(UPM.管理))
-        {
-            <div>
-                <a href="/User">用户管理</a>
-            </div>
-            <div>
-                <a href="/Meta/ShenDanList">审单操作维护</a>
-            </div>
-            <div>
-                <a href="/Meta/ShouHouList">售后操作维护</a>
-            </div>
-            <div>
-                <a href="/Meta/ShouHouReasonList">售后原因维护</a>
-            </div>
-            <div>
-                <a href="/Meta/ShopList">店铺维护</a>
-            </div>
-        }
-
-        <br />
-        <br />
-        <br />
+    @if (PM.Any(UPM.采购))
+    {
         <div>
-            <a href="/SignOut">注销</a>
+            <a href="/Order/New">新建采购订单</a>
         </div>
+        <div>
+            <a href="/Order/ImportCaiGou">导入采购订单</a>
+        </div>
+        <div>
+            <a href="/Order/CaiGouList">采购订单列表</a>
+        </div>
+    }
+    @if (PM.Any(UPM.跟进))
+    {
+        <div>
+            <a href="/Order/GenJinList">快递跟进</a>
+        </div>
+    }
+    @if (PM.Any(UPM.电话))
+    {
+        <div>
+            <a href="/Order/Import">电话客服</a>
+        </div>
+    }
+    @if (PM.Any(UPM.拆包))
+    {
+        <div>
+            <a href="/Order/ChaiBaoList">拆包审单</a>
+        </div>
+    }
+    @if (PM.Any(UPM.售后))
+    {
+        <div>
+            <a href="/Order/ShouHouList">售后订单列表</a>
+        </div>
+    }
+    @if (PM.Any(UPM.客服))
+    {
+        <div>
+            <a href="/Order/KeFuList">客服列表</a>
+        </div>
+    }
+    @if (PM.Any(UPM.管理))
+    {
+        <div>
+            <a href="/User">用户管理</a>
+        </div>
+        <div>
+            <a href="/Meta/ShenDanList">审单操作维护</a>
+        </div>
+        <div>
+            <a href="/Meta/ShouHouList">售后操作维护</a>
+        </div>
+        <div>
+            <a href="/Meta/ShouHouReasonList">售后原因维护</a>
+        </div>
+        <div>
+            <a href="/Meta/ShopList">店铺维护</a>
+        </div>
+    }
+
+    <br />
+    <br />
+    <br />
+    <div>
+        <a href="/SignOut">注销</a>
     </div>
+</div>

@@ -15,6 +15,8 @@ namespace DaSongERP.Dal
 {
     public class ExcelDao : Dao
     {
+        #region 导入电话客服
+
         public IList<OrderModel> ReadExcel电话客服(Stream excelStream, bool isXlsx)
         {
             excelStream.Position = 0;
@@ -32,31 +34,18 @@ namespace DaSongERP.Dal
             //获取第一个sheet
             ISheet sheet = wk.GetSheetAt(0);
             //获取第一行
-            IRow headrow = sheet.GetRow(0);
+            IRow headRow = sheet.GetRow(0);
 
-            int? idxJD订单号 = null;
-            int? idx电话备注 = null;
-            for (var i = 0; i < headrow.PhysicalNumberOfCells; i++)
+            var dictColumns = new Dictionary<string, int>();
+            foreach (var cell in headRow.Cells)
             {
-                var value = (headrow.Cells[i].StringCellValue ?? string.Empty).Trim();
-                if (string.Compare(value, "销售平台单号", true) == 0)
+                var colName = (cell.StringCellValue ?? string.Empty).Trim();
+                if (string.IsNullOrEmpty(colName) || dictColumns.ContainsKey(colName))
                 {
-                    idxJD订单号 = i;
-                }
-                else if (string.Compare(value, "电话备注", true) == 0)
-                {
-                    idx电话备注 = i;
+                    continue;
                 }
 
-                if (idxJD订单号.HasValue && idx电话备注.HasValue)
-                {
-                    break;
-                }
-            }
-
-            if (!idxJD订单号.HasValue || !idx电话备注.HasValue)
-            {
-                return orders;
+                dictColumns.Add(colName, cell.ColumnIndex);
             }
 
             OrderModel lastOrder = null;
@@ -68,51 +57,21 @@ namespace DaSongERP.Dal
                     continue;
                 }
 
-                var cell电话备注 = row.GetCell(idx电话备注.Value);
-                if (cell电话备注 == null)
-                {
-                    continue;
-                }
-
-                var 电话备注 = (cell电话备注.StringCellValue ?? string.Empty).Trim();
-                var JD订单号 = string.Empty;
-                var cellJD订单号 = row.GetCell(idxJD订单号.Value);
-                if (cellJD订单号 == null)
-                {
-                    if (lastOrder == null)
-                    {
-                        continue;
-                    }
-
-                    JD订单号 = lastOrder.JD订单号;
-                }
-                else
-                {
-                    JD订单号 = (cellJD订单号.StringCellValue ?? string.Empty).Trim();
-                }
-
-                if (string.IsNullOrEmpty(JD订单号))
-                {
-                    continue;
-                }
-
-                if (string.IsNullOrEmpty(电话备注))
-                {
-                    if (JD订单号 == lastOrder?.JD订单号)
-                    {
-                        电话备注 = lastOrder.电话备注;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-
                 var o = new OrderModel();
-                orders.Add(o);
-                o.JD订单号 = JD订单号;
-                o.电话备注 = 电话备注;
+                o.电话备注 = GetStringValue(lastOrder?.电话备注, row, dictColumns, "电话备注");
+                o.JD订单号 = GetStringValue(lastOrder?.JD订单号, row, dictColumns, "销售平台单号");
+                o.客人姓名 = GetStringValue(lastOrder?.客人姓名, row, dictColumns, "收件人");
+                o.客人电话 = GetStringValue(lastOrder?.客人电话, row, dictColumns, "电话");
+                o.客人地址 = GetStringValue(lastOrder?.客人地址, row, dictColumns, "地址");
                 o.RowIndex = rowIndex;
+
+                if (string.IsNullOrEmpty(o.JD订单号))
+                {
+                    lastOrder = null;
+                    continue;
+                }
+
+                orders.Add(o);
                 lastOrder = o;
             }
 
@@ -120,6 +79,10 @@ namespace DaSongERP.Dal
 
             return orders;
         }
+
+        #endregion 导入电话客服
+
+        #region 导入拆包审单
 
         public IList<OrderModel> ReadExcel拆包审单(Stream excelStream, bool isXlsx)
         {
@@ -138,35 +101,32 @@ namespace DaSongERP.Dal
             //获取第一个sheet
             ISheet sheet = wk.GetSheetAt(0);
             //获取第一行
-            IRow headrow = sheet.GetRow(0);
+            IRow headRow = sheet.GetRow(0);
 
-            int idxJD订单号 = 0;
-            int idx运单号 = 1;
+            var dictColumns = new Dictionary<string, int>();
+            foreach (var cell in headRow.Cells)
+            {
+                var colName = (cell.StringCellValue ?? string.Empty).Trim();
+                if (string.IsNullOrEmpty(colName) || dictColumns.ContainsKey(colName))
+                {
+                    continue;
+                }
+
+                dictColumns.Add(colName, cell.ColumnIndex);
+            }
 
             for (var rowIndex = 1; rowIndex < sheet.PhysicalNumberOfRows; rowIndex++)
             {
-                var o = new OrderModel();
                 var row = sheet.GetRow(rowIndex);
                 if (row == null)
                 {
                     continue;
                 }
 
-                var cell运单号 = row.GetCell(idx运单号);
-                if (cell运单号 == null)
-                {
-                    continue;
-                }
-
-                o.来快递单号 = (cell运单号.StringCellValue ?? string.Empty).Trim();
-
-                var cellJD订单号 = row.GetCell(idxJD订单号);
-                if (cellJD订单号 == null)
-                {
-                    continue;
-                }
-
-                o.JD订单号 = (cellJD订单号.StringCellValue ?? string.Empty).Trim();
+                var o = new OrderModel();
+                o.JD订单号 = GetStringValue(null, row, dictColumns, "订单号");
+                o.来快递单号 = GetStringValue(null, row, dictColumns, "运单号");
+                o.RowIndex = rowIndex;
 
                 if (string.IsNullOrEmpty(o.JD订单号))
                 {
@@ -177,7 +137,7 @@ namespace DaSongERP.Dal
                 {
                     continue;
                 }
-                
+
                 orders.Add(o);
             }
 
@@ -186,7 +146,222 @@ namespace DaSongERP.Dal
             return orders;
         }
 
-        public bool WriteExcel电话客服(Stream excelStream, bool isXlsx, IList<OrderModel> orders, string file)
+        #endregion 导入拆包审单
+
+        #region 导入采购订单
+
+        public IList<OrderModel> ReadExcel采购订单(Stream excelStream, bool isXlsx)
+        {
+            excelStream.Position = 0;
+            IList<OrderModel> orders = new List<OrderModel>();
+            IWorkbook wk = null;
+            if (isXlsx)
+            {
+                wk = new XSSFWorkbook(excelStream);
+            }
+            else
+            {
+                wk = new HSSFWorkbook(excelStream);
+            }
+
+            //获取第一个sheet
+            ISheet sheet = wk.GetSheetAt(0);
+            //获取第一行
+            IRow headRow = sheet.GetRow(0);
+
+            var dictColumns = new Dictionary<string, int>();
+            foreach (var cell in headRow.Cells)
+            {
+                var colName = (cell.StringCellValue ?? string.Empty).Trim();
+                if (string.IsNullOrEmpty(colName) || dictColumns.ContainsKey(colName))
+                {
+                    continue;
+                }
+
+                dictColumns.Add(colName, cell.ColumnIndex);
+            }
+
+            OrderModel lastOrder = null;
+            for (var rowIndex = 1; rowIndex < sheet.PhysicalNumberOfRows; rowIndex++)
+            {
+                if(rowIndex >= 49)
+                {
+
+                }
+                var row = sheet.GetRow(rowIndex);
+                if (row == null)
+                {
+                    continue;
+                }
+
+                var o = new OrderModel();
+                o.JD订单号 = GetStringValue(lastOrder?.JD订单号, row, dictColumns, "京东订单号");
+                o.淘宝订单号 = GetStringValue(lastOrder?.淘宝订单号, row, dictColumns, "淘宝订单编号");
+                o.货号 = GetStringValue(lastOrder?.货号, row, dictColumns, "货号");
+                o.采购备注 = GetStringValue(lastOrder?.采购备注, row, dictColumns, "备注");
+                o.进货数量 = GetIntValue(lastOrder?.进货数量, row, dictColumns, "数量");
+                o.京东价 = GetDecimalValue(lastOrder?.京东价, row, dictColumns, "京东价");
+                o.成本价 = GetDecimalValue(lastOrder?.京东价, row, dictColumns, "成本价");
+                o.来快递单号 = GetStringValue(lastOrder?.来快递单号, row, dictColumns, "快递单号");
+                o.客人姓名 = GetStringValue(lastOrder?.客人姓名, row, dictColumns, "收件人");
+                o.客人电话 = GetStringValue(lastOrder?.客人电话, row, dictColumns, "电话");
+                o.客人地址 = GetStringValue(lastOrder?.客人地址, row, dictColumns, "地址");
+                o.店铺 = GetStringValue(lastOrder?.店铺, row, dictColumns, "店铺名称");
+                o.进货日期 = GetDateTimeValue(lastOrder?.进货日期, row, dictColumns, "进货日期");
+                o.RowIndex = rowIndex;
+
+                if (string.IsNullOrEmpty(o.货号))
+                {
+                    lastOrder = null;
+                    continue;
+                }
+
+                orders.Add(o);
+                lastOrder = o;
+            }
+
+            wk.Close();
+
+            return orders;
+        }
+
+        #endregion 导入采购订单
+
+        #region Excel 公用
+
+        private static string GetStringValue(string lastValue, IRow row, Dictionary<string, int> dictColumns, params string[] columnNames)
+        {
+            foreach (var colName in columnNames)
+            {
+                if (!dictColumns.ContainsKey(colName))
+                {
+                    continue;
+                }
+
+                var cell = row.GetCell(dictColumns[colName]);
+                if (cell == null)
+                {
+                    return lastValue ?? string.Empty;
+                }
+
+                var strVal = default(string);
+                switch (cell.CellType)
+                {
+                    case CellType.Formula:
+                    case CellType.String:
+                        strVal = cell.StringCellValue;
+                        break;
+                    case CellType.Numeric:
+                        strVal = cell.NumericCellValue.ToString();
+                        break;
+                }
+
+                return strVal;
+            }
+
+            return string.Empty;
+        }
+
+        private static int? GetIntValue(int? lastValue, IRow row, Dictionary<string, int> dictColumns, params string[] columnNames)
+        {
+            foreach (var colName in columnNames)
+            {
+                if (!dictColumns.ContainsKey(colName))
+                {
+                    continue;
+                }
+
+                var cell = row.GetCell(dictColumns[colName]);
+                if (cell == null)
+                {
+                    return lastValue;
+                }
+
+                var cellVal = cell.NumericCellValue;
+                return Convert.ToInt32(cellVal);
+            }
+
+            return null;
+        }
+
+        private static Decimal? GetDecimalValue(Decimal? lastValue, IRow row, Dictionary<string, int> dictColumns, params string[] columnNames)
+        {
+            foreach (var colName in columnNames)
+            {
+                if (!dictColumns.ContainsKey(colName))
+                {
+                    continue;
+                }
+
+                var cell = row.GetCell(dictColumns[colName]);
+                if (cell == null)
+                {
+                    return lastValue;
+                }
+
+                switch (cell.CellType)
+                {
+                    case CellType.Formula:
+                    case CellType.String:
+                        return Convert.ToDecimal(cell.StringCellValue);
+                    case CellType.Numeric:
+                        return Convert.ToDecimal(cell.NumericCellValue);
+                }
+            }
+
+            return null;
+        }
+
+        private static DateTime? GetDateTimeValue(DateTime? lastValue, IRow row, Dictionary<string, int> dictColumns, params string[] columnNames)
+        {
+            foreach (var colName in columnNames)
+            {
+                if (!dictColumns.ContainsKey(colName))
+                {
+                    continue;
+                }
+
+                var cell = row.GetCell(dictColumns[colName]);
+                if (cell == null)
+                {
+                    return lastValue;
+                }
+
+                switch (cell.CellType)
+                {
+                    case CellType.String:
+                        return Convert.ToDateTime(cell.StringCellValue);
+                    default:
+                        return cell.DateCellValue;
+                }
+            }
+
+            return null;
+        }
+
+        private static bool SetStringValue(IRow row, string val, Dictionary<string, int> dictColumns, params string[] columnNames)
+        {
+            foreach (var colName in columnNames)
+            {
+                if (!dictColumns.ContainsKey(colName))
+                {
+                    continue;
+                }
+
+                var cell = row.GetCell(dictColumns[colName]);
+                if (cell == null)
+                {
+                    cell = row.CreateCell(dictColumns[colName]);
+                }
+
+                cell.SetCellValue(val);
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool WriteExcel导入结果Update(Stream excelStream, string targetColumnName, bool isXlsx, IList<OrderModel> orders, string file)
         {
             excelStream.Position = 0;
             IWorkbook wk = null;
@@ -202,26 +377,18 @@ namespace DaSongERP.Dal
             //获取第一个sheet
             ISheet sheet = wk.GetSheetAt(0);
             //获取第一行
-            IRow headrow = sheet.GetRow(0);
+            IRow headRow = sheet.GetRow(0);
 
-            int? idx处理结果 = null;
-            for (var i = 0; i < headrow.PhysicalNumberOfCells; i++)
+            var dictColumns = new Dictionary<string, int>();
+            foreach (var cell in headRow.Cells)
             {
-                var value = (headrow.Cells[i].StringCellValue ?? string.Empty).Trim();
-                if (string.Compare(value, "处理结果", true) == 0)
+                var colName = (cell.StringCellValue ?? string.Empty).Trim();
+                if (string.IsNullOrEmpty(colName) || dictColumns.ContainsKey(colName))
                 {
-                    idx处理结果 = i;
+                    continue;
                 }
 
-                if (idx处理结果.HasValue)
-                {
-                    break;
-                }
-            }
-
-            if (!idx处理结果.HasValue)
-            {
-                return false;
+                dictColumns.Add(colName, cell.ColumnIndex);
             }
 
             for (var rowIndex = 1; rowIndex < sheet.PhysicalNumberOfRows; rowIndex++)
@@ -230,12 +397,6 @@ namespace DaSongERP.Dal
                 if (row == null)
                 {
                     continue;
-                }
-
-                var cell处理结果 = row.GetCell(idx处理结果.Value);
-                if (cell处理结果 == null)
-                {
-                    cell处理结果 = row.CreateCell(idx处理结果.Value);
                 }
 
                 var order = orders.FirstOrDefault(m => m.RowIndex.GetValueOrDefault() == rowIndex);
@@ -263,7 +424,11 @@ namespace DaSongERP.Dal
                         break;
                 }
 
-                cell处理结果.SetCellValue(处理结果);
+                var success = SetStringValue(row, 处理结果, dictColumns, targetColumnName);
+                if (!success)
+                {
+                    return false;
+                }
             }
 
             using (var stream = new FileStream(file, FileMode.Create, FileAccess.Write))
@@ -275,5 +440,84 @@ namespace DaSongERP.Dal
 
             return true;
         }
+
+        public bool WriteExcel导入结果Create(Stream excelStream, string targetColumnName, bool isXlsx, IList<OrderModel> orders, string file)
+        {
+            excelStream.Position = 0;
+            IWorkbook wk = null;
+            if (isXlsx)
+            {
+                wk = new XSSFWorkbook(excelStream);
+            }
+            else
+            {
+                wk = new HSSFWorkbook(excelStream);
+            }
+
+            //获取第一个sheet
+            ISheet sheet = wk.GetSheetAt(0);
+            //获取第一行
+            IRow headRow = sheet.GetRow(0);
+
+            var dictColumns = new Dictionary<string, int>();
+            foreach (var cell in headRow.Cells)
+            {
+                var colName = (cell.StringCellValue ?? string.Empty).Trim();
+                if (string.IsNullOrEmpty(colName) || dictColumns.ContainsKey(colName))
+                {
+                    continue;
+                }
+
+                dictColumns.Add(colName, cell.ColumnIndex);
+            }
+
+            for (var rowIndex = 1; rowIndex < sheet.PhysicalNumberOfRows; rowIndex++)
+            {
+                var row = sheet.GetRow(rowIndex);
+                if (row == null)
+                {
+                    continue;
+                }
+
+                var order = orders.FirstOrDefault(m => m.RowIndex.GetValueOrDefault() == rowIndex);
+                if (order == null)
+                {
+                    continue;
+                }
+
+                if (!order.导入结果.HasValue)
+                {
+                    continue;
+                }
+
+                var 处理结果 = string.Empty;
+                switch (order.导入结果.Value)
+                {
+                    case 0:
+                        处理结果 = "未导入";
+                        break;
+                    case 1:
+                        处理结果 = "成功";
+                        break;
+                }
+
+                var success = SetStringValue(row, 处理结果, dictColumns, targetColumnName);
+                if (!success)
+                {
+                    return false;
+                }
+            }
+
+            using (var stream = new FileStream(file, FileMode.Create, FileAccess.Write))
+            {
+                wk.Write(stream);
+            }
+
+            wk.Close();
+
+            return true;
+        }
+
+        #endregion
     }
 }

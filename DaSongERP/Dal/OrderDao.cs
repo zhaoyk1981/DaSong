@@ -19,6 +19,13 @@ namespace DaSongERP.Dal
             return rowCount;
         }
 
+        public int Create4Excel(OrderModel order)
+        {
+            var cmd = ProcCommands.sp_CreateOrder4Excel().SetParameterValues(order);
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
+
         public OrderModel GetOrderBy订单号(OrderModel order)
         {
             var cmd = ProcCommands.sp_GetOrderBy订单号().SetParameterValues(order);

@@ -4,12 +4,12 @@
     [货号]     NVARCHAR (50)    CONSTRAINT [DF_订单_货号] DEFAULT ('') NOT NULL,
     [商品图片]   NVARCHAR (500)   CONSTRAINT [DF_订单_商品图片] DEFAULT ('') NOT NULL,
     [进货数量]   INT              NULL,
-    [店铺]     NVARCHAR (50)    NOT NULL,
+    [店铺]     NVARCHAR (50)    CONSTRAINT [DF_订单_店铺] DEFAULT ('') NOT NULL,
     [JD订单号]  NVARCHAR (50)    CONSTRAINT [DF_订单_京东订单号] DEFAULT ('') NOT NULL,
     [客人姓名]   NVARCHAR (50)    CONSTRAINT [DF_订单_客人姓名] DEFAULT ('') NOT NULL,
     [客人电话]   NVARCHAR (50)    CONSTRAINT [DF_订单_客人电话] DEFAULT ('') NOT NULL,
     [客人地址]   NVARCHAR (150)   CONSTRAINT [DF_订单_客人地址] DEFAULT ('') NOT NULL,
-    [淘宝账号]   NVARCHAR (50)    NOT NULL,
+    [淘宝账号]   NVARCHAR (50)    CONSTRAINT [DF_订单_淘宝账号] DEFAULT ('') NOT NULL,
     [淘宝订单号]  NVARCHAR (50)    CONSTRAINT [DF_订单_淘宝订单号] DEFAULT ('') NOT NULL,
     [采购备注]   NVARCHAR (MAX)   CONSTRAINT [DF_订单_采购备注] DEFAULT ('') NOT NULL,
     [订单修改备注] NVARCHAR (MAX)   CONSTRAINT [DF_订单_订单修改备注] DEFAULT ('') NOT NULL,
@@ -64,7 +64,8 @@
 
 
 
+
+
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_订单_JD订单号_淘宝订单号]
-    ON [dbo].[订单]([JD订单号] ASC, [淘宝订单号] ASC);
+
 

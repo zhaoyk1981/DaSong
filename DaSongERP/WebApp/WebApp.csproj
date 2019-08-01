@@ -136,6 +136,7 @@
     <Content Include="js\pages\edituser.js" />
     <Content Include="js\pages\genjinlist.js" />
     <Content Include="js\pages\genjinorder.js" />
+    <Content Include="js\pages\importcaigouorders.js" />
     <Content Include="js\pages\importorders.js" />
     <Content Include="js\pages\kefulist.js" />
     <Content Include="js\pages\kefuorder.js" />
@@ -418,6 +419,7 @@
     <Content Include="Views\Meta\ShopList.cshtml" />
     <Content Include="Views\Meta\NewShop.cshtml" />
     <Content Include="Views\Meta\EditShop.cshtml" />
+    <Content Include="Views\Order\ImportCaiGou.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

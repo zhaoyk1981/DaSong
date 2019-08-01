@@ -37,7 +37,8 @@
                 </div>
                 <div class="form-group col-6">
                     <label class="static-label">店铺名称：</label>
-                    <span>@DP.Txt(Model.Order.店铺名称)</span>
+                    <span id="Lbl店铺名称">@DP.Txt(Model.Order.店铺名称)</span>
+                    <a href="javascript:void(0)" class="btn-copy-clipboard" data-clipboard-target="#Lbl店铺名称">复制</a>
                 </div>
                 <div class="form-group col-6">
                     <label class="static-label">京东价：</label>
@@ -145,7 +146,6 @@
                 <div class="form-group col-6">
                     <label class="static-label">转发单号：</label>
                     <input type="text" class="form-control" name="转发单号" id="Txt转发单号" maxlength="50" value="@Model.Order.转发单号" />
-                    <span class="validator" id="vd转发单号" data-required="" data-validate-target="#Txt转发单号"><span class="error-message text-danger">此项必填</span></span>
                 </div>
                 <div class="form-group col-12">
                     <label class="static-label">拆包人员备注：</label>
@@ -153,15 +153,19 @@
                 </div>
                 <div class="form-group col-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="订单终结" data-type="bool" id="Chk订单终结" @(Model.Order.订单终结.GetValueOrDefault() ? "checked" : "") />
-                        <label class="form-check-label" for="Chk订单终结">订单终结</label>
+                        <input class="form-check-input" type="checkbox" name="高亮" data-type="bool" id="Chk高亮" @(Model.Order.高亮.GetValueOrDefault() ? "checked" : "") />
+                        <label class="form-check-label" for="Chk高亮">异常订单</label>
                     </div>
                 </div>
                 <div class="form-group col-6">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="高亮" data-type="bool" id="Chk高亮" @(Model.Order.高亮.GetValueOrDefault() ? "checked" : "") />
-                        <label class="form-check-label" for="Chk高亮">异常订单</label>
+                        <input class="form-check-input" type="checkbox" name="订单终结" data-type="bool" id="Chk订单终结" @(Model.Order.订单终结.GetValueOrDefault() ? "checked" : "") />
+                        <label class="form-check-label" for="Chk订单终结">订单终结</label>
                     </div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="Txt订单终结备注">订单终结备注：</label>
+                    <textarea class="id-订单终结备注 form-control" name="订单终结备注" id="Txt订单终结备注">@Model.Order.订单终结备注</textarea>
                 </div>
             </div>
         </fieldset>

@@ -11,6 +11,8 @@ CREATE PROCEDURE [dbo].[sp_订单跟进]
 	, @发货备注 NVARCHAR(MAX)
 	, @跟进人ID UNIQUEIDENTIFIER
 	, @高亮 BIT
+	,@订单终结 BIT
+	,@订单终结备注 NVARCHAR(MAX)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -24,6 +26,8 @@ BEGIN
 		, 发货备注 = @发货备注
 		, 跟进人ID = @跟进人ID
 		, [高亮] = @高亮
+		,[订单终结] = @订单终结
+		,[订单终结备注] = @订单终结备注
 	WHERE ID = @ID;
 
 	SELECT @@ROWCOUNT AS [RowCount];
