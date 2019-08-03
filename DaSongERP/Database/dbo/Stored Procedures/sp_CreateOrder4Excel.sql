@@ -19,10 +19,10 @@ BEGIN
 	SET NOCOUNT ON;
 
 	IF NOT EXISTS(SELECT * FROM dbo.订单 o
-		WHERE [货号] = @货号
-		AND [JD订单号] = @JD订单号
-		AND [淘宝订单号] = @淘宝订单号
-		AND [采购备注] = @采购备注)
+		WHERE [货号] = ISNULL(@货号, '')
+		AND [JD订单号] = ISNULL(@JD订单号, '')
+		AND [淘宝订单号] = ISNULL(@淘宝订单号, '')
+		AND [采购备注] = ISNULL(@采购备注, ''))
 	BEGIN
 
     INSERT INTO [dbo].[订单]
@@ -40,12 +40,12 @@ BEGIN
      SELECT
            NEWID()
            ,@进货日期
-           ,@货号
+           ,ISNULL(@货号, '')
            ,@进货数量
-           ,@店铺
-           ,@JD订单号
-		   ,@淘宝订单号
-           ,@采购备注
+           ,ISNULL(@店铺, '')
+           ,ISNULL(@JD订单号, '')
+		   ,ISNULL(@淘宝订单号, '')
+           ,ISNULL(@采购备注, '')
            ,@京东价
            ,@成本价
 		   ,@采购人ID;

@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CellStatus.cs" />
     <Compile Include="Dao.cs" />
     <Compile Include="ExcelDao.cs" />
     <Compile Include="MetaDao.cs" />

@@ -11,6 +11,9 @@
         <input type="hidden" name="ID" id="LblOrderID" value="@Model.Order.ID.Value" />
         <fieldset>
             <legend>采购</legend>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
+            </div>
             <div class="row">
                 <div class="form-group col-12">
                     <a href="@Model.Order.商品图片" target="_blank">
@@ -169,9 +172,6 @@
                 </div>
             </div>
         </fieldset>
-        <div class="form-group">
-            <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
-        </div>
         @if (!string.IsNullOrEmpty(Model.Order.订单修改备注))
         {
             <div class="form-group">

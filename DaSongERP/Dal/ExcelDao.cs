@@ -36,17 +36,8 @@ namespace DaSongERP.Dal
             //获取第一行
             IRow headRow = sheet.GetRow(0);
 
-            var dictColumns = new Dictionary<string, int>();
-            foreach (var cell in headRow.Cells)
-            {
-                var colName = (cell.StringCellValue ?? string.Empty).Trim();
-                if (string.IsNullOrEmpty(colName) || dictColumns.ContainsKey(colName))
-                {
-                    continue;
-                }
-
-                dictColumns.Add(colName, cell.ColumnIndex);
-            }
+            var dictColumns = GetAllColumns(headRow);
+            var dictCellStatus = GetAllCellStatus(sheet);
 
             OrderModel lastOrder = null;
             for (var rowIndex = 1; rowIndex < sheet.PhysicalNumberOfRows; rowIndex++)
@@ -58,11 +49,11 @@ namespace DaSongERP.Dal
                 }
 
                 var o = new OrderModel();
-                o.电话备注 = GetStringValue(lastOrder?.电话备注, row, dictColumns, "电话备注");
-                o.JD订单号 = GetStringValue(lastOrder?.JD订单号, row, dictColumns, "销售平台单号");
-                o.客人姓名 = GetStringValue(lastOrder?.客人姓名, row, dictColumns, "收件人");
-                o.客人电话 = GetStringValue(lastOrder?.客人电话, row, dictColumns, "电话");
-                o.客人地址 = GetStringValue(lastOrder?.客人地址, row, dictColumns, "地址");
+                o.电话备注 = GetStringValue(lastOrder?.电话备注, rowIndex, row, dictColumns, dictCellStatus, "电话备注");
+                o.JD订单号 = GetStringValue(lastOrder?.JD订单号, rowIndex, row, dictColumns, dictCellStatus, "销售平台单号");
+                o.客人姓名 = GetStringValue(lastOrder?.客人姓名, rowIndex, row, dictColumns, dictCellStatus, "收件人");
+                o.客人电话 = GetStringValue(lastOrder?.客人电话, rowIndex, row, dictColumns, dictCellStatus, "电话");
+                o.客人地址 = GetStringValue(lastOrder?.客人地址, rowIndex, row, dictColumns, dictCellStatus, "地址");
                 o.RowIndex = rowIndex;
 
                 if (string.IsNullOrEmpty(o.JD订单号))
@@ -103,17 +94,8 @@ namespace DaSongERP.Dal
             //获取第一行
             IRow headRow = sheet.GetRow(0);
 
-            var dictColumns = new Dictionary<string, int>();
-            foreach (var cell in headRow.Cells)
-            {
-                var colName = (cell.StringCellValue ?? string.Empty).Trim();
-                if (string.IsNullOrEmpty(colName) || dictColumns.ContainsKey(colName))
-                {
-                    continue;
-                }
-
-                dictColumns.Add(colName, cell.ColumnIndex);
-            }
+            var dictColumns = GetAllColumns(headRow);
+            var dictCellStatus = GetAllCellStatus(sheet);
 
             for (var rowIndex = 1; rowIndex < sheet.PhysicalNumberOfRows; rowIndex++)
             {
@@ -124,8 +106,8 @@ namespace DaSongERP.Dal
                 }
 
                 var o = new OrderModel();
-                o.JD订单号 = GetStringValue(null, row, dictColumns, "订单号");
-                o.来快递单号 = GetStringValue(null, row, dictColumns, "运单号");
+                o.JD订单号 = GetStringValue(null, rowIndex, row, dictColumns, dictCellStatus, "订单号");
+                o.来快递单号 = GetStringValue(null, rowIndex, row, dictColumns, dictCellStatus, "运单号");
                 o.RowIndex = rowIndex;
 
                 if (string.IsNullOrEmpty(o.JD订单号))
@@ -169,22 +151,13 @@ namespace DaSongERP.Dal
             //获取第一行
             IRow headRow = sheet.GetRow(0);
 
-            var dictColumns = new Dictionary<string, int>();
-            foreach (var cell in headRow.Cells)
-            {
-                var colName = (cell.StringCellValue ?? string.Empty).Trim();
-                if (string.IsNullOrEmpty(colName) || dictColumns.ContainsKey(colName))
-                {
-                    continue;
-                }
-
-                dictColumns.Add(colName, cell.ColumnIndex);
-            }
+            var dictColumns = GetAllColumns(headRow);
+            var dictCellStatus = GetAllCellStatus(sheet);
 
             OrderModel lastOrder = null;
             for (var rowIndex = 1; rowIndex < sheet.PhysicalNumberOfRows; rowIndex++)
             {
-                if(rowIndex >= 49)
+                if (rowIndex >= 49)
                 {
 
                 }
@@ -195,19 +168,19 @@ namespace DaSongERP.Dal
                 }
 
                 var o = new OrderModel();
-                o.JD订单号 = GetStringValue(lastOrder?.JD订单号, row, dictColumns, "京东订单号");
-                o.淘宝订单号 = GetStringValue(lastOrder?.淘宝订单号, row, dictColumns, "淘宝订单编号");
-                o.货号 = GetStringValue(lastOrder?.货号, row, dictColumns, "货号");
-                o.采购备注 = GetStringValue(lastOrder?.采购备注, row, dictColumns, "备注");
-                o.进货数量 = GetIntValue(lastOrder?.进货数量, row, dictColumns, "数量");
-                o.京东价 = GetDecimalValue(lastOrder?.京东价, row, dictColumns, "京东价");
-                o.成本价 = GetDecimalValue(lastOrder?.京东价, row, dictColumns, "成本价");
-                o.来快递单号 = GetStringValue(lastOrder?.来快递单号, row, dictColumns, "快递单号");
-                o.客人姓名 = GetStringValue(lastOrder?.客人姓名, row, dictColumns, "收件人");
-                o.客人电话 = GetStringValue(lastOrder?.客人电话, row, dictColumns, "电话");
-                o.客人地址 = GetStringValue(lastOrder?.客人地址, row, dictColumns, "地址");
-                o.店铺 = GetStringValue(lastOrder?.店铺, row, dictColumns, "店铺名称");
-                o.进货日期 = GetDateTimeValue(lastOrder?.进货日期, row, dictColumns, "进货日期");
+                o.JD订单号 = GetStringValue(lastOrder?.JD订单号, rowIndex, row, dictColumns, dictCellStatus, "京东订单号");
+                o.淘宝订单号 = GetStringValue(lastOrder?.淘宝订单号, rowIndex, row, dictColumns, dictCellStatus, "淘宝订单编号");
+                o.货号 = GetStringValue(lastOrder?.货号, rowIndex, row, dictColumns, dictCellStatus, "货号");
+                o.采购备注 = GetStringValue(lastOrder?.采购备注, rowIndex, row, dictColumns, dictCellStatus, "备注");
+                o.进货数量 = GetIntValue(lastOrder?.进货数量, rowIndex, row, dictColumns, dictCellStatus, "进货数量");
+                o.京东价 = GetDecimalValue(lastOrder?.京东价, rowIndex, row, dictColumns, dictCellStatus, "京东价");
+                o.成本价 = GetDecimalValue(lastOrder?.京东价, rowIndex, row, dictColumns, dictCellStatus, "成本价");
+                o.来快递单号 = GetStringValue(lastOrder?.来快递单号, rowIndex, row, dictColumns, dictCellStatus, "快递单号");
+                o.客人姓名 = GetStringValue(lastOrder?.客人姓名, rowIndex, row, dictColumns, dictCellStatus, "收件人");
+                o.客人电话 = GetStringValue(lastOrder?.客人电话, rowIndex, row, dictColumns, dictCellStatus, "电话");
+                o.客人地址 = GetStringValue(lastOrder?.客人地址, rowIndex, row, dictColumns, dictCellStatus, "地址");
+                o.店铺 = GetStringValue(lastOrder?.店铺, rowIndex, row, dictColumns, dictCellStatus, "店铺名称");
+                o.进货日期 = GetDateTimeValue(lastOrder?.进货日期, rowIndex, row, dictColumns, dictCellStatus, "进货日期");
                 o.RowIndex = rowIndex;
 
                 if (string.IsNullOrEmpty(o.货号))
@@ -229,7 +202,75 @@ namespace DaSongERP.Dal
 
         #region Excel 公用
 
-        private static string GetStringValue(string lastValue, IRow row, Dictionary<string, int> dictColumns, params string[] columnNames)
+        private IDictionary<string, int> GetAllColumns(IRow headRow)
+        {
+            var dictColumns = new Dictionary<string, int>();
+            foreach (var cell in headRow.Cells)
+            {
+                var colName = (cell.StringCellValue ?? string.Empty).Trim()
+                    .Replace("\r", "")
+                    .Replace("\n", "")
+                    .Replace(" ", "");
+
+                if (string.IsNullOrEmpty(colName) || dictColumns.ContainsKey(colName))
+                {
+                    continue;
+                }
+
+                dictColumns.Add(colName, cell.ColumnIndex);
+            }
+
+            return dictColumns;
+        }
+
+        private IDictionary<string, CellStatus> GetAllCellStatus(ISheet sheet)
+        {
+            var dict = new Dictionary<string, CellStatus>();
+            for (var i = 1; i < sheet.PhysicalNumberOfRows; i++)
+            {
+                var row = sheet.GetRow(i);
+                for (var j = 0; j < row.PhysicalNumberOfCells; j++)
+                {
+                    var key = $"{i},{j}";
+                    var cellStatus = 0;
+                    var cell = row.GetCell(j);
+                    if (cell == null)
+                    {
+                        if (i == 1)
+                        {
+                            dict.Add(key, CellStatus.None);
+                            continue;
+                        }
+                        else
+                        {
+                            var upCellStatus = dict[$"{i - 1},{j}"];
+                            if ((upCellStatus & CellStatus.Merged) == CellStatus.Merged)
+                            {
+                                dict.Add(key, CellStatus.Merged);
+                            }
+                            else
+                            {
+                                dict.Add(key, CellStatus.None);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        cellStatus = (int)CellStatus.Exists;
+                        if (cell.IsMergedCell)
+                        {
+                            cellStatus += (int)CellStatus.Merged;
+                        }
+
+                        dict.Add(key, (CellStatus)cellStatus);
+                    }
+                }
+            }
+
+            return dict;
+        }
+
+        private static string GetStringValue(string lastValue, int rowIndex, IRow row, IDictionary<string, int> dictColumns, IDictionary<string, CellStatus> dictCellStatus, params string[] columnNames)
         {
             foreach (var colName in columnNames)
             {
@@ -238,10 +279,18 @@ namespace DaSongERP.Dal
                     continue;
                 }
 
-                var cell = row.GetCell(dictColumns[colName]);
+                var cellIndex = dictColumns[colName];
+                var cell = row.GetCell(cellIndex);
+                var upCellKey = $"{rowIndex - 1},{cellIndex}";
+                var upCellStatus = dictCellStatus.ContainsKey(upCellKey) ? dictCellStatus[upCellKey] : CellStatus.None;
                 if (cell == null)
                 {
-                    return lastValue ?? string.Empty;
+                    if ((upCellStatus & CellStatus.Merged) == CellStatus.Merged)
+                    {
+                        return lastValue ?? string.Empty;
+                    }
+
+                    return string.Empty;
                 }
 
                 var strVal = default(string);
@@ -262,7 +311,7 @@ namespace DaSongERP.Dal
             return string.Empty;
         }
 
-        private static int? GetIntValue(int? lastValue, IRow row, Dictionary<string, int> dictColumns, params string[] columnNames)
+        private static int? GetIntValue(int? lastValue, int rowIndex, IRow row, IDictionary<string, int> dictColumns, IDictionary<string, CellStatus> dictCellStatus, params string[] columnNames)
         {
             foreach (var colName in columnNames)
             {
@@ -271,10 +320,18 @@ namespace DaSongERP.Dal
                     continue;
                 }
 
-                var cell = row.GetCell(dictColumns[colName]);
+                var cellIndex = dictColumns[colName];
+                var cell = row.GetCell(cellIndex);
+                var upCellKey = $"{rowIndex - 1},{cellIndex}";
+                var upCellStatus = dictCellStatus.ContainsKey(upCellKey) ? dictCellStatus[upCellKey] : CellStatus.None;
                 if (cell == null)
                 {
-                    return lastValue;
+                    if ((upCellStatus & CellStatus.Merged) == CellStatus.Merged)
+                    {
+                        return lastValue;
+                    }
+
+                    return null;
                 }
 
                 var cellVal = cell.NumericCellValue;
@@ -284,7 +341,7 @@ namespace DaSongERP.Dal
             return null;
         }
 
-        private static Decimal? GetDecimalValue(Decimal? lastValue, IRow row, Dictionary<string, int> dictColumns, params string[] columnNames)
+        private static Decimal? GetDecimalValue(Decimal? lastValue, int rowIndex, IRow row, IDictionary<string, int> dictColumns, IDictionary<string, CellStatus> dictCellStatus, params string[] columnNames)
         {
             foreach (var colName in columnNames)
             {
@@ -293,10 +350,18 @@ namespace DaSongERP.Dal
                     continue;
                 }
 
-                var cell = row.GetCell(dictColumns[colName]);
+                var cellIndex = dictColumns[colName];
+                var cell = row.GetCell(cellIndex);
+                var upCellKey = $"{rowIndex - 1},{cellIndex}";
+                var upCellStatus = dictCellStatus.ContainsKey(upCellKey) ? dictCellStatus[upCellKey] : CellStatus.None;
                 if (cell == null)
                 {
-                    return lastValue;
+                    if ((upCellStatus & CellStatus.Merged) == CellStatus.Merged)
+                    {
+                        return lastValue;
+                    }
+
+                    return null;
                 }
 
                 switch (cell.CellType)
@@ -312,7 +377,7 @@ namespace DaSongERP.Dal
             return null;
         }
 
-        private static DateTime? GetDateTimeValue(DateTime? lastValue, IRow row, Dictionary<string, int> dictColumns, params string[] columnNames)
+        private static DateTime? GetDateTimeValue(DateTime? lastValue, int rowIndex, IRow row, IDictionary<string, int> dictColumns, IDictionary<string, CellStatus> dictCellStatus, params string[] columnNames)
         {
             foreach (var colName in columnNames)
             {
@@ -321,10 +386,18 @@ namespace DaSongERP.Dal
                     continue;
                 }
 
-                var cell = row.GetCell(dictColumns[colName]);
+                var cellIndex = dictColumns[colName];
+                var cell = row.GetCell(cellIndex);
+                var upCellKey = $"{rowIndex - 1},{cellIndex}";
+                var upCellStatus = dictCellStatus.ContainsKey(upCellKey) ? dictCellStatus[upCellKey] : CellStatus.None;
                 if (cell == null)
                 {
-                    return lastValue;
+                    if ((upCellStatus & CellStatus.Merged) == CellStatus.Merged)
+                    {
+                        return lastValue;
+                    }
+
+                    return null;
                 }
 
                 switch (cell.CellType)
@@ -339,26 +412,34 @@ namespace DaSongERP.Dal
             return null;
         }
 
-        private static bool SetStringValue(IRow row, string val, Dictionary<string, int> dictColumns, params string[] columnNames)
+        private static bool SetStringValue(IRow row, string val, IDictionary<string, int> dictColumns, bool appendWhenNotFound, params string[] columnNames)
         {
+            int? colIndex = appendWhenNotFound ? dictColumns.Values.Max() + 1 : default(int?);
             foreach (var colName in columnNames)
             {
                 if (!dictColumns.ContainsKey(colName))
                 {
+
                     continue;
                 }
 
-                var cell = row.GetCell(dictColumns[colName]);
-                if (cell == null)
-                {
-                    cell = row.CreateCell(dictColumns[colName]);
-                }
-
-                cell.SetCellValue(val);
-                return true;
+                colIndex = dictColumns[colName];
+                break;
             }
 
-            return false;
+            if (!colIndex.HasValue)
+            {
+                return false;
+            }
+
+            var cell = row.GetCell(colIndex.Value);
+            if (cell == null)
+            {
+                cell = row.CreateCell(colIndex.Value);
+            }
+
+            cell.SetCellValue(val);
+            return true;
         }
 
         public bool WriteExcel导入结果Update(Stream excelStream, string targetColumnName, bool isXlsx, IList<OrderModel> orders, string file)
@@ -379,17 +460,7 @@ namespace DaSongERP.Dal
             //获取第一行
             IRow headRow = sheet.GetRow(0);
 
-            var dictColumns = new Dictionary<string, int>();
-            foreach (var cell in headRow.Cells)
-            {
-                var colName = (cell.StringCellValue ?? string.Empty).Trim();
-                if (string.IsNullOrEmpty(colName) || dictColumns.ContainsKey(colName))
-                {
-                    continue;
-                }
-
-                dictColumns.Add(colName, cell.ColumnIndex);
-            }
+            var dictColumns = GetAllColumns(headRow);
 
             for (var rowIndex = 1; rowIndex < sheet.PhysicalNumberOfRows; rowIndex++)
             {
@@ -424,7 +495,7 @@ namespace DaSongERP.Dal
                         break;
                 }
 
-                var success = SetStringValue(row, 处理结果, dictColumns, targetColumnName);
+                var success = SetStringValue(row, 处理结果, dictColumns, true, targetColumnName);
                 if (!success)
                 {
                     return false;
@@ -459,17 +530,7 @@ namespace DaSongERP.Dal
             //获取第一行
             IRow headRow = sheet.GetRow(0);
 
-            var dictColumns = new Dictionary<string, int>();
-            foreach (var cell in headRow.Cells)
-            {
-                var colName = (cell.StringCellValue ?? string.Empty).Trim();
-                if (string.IsNullOrEmpty(colName) || dictColumns.ContainsKey(colName))
-                {
-                    continue;
-                }
-
-                dictColumns.Add(colName, cell.ColumnIndex);
-            }
+            var dictColumns = GetAllColumns(headRow);
 
             for (var rowIndex = 1; rowIndex < sheet.PhysicalNumberOfRows; rowIndex++)
             {
@@ -501,7 +562,7 @@ namespace DaSongERP.Dal
                         break;
                 }
 
-                var success = SetStringValue(row, 处理结果, dictColumns, targetColumnName);
+                var success = SetStringValue(row, 处理结果, dictColumns, true, targetColumnName);
                 if (!success)
                 {
                     return false;
