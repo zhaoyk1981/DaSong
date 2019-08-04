@@ -366,9 +366,9 @@ namespace DaSongERP.Dal
 
                 switch (cell.CellType)
                 {
-                    case CellType.Formula:
                     case CellType.String:
                         return Convert.ToDecimal(cell.StringCellValue);
+                    case CellType.Formula:
                     case CellType.Numeric:
                         return Convert.ToDecimal(cell.NumericCellValue);
                 }
@@ -376,6 +376,8 @@ namespace DaSongERP.Dal
 
             return null;
         }
+
+
 
         private static DateTime? GetDateTimeValue(DateTime? lastValue, int rowIndex, IRow row, IDictionary<string, int> dictColumns, IDictionary<string, CellStatus> dictCellStatus, params string[] columnNames)
         {
