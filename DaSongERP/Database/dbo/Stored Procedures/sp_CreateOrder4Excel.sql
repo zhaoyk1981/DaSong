@@ -8,6 +8,7 @@ CREATE PROCEDURE [dbo].[sp_CreateOrder4Excel]
     ,@店铺 nvarchar(50)
     ,@JD订单号 nvarchar(50)
 	,@淘宝订单号 NVARCHAR(50)
+	,@淘宝账号 NVARCHAR(50)
     ,@采购备注 nvarchar(max)
 	,@来快递 NVARCHAR(150)
 	,@来快递单号 NVARCHAR(150)
@@ -36,6 +37,7 @@ BEGIN
            ,[JD订单号]
 		   ,[淘宝订单号]
            ,[采购备注]
+		   ,[淘宝账号]
 		   ,[来快递]
 		   ,[来快递单号]
            ,[京东价]
@@ -50,6 +52,7 @@ BEGIN
            ,ISNULL(@JD订单号, '')
 		   ,ISNULL(@淘宝订单号, '')
            ,ISNULL(@采购备注, '')
+		   ,ISNULL(@淘宝账号, '')
 		   ,ISNULL(@来快递, '')
 		   ,ISNULL(@来快递单号, '')
            ,@京东价
