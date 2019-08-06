@@ -41,13 +41,6 @@ namespace DaSongERP.Biz
             return o;
         }
 
-        //public IList<OrderModel> GetOrdersBy(string jd订单号, string 来快递单号)
-        //{
-        //    var orders = this.OrderDao.GetOrdersBy(jd订单号, 来快递单号);
-        //    Set店铺(orders);
-        //    return orders;
-        //}
-
         public OrderModel GetOrderBy(Guid id)
         {
             var order = this.OrderDao.GetOrderBy(id);
@@ -199,14 +192,6 @@ namespace DaSongERP.Biz
             return rowCount;
         }
 
-        //public OrderListViewModel GetOrderListViewModel(string jd订单号)
-        //{
-        //    var vm = new OrderListViewModel();
-        //    vm.Orders = this.GetOrdersBy(jd订单号, null);
-        //    vm.JD订单号 = jd订单号;
-        //    return vm;
-        //}
-
         public IList<OrderModel> GetOrdersBy来快递单号(string 来快递单号)
         {
             var list = OrderDao.GetOrdersBy(null, 来快递单号);
@@ -214,40 +199,11 @@ namespace DaSongERP.Biz
             return list;
         }
 
-        //public IList<OrderModel> GetOrdersBy(OrderModel condition)
-        //{
-        //    var list = OrderDao.GetOrdersBy(condition);
-        //    return list;
-        //}
-
-        //public OrderListViewModel GetOrderListViewModel(OrderModel condition)
-        //{
-        //    var vm = new OrderListViewModel();
-        //    vm.Orders = condition.Search.GetValueOrDefault() ? OrderDao.GetOrdersBy(condition) : new List<OrderModel>();
-        //    vm.Condition = condition;
-        //    return vm;
-        //}
-
-        //public OrderListViewModel GetChaiBaoOrderListViewModel(string 来快递单号)
-        //{
-        //    var vm = new OrderListViewModel();
-        //    vm.Orders = this.GetOrdersBy来快递单号(来快递单号);
-        //    vm.来快递单号 = 来快递单号;
-        //    return vm;
-        //}
-
-        //public OrderListViewModel GetImportOrderListViewModel()
-        //{
-        //    var vm = new OrderListViewModel();
-        //    vm.Orders = this.Get未导入Orders();
-        //    return vm;
-        //}
-
         public 跟进ListViewModel Get跟进ListViewModel()
         {
             var vm = new 跟进ListViewModel();
             vm.Orders = new PagedList<OrderModel>();
-            vm.Orders.PageSize = 300;
+            vm.Orders.PageSize = 100;
             return vm;
         }
 
@@ -268,7 +224,7 @@ namespace DaSongERP.Biz
         {
             var vm = new 电话客服ListViewModel();
             vm.Orders = new PagedList<OrderModel>();
-            vm.Orders.PageSize = 300;
+            vm.Orders.PageSize = 100;
             return vm;
         }
 
@@ -335,7 +291,7 @@ namespace DaSongERP.Biz
         {
             var vm = new 采购ListViewModel();
             vm.Orders = new PagedList<OrderModel>();
-            vm.Orders.PageSize = 300;
+            vm.Orders.PageSize = 100;
             return vm;
         }
 
@@ -356,7 +312,7 @@ namespace DaSongERP.Biz
         {
             var vm = new 拆包审单ListViewModel();
             vm.Orders = new PagedList<OrderModel>();
-            vm.Orders.PageSize = 300;
+            vm.Orders.PageSize = 100;
             return vm;
         }
 
@@ -377,7 +333,7 @@ namespace DaSongERP.Biz
         {
             var vm = new 售后ListViewModel();
             vm.Orders = new PagedList<OrderModel>();
-            vm.Orders.PageSize = 300;
+            vm.Orders.PageSize = 100;
             return vm;
         }
 
@@ -398,7 +354,7 @@ namespace DaSongERP.Biz
         {
             var vm = new 客服ListViewModel();
             vm.Orders = new PagedList<OrderModel>();
-            vm.Orders.PageSize = 300;
+            vm.Orders.PageSize = 100;
             return vm;
         }
 

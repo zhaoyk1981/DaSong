@@ -12,6 +12,7 @@ CREATE PROCEDURE [dbo].[sp_跟进List]
 	, @JD订单号 NVARCHAR(50)
 	, @拆包超时 INT
 	, @已跟进 BIT
+	, @已拆包 BIT
 	, @货号 NVARCHAR(50)
 	, @自采 BIT
 	, @高亮 BIT
@@ -31,6 +32,7 @@ BEGIN
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@拆包超时 IS NULL OR DATEDIFF(DAY, o.进货日期, GETDATE()) >= @拆包超时)
 		AND (@已跟进 IS NULL OR o.已跟进 = @已跟进)
+		AND (@已拆包 IS NULL OR o.[已拆包] = @已拆包)
 		AND (@货号 IS NULL OR o.[货号] LIKE '%' + @货号 + '%')
 		AND (@自采 IS NULL OR o.[自采] = @自采)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮);
@@ -45,6 +47,7 @@ BEGIN
 		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@拆包超时 IS NULL OR DATEDIFF(DAY, o.进货日期, GETDATE()) >= @拆包超时)
 		AND (@已跟进 IS NULL OR o.已跟进 = @已跟进)
+		AND (@已拆包 IS NULL OR o.[已拆包] = @已拆包)
 		AND (@货号 IS NULL OR o.[货号] LIKE '%' + @货号 + '%')
 		AND (@自采 IS NULL OR o.[自采] = @自采)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)

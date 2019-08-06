@@ -12,6 +12,7 @@ CREATE PROCEDURE [dbo].[sp_CreateOrder4Excel]
     ,@采购备注 nvarchar(max)
 	,@来快递 NVARCHAR(150)
 	,@来快递单号 NVARCHAR(150)
+	,@转发单号 NVARCHAR(100)
     ,@京东价 money
     ,@成本价 money
 	,@采购人ID UNIQUEIDENTIFIER
@@ -40,6 +41,7 @@ BEGIN
 		   ,[淘宝账号]
 		   ,[来快递]
 		   ,[来快递单号]
+		   ,[转发单号]
            ,[京东价]
            ,[成本价]
 		   ,[采购人ID])
@@ -55,6 +57,7 @@ BEGIN
 		   ,ISNULL(@淘宝账号, '')
 		   ,ISNULL(@来快递, '')
 		   ,ISNULL(@来快递单号, '')
+		   ,ISNULL(@转发单号, '')
            ,@京东价
            ,@成本价
 		   ,@采购人ID;

@@ -177,6 +177,7 @@ namespace DaSongERP.Dal
                 o.成本价 = GetDecimalValue(lastOrder?.京东价, rowIndex, row, dictColumns, dictCellStatus, "成本价");
                 o.来快递 = GetStringValue(lastOrder?.来快递, rowIndex, row, dictColumns, dictCellStatus, "快递名称");
                 o.来快递单号 = GetStringValue(lastOrder?.来快递单号, rowIndex, row, dictColumns, dictCellStatus, "快递单号");
+                o.转发单号 = GetStringValue(lastOrder?.转发单号, rowIndex, row, dictColumns, dictCellStatus, "转发单号");
                 o.淘宝账号 = GetStringValue(lastOrder?.淘宝账号, rowIndex, row, dictColumns, dictCellStatus, "淘宝账号");
                 o.客人姓名 = GetStringValue(lastOrder?.客人姓名, rowIndex, row, dictColumns, dictCellStatus, "收件人");
                 o.客人电话 = GetStringValue(lastOrder?.客人电话, rowIndex, row, dictColumns, dictCellStatus, "电话");

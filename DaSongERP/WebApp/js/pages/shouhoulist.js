@@ -1,4 +1,4 @@
-﻿define(['jquery', 'mustache', 'kyle_toolkit_repeater', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, mustache, repeater, model, validation) {
+﻿define(['jquery', 'mustache', 'kyle_toolkit_repeater', 'kyle_toolkit_model', 'kyle_toolkit_validation', 'clipboard'], function ($, mustache, repeater, model, validation, ClipBoardJS) {
     let btnSearch_click = function (event) {
         repeater.dataBind(true);
     };
@@ -14,7 +14,10 @@
                     return newCondition;
                 },
                 url: '/Order/AShouHouList',
-                currentSortPaging: vm.currentSortPaging
+                currentSortPaging: vm.currentSortPaging,
+                onDataBound: function (dat) {
+                    new ClipBoardJS('.btn-copy-clipboard');
+                }
             }, true);
 
             $('#BtnSearch').click(btnSearch_click).click();

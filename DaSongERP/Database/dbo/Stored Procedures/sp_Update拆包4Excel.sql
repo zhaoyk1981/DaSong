@@ -12,6 +12,9 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
+	DECLARE @审单操作ID UNIQUEIDENTIFIER = NULL;
+	SELECT @审单操作ID = ID FROM dbo.审单操作 WHERE [Name] = '正常发走';
+
 	DECLARE @Count INT = 0;
 
 	SELECT 
@@ -23,6 +26,7 @@ BEGIN
 
     UPDATE 订单 SET
 		来快递单号 = @来快递单号
+		, [审单操作ID] = @审单操作ID
 	WHERE JD订单号 = @JD订单号;
 
 	SELECT @Count + CASE WHEN @@ROWCOUNT >= 1 THEN 1 ELSE 0 END AS [Result];

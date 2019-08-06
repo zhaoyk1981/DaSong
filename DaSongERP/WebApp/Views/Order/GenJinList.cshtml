@@ -62,6 +62,14 @@
                         </select>
                     </div>
                     <div class="form-group col-6">
+                        <label for="Ddl拆包状态">拆包状态</label>
+                        <select id="Ddl拆包状态" class="form-control" name="已拆包" data-type="bool">
+                            <option value="" selected>全部</option>
+                            <option value="true">已拆包</option>
+                            <option value="false">未拆包</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
                         <label for="Ddl异常订单">是否异常订单</label>
                         <select id="Ddl异常订单" class="form-control" name="高亮" data-type="bool">
                             <option value="" selected>全部</option>
@@ -74,12 +82,12 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="拆包超时" id="Chk拆包超时" />
                             <label class="form-check-label" for="Chk拆包超时">
-                                超过&nbsp;<select id="Ddl拆包超时">
+                                创建订单超过&nbsp;<select id="Ddl拆包超时">
                                     @for (var i = 2; i <= 10; i++)
                                     {
                                         <option value="@i" @(i == 3 ? "selected" : "")>@i</option>
                                     }
-                                </select>&nbsp;天未拆包
+                                </select>&nbsp;天
                             </label>
                         </div>
                     </div>

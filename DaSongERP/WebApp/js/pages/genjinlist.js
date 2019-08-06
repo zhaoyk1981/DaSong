@@ -5,7 +5,7 @@
 
     let chk拆包超时_click = function () {
         if ($(this).prop('checked') === true) {
-            $('#Ddl跟进状态').val('true');
+            $('#Ddl跟进状态').val('false');
         }
 
         return true;
@@ -31,7 +31,7 @@
                 }
             }, true);
 
-            $('#Chk拆包超时').click(chk拆包超时_click);
+            //$('#Chk拆包超时').click(chk拆包超时_click);
             $('#BtnSearch').click(btnSearch_click).click();
         }
     };
