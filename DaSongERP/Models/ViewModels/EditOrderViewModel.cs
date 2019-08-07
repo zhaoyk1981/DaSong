@@ -17,6 +17,8 @@ namespace DaSongERP.ViewModels
 
         public IList<快递Model> 来快递DataSource { get; set; }
 
+        public IList<MetaModel<Guid>> 中转仓DataSource { get; set; }
+
         public OrderModel Order { get; set; }
 
     }

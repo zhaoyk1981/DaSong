@@ -7073,12 +7073,6 @@ label.static-label {
     .notify-number .number:empty {
       display: none; }
 
-[data-zicai='true'] {
-  background-color: skyblue !important; }
-
-[data-high-light='true'] {
-  background-color: #ffc107 !important; }
-
 /*#endregion base END */
 /*#region components START */
 /*#region popup*/
@@ -7399,3 +7393,23 @@ body .vw-order-list #LblMessage:empty {
 
 body .vw-order-list .product-thumbnail {
   height: 120px; }
+
+body .vw-order-list .order-status {
+  font-weight: bold;
+  display: none;
+  margin-left: 5px; }
+  body .vw-order-list .order-status.自采 {
+    color: blue; }
+  body .vw-order-list .order-status.异常 {
+    color: #ffc107; }
+  body .vw-order-list .order-status.现货 {
+    color: darkgreen; }
+
+body .vw-order-list [data-zicai='true'] .order-status.自采 {
+  display: inline-block; }
+
+body .vw-order-list [data-high-light='true'] .order-status.异常 {
+  display: inline-block; }
+
+body .vw-order-list [data-xianhuo='true'] .order-status.现货 {
+  display: inline-block; }

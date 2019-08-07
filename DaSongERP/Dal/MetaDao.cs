@@ -176,6 +176,48 @@ namespace DaSongERP.Dal
         }
 
 
+        public PagedList<MetaModel<Guid>> Get中转仓List(MetaCondition condition)
+        {
+            var cmd = ProcCommands.sp_中转仓List().SetParameterValues(condition);
+            var dataSet = DBHelper.ExecuteDataSet(cmd);
+            var pagedList = new PagedList<MetaModel<Guid>>(condition, dataSet);
+            return pagedList;
+        }
+
+        public int Create中转仓(MetaModel<Guid> meta)
+        {
+            var cmd = ProcCommands.sp_Create中转仓().SetParameterValues(meta);
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
+
+        public int Update中转仓(MetaModel<Guid> meta)
+        {
+            var cmd = ProcCommands.sp_Update中转仓().SetParameterValues(meta);
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
+
+        public int Delete中转仓(Guid id)
+        {
+            var cmd = ProcCommands.sp_Delete中转仓().SetParameterValues(new
+            {
+                ID = id
+            });
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
+
+        public MetaModel<Guid> Get中转仓By(Guid id)
+        {
+            var cmd = ProcCommands.sp_Get中转仓ByID().SetParameterValues(new
+            {
+                ID = id
+            });
+
+            return DBHelper.ExecuteEntityList<MetaModel<Guid>>(cmd).FirstOrDefault();
+        }
+
         public PagedList<店铺Model> Get店铺List(ShopCondition condition)
         {
             var cmd = ProcCommands.sp_店铺List().SetParameterValues(condition);
@@ -228,6 +270,13 @@ namespace DaSongERP.Dal
         {
             var cmd = ProcCommands.sp_GetAll快递();
             var list = DBHelper.ExecuteEntityList<快递Model>(cmd);
+            return list;
+        }
+
+        public IList<MetaModel<Guid>> GetAll中转仓()
+        {
+            var cmd = ProcCommands.sp_GetAll中转仓();
+            var list = DBHelper.ExecuteEntityList<MetaModel<Guid>>(cmd);
             return list;
         }
     }

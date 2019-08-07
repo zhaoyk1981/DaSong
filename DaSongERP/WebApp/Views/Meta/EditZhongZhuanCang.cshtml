@@ -1,0 +1,30 @@
+﻿@model EditMetaViewModel
+@{
+    ViewBag.Title = "编辑中转仓";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="vw-meta-form vw-edit-zhongzhuancang" data-page-js="editzhongzhuancang">
+    @Html.Partial("_Nav")
+    <h2>@ViewBag.Title</h2>
+    <div class="form" validation-group="submit" autocomplete="off">
+        <fieldset>
+            <input type="hidden" name="ID" value="@Model.Meta.ID" />
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="TxtName">名称</label>
+                    <input type="text" class="form-control" maxlength="50" name="Name" id="TxtName" autocomplete="off" value="@Model.Meta.Name" />
+                    <span class="validator" id="vdName" data-required="" data-validate-target="#TxtName"><span class="error-message text-danger">此项必填</span></span>
+                </div>
+                <div class="form-group col-6">
+                    <label for="TxtSN">SN</label>
+                    <input type="number" class="form-control" name="SN" id="TxtSN" autocomplete="off" value="@Model.Meta.SN.GetValueOrDefault()" step="1" />
+                    <span class="validator" id="vdSN" data-required="" data-validate-target="#TxtSN"><span class="error-message text-danger">此项必填</span></span>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" id="BtnSubmit">提交</button>
+        </div>
+    </div>
+</div>

@@ -28,12 +28,13 @@ BEGIN
 	SELECT @RecordsCount = COUNT(DISTINCT o.Id)
 	FROM vw_Orders o
 	WHERE ISNULL(o.订单终结, 0) = 0
+		AND o.现货 = 0
 		AND (@拆包人ID IS NULL OR o.[拆包人ID] = @拆包人ID)
-		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@来快递单号 IS NULL OR o.[来快递单号] LIKE '%' + @来快递单号 + '%')
 		AND (@已拆包 IS NULL OR o.[已拆包] = @已拆包)
 		AND (@拆包超时 IS NULL OR DATEDIFF(DAY, o.进货日期, GETDATE()) >= @拆包超时)
-		AND (@货号 IS NULL OR o.[货号] LIKE '%' + @货号 + '%')
+		AND (ISNULL(@货号, '') = '' OR o.[货号] LIKE '%' + @货号 + '%')
 		AND (@自采 IS NULL OR o.[自采] = @自采)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮);
 
@@ -43,12 +44,13 @@ BEGIN
 	SELECT o.*
 	FROM vw_Orders o
 	WHERE ISNULL(o.订单终结, 0) = 0
+		AND o.现货 = 0
 		AND (@拆包人ID IS NULL OR o.[采购人ID] = @拆包人ID)
-		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@来快递单号 IS NULL OR o.[来快递单号] LIKE '%' + @来快递单号 + '%')
 		AND (@已拆包 IS NULL OR o.[已拆包] = @已拆包)
 		AND (@拆包超时 IS NULL OR DATEDIFF(DAY, o.进货日期, GETDATE()) >= @拆包超时)
-		AND (@货号 IS NULL OR o.[货号] LIKE '%' + @货号 + '%')
+		AND (ISNULL(@货号, '') = '' OR o.[货号] LIKE '%' + @货号 + '%')
 		AND (@自采 IS NULL OR o.[自采] = @自采)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
 	ORDER BY o.进货日期 DESC

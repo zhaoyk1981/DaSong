@@ -17,6 +17,7 @@ namespace DaSongERP.Biz
         public EditOrderViewModel GetCreateOrderViewModel()
         {
             var vm = new EditOrderViewModel();
+            vm.中转仓DataSource = this.MetaDao.GetAll中转仓();
             return vm;
         }
 
@@ -52,6 +53,7 @@ namespace DaSongERP.Biz
         {
             var vm = new EditOrderViewModel();
             vm.Order = this.GetOrderBy(id);
+            vm.中转仓DataSource = this.MetaDao.GetAll中转仓();
             Set店铺(vm.Order);
             return vm;
         }
@@ -204,6 +206,7 @@ namespace DaSongERP.Biz
             var vm = new 跟进ListViewModel();
             vm.Orders = new PagedList<OrderModel>();
             vm.Orders.PageSize = 100;
+            vm.中转仓DataSource = this.MetaDao.GetAll中转仓();
             return vm;
         }
 
@@ -292,6 +295,7 @@ namespace DaSongERP.Biz
             var vm = new 采购ListViewModel();
             vm.Orders = new PagedList<OrderModel>();
             vm.Orders.PageSize = 100;
+            vm.中转仓DataSource = this.MetaDao.GetAll中转仓();
             return vm;
         }
 

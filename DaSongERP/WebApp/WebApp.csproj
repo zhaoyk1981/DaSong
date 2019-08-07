@@ -134,6 +134,7 @@
     <Content Include="js\pages\editshouhou.js" />
     <Content Include="js\pages\editshouhoureason.js" />
     <Content Include="js\pages\edituser.js" />
+    <Content Include="js\pages\editzhongzhuancang.js" />
     <Content Include="js\pages\genjinlist.js" />
     <Content Include="js\pages\genjinorder.js" />
     <Content Include="js\pages\importcaigouorders.js" />
@@ -148,6 +149,7 @@
     <Content Include="js\pages\newshouhou.js" />
     <Content Include="js\pages\newshouhoureason.js" />
     <Content Include="js\pages\newuser.js" />
+    <Content Include="js\pages\newzhongzhuancang.js" />
     <Content Include="js\pages\shendanlist.js" />
     <Content Include="js\pages\shoplist.js" />
     <Content Include="js\pages\shouhoucaozuolist.js" />
@@ -156,6 +158,7 @@
     <Content Include="js\pages\shouhoureasonlist.js" />
     <Content Include="js\pages\signin.js" />
     <Content Include="js\pages\userlist.js" />
+    <Content Include="js\pages\zhongzhuancanglist.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -420,6 +423,12 @@
     <Content Include="Views\Meta\NewShop.cshtml" />
     <Content Include="Views\Meta\EditShop.cshtml" />
     <Content Include="Views\Order\ImportCaiGou.cshtml" />
+    <Content Include="Templates\采购单导入模板.xlsx" />
+    <Content Include="Templates\电话客服表格模板.xlsx" />
+    <Content Include="Templates\导入运单号模版.xlsx" />
+    <Content Include="Views\Meta\ZhongZhuanCangList.cshtml" />
+    <Content Include="Views\Meta\NewZhongZhuanCang.cshtml" />
+    <Content Include="Views\Meta\EditZhongZhuanCang.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

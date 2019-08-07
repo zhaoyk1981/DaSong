@@ -26,9 +26,10 @@ BEGIN
 	FROM vw_Orders o
 	WHERE ISNULL(o.订单终结, 0) = 0
 		AND [自采] = 0
+		AND [现货] = 0
 		AND (@电话客服ID IS NULL OR o.[跟进人ID] = @电话客服ID)
-		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
-		AND (@客人地址 IS NULL OR o.[客人地址] LIKE '%' + @客人地址 + '%' OR o.[客人姓名] LIKE '%' + @客人地址 + '%' OR o.[客人电话] LIKE '%' + @客人地址 + '%')
+		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+		AND (ISNULL(@客人地址, '') = '' OR o.[客人地址] LIKE '%' + @客人地址 + '%' OR o.[客人姓名] LIKE '%' + @客人地址 + '%' OR o.[客人电话] LIKE '%' + @客人地址 + '%')
 		AND (@已导入 IS NULL OR o.已导入 = @已导入)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮);
 
@@ -39,9 +40,10 @@ BEGIN
 	FROM vw_Orders o
 	WHERE ISNULL(o.订单终结, 0) = 0
 		AND [自采] = 0
+		AND [现货] = 0
 		AND (@电话客服ID IS NULL OR o.[跟进人ID] = @电话客服ID)
-		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
-		AND (@客人地址 IS NULL OR o.[客人地址] LIKE '%' + @客人地址 + '%' OR o.[客人姓名] LIKE '%' + @客人地址 + '%' OR o.[客人电话] LIKE '%' + @客人地址 + '%')
+		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+		AND (ISNULL(@客人地址, '') = '' OR o.[客人地址] LIKE '%' + @客人地址 + '%' OR o.[客人姓名] LIKE '%' + @客人地址 + '%' OR o.[客人电话] LIKE '%' + @客人地址 + '%')
 		AND (@已导入 IS NULL OR o.已导入 = @已导入)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
 	ORDER BY o.进货日期 DESC

@@ -16,9 +16,11 @@ CREATE PROCEDURE [dbo].[sp_UpdateOrder]
     ,@采购备注 nvarchar(max)
     ,@京东价 money
     ,@成本价 money
+	,@现货 BIT
 	,@订单修改备注 nvarchar(max)
 	,@采购人ID UNIQUEIDENTIFIER
 	,@高亮 BIT
+	,@中转仓 NVARCHAR(50)
 	,@订单终结 BIT
 	,@订单终结备注 NVARCHAR(MAX)
 AS
@@ -41,8 +43,10 @@ BEGIN
            ,[采购备注] = @采购备注
            ,[京东价] = @京东价
            ,[成本价] = @成本价
+		   ,[现货] = @现货
 		   ,[采购人ID] = @采购人ID
 		   ,[高亮] = @高亮
+		   ,[中转仓] = @中转仓
 		   ,[订单终结] = @订单终结
 		   ,[订单终结备注] = @订单终结备注
 		WHERE ID = @ID;

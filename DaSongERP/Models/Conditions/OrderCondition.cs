@@ -124,5 +124,9 @@ namespace DaSongERP.Conditions
         public bool? 自采 { get; set; }
 
         public bool? 高亮 { get; set; }
+
+        public string 中转仓 { get; set; }
+
+        public bool? 现货 { get; set; }
     }
 }

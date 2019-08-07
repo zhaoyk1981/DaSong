@@ -13,6 +13,7 @@ CREATE PROCEDURE [dbo].[sp_售后List]
 	, @已售后 BIT
 	, @售后完结 BIT
 	, @高亮 BIT
+	, @现货 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -27,10 +28,11 @@ BEGIN
 	WHERE ISNULL(o.订单终结, 0) = 0
 		AND [自采] = 0
 		AND (@售后人员ID IS NULL OR o.[售后人员ID] = @售后人员ID)
-		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@已售后 IS NULL OR o.[已售后] = @已售后)
 		AND (@售后完结 IS NULL OR ISNULL(o.[售后完结], 0) = @售后完结)
-		AND (@高亮 IS NULL OR o.[高亮] = @高亮);
+		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
+		AND (@现货 IS NULL OR o.[现货] = @现货);
 
 	SELECT @PagesCount = PagesCount, @PageSize = PageSize, @PageIndex = PageIndex
 	FROM [dbo].[InitPagingParams](@PageSize, @PageIndex, NULL, @RecordsCount);
@@ -40,10 +42,11 @@ BEGIN
 	WHERE ISNULL(o.订单终结, 0) = 0
 		AND [自采] = 0
 		AND (@售后人员ID IS NULL OR o.[售后人员ID] = @售后人员ID)
-		AND (@JD订单号 IS NULL OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@已售后 IS NULL OR o.[已售后] = @已售后)
 		AND (@售后完结 IS NULL OR ISNULL(o.[售后完结], 0) = @售后完结)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
+		AND (@现货 IS NULL OR o.[现货] = @现货)
 	ORDER BY o.进货日期 DESC
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 

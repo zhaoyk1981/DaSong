@@ -184,6 +184,13 @@ namespace DaSongERP.Dal
                 o.客人地址 = GetStringValue(lastOrder?.客人地址, rowIndex, row, dictColumns, dictCellStatus, "地址");
                 o.店铺 = GetStringValue(lastOrder?.店铺, rowIndex, row, dictColumns, dictCellStatus, "店铺名称");
                 o.进货日期 = GetDateTimeValue(lastOrder?.进货日期, rowIndex, row, dictColumns, dictCellStatus, "进货日期");
+                o.现货 = GetStringValue("", rowIndex, row, dictColumns, dictCellStatus, "现货") == "是";
+                o.中转仓 = GetStringValue(lastOrder?.中转仓, rowIndex, row, dictColumns, dictCellStatus, "中转仓");
+                if (string.IsNullOrEmpty(o.中转仓))
+                {
+                    o.中转仓 = "天津";
+                }
+
                 o.RowIndex = rowIndex;
 
                 if (string.IsNullOrEmpty(o.货号))

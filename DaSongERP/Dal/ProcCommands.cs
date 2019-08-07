@@ -82,6 +82,8 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@成本价", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@采购人ID", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_CreateOrder
@@ -104,6 +106,8 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@京东价", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@成本价", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@采购人ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_CreateOrder4Excel
@@ -153,6 +157,8 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单终结", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单终结备注", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_UpdateOrder
@@ -233,6 +239,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客人姓名", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客人电话", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客人地址", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@退款金额", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后完结", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单修改备注", Value = DBNull.Value });
@@ -348,6 +355,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@自采", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_跟进List
@@ -390,6 +398,8 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@自采", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_采购List
@@ -427,6 +437,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已售后", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后完结", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_售后List
@@ -604,6 +615,59 @@ namespace DaSongERP.Dal
         }
         #endregion sp_Get售后原因ByID
 
+
+        #region sp_中转仓List
+        public static SqlCommand sp_中转仓List()
+        {
+            var cmd = new SqlCommand("sp_中转仓List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_中转仓List
+
+        #region sp_Create中转仓
+        public static SqlCommand sp_Create中转仓()
+        {
+            var cmd = new SqlCommand("sp_Create中转仓") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SN", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Create中转仓
+
+        #region sp_Update中转仓
+        public static SqlCommand sp_Update中转仓()
+        {
+            var cmd = new SqlCommand("sp_Update中转仓") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SN", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Update中转仓
+
+        #region sp_Delete中转仓
+        public static SqlCommand sp_Delete中转仓()
+        {
+            var cmd = new SqlCommand("sp_Delete中转仓") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Delete中转仓
+
+        #region sp_Get中转仓ByID
+        public static SqlCommand sp_Get中转仓ByID()
+        {
+            var cmd = new SqlCommand("sp_Get中转仓ByID") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Get中转仓ByID
+
         #region sp_UserList
         public static SqlCommand sp_UserList()
         {
@@ -693,5 +757,13 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_Update拆包4Excel
+
+        #region sp_GetAll中转仓
+        public static SqlCommand sp_GetAll中转仓()
+        {
+            var cmd = new SqlCommand("sp_GetAll中转仓") { CommandType = CommandType.StoredProcedure };
+            return cmd;
+        }
+        #endregion sp_GetAll中转仓
     }
 }

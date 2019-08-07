@@ -280,6 +280,95 @@ namespace DaSongERP.WebApp.Controllers
         }
 
 
+        public ActionResult ZhongZhuanCangList()
+        {
+            if (!PM.Any(UPM.管理))
+            {
+                return Redirect("/SignIn");
+            }
+
+            var vm = this.MetaBiz.Get中转仓ListViewModel();
+            vm.Json = SerializeObject(new
+            {
+                AllIDs = new string[] { },
+                currentSortPaging = vm.MetaList.GetCurrentSortPaging()
+            });
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AZhongZhuanCangList()
+        {
+            var condition = this.Request.Params.Map<MetaCondition>();
+            condition.PageIndex = int.Parse(this.Request.Params["PageIndex"]);
+
+            var list = this.MetaBiz.Get中转仓List(condition);
+            return this.Json(list);
+        }
+
+        [HttpPost]
+        public ActionResult ADeleteZhongZhuanCang()
+        {
+            Guid id;
+            if (!Guid.TryParse(Request.Params["id"], out id))
+            {
+                return Json(new
+                {
+                    Success = false,
+                    ErrorMessage = string.Empty
+                });
+            }
+
+            var rowCount = this.MetaBiz.Delete中转仓(id);
+            if (rowCount == 0)
+            {
+                return Json(new
+                {
+                    Success = false
+                });
+            }
+
+            return Json(new
+            {
+                Success = true
+            });
+        }
+
+        public ActionResult NewZhongZhuanCang()
+        {
+            var vm = MetaBiz.GetNew中转仓ViewModel();
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult ACreateZhongZhuanCang()
+        {
+            var meta = this.DeserializeObject<MetaModel<Guid>>(Request.Params["FormJson"]);
+            var rowCount = this.MetaBiz.Create中转仓(meta);
+            return Json(new
+            {
+                Success = rowCount == 1
+            });
+        }
+
+        public ActionResult EditZhongZhuanCang(Guid id)
+        {
+            var vm = MetaBiz.GetEdit中转仓ViewModel(id);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AUpdateZhongZhuanCang()
+        {
+            var meta = this.DeserializeObject<MetaModel<Guid>>(Request.Params["FormJson"]);
+            var rowCount = this.MetaBiz.Update中转仓(meta);
+            return Json(new
+            {
+                Success = rowCount == 1
+            });
+        }
+
+
 
         public ActionResult ShopList()
         {

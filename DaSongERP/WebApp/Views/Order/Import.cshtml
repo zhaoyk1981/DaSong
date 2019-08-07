@@ -6,9 +6,14 @@
 
 @section Head{
     <script id="tmplRow" type="x-tmpl-mustache">
-        <tr data-id="{{ID}}" data-high-light="{{高亮}}" data-zicai="{{自采}}">
+        <tr data-id="{{ID}}" data-high-light="{{高亮}}" data-zicai="{{自采}}" data-xianhuo="{{现货}}">
             <td>{{店铺名称}}</td>
-            <td>{{JD订单号}}</td>
+            <td>
+                {{JD订单号}}
+                <span class="异常 order-status">异常</span>
+                <span class="现货 order-status">现货</span>
+                <span class="自采 order-status">自采</span>
+            </td>
             <td>
                 <a href="{{商品图片}}" target="_blank">
                     <img src="{{商品图片}}" class="product-thumbnail" />
@@ -42,6 +47,7 @@
                 <button type="button" class="btn btn-primary" id="BtnSubmit">上传</button>
             </div>
             <br />
+            <a href="~/Templates/电话客服表格模板.xlsx">下载模板</a>
             <br />
             <div class="alert alert-info">
                 更新数据列为：电话备注，客人姓名，电话，地址

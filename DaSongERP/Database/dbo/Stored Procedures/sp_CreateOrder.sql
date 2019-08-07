@@ -19,6 +19,8 @@ CREATE PROCEDURE [dbo].[sp_CreateOrder]
     ,@成本价 money
 	,@采购人ID UNIQUEIDENTIFIER
 	,@高亮 BIT
+	,@现货 BIT
+	,@中转仓 NVARCHAR(50)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -49,7 +51,9 @@ BEGIN
            ,[京东价]
            ,[成本价]
 		   ,[采购人ID]
-		   ,[高亮])
+		   ,[高亮]
+		   ,[现货]
+		   ,[中转仓])
      SELECT
            @ID
            ,@进货日期
@@ -67,7 +71,9 @@ BEGIN
            ,@京东价
            ,@成本价
 		   ,@采购人ID
-		   ,@高亮;
+		   ,@高亮
+		   ,@现货
+		   ,@中转仓;
 
 	END
 

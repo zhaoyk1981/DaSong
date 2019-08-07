@@ -179,6 +179,53 @@ namespace DaSongERP.Biz
             return vm;
         }
 
+
+        public MetaListViewModel Get中转仓ListViewModel()
+        {
+            var vm = new MetaListViewModel();
+            vm.MetaList = new PagedList<MetaModel<Guid>>();
+            vm.MetaList.PageSize = 300;
+            return vm;
+        }
+
+        public PagedList<MetaModel<Guid>> Get中转仓List(MetaCondition condition)
+        {
+            var list = this.MetaDao.Get中转仓List(condition);
+            return list;
+        }
+
+        public int Create中转仓(MetaModel<Guid> meta)
+        {
+            meta.ID = Guid.NewGuid();
+            var rowCount = this.MetaDao.Create中转仓(meta);
+            return rowCount;
+        }
+
+        public int Update中转仓(MetaModel<Guid> meta)
+        {
+            var rowCount = this.MetaDao.Update中转仓(meta);
+            return rowCount;
+        }
+
+        public int Delete中转仓(Guid id)
+        {
+            var rowCount = this.MetaDao.Delete中转仓(id);
+            return rowCount;
+        }
+
+        public EditMetaViewModel GetNew中转仓ViewModel()
+        {
+            var vm = new EditMetaViewModel();
+            return vm;
+        }
+
+        public EditMetaViewModel GetEdit中转仓ViewModel(Guid id)
+        {
+            var vm = new EditMetaViewModel();
+            vm.Meta = MetaDao.Get中转仓By(id);
+            return vm;
+        }
+
         public EditShopViewModel GetNewShopViewModel()
         {
             var vm = new EditShopViewModel();

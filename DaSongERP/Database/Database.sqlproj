@@ -130,5 +130,12 @@
     <Build Include="dbo\Stored Procedures\sp_Create店铺.sql" />
     <Build Include="dbo\Stored Procedures\sp_Update拆包4Excel.sql" />
     <Build Include="dbo\Stored Procedures\sp_CreateOrder4Excel.sql" />
+    <Build Include="dbo\Tables\中转仓.sql" />
+    <Build Include="dbo\Stored Procedures\sp_中转仓List.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Update中转仓.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get中转仓ByID.sql" />
+    <Build Include="dbo\Stored Procedures\sp_GetAll中转仓.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Delete中转仓.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Create中转仓.sql" />
   </ItemGroup>
 </Project>

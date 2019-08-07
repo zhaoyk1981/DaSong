@@ -40,12 +40,16 @@
                     <span>@DP.Txt(Model.Order.店铺名称)</span>
                 </div>
                 <div class="form-group col-6">
+                    <label class="static-label">中转仓：</label>
+                    <span id="Lbl店铺名称">@DP.Txt(Model.Order.中转仓)</span>
+                </div>
+                <div class="form-group col-6">
                     <label class="static-label">京东价：</label>
                     <span>@DP.Txt(Model.Order.京东价)</span>
                 </div>
                 <div class="form-group col-6">
                     <label for="Txt客人姓名">客人姓名：</label>
-                    <input type="text" class="id-客人姓名 form-control" name="客人姓名" id="Txt客人姓名" maxlength="50" value="@(Model.Order.客人姓名)"/>
+                    <input type="text" class="id-客人姓名 form-control" name="客人姓名" id="Txt客人姓名" maxlength="50" value="@(Model.Order.客人姓名)" />
                     <span class="validator" id="vd客人姓名" data-required="" data-validate-target="#Txt客人姓名"><span class="error-message text-danger">此项必填</span></span>
                 </div>
                 <div class="form-group col-6">
@@ -168,6 +172,10 @@
                     <div class="form-group col-6">
                         <label class="static-label">客人退回单号：</label>
                         <span>@DP.Txt(Model.Order.客人退回单号)</span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="static-label">退款金额：</label>
+                        <span>@DP.Txt(Model.Order.退款金额)</span>
                     </div>
                     <div class="form-group col-6">
                         <label class="static-label">售后完结：</label>

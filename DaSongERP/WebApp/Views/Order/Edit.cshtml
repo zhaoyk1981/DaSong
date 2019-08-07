@@ -50,6 +50,15 @@
                     <input type="text" class="id-店铺 form-control" id="Txt店铺" maxlength="50" name="店铺" value="@Model.Order.店铺" />
                 </div>
                 <div class="form-group col-6">
+                    <label for="Ddl中转仓">中转仓</label>
+                    <select id="Ddl中转仓" class="form-control" name="中转仓">
+                        @foreach (var meta in Model.中转仓DataSource)
+                        {
+                            <option value="@meta.Name" @(Model.Order.中转仓 == meta.Name ? "selected" : "")>@meta.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-6">
                     <label for="Txt京东价">京东价：</label>
                     <input type="number" step="0.01" min="0" class="id-京东价 form-control" name="京东价" id="Txt京东价" value="@(Model.Order.京东价.HasValue ? Model.Order.京东价.Value.ToString("F") : string.Empty)" />
                 </div>
@@ -90,7 +99,14 @@
                     <input type="number" step="0.01" min="0" class="id-成本价 form-control" name="成本价" id="Txt成本价" value="@Model.Order.成本价.Value.ToString("F")" />
                     <span class="validator" id="vd成本价" data-required="" data-validate-target="#Txt成本价"><span class="error-message text-danger">此项必填</span></span>
                 </div>
-                <div class="form-group col-12">
+                <div class="form-group col-6">
+                    <label>现货：</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="现货" data-type="bool" id="Chk现货" @(Model.Order.现货.GetValueOrDefault() ? "checked" : "") />
+                        <label class="form-check-label" for="Chk现货">是</label>
+                    </div>
+                </div>
+                <div class="form-group col-6">
                     <label>订单终结：</label>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="订单终结" data-type="bool" id="Chk订单终结" @(Model.Order.订单终结.GetValueOrDefault() ? "checked" : "") />

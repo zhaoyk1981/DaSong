@@ -180,6 +180,10 @@
                     <input type="text" class="form-control" name="淘宝退回单号" id="Txt淘宝退回单号" maxlength="50" value="@DP.Txt(Model.Order.淘宝退回单号, "")" />
                 </div>
                 <div class="form-group col-6">
+                    <label for="Txt成本价">退款金额：</label>
+                    <input type="number" step="0.01" min="0" class="id-退款金额 form-control" name="退款金额" id="Txt退款金额" value="@(Model.Order.退款金额.GetValueOrDefault() != 0 ? Model.Order.退款金额.Value.ToString("F") : string.Empty)" />
+                </div>
+                <div class="form-group col-6">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="售后完结" data-type="bool" id="Chk售后完结" @(Model.Order.售后完结.GetValueOrDefault() ? "checked" : "") />
                         <label class="form-check-label" for="Chk售后完结">售后完结</label>

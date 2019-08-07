@@ -42,8 +42,13 @@
     [订单终结]   BIT              CONSTRAINT [DF_订单_订单终结] DEFAULT ((0)) NOT NULL,
     [订单终结备注] NVARCHAR (MAX)   CONSTRAINT [DF_订单_订单终结备注] DEFAULT ('') NOT NULL,
     [淘宝退回单号] NVARCHAR (50)    CONSTRAINT [DF_订单_淘宝退回单号] DEFAULT ('') NOT NULL,
+    [中转仓]    NVARCHAR (50)    CONSTRAINT [DF_订单_中转仓] DEFAULT ('') NOT NULL,
+    [现货]     BIT              CONSTRAINT [DF_订单_现货] DEFAULT ((0)) NOT NULL,
+    [退款金额]   MONEY            NULL,
     CONSTRAINT [PK_订单] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 

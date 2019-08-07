@@ -15,6 +15,8 @@ CREATE PROCEDURE [dbo].[sp_CreateOrder4Excel]
 	,@转发单号 NVARCHAR(100)
     ,@京东价 money
     ,@成本价 money
+	,@现货 BIT
+	,@中转仓 NVARCHAR(50)
 	,@采购人ID UNIQUEIDENTIFIER
 AS
 BEGIN
@@ -44,6 +46,8 @@ BEGIN
 		   ,[转发单号]
            ,[京东价]
            ,[成本价]
+		   ,[现货]
+		   ,[中转仓]
 		   ,[采购人ID])
      SELECT
            NEWID()
@@ -60,6 +64,8 @@ BEGIN
 		   ,ISNULL(@转发单号, '')
            ,@京东价
            ,@成本价
+		   ,@现货
+		   ,@中转仓
 		   ,@采购人ID;
 
 	END

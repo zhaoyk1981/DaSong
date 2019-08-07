@@ -6,9 +6,14 @@
 
 @section Head{
     <script id="tmplRow" type="x-tmpl-mustache">
-        <tr data-id="{{ID}}" data-high-light="{{高亮}}" data-zicai="{{自采}}">
+        <tr data-id="{{ID}}" data-high-light="{{高亮}}" data-zicai="{{自采}}" data-xianhuo="{{现货}}">
             <td>{{店铺名称}}</td>
-            <td>{{JD订单号}}</td>
+            <td>
+                {{JD订单号}}
+                <span class="异常 order-status">异常</span>
+                <span class="现货 order-status">现货</span>
+                <span class="自采 order-status">自采</span>
+            </td>
             <td>
                 <a href="{{商品图片}}" target="_blank">
                     <img src="{{商品图片}}" class="product-thumbnail" />
@@ -51,6 +56,14 @@
                         </select>
                     </div>
                     <div class="form-group col-6">
+                        <label for="Ddl现货">是否现货</label>
+                        <select id="Ddl现货" class="form-control" name="现货" data-type="bool">
+                            <option value="" selected>全部</option>
+                            <option value="true">现货</option>
+                            <option value="false">非现货</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
                         <label for="Ddl异常订单">是否异常订单</label>
                         <select id="Ddl异常订单" class="form-control" name="高亮" data-type="bool">
                             <option value="" selected>全部</option>
@@ -59,7 +72,6 @@
                         </select>
                     </div>
                     <div class="form-group col-6">
-                        <label>&nbsp;</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="售后完结" data-type="bool" id="Chk售后完结" />
                             <label class="form-check-label" for="Chk售后完结">售后完结</label>
