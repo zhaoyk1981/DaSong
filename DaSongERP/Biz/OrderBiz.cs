@@ -128,6 +128,7 @@ namespace DaSongERP.Biz
             var ordersInExcel = ExcelDao.ReadExcel拆包审单(excelStream, isXlsx);
             foreach (var order in ordersInExcel)
             {
+                order.拆包人ID = this.UserID;
                 order.导入结果 = OrderDao.Update拆包4Excel(order);
             }
 
@@ -147,6 +148,14 @@ namespace DaSongERP.Biz
         public int Update拆包(OrderModel order)
         {
             order.拆包人ID = this.UserID;
+            order.订单修改备注 = string.Empty;
+            if (order.审单操作ID.Value == Guid.Empty)
+            {
+                order.审单操作ID = null;
+                order.转发单号 = string.Empty;
+                order.订单修改备注 = this.生成订单修改备注_拆包审单(order, "拆包人");
+            }
+
             var rowCount = OrderDao.Update拆包(order);
             return rowCount;
         }
@@ -163,7 +172,7 @@ namespace DaSongERP.Biz
         public int Update售后(OrderModel order)
         {
             order.售后人员ID = this.UserID;
-            order.订单修改备注 = this.生成订单修改备注(order, "售后");
+            order.订单修改备注 = this.生成订单修改备注_客人地址(order, "售后");
             var rowCount = OrderDao.Update售后(order);
             return rowCount;
         }
@@ -189,7 +198,7 @@ namespace DaSongERP.Biz
         public int Update客服(OrderModel order)
         {
             order.客服ID = this.UserID;
-            order.订单修改备注 = this.生成订单修改备注(order, "客服");
+            order.订单修改备注 = this.生成订单修改备注_客人地址(order, "客服");
             var rowCount = OrderDao.Update客服(order);
             return rowCount;
         }
@@ -255,12 +264,12 @@ namespace DaSongERP.Biz
         public int Update电话客服(OrderModel order)
         {
             order.电话客服ID = this.UserID;
-            order.订单修改备注 = this.生成订单修改备注(order, "电话客服");
+            order.订单修改备注 = this.生成订单修改备注_客人地址(order, "电话客服");
             var rowCount = this.OrderDao.Update电话客服(order);
             return rowCount;
         }
 
-        private string 生成订单修改备注(OrderModel newOrder, string role)
+        private string 生成订单修改备注_客人地址(OrderModel newOrder, string role)
         {
             var oldOrder = this.GetOrderBy(newOrder.ID.Value);
             var b = new StringBuilder();
@@ -284,6 +293,18 @@ namespace DaSongERP.Biz
             {
                 return string.Empty;
             }
+
+            var user = this.UserDao.GetUserBy(this.UserID.Value);
+
+            return $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - {role}: {user.Name}, JD订单号:{oldOrder.JD订单号}\r\n{b.ToString()}";
+        }
+
+        private string 生成订单修改备注_拆包审单(OrderModel newOrder, string role)
+        {
+            var oldOrder = this.GetOrderBy(newOrder.ID.Value);
+            var b = new StringBuilder();
+
+            b.Append($"还原为未拆包，\r\n原审单操作为\"{oldOrder.审单操作.Name}\", 原转发单号为\"{oldOrder.转发单号}\"\r\n");
 
             var user = this.UserDao.GetUserBy(this.UserID.Value);
 

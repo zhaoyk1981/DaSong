@@ -19,10 +19,10 @@ namespace DaSongERP.Dal
             return list;
         }
 
-        public IList<MetaModel<Guid>> Get审单操作()
+        public IList<审单操作Model> Get审单操作()
         {
             var cmd = ProcCommands.sp_Get审单操作();
-            var list = DBHelper.ExecuteEntityList<MetaModel<Guid>>(cmd);
+            var list = DBHelper.ExecuteEntityList<审单操作Model>(cmd);
             return list;
         }
 
@@ -47,22 +47,22 @@ namespace DaSongERP.Dal
             return list;
         }
 
-        public PagedList<MetaModel<Guid>> Get审单操作List(MetaCondition condition)
+        public PagedList<审单操作Model> Get审单操作List(MetaCondition condition)
         {
             var cmd = ProcCommands.sp_审单操作List().SetParameterValues(condition);
             var dataSet = DBHelper.ExecuteDataSet(cmd);
-            var pagedList = new PagedList<MetaModel<Guid>>(condition, dataSet);
+            var pagedList = new PagedList<审单操作Model>(condition, dataSet);
             return pagedList;
         }
 
-        public int Create审单操作(MetaModel<Guid> meta)
+        public int Create审单操作(审单操作Model meta)
         {
             var cmd = ProcCommands.sp_Create审单操作().SetParameterValues(meta);
             var rowCount = (int)DBHelper.ExecuteScalar(cmd);
             return rowCount;
         }
 
-        public int Update审单操作(MetaModel<Guid> meta)
+        public int Update审单操作(审单操作Model meta)
         {
             var cmd = ProcCommands.sp_Update审单操作().SetParameterValues(meta);
             var rowCount = (int)DBHelper.ExecuteScalar(cmd);
@@ -79,14 +79,14 @@ namespace DaSongERP.Dal
             return rowCount;
         }
 
-        public MetaModel<Guid> Get审单操作By(Guid id)
+        public 审单操作Model Get审单操作By(Guid id)
         {
             var cmd = ProcCommands.sp_Get审单操作ByID().SetParameterValues(new
             {
                 ID = id
             });
 
-            return DBHelper.ExecuteEntityList<MetaModel<Guid>>(cmd).FirstOrDefault();
+            return DBHelper.ExecuteEntityList<审单操作Model>(cmd).FirstOrDefault();
         }
 
 

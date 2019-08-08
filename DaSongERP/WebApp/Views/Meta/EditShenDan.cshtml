@@ -1,4 +1,4 @@
-﻿@model EditMetaViewModel
+﻿@model Edit审单操作ViewModel
 @{
     ViewBag.Title = "编辑审单操作";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,6 +15,13 @@
                     <label for="TxtName">名称</label>
                     <input type="text" class="form-control" maxlength="50" name="Name" id="TxtName" autocomplete="off" value="@Model.Meta.Name" />
                     <span class="validator" id="vdName" data-required="" data-validate-target="#TxtName"><span class="error-message text-danger">此项必填</span></span>
+                </div>
+                <div class="form-group col-6">
+                    <label>&nbsp;</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="已完成" data-type="bool" id="Chk已完成" @(Model.Meta.已完成.GetValueOrDefault() ? "checked" : "") />
+                        <label class="form-check-label" for="Chk已完成">已完成</label>
+                    </div>
                 </div>
                 <div class="form-group col-6">
                     <label for="TxtSN">SN</label>

@@ -9,7 +9,7 @@ namespace DaSongERP.ViewModels
 {
     public class EditOrderViewModel : ViewModel
     {
-        public IList<MetaModel<Guid>> 审单操作DataSource { get; set; }
+        public IList<审单操作Model> 审单操作DataSource { get; set; }
 
         public IList<MetaModel<Guid>> 售后操作DataSource { get; set; }
 

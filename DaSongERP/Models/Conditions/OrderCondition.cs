@@ -128,5 +128,7 @@ namespace DaSongERP.Conditions
         public string 中转仓 { get; set; }
 
         public bool? 现货 { get; set; }
+
+        public bool? 订单终结 { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace DaSongERP.Biz
             return this.MetaDao.Get店铺();
         }
 
-        public IList<MetaModel<Guid>> Get审单操作()
+        public IList<审单操作Model> Get审单操作()
         {
             return this.MetaDao.Get审单操作();
         }
@@ -38,28 +38,28 @@ namespace DaSongERP.Biz
             return this.MetaDao.Get淘宝账号();
         }
 
-        public MetaListViewModel Get审单操作ListViewModel()
+        public 审单操作ListViewModel Get审单操作ListViewModel()
         {
-            var vm = new MetaListViewModel();
-            vm.MetaList = new PagedList<MetaModel<Guid>>();
+            var vm = new 审单操作ListViewModel();
+            vm.MetaList = new PagedList<审单操作Model>();
             vm.MetaList.PageSize = 300;
             return vm;
         }
 
-        public PagedList<MetaModel<Guid>> Get审单操作List(MetaCondition condition)
+        public PagedList<审单操作Model> Get审单操作List(MetaCondition condition)
         {
             var list = this.MetaDao.Get审单操作List(condition);
             return list;
         }
 
-        public int Create审单操作(MetaModel<Guid> meta)
+        public int Create审单操作(审单操作Model meta)
         {
             meta.ID = Guid.NewGuid();
             var rowCount = this.MetaDao.Create审单操作(meta);
             return rowCount;
         }
 
-        public int Update审单操作(MetaModel<Guid> meta)
+        public int Update审单操作(审单操作Model meta)
         {
             var rowCount = this.MetaDao.Update审单操作(meta);
             return rowCount;
@@ -71,15 +71,15 @@ namespace DaSongERP.Biz
             return rowCount;
         }
 
-        public EditMetaViewModel GetNew审单操作ViewModel()
+        public Edit审单操作ViewModel GetNew审单操作ViewModel()
         {
-            var vm = new EditMetaViewModel();
+            var vm = new Edit审单操作ViewModel();
             return vm;
         }
 
-        public EditMetaViewModel GetEdit审单操作ViewModel(Guid id)
+        public Edit审单操作ViewModel GetEdit审单操作ViewModel(Guid id)
         {
-            var vm = new EditMetaViewModel();
+            var vm = new Edit审单操作ViewModel();
             vm.Meta = MetaDao.Get审单操作By(id);
             return vm;
         }

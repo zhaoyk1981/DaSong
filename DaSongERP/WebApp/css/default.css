@@ -7397,13 +7397,14 @@ body .vw-order-list .product-thumbnail {
 body .vw-order-list .order-status {
   font-weight: bold;
   display: none;
-  margin-left: 5px; }
+  margin-left: 5px;
+  color: white; }
   body .vw-order-list .order-status.自采 {
-    color: blue; }
+    background-color: blue; }
   body .vw-order-list .order-status.异常 {
-    color: #ffc107; }
+    background-color: #ffc107; }
   body .vw-order-list .order-status.现货 {
-    color: darkgreen; }
+    background-color: darkgreen; }
 
 body .vw-order-list [data-zicai='true'] .order-status.自采 {
   display: inline-block; }

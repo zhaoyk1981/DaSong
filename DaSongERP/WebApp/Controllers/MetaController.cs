@@ -76,7 +76,7 @@ namespace DaSongERP.WebApp.Controllers
         [HttpPost]
         public ActionResult ACreateShenDan()
         {
-            var meta = this.DeserializeObject<MetaModel<Guid>>(Request.Params["FormJson"]);
+            var meta = this.DeserializeObject<审单操作Model>(Request.Params["FormJson"]);
             var rowCount = this.MetaBiz.Create审单操作(meta);
             return Json(new
             {
@@ -93,7 +93,7 @@ namespace DaSongERP.WebApp.Controllers
         [HttpPost]
         public ActionResult AUpdateShenDan()
         {
-            var meta = this.DeserializeObject<MetaModel<Guid>>(Request.Params["FormJson"]);
+            var meta = this.DeserializeObject<审单操作Model>(Request.Params["FormJson"]);
             var rowCount = this.MetaBiz.Update审单操作(meta);
             return Json(new
             {

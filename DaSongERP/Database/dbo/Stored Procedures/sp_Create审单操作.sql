@@ -7,6 +7,7 @@ CREATE PROCEDURE [dbo].[sp_Create审单操作]
 	@ID UNIQUEIDENTIFIER
 	, @Name NVARCHAR(50)
 	, @SN INT
+	, @已完成 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -22,11 +23,13 @@ BEGIN
 	INSERT INTO [dbo].[审单操作]
            ([ID]
            ,[Name]
-           ,[SN])
+           ,[SN]
+		   ,[已完成])
      SELECT
            @ID
            ,@Name
-           ,@SN;
+           ,@SN
+		   ,@已完成;
 
 	SELECT @@ROWCOUNT [RowCount];
 END

@@ -222,6 +222,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单终结", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单终结备注", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单修改备注", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Update拆包
@@ -420,6 +421,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@自采", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单终结", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_拆包审单List
@@ -477,6 +479,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SN", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已完成", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Create审单操作
@@ -488,6 +491,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SN", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已完成", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Update审单操作
@@ -753,7 +757,8 @@ namespace DaSongERP.Dal
         {
             var cmd = new SqlCommand("sp_Update拆包4Excel") { CommandType = CommandType.StoredProcedure };
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
-            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@来快递单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@转发单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@拆包人ID", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Update拆包4Excel
@@ -765,5 +770,14 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_GetAll中转仓
+
+        #region sp_统计拆包审单数量
+        public static SqlCommand sp_统计拆包审单数量()
+        {
+            var cmd = new SqlCommand("sp_统计拆包审单数量") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Date", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_统计拆包审单数量
     }
 }

@@ -14,17 +14,18 @@
             font-weight: bold;
             display: none;
             margin-left: 5px;
+            color: white;
 
             &.自采 {
-                color: blue;
+                background-color: blue;
             }
 
             &.异常 {
-                color: #ffc107;
+                background-color: #ffc107;
             }
 
             &.现货 {
-                color: darkgreen;
+                background-color: darkgreen;
             }
         }
 

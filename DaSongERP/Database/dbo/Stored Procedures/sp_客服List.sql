@@ -23,8 +23,7 @@ BEGIN
 
 	SELECT @RecordsCount = COUNT(DISTINCT o.Id)
 	FROM vw_Orders o
-	WHERE ISNULL(o.订单终结, 0) = 0
-		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+	WHERE (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (ISNULL(@货号, '') = '' OR o.[货号] LIKE '%' + @货号 + '%')
 		AND (@自采 IS NULL OR o.[自采] = @自采)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮);
@@ -34,8 +33,7 @@ BEGIN
 
 	SELECT o.*
 	FROM vw_Orders o
-	WHERE ISNULL(o.订单终结, 0) = 0
-		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+	WHERE (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (ISNULL(@货号, '') = '' OR o.[货号] LIKE '%' + @货号 + '%')
 		AND (@自采 IS NULL OR o.[自采] = @自采)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)

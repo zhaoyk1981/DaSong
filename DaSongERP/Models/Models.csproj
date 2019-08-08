@@ -54,6 +54,7 @@
     <Compile Include="Models\StockModel.cs" />
     <Compile Include="Models\UPM.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\审单操作Model.cs" />
     <Compile Include="Models\店铺Model.cs" />
     <Compile Include="Models\快递Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="ViewModels\EditOrderViewModel.cs" />
     <Compile Include="ViewModels\EditShopViewModel.cs" />
     <Compile Include="ViewModels\EditUserViewModel.cs" />
+    <Compile Include="ViewModels\Edit审单操作ViewModel.cs" />
     <Compile Include="ViewModels\MetaListViewModel.cs" />
     <Compile Include="ViewModels\OrderListViewModel.cs" />
     <Compile Include="ViewModels\PagedListViewModel.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="ViewModels\UserListViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="ViewModels\售后ListViewModel.cs" />
+    <Compile Include="ViewModels\审单操作ListViewModel.cs" />
     <Compile Include="ViewModels\客服ListViewModel.cs" />
     <Compile Include="ViewModels\店铺ListViewModel.cs" />
     <Compile Include="ViewModels\拆包审单ListViewModel.cs" />

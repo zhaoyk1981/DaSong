@@ -35,7 +35,7 @@
     [售后人员ID] UNIQUEIDENTIFIER NULL,
     [售后时间]   DATETIME2 (7)    NULL,
     [客人退回单号] NVARCHAR (100)   CONSTRAINT [DF_订单_客人退回单号] DEFAULT ('') NOT NULL,
-    [售后完结]   BIT              NULL,
+    [售后完结]   BIT              CONSTRAINT [DF_订单_售后完结] DEFAULT ((0)) NOT NULL,
     [客服ID]   UNIQUEIDENTIFIER NULL,
     [客服时间]   DATETIME2 (7)    NULL,
     [高亮]     BIT              CONSTRAINT [DF_订单_高亮] DEFAULT ((0)) NOT NULL,
@@ -47,6 +47,8 @@
     [退款金额]   MONEY            NULL,
     CONSTRAINT [PK_订单] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 

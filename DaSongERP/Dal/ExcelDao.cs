@@ -107,7 +107,7 @@ namespace DaSongERP.Dal
 
                 var o = new OrderModel();
                 o.JD订单号 = GetStringValue(null, rowIndex, row, dictColumns, dictCellStatus, "订单号");
-                o.来快递单号 = GetStringValue(null, rowIndex, row, dictColumns, dictCellStatus, "运单号");
+                o.转发单号 = GetStringValue(null, rowIndex, row, dictColumns, dictCellStatus, "运单号");
                 o.RowIndex = rowIndex;
 
                 if (string.IsNullOrEmpty(o.JD订单号))

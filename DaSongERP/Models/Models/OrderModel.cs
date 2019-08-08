@@ -193,6 +193,16 @@ namespace DaSongERP.Models
 
         public string 转发单号 { get; set; }
 
+        public string Baidu转发单号
+        {
+            get
+            {
+                var list = (转发单号 ?? string.Empty).Split(" ,;".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                    .Select(m => $"<a target=\"_blank\" href=\"https://www.baidu.com/s?wd={m}\">{m}</a>").ToList();
+                return string.Join("<br/>", list);
+            }
+        }
+
         public UserModel 拆包人 { get; set; }
 
         public Guid? 拆包人ID

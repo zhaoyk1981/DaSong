@@ -7,6 +7,7 @@ CREATE PROCEDURE [dbo].[sp_Update审单操作]
 	@ID UNIQUEIDENTIFIER
 	, @Name NVARCHAR(50)
 	, @SN INT
+	, @已完成 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -22,6 +23,7 @@ BEGIN
 	UPDATE [dbo].[审单操作] SET
            [Name] = @Name
            ,[SN] = @SN
+		   ,[已完成] = @已完成
     WHERE ID = @ID;
 
 	SELECT @@ROWCOUNT [RowCount];

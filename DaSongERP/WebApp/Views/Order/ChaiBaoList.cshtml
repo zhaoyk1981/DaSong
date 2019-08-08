@@ -53,7 +53,7 @@
             <a href="~/Templates/导入运单号模版.xlsx">下载模板</a>
             <br />
             <div class="alert alert-info">
-                更新数据列为：快递单号
+                更新数据列为：转发单号
             </div>
             <br />
             <a href="/Order/Import" id="LblMessage" class="alert alert-info hide-when-empty"></a>
@@ -93,6 +93,14 @@
                     </select>
                 </div>
                 <div class="form-group col-6">
+                    <label for="Ddl订单终结">订单终结</label>
+                    <select id="Ddl订单终结" class="form-control" name="订单终结" data-type="bool">
+                        <option value="">全部</option>
+                        <option value="true">已终结</option>
+                        <option value="false" selected>未终结</option>
+                    </select>
+                </div>
+                <div class="form-group col-6">
                     <label for="Ddl异常订单">是否异常订单</label>
                     <select id="Ddl异常订单" class="form-control" name="高亮" data-type="bool">
                         <option value="" selected>全部</option>
@@ -101,6 +109,7 @@
                     </select>
                 </div>
                 <div class="form-group col-6">
+                    <label>&nbsp;</label>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="拆包超时" id="Chk拆包超时" />
                         <label class="form-check-label" for="Chk售后完结">

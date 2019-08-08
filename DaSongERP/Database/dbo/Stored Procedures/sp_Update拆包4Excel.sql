@@ -5,7 +5,8 @@
 -- =============================================
 CREATE PROCEDURE [dbo].[sp_Update拆包4Excel]
 	@JD订单号 NVARCHAR(50)
-	, @来快递单号 NVARCHAR(50)
+	, @转发单号 NVARCHAR(50)
+	, @拆包人ID UNIQUEIDENTIFIER
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -25,8 +26,10 @@ BEGIN
 	WHERE JD订单号 = @JD订单号;
 
     UPDATE 订单 SET
-		来快递单号 = @来快递单号
+		来快递单号 = @转发单号
 		, [审单操作ID] = @审单操作ID
+		, [拆包人ID] = @拆包人ID
+		, [拆包时间] = GETDATE()
 	WHERE JD订单号 = @JD订单号;
 
 	SELECT @Count + CASE WHEN @@ROWCOUNT >= 1 THEN 1 ELSE 0 END AS [Result];

@@ -6,10 +6,9 @@ SELECT  o.ID, o.进货日期, o.货号, o.商品图片, o.进货数量, o.店铺
                o.售后完结, o.客服ID, o.客服时间, o.高亮, o.现货, o.退款金额, o.中转仓, cg.Name AS [采购人.Name], sd.Name AS [审单操作.Name], 
                cb.Name AS [拆包人.Name], sho.Name AS [售后操作.Name], sho.SN AS [售后操作.SN], shr.Name AS [售后原因.Name], shr.SN AS [售后原因.SN], 
                sh.Name AS [售后人员.Name], gj.Name AS [跟进人.Name], kf.Name AS [客服.Name], CAST(CASE WHEN o.[来快递单号] = '' THEN 0 ELSE 1 END AS BIT) 
-               AS 已跟进, CAST(CASE WHEN o.[导入时间] IS NULL THEN 0 ELSE 1 END AS BIT) AS 已导入, CAST(CASE WHEN o.[转发单号] = '' OR
-               sd.Name = '问题件，还会到货' THEN 0 ELSE 1 END AS BIT) AS 已拆包, CAST(CASE WHEN o.售后操作ID IS NULL THEN 0 ELSE 1 END AS BIT) AS 已售后, 
-               dhkf.Name AS [电话客服.Name], o.订单终结, o.订单终结备注, o.淘宝退回单号, CAST(CASE WHEN o.JD订单号 = '' THEN 1 ELSE 0 END AS BIT) 
-               AS 自采
+               AS 已跟进, CAST(CASE WHEN o.[导入时间] IS NULL THEN 0 ELSE 1 END AS BIT) AS 已导入, ISNULL(sd.已完成, 0) AS 已拆包, 
+               CAST(CASE WHEN o.售后操作ID IS NULL THEN 0 ELSE 1 END AS BIT) AS 已售后, dhkf.Name AS [电话客服.Name], o.订单终结, o.订单终结备注, 
+               o.淘宝退回单号, CAST(CASE WHEN o.JD订单号 = '' THEN 1 ELSE 0 END AS BIT) AS 自采
 FROM     dbo.订单 AS o LEFT OUTER JOIN
                dbo.Users AS cg ON cg.ID = o.采购人ID LEFT OUTER JOIN
                dbo.审单操作 AS sd ON sd.ID = o.审单操作ID LEFT OUTER JOIN
@@ -63,8 +62,15 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 56
+      Begin ColumnWidths = 63
          Width = 284
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
+         Width = 1000
          Width = 1000
          Width = 1000
          Width = 1000
@@ -141,6 +147,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_Orders';
+
+
 
 
 

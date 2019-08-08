@@ -12,6 +12,7 @@ CREATE PROCEDURE [dbo].[sp_Update拆包]
 	, @订单终结 BIT
 	,@订单终结备注 NVARCHAR(MAX)
 	, @高亮 BIT
+	, @订单修改备注 NVARCHAR(MAX)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -27,6 +28,7 @@ BEGIN
 		,[订单终结备注] = @订单终结备注
 		, [拆包时间] = GETDATE()
 		, [高亮] = @高亮
+		, [订单修改备注] = [订单修改备注] + ISNULL(@订单修改备注, '')
 	WHERE ID = @ID;
 
 	SELECT @@ROWCOUNT [RowCount];

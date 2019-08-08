@@ -152,6 +152,7 @@
                         {
                             <option value="@m.ID.Value" @(Model.Order.审单操作ID.GetValueOrDefault() == m.ID.Value ? "selected" : "")>@m.Name</option>
                         }
+                        <option value="@Guid.Empty">改为未审</option>
                     </select>
                 </div>
                 <div class="form-group col-6">

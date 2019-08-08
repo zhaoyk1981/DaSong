@@ -137,5 +137,6 @@
     <Build Include="dbo\Stored Procedures\sp_GetAll中转仓.sql" />
     <Build Include="dbo\Stored Procedures\sp_Delete中转仓.sql" />
     <Build Include="dbo\Stored Procedures\sp_Create中转仓.sql" />
+    <Build Include="dbo\Stored Procedures\sp_统计拆包审单数量.sql" />
   </ItemGroup>
 </Project>

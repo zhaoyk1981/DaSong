@@ -2,8 +2,11 @@
     [ID]   UNIQUEIDENTIFIER NOT NULL,
     [Name] NVARCHAR (50)    NOT NULL,
     [SN]   INT              NOT NULL,
+    [已完成]  BIT              NOT NULL,
     CONSTRAINT [PK_审单操作] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 
