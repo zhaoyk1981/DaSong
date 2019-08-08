@@ -82,12 +82,10 @@
                 <div class="form-group col-6">
                     <label for="Ddl淘宝账号ID">淘宝账号：</label>
                     <input type="text" class="id-淘宝账号 form-control" id="Txt淘宝账号" maxlength="50" name="淘宝账号" value="@Model.Order.淘宝账号" />
-                    <span class="validator" id="vd淘宝账号" data-required="" data-validate-target="#Txt淘宝账号"><span class="error-message text-danger">此项必填</span></span>
                 </div>
                 <div class="form-group col-6">
                     <label for="Txt淘宝订单号">淘宝订单号：</label>
                     <input type="text" class="id-淘宝订单号 form-control" name="淘宝订单号" id="Txt淘宝订单号" maxlength="50" value="@Model.Order.淘宝订单号" />
-                    <span class="validator" id="vd淘宝订单号" data-required="" data-validate-target="#Txt淘宝订单号"><span class="error-message text-danger">此项必填</span></span>
                 </div>
                 <div class="form-group col-6">
                     <label for="Txt进货数量">进货数量：</label>
@@ -97,7 +95,6 @@
                 <div class="form-group col-6">
                     <label for="Txt成本价">成本价：</label>
                     <input type="number" step="0.01" min="0" class="id-成本价 form-control" name="成本价" id="Txt成本价" value="@Model.Order.成本价.Value.ToString("F")" />
-                    <span class="validator" id="vd成本价" data-required="" data-validate-target="#Txt成本价"><span class="error-message text-danger">此项必填</span></span>
                 </div>
                 <div class="form-group col-6">
                     <label>现货：</label>
