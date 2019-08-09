@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE dbo.sp_统计拆包审单数量
+CREATE PROCEDURE [dbo].[sp_统计拆包审单数量]
 	@Date DATETIME
 AS
 BEGIN
@@ -21,7 +21,8 @@ BEGIN
 	SELECT u.ID, u.Name, ISNULL(c.[Count], 0) [Count]
 	FROM Users u
 	LEFT JOIN CNT c ON c.ID = u.ID
-	WHERE (u.PermissionID & 16) = 16;
+	WHERE (u.PermissionID & 16) = 16
+	ORDER BY u.Name;
 
 	WITH CNT AS(
 		SELECT p.ID, COUNT(0) [Count]

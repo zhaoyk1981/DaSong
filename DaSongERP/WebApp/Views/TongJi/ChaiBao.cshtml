@@ -1,0 +1,22 @@
+﻿@model 拆包审单统计ViewModel
+@{
+    ViewBag.Title = "今日拆包审单数量";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="vw-tongji vw-tongji-chaibaoshendan" data-page-js="tjchaibao" vm-json="@Model.Json">
+    @Html.Partial("_Nav")
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <div>
+        <h3>按员工统计：</h3>
+        <p>
+            @Html.Raw(string.Join("<br />", Model.ListByUser.Select(m => $"<b>{m.Name}:</b> {m.Count.ToString("F0")}件")))
+        </p>
+        <h3>按状态统计：</h3>
+        <p>
+            @Html.Raw(string.Join("<br />", Model.ListByStatus.Select(m => $"<b>{m.Name}:</b> {m.Count.ToString("F0")}件")))
+        </p>
+    </div>
+</div>
+

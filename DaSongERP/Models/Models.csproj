@@ -57,6 +57,7 @@
     <Compile Include="Models\审单操作Model.cs" />
     <Compile Include="Models\店铺Model.cs" />
     <Compile Include="Models\快递Model.cs" />
+    <Compile Include="Models\统计项Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EditMetaViewModel.cs" />
     <Compile Include="ViewModels\EditOrderViewModel.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="ViewModels\客服ListViewModel.cs" />
     <Compile Include="ViewModels\店铺ListViewModel.cs" />
     <Compile Include="ViewModels\拆包审单ListViewModel.cs" />
+    <Compile Include="ViewModels\拆包审单统计ViewModel.cs" />
     <Compile Include="ViewModels\电话客服ListViewModel.cs" />
     <Compile Include="ViewModels\跟进ListViewModel.cs" />
     <Compile Include="ViewModels\采购ListViewModel.cs" />

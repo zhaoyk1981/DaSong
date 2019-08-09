@@ -65,7 +65,9 @@ namespace DaSongERP.Models
         {
             get
             {
-                var list = (来快递单号 ?? string.Empty).Split(" ,;".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                var list = (来快递单号 ?? string.Empty)
+                    .Split(" ,;".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                    .Select(m => m.Replace("\"", "").Trim())
                     .Select(m => $"<a target=\"_blank\" href=\"https://www.baidu.com/s?wd={m}\">{m}</a>").ToList();
                 return string.Join("<br/>", list);
             }
@@ -197,8 +199,9 @@ namespace DaSongERP.Models
         {
             get
             {
-                var list = (转发单号 ?? string.Empty).Split(" ,;".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-                    .Select(m => $"<a target=\"_blank\" href=\"https://www.baidu.com/s?wd={m}\">{m}</a>").ToList();
+                var list = (转发单号 ?? string.Empty).Trim().Split(" ,;".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                    .Select(m => m.Replace("\"", "").Trim())
+                    .Select(m => $"<a target='_blank' id='lbl转发单号{ID}' href='https://www.baidu.com/s?wd={m.Trim()}'>{m.Trim()}</a>&nbsp;<a href='javascript: void(0)' class='btn-copy-clipboard' data-clipboard-target='#lbl转发单号{ID}'>复制</a>").ToList();
                 return string.Join("<br/>", list);
             }
         }

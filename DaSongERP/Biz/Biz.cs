@@ -20,6 +20,8 @@ namespace DaSongERP.Biz
 
         protected ExcelDao ExcelDao { get; set; } = new ExcelDao();
 
+        protected 统计Dao 统计Dao { get; set; } = new 统计Dao();
+
         protected Guid? UserID
         {
             get

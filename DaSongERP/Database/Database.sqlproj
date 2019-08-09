@@ -63,7 +63,6 @@
     <Folder Include="dbo\Functions\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\淘宝账号.sql" />
     <Build Include="dbo\Tables\售后原因.sql" />
     <Build Include="dbo\Tables\售后操作.sql" />
     <Build Include="dbo\Tables\审单操作.sql" />

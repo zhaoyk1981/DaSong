@@ -115,7 +115,7 @@ namespace DaSongERP.Dal
                     continue;
                 }
 
-                if (string.IsNullOrEmpty(o.来快递单号))
+                if (string.IsNullOrEmpty(o.转发单号))
                 {
                     continue;
                 }
@@ -313,6 +313,11 @@ namespace DaSongERP.Dal
                     case CellType.Numeric:
                         strVal = cell.NumericCellValue.ToString();
                         break;
+                }
+
+                if (!string.IsNullOrEmpty(strVal))
+                {
+                    strVal = strVal.Replace("\t", "");
                 }
 
                 return strVal;

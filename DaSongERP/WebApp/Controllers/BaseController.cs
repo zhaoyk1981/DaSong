@@ -17,6 +17,8 @@ namespace DaSongERP.WebApp.Controllers
 
         protected OrderBiz OrderBiz { get; set; } = new OrderBiz();
 
+        protected 统计Biz 统计Biz { get; set; } = new 统计Biz();
+
         private static string _BuildVer;
         /// <summary>
         /// Build版本，用于防止客户端JS和CSS文件缓存，没次Build时重新生成

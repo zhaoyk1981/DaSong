@@ -436,6 +436,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后人员ID", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客人地址", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已售后", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后完结", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });

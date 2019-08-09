@@ -24,7 +24,27 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N' End
+         Begin Table = "shr"
+            Begin Extent = 
+               Top = 9
+               Left = 1788
+               Bottom = 175
+               Right = 1971
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "sh"
+            Begin Extent = 
+               Top = 9
+               Left = 2028
+               Bottom = 201
+               Right = 2222
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
          Begin Table = "gj"
             Begin Extent = 
                Top = 9
@@ -45,16 +65,6 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "dhkf"
-            Begin Extent = 
-               Top = 9
-               Left = 326
-               Bottom = 201
-               Right = 542
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
       End
    End
    Begin SQLPane = 
@@ -62,62 +72,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 63
+      Begin ColumnWidths = 9
          Width = 284
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
-         Width = 1000
          Width = 1000
          Width = 1000
          Width = 1000
@@ -131,7 +87,7 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
          Column = 1440
-         Alias = 3140
+         Alias = 900
          Table = 1170
          Output = 720
          Append = 1400
@@ -147,6 +103,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'      End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_Orders';
+
+
 
 
 
@@ -249,7 +207,17 @@ Begin DesignProperties =
                Right = 269
             End
             DisplayFlags = 280
-            TopColumn = 19
+            TopColumn = 30
+         End
+         Begin Table = "s"
+            Begin Extent = 
+               Top = 9
+               Left = 326
+               Bottom = 175
+               Right = 509
+            End
+            DisplayFlags = 280
+            TopColumn = 0
          End
          Begin Table = "cg"
             Begin Extent = 
@@ -257,6 +225,16 @@ Begin DesignProperties =
                Left = 566
                Bottom = 201
                Right = 760
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "tb"
+            Begin Extent = 
+               Top = 9
+               Left = 817
+               Bottom = 175
+               Right = 1000
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -290,27 +268,9 @@ Begin DesignProperties =
             End
             DisplayFlags = 280
             TopColumn = 0
-         End
-         Begin Table = "shr"
-            Begin Extent = 
-               Top = 9
-               Left = 1788
-               Bottom = 175
-               Right = 1971
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "sh"
-            Begin Extent = 
-               Top = 9
-               Left = 2028
-               Bottom = 201
-               Right = 2222
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-   ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_Orders';
+        ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'vw_Orders';
+
+
 
 
 

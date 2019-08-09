@@ -27,7 +27,9 @@
                 <a href="javascript:void(0)" class="btn-copy-clipboard" data-clipboard-target="#Lbl淘宝订单号{{RowIndex}}">复制</a>
             </td>
             <td>{{{Baidu来快递单号}}}</td>
-            <td>{{{Baidu转发单号}}}</td>
+            <td>
+                {{{Baidu转发单号}}}
+            </td>
             <td>{{电话备注}}</td>
             <td>
                 <a href="/Order/ShouHou/{{ID}}" class="btn btn-primary btn-edit" target="_blank">售后</a>
@@ -47,6 +49,10 @@
                     <div class="form-group col-6">
                         <label for="TxtJD订单号">JD订单号</label>
                         <input type="text" name="JD订单号" class="form-control" id="TxtJD订单号" autocomplete="off" on-enter />
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Txt客人地址">客人地址</label>
+                        <input type="text" name="客人地址" class="form-control" id="Txt客人地址" autocomplete="off" on-enter />
                     </div>
                     <div class="form-group col-6">
                         <label for="Ddl售后状态">售后状态</label>
@@ -73,6 +79,7 @@
                         </select>
                     </div>
                     <div class="form-group col-6">
+                        <label>&nbsp;</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="售后完结" data-type="bool" id="Chk售后完结" />
                             <label class="form-check-label" for="Chk售后完结">售后完结</label>

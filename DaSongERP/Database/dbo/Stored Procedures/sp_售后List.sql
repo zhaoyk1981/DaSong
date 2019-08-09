@@ -10,6 +10,7 @@ CREATE PROCEDURE [dbo].[sp_售后List]
 	, @OrderByDesc BIT = 1
 	, @售后人员ID UNIQUEIDENTIFIER
 	, @JD订单号 NVARCHAR(50)
+	, @客人地址 NVARCHAR(150)
 	, @已售后 BIT
 	, @售后完结 BIT
 	, @高亮 BIT
@@ -28,6 +29,7 @@ BEGIN
 	WHERE [自采] = 0
 		AND (@售后人员ID IS NULL OR o.[售后人员ID] = @售后人员ID)
 		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+		AND (ISNULL(@客人地址, '') = '' OR o.[客人地址] LIKE '%' + @客人地址 + '%' OR o.[客人姓名] LIKE '%' + @客人地址 + '%' OR o.[客人电话] LIKE '%' + @客人地址 + '%')
 		AND (@已售后 IS NULL OR o.[已售后] = @已售后)
 		AND (@售后完结 IS NULL OR ISNULL(o.[售后完结], 0) = @售后完结)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
@@ -41,6 +43,7 @@ BEGIN
 	WHERE [自采] = 0
 		AND (@售后人员ID IS NULL OR o.[售后人员ID] = @售后人员ID)
 		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
+		AND (ISNULL(@客人地址, '') = '' OR o.[客人地址] LIKE '%' + @客人地址 + '%' OR o.[客人姓名] LIKE '%' + @客人地址 + '%' OR o.[客人电话] LIKE '%' + @客人地址 + '%')
 		AND (@已售后 IS NULL OR o.[已售后] = @已售后)
 		AND (@售后完结 IS NULL OR ISNULL(o.[售后完结], 0) = @售后完结)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)

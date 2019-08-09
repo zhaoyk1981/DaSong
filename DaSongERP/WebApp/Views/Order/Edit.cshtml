@@ -94,7 +94,7 @@
                 </div>
                 <div class="form-group col-6">
                     <label for="Txt成本价">成本价：</label>
-                    <input type="number" step="0.01" min="0" class="id-成本价 form-control" name="成本价" id="Txt成本价" value="@Model.Order.成本价.Value.ToString("F")" />
+                    <input type="number" step="0.01" min="0" class="id-成本价 form-control" name="成本价" id="Txt成本价" value="@(Model.Order.成本价.HasValue ? Model.Order.成本价.Value.ToString("F") : "")" />
                 </div>
                 <div class="form-group col-6">
                     <label>现货：</label>

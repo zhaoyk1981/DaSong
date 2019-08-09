@@ -7073,6 +7073,11 @@ label.static-label {
     .notify-number .number:empty {
       display: none; }
 
+span.minify {
+  display: inline-block;
+  width: 1px;
+  height: 1px; }
+
 /*#endregion base END */
 /*#region components START */
 /*#region popup*/

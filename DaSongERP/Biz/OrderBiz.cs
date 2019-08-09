@@ -128,6 +128,7 @@ namespace DaSongERP.Biz
             var ordersInExcel = ExcelDao.ReadExcel拆包审单(excelStream, isXlsx);
             foreach (var order in ordersInExcel)
             {
+                order.转发单号 = order.转发单号.Replace("\"", "").Trim();
                 order.拆包人ID = this.UserID;
                 order.导入结果 = OrderDao.Update拆包4Excel(order);
             }
@@ -149,6 +150,8 @@ namespace DaSongERP.Biz
         {
             order.拆包人ID = this.UserID;
             order.订单修改备注 = string.Empty;
+            order.转发单号 = order.转发单号.Replace("\"", "").Trim();
+
             if (order.审单操作ID.Value == Guid.Empty)
             {
                 order.审单操作ID = null;
