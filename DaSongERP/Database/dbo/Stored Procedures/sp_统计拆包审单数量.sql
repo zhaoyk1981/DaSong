@@ -22,6 +22,7 @@ BEGIN
 	FROM Users u
 	LEFT JOIN CNT c ON c.ID = u.ID
 	WHERE (u.PermissionID & 16) = 16
+		AND ISNULL(c.[Count], 0) > 0
 	ORDER BY u.Name;
 
 	WITH CNT AS(
