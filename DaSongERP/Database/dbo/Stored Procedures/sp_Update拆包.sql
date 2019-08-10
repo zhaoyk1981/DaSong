@@ -8,6 +8,7 @@ CREATE PROCEDURE [dbo].[sp_Update拆包]
 	, @审单操作ID UNIQUEIDENTIFIER
 	, @拆包人员备注 NVARCHAR(MAX)
 	, @转发单号 NVARCHAR(50)
+	, @入库数量 INT
 	, @拆包人ID UNIQUEIDENTIFIER
 	, @订单终结 BIT
 	,@订单终结备注 NVARCHAR(MAX)
@@ -21,6 +22,7 @@ BEGIN
 
     UPDATE [dbo].[订单] SET
 		[审单操作ID] = @审单操作ID
+		, [入库数量] = ISNULL(入库数量, 0) + ISNULL(@入库数量, 0)
 		, [拆包人ID] = @拆包人ID
 		, [拆包人员备注] = @拆包人员备注
 		, [转发单号] = @转发单号

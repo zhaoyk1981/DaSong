@@ -24,6 +24,13 @@
                     </div>
                 </div>
                 <div class="form-group col-6">
+                    <label>&nbsp;</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="入库" data-type="bool" id="Chk入库"  @(Model.Meta.入库.GetValueOrDefault() ? "checked" : "")  />
+                        <label class="form-check-label" for="Chk入库">自采入库</label>
+                    </div>
+                </div>
+                <div class="form-group col-6">
                     <label for="TxtSN">SN</label>
                     <input type="number" class="form-control" name="SN" id="TxtSN" autocomplete="off" value="@Model.Meta.SN.GetValueOrDefault()" step="1" />
                     <span class="validator" id="vdSN" data-required="" data-validate-target="#TxtSN"><span class="error-message text-danger">此项必填</span></span>

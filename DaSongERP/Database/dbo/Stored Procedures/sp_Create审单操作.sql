@@ -8,6 +8,7 @@ CREATE PROCEDURE [dbo].[sp_Create审单操作]
 	, @Name NVARCHAR(50)
 	, @SN INT
 	, @已完成 BIT
+	, @入库 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -24,12 +25,14 @@ BEGIN
            ([ID]
            ,[Name]
            ,[SN]
-		   ,[已完成])
+		   ,[已完成]
+		   ,[入库])
      SELECT
            @ID
            ,@Name
            ,@SN
-		   ,@已完成;
+		   ,@已完成
+		   ,@入库;
 
 	SELECT @@ROWCOUNT [RowCount];
 END

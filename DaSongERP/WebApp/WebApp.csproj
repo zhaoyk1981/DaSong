@@ -133,6 +133,7 @@
     <Content Include="js\pages\editshop.js" />
     <Content Include="js\pages\editshouhou.js" />
     <Content Include="js\pages\editshouhoureason.js" />
+    <Content Include="js\pages\editstock.js" />
     <Content Include="js\pages\edituser.js" />
     <Content Include="js\pages\editzhongzhuancang.js" />
     <Content Include="js\pages\genjinlist.js" />
@@ -148,6 +149,7 @@
     <Content Include="js\pages\newshop.js" />
     <Content Include="js\pages\newshouhou.js" />
     <Content Include="js\pages\newshouhoureason.js" />
+    <Content Include="js\pages\newstock.js" />
     <Content Include="js\pages\newuser.js" />
     <Content Include="js\pages\newzhongzhuancang.js" />
     <Content Include="js\pages\shendanlist.js" />
@@ -157,6 +159,7 @@
     <Content Include="js\pages\shouhouorder.js" />
     <Content Include="js\pages\shouhoureasonlist.js" />
     <Content Include="js\pages\signin.js" />
+    <Content Include="js\pages\stocklist.js" />
     <Content Include="js\pages\tjchaibao.js" />
     <Content Include="js\pages\userlist.js" />
     <Content Include="js\pages\zhongzhuancanglist.js" />
@@ -378,6 +381,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Controllers\SignOutController.cs" />
+    <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Controllers\TongJiController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -432,6 +436,9 @@
     <Content Include="Views\Meta\NewZhongZhuanCang.cshtml" />
     <Content Include="Views\Meta\EditZhongZhuanCang.cshtml" />
     <Content Include="Views\TongJi\ChaiBao.cshtml" />
+    <Content Include="Views\Stock\Index.cshtml" />
+    <Content Include="Views\Stock\New.cshtml" />
+    <Content Include="Views\Stock\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -446,7 +453,6 @@
     <Folder Include="Views\Authorized\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\SignOut\" />
-    <Folder Include="Views\Stock\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Biz\Biz.csproj">

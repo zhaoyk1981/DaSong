@@ -137,5 +137,16 @@
     <Build Include="dbo\Stored Procedures\sp_Delete中转仓.sql" />
     <Build Include="dbo\Stored Procedures\sp_Create中转仓.sql" />
     <Build Include="dbo\Stored Procedures\sp_统计拆包审单数量.sql" />
+    <Build Include="dbo\Tables\库存商品.sql" />
+    <Build Include="dbo\Tables\库存动量.sql" />
+    <Build Include="dbo\Views\vw_库存商品.sql" />
+    <Build Include="dbo\Stored Procedures\sp_库存商品List.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Update库存商品.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Save库存动量.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get库存商品ByID.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Get规格By货号.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Delete库存商品.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Delete库存动量.sql" />
+    <Build Include="dbo\Stored Procedures\sp_Create库存商品.sql" />
   </ItemGroup>
 </Project>

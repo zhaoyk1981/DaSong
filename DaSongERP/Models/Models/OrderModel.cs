@@ -34,9 +34,23 @@ namespace DaSongERP.Models
 
         public string 货号 { get; set; }
 
+        public string 规格 { get; set; }
+
+        public Guid? 库存商品ID { get; set; }
+
         public string 商品图片 { get; set; }
 
         public int? 进货数量 { get; set; }
+
+        public int? 入库数量 { get; set; }
+
+        public int 待入库数量
+        {
+            get
+            {
+                return 进货数量.GetValueOrDefault() - 入库数量.GetValueOrDefault();
+            }
+        }
 
         public string 店铺 { get; set; }
 
@@ -172,7 +186,7 @@ namespace DaSongERP.Models
         /// </summary>
         public int? 导入结果 { get; set; }
 
-        public MetaModel<Guid> 审单操作 { get; set; }
+        public 审单操作Model 审单操作 { get; set; }
 
         public Guid? 审单操作ID
         {
@@ -184,7 +198,7 @@ namespace DaSongERP.Models
             {
                 if (this.审单操作 == null)
                 {
-                    this.审单操作 = new MetaModel<Guid>();
+                    this.审单操作 = new 审单操作Model();
                 }
 
                 this.审单操作.ID = value;

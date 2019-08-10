@@ -68,6 +68,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@进货日期", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@规格", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@商品图片", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@进货数量", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@店铺", Value = DBNull.Value });
@@ -140,6 +141,7 @@ namespace DaSongERP.Dal
             var cmd = new SqlCommand("sp_UpdateOrder") { CommandType = CommandType.StoredProcedure };
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@规格", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@商品图片", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@进货数量", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@店铺", Value = DBNull.Value });
@@ -216,6 +218,7 @@ namespace DaSongERP.Dal
             var cmd = new SqlCommand("sp_Update拆包") { CommandType = CommandType.StoredProcedure };
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@审单操作ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@入库数量", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@拆包人员备注", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@转发单号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@拆包人ID", Value = DBNull.Value });
@@ -481,6 +484,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SN", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已完成", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@入库", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Create审单操作
@@ -493,6 +497,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@SN", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已完成", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@入库", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Update审单操作
@@ -780,5 +785,102 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_统计拆包审单数量
+
+        #region sp_Create库存商品
+        public static SqlCommand sp_Create库存商品()
+        {
+            var cmd = new SqlCommand("sp_Create库存商品") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@规格", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Thumbnails", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Amount", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@仓库", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@库位", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Create库存商品
+
+        #region sp_Update库存商品
+        public static SqlCommand sp_Update库存商品()
+        {
+            var cmd = new SqlCommand("sp_Update库存商品") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@规格", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Thumbnails", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Amount", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@仓库", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@库位", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Update库存商品
+
+        #region sp_Delete库存商品
+        public static SqlCommand sp_Delete库存商品()
+        {
+            var cmd = new SqlCommand("sp_Delete库存商品") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Delete库存商品
+
+        #region sp_Get库存商品ByID
+        public static SqlCommand sp_Get库存商品ByID()
+        {
+            var cmd = new SqlCommand("sp_Get库存商品ByID") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Get库存商品ByID
+
+        #region sp_库存商品List
+        public static SqlCommand sp_库存商品List()
+        {
+            var cmd = new SqlCommand("sp_库存商品List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@仓库", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_库存商品List
+
+        #region sp_Get规格By货号
+        public static SqlCommand sp_Get规格By货号()
+        {
+            var cmd = new SqlCommand("sp_Get规格By货号") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@仓库", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Get规格By货号
+
+        #region sp_Save库存动量
+        public static SqlCommand sp_Save库存动量()
+        {
+            var cmd = new SqlCommand("sp_Save库存动量") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@库存商品ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货数量", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途数量", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Remark", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@UserID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Save库存动量
+
+        #region sp_Delete库存动量
+        public static SqlCommand sp_Delete库存动量()
+        {
+            var cmd = new SqlCommand("sp_Delete库存动量") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_Delete库存动量
     }
 }

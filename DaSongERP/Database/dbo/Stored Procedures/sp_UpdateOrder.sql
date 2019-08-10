@@ -7,6 +7,7 @@ CREATE PROCEDURE [dbo].[sp_UpdateOrder]
 	,@商品图片 NVARCHAR(500)
     ,@进货数量 int
     ,@店铺 nvarchar(50)
+	,@规格 nvarchar(200)
     ,@JD订单号 nvarchar(50)
 	,@客人姓名 nvarchar(50)
 	,@客人电话 nvarchar(50)
@@ -31,6 +32,7 @@ BEGIN
 
     UPDATE [dbo].[订单] SET
            [货号] = @货号
+		   ,[规格] = ISNULL(@规格, '')
 		   ,[商品图片] = @商品图片
            ,[进货数量] = @进货数量
            ,[店铺] = @店铺

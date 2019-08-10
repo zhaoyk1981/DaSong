@@ -2,8 +2,10 @@
     [ID]     UNIQUEIDENTIFIER NOT NULL,
     [进货日期]   DATETIME2 (7)    NULL,
     [货号]     NVARCHAR (50)    CONSTRAINT [DF_订单_货号] DEFAULT ('') NOT NULL,
+    [规格]     NVARCHAR (200)   CONSTRAINT [DF_订单_规格] DEFAULT ('') NOT NULL,
     [商品图片]   NVARCHAR (500)   CONSTRAINT [DF_订单_商品图片] DEFAULT ('') NOT NULL,
     [进货数量]   INT              NULL,
+    [入库数量]   INT              NULL,
     [店铺]     NVARCHAR (50)    CONSTRAINT [DF_订单_店铺] DEFAULT ('') NOT NULL,
     [JD订单号]  NVARCHAR (50)    CONSTRAINT [DF_订单_京东订单号] DEFAULT ('') NOT NULL,
     [客人姓名]   NVARCHAR (50)    CONSTRAINT [DF_订单_客人姓名] DEFAULT ('') NOT NULL,
@@ -47,6 +49,8 @@
     [退款金额]   MONEY            NULL,
     CONSTRAINT [PK_订单] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 

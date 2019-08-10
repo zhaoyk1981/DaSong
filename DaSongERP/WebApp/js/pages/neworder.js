@@ -85,16 +85,56 @@
         return true;
     };
 
+    let loadSpecList = function () {
+        let condition = {
+            货号: $.trim($('#Txt货号').val()),
+            仓库: $('#Ddl中转仓').val()
+        };
+        let json = JSON.stringify(condition);
+        let formData = new FormData();
+        formData.append("formJson", enhance.HTMLEncode(json));
+
+        $.ajax({
+            url: '/Stock/AGetSpecOptions',
+            type: 'POST',
+            dataType: 'JSON',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (data.SpecOptions.length > 0) {
+                    let ddl = $('#Ddl规格')[0];
+                    while (ddl.options.length > 0) {
+                        ddl.options.remove(0);
+                    }
+
+                    for (let i = 0; i < data.SpecOptions.length; i++) {
+                        let op = $("<option value='" + data.SpecOptions[i].Value + "'>" + data.SpecOptions[i].Text + "</option>");
+                        ddl.options.add(op[0]);
+                    }
+
+                    if (timer3 != null) {
+                        clearInterval(timer3);
+                        timer3 = null;
+                    }
+                }
+            }
+        });
+    };
+
     let timer = null;
     let timer2 = null;
+    let timer3 = null;
 
     return {
         ready: function () {
             $('#BtnSubmit').click(btnSubmit_click);
             $('#Txt商品图片').on('change', txtProductImage_change);
-            $('#TxtJD订单号,#Txt淘宝订单号,#Txt货号,#Txt采购备注').on('change', txtOrderNumbers_change);
+            //$('#TxtJD订单号,#Txt淘宝订单号,#Txt货号,#Txt采购备注').on('change', txtOrderNumbers_change);
+            $('#Ddl中转仓,#Txt货号').on('change', loadSpecList);
             timer = setInterval(txtProductImage_change, 1000);
             timer2 = setInterval(txtOrderNumbers_change, 1000);
+            timer3 = setInterval(loadSpecList, 1000);
         }
     };
 });

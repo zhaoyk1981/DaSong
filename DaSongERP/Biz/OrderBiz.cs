@@ -32,7 +32,34 @@ namespace DaSongERP.Biz
                 return 2;
             }
 
-            return this.OrderDao.Create(order);
+            var rowCount = this.OrderDao.Create(order);
+
+            this.订单动量(order.ID.Value);
+
+            return rowCount;
+        }
+
+        private void 订单动量(Guid orderId)
+        {
+            var savedOrder = this.GetOrderBy(orderId);
+            var stockBiz = new 库存商品Biz();
+
+            if (savedOrder.订单终结.GetValueOrDefault())
+            {
+                库存商品Dao.Delete库存动量(orderId);
+            }
+            else if (savedOrder.现货.GetValueOrDefault())
+            {
+                stockBiz.现货动量(savedOrder);
+            }
+            else if (savedOrder.自采.GetValueOrDefault())
+            {
+                stockBiz.自采在途动量(savedOrder);
+            }
+            else
+            {
+                库存商品Dao.Delete库存动量(orderId);
+            }
         }
 
         public OrderModel GetOrderBy订单号(OrderModel order)
@@ -54,6 +81,12 @@ namespace DaSongERP.Biz
             var vm = new EditOrderViewModel();
             vm.Order = this.GetOrderBy(id);
             vm.中转仓DataSource = this.MetaDao.GetAll中转仓();
+            vm.规格DataSource = new 库存商品Biz().Get规格Options(new 库存商品Condition()
+            {
+                货号 = vm.Order?.货号,
+                仓库 = vm.Order?.中转仓
+            });
+
             Set店铺(vm.Order);
             return vm;
         }
@@ -77,6 +110,7 @@ namespace DaSongERP.Biz
             }
 
             var rowCount = this.OrderDao.Update(order);
+            this.订单动量(order.ID.Value);
             return rowCount;
         }
 
@@ -160,6 +194,17 @@ namespace DaSongERP.Biz
             }
 
             var rowCount = OrderDao.Update拆包(order);
+            if (order.入库数量.GetValueOrDefault() > 0)
+            {
+                var savedOrder = this.GetOrderBy(order.ID.Value);
+                var stockBiz = new 库存商品Biz();
+
+                if (savedOrder.自采.GetValueOrDefault() && savedOrder.审单操作.入库.GetValueOrDefault())
+                {
+                    stockBiz.自采入库动量(savedOrder);
+                }
+            }
+
             return rowCount;
         }
 
@@ -447,5 +492,7 @@ namespace DaSongERP.Biz
 
             order.店铺名称 = shop.Name;
         }
+
+
     }
 }

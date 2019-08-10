@@ -5,6 +5,7 @@ CREATE PROCEDURE [dbo].[sp_CreateOrder]
 	@ID uniqueidentifier
     ,@进货日期 datetime2(7)
     ,@货号 nvarchar(50)
+	,@规格 nvarchar(200)
 	,@商品图片 NVARCHAR(500)
     ,@进货数量 int
     ,@店铺 nvarchar(50)
@@ -38,6 +39,7 @@ BEGIN
            ([ID]
            ,[进货日期]
            ,[货号]
+		   ,[规格]
 		   ,[商品图片]
            ,[进货数量]
            ,[店铺]
@@ -58,6 +60,7 @@ BEGIN
            @ID
            ,@进货日期
            ,@货号
+		   ,ISNULL(@规格, '')
 		   ,@商品图片
            ,@进货数量
            ,@店铺

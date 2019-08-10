@@ -22,6 +22,8 @@ namespace DaSongERP.Biz
 
         protected 统计Dao 统计Dao { get; set; } = new 统计Dao();
 
+        protected 库存商品Dao 库存商品Dao { get; set; } = new 库存商品Dao();
+
         protected Guid? UserID
         {
             get

@@ -45,16 +45,19 @@
     <Compile Include="Conditions\OrderCondition.cs" />
     <Compile Include="Conditions\ShopCondition.cs" />
     <Compile Include="Conditions\UserCondition.cs" />
+    <Compile Include="Conditions\库存商品Condition.cs" />
     <Compile Include="Models\CellValueModel.cs" />
+    <Compile Include="Models\ListItemModel.cs" />
     <Compile Include="Models\MetaModel.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\OrderCountModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\PermissionModel.cs" />
-    <Compile Include="Models\StockModel.cs" />
     <Compile Include="Models\UPM.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\审单操作Model.cs" />
+    <Compile Include="Models\库存动量Model.cs" />
+    <Compile Include="Models\库存商品Model.cs" />
     <Compile Include="Models\店铺Model.cs" />
     <Compile Include="Models\快递Model.cs" />
     <Compile Include="Models\统计项Model.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="ViewModels\EditShopViewModel.cs" />
     <Compile Include="ViewModels\EditUserViewModel.cs" />
     <Compile Include="ViewModels\Edit审单操作ViewModel.cs" />
+    <Compile Include="ViewModels\Edit库存商品ViewModel.cs" />
     <Compile Include="ViewModels\MetaListViewModel.cs" />
     <Compile Include="ViewModels\OrderListViewModel.cs" />
     <Compile Include="ViewModels\PagedListViewModel.cs" />
@@ -73,6 +77,7 @@
     <Compile Include="ViewModels\售后ListViewModel.cs" />
     <Compile Include="ViewModels\审单操作ListViewModel.cs" />
     <Compile Include="ViewModels\客服ListViewModel.cs" />
+    <Compile Include="ViewModels\库存商品ListViewModel.cs" />
     <Compile Include="ViewModels\店铺ListViewModel.cs" />
     <Compile Include="ViewModels\拆包审单ListViewModel.cs" />
     <Compile Include="ViewModels\拆包审单统计ViewModel.cs" />

@@ -17,5 +17,15 @@ namespace DaSongERP.Models
                 return this.已完成.GetValueOrDefault() ? "是" : "否";
             }
         }
+
+        public bool? 入库 { get; set; }
+
+        public string Str入库
+        {
+            get
+            {
+                return this.入库.GetValueOrDefault() ? "是" : "否";
+            }
+        }
     }
 }

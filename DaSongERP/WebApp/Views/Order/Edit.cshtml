@@ -45,6 +45,15 @@
                     <input type="text" class="id-货号 form-control" name="货号" id="Txt货号" maxlength="50" value="@Model.Order.货号" />
                     <span class="validator" id="vd货号" data-required="" data-validate-target="#Txt货号"><span class="error-message text-danger">此项必填</span></span>
                 </div>
+                <div class="form-group col-12">
+                    <label for="Ddl规格">规格</label>
+                    <select id="Ddl规格" class="form-control" name="规格">
+                        @foreach (var meta in Model.规格DataSource)
+                        {
+                            <option value="@meta.Value" @(Model.Order.规格 == meta.Value ? "selected" : "")>@meta.Text</option>
+                        }
+                    </select>
+                </div>
                 <div class="form-group col-6">
                     <label for="Ddl店铺ID">店铺名称：</label>
                     <input type="text" class="id-店铺 form-control" id="Txt店铺" maxlength="50" name="店铺" value="@Model.Order.店铺" />

@@ -68,6 +68,7 @@
     <Compile Include="ProcCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDao.cs" />
+    <Compile Include="库存商品Dao.cs" />
     <Compile Include="统计Dao.cs" />
   </ItemGroup>
   <ItemGroup>

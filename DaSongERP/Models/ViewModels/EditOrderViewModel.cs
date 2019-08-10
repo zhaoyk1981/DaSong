@@ -19,6 +19,8 @@ namespace DaSongERP.ViewModels
 
         public IList<MetaModel<Guid>> 中转仓DataSource { get; set; }
 
+        public IList<ListItemModel> 规格DataSource { get; set; }
+
         public OrderModel Order { get; set; }
 
     }
