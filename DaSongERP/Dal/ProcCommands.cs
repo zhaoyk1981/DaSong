@@ -226,6 +226,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单终结备注", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单修改备注", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Update拆包
@@ -385,6 +386,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客人地址", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已导入", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_电话客服List
@@ -404,6 +406,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_采购List
@@ -425,6 +428,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@自采", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单终结", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_拆包审单List
@@ -444,6 +448,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@售后完结", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_售后List
@@ -460,6 +465,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@自采", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_客服List
@@ -795,9 +801,9 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@规格", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Thumbnails", Value = DBNull.Value });
-            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Amount", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@仓库", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@库位", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@UserID", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Create库存商品
@@ -807,13 +813,11 @@ namespace DaSongERP.Dal
         {
             var cmd = new SqlCommand("sp_Update库存商品") { CommandType = CommandType.StoredProcedure };
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
-            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
-            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@规格", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Thumbnails", Value = DBNull.Value });
-            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Amount", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@仓库", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@库位", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@UserID", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Update库存商品
@@ -895,5 +899,34 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_库存动量List
+
+        #region sp_UpdateOrder在途待发
+        public static SqlCommand sp_UpdateOrder在途待发()
+        {
+            var cmd = new SqlCommand("sp_UpdateOrder在途待发") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_UpdateOrder在途待发
+
+        #region sp_DeleteOrder
+        public static SqlCommand sp_DeleteOrder()
+        {
+            var cmd = new SqlCommand("sp_DeleteOrder") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_DeleteOrder
+
+        #region sp_UpdateOrder高亮
+        public static SqlCommand sp_UpdateOrder高亮()
+        {
+            var cmd = new SqlCommand("sp_UpdateOrder高亮") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_UpdateOrder高亮
     }
 }

@@ -180,11 +180,14 @@ namespace DaSongERP.Biz
             return orders;
         }
 
+        private static readonly Guid 正常发走ID = new Guid("8D1DB75A-B976-47D1-9BA2-3CBA8042C369");
+
         public int Update拆包(OrderModel order)
         {
             order.拆包人ID = this.UserID;
             order.订单修改备注 = string.Empty;
             order.转发单号 = order.转发单号.Replace("\"", "").Trim();
+            order.在途待发 = order.审单操作ID.GetValueOrDefault() == 正常发走ID ? false : default(bool?);
 
             if (order.审单操作ID.Value == Guid.Empty)
             {

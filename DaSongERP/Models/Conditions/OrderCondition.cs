@@ -130,5 +130,7 @@ namespace DaSongERP.Conditions
         public bool? 现货 { get; set; }
 
         public bool? 订单终结 { get; set; }
+
+        public bool? 在途待发 { get; set; }
     }
 }

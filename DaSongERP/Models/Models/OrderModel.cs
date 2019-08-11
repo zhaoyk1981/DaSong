@@ -349,5 +349,6 @@ namespace DaSongERP.Models
 
         public string 中转仓 { get; set; }
 
+        public bool? 在途待发 { get; set; }
     }
 }

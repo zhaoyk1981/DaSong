@@ -7,9 +7,9 @@ CREATE PROCEDURE [dbo].[sp_Create库存商品]
 	,@规格 nvarchar(200)
 	,@Name nvarchar(200)
 	,@Thumbnails NVARCHAR(500)
-	,@Amount int
 	,@仓库 nvarchar(50)
 	,@库位 nvarchar(50)
+	,@UserID UNIQUEIDENTIFIER
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -24,18 +24,18 @@ BEGIN
 				,[规格]
 				,[Name]
 				,[Thumbnails]
-				,[Amount]
 				,[仓库]
-				,[库位])
+				,[库位]
+				,[UserID])
 			VALUES
 				(@ID
 				,@货号
 				,@规格
 				,@Name
 				,@Thumbnails
-				,@Amount
 				,@仓库
-				,@库位);
+				,@库位
+				,@UserID);
 
 	END
 	SELECT @@ROWCOUNT [RowCount];

@@ -47,8 +47,11 @@
     [中转仓]    NVARCHAR (50)    CONSTRAINT [DF_订单_中转仓] DEFAULT ('') NOT NULL,
     [现货]     BIT              CONSTRAINT [DF_订单_现货] DEFAULT ((0)) NOT NULL,
     [退款金额]   MONEY            NULL,
+    [在途待发]   BIT              CONSTRAINT [DF_订单_在途待发] DEFAULT ((0)) NOT NULL,
     CONSTRAINT [PK_订单] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
+
+
 
 
 

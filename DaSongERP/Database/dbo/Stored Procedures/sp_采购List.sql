@@ -15,6 +15,7 @@ CREATE PROCEDURE [dbo].[sp_采购List]
 	, @高亮 BIT
 	, @现货 BIT
 	, @中转仓 NVARCHAR(50)
+	, @在途待发 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -32,7 +33,8 @@ BEGIN
 		AND (@自采 IS NULL OR o.[自采] = @自采)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
 		AND (@现货 IS NULL OR o.[现货] = @现货)
-		AND (ISNULL(@中转仓, '') = '' OR o.[中转仓] = @中转仓);
+		AND (ISNULL(@中转仓, '') = '' OR o.[中转仓] = @中转仓)
+		AND (@在途待发 IS NULL OR o.在途待发 = @在途待发);
 
 	SELECT @PagesCount = PagesCount, @PageSize = PageSize, @PageIndex = PageIndex
 	FROM [dbo].[InitPagingParams](@PageSize, @PageIndex, NULL, @RecordsCount);
@@ -46,6 +48,7 @@ BEGIN
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
 		AND (@现货 IS NULL OR o.[现货] = @现货)
 		AND (ISNULL(@中转仓, '') = '' OR o.[中转仓] = @中转仓)
+		AND (@在途待发 IS NULL OR o.在途待发 = @在途待发)
 	ORDER BY o.进货日期 DESC
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 

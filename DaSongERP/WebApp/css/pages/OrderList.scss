@@ -27,6 +27,10 @@
             &.现货 {
                 background-color: darkgreen;
             }
+
+            &.在途待发 {
+                background-color: purple;
+            }
         }
 
         [data-zicai='true'] {
@@ -43,6 +47,12 @@
 
         [data-xianhuo='true'] {
             .order-status.现货 {
+                display: inline-block;
+            }
+        }
+
+        [data-zaitudaifa='true'] {
+            .order-status.在途待发 {
                 display: inline-block;
             }
         }

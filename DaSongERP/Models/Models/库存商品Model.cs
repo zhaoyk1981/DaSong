@@ -22,12 +22,47 @@ namespace DaSongERP.Models
 
         public string 库位 { get; set; }
 
-        public int? Amount { get; set; }
-
         public int? 现货数量 { get; set; }
 
         public int? 在途数量 { get; set; }
 
         public int? 虚拟数量 { get; set; }
+
+        public UserModel User { get; set; }
+
+        public Guid? UserID
+        {
+            get
+            {
+                return User?.ID;
+            }
+            set
+            {
+                if (User == null)
+                {
+                    User = new UserModel();
+                }
+
+                User.ID = value;
+            }
+        }
+
+        public string UserName
+        {
+            get
+            {
+                return this.User?.Name;
+            }
+        }
+
+        public DateTime? DateCreated { get; set; }
+
+        public string StrDateCreated
+        {
+            get
+            {
+                return DateCreated.HasValue ? DateCreated.Value.ToString("yyyy-M-d H:mm:ss") : string.Empty;
+            }
+        }
     }
 }

@@ -61,6 +61,14 @@
                         <label class="static-label">虚拟数量：</label>
                         <span>@DP.Txt(Model.库存商品.虚拟数量.GetValueOrDefault().ToString("F0"))</span>
                     </div>
+                    <div class="form-group col-6">
+                        <label class="static-label">创建人：</label>
+                        <span>@DP.Txt(Model.库存商品.UserName)</span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="static-label">创建日期：</label>
+                        <span>@DP.Txt(Model.库存商品.DateCreated)</span>
+                    </div>
                 </div>
             </fieldset>
             <div class="form-group">

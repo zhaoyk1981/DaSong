@@ -50,7 +50,15 @@
                     <span>@DP.Txt(Model.库存商品.虚拟数量.GetValueOrDefault().ToString("F0"))</span>
                 </div>
                 <div class="form-group col-6">
-                    <label for="TxtAmount">增加数量：</label>
+                    <label class="static-label">创建人：</label>
+                    <span>@DP.Txt(Model.库存商品.UserName)</span>
+                </div>
+                <div class="form-group col-6">
+                    <label class="static-label">创建日期：</label>
+                    <span>@DP.Txt(Model.库存商品.DateCreated)</span>
+                </div>
+                <div class="form-group col-6">
+                    <label for="TxtAmount">增减数量：（增加写正数，减少写负数）</label>
                     <input type="number" step="1" min="0" class="form-control" name="现货数量" id="Txt现货数量" value="" />
                     <span class="validator" id="vd现货数量" data-required="" data-validate-target="#Txt现货数量"><span class="error-message text-danger">此项必填</span></span>
                 </div>

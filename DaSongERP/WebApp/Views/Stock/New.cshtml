@@ -23,6 +23,7 @@
                     <div class="form-group col-6">
                         <label for="TxtName">商品名称：</label>
                         <input type="text" class="form-control" name="Name" id="TxtName" maxlength="200" />
+                        <span class="validator" id="vdName" data-required="" data-validate-target="#TxtName"><span class="error-message text-danger">此项必填</span></span>
                     </div>
                     <div class="form-group col-6">
                         <label for="Txt货号">货号：</label>
@@ -45,11 +46,6 @@
                     <div class="form-group col-6">
                         <label for="Txt库位">库位：</label>
                         <input type="text" class="form-control" name="库位" id="Txt库位" maxlength="50" />
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="TxtAmount">数量：</label>
-                        <input type="number" step="1" min="0" class="form-control" name="Amount" id="TxtAmount" value="0" />
-                        <span class="validator" id="vdAmount" data-required="" data-validate-target="#TxtAmount"><span class="error-message text-danger">此项必填</span></span>
                     </div>
                 </div>
             </fieldset>

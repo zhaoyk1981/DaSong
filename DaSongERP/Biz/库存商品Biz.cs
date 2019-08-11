@@ -31,12 +31,14 @@ namespace DaSongERP.Biz
         public int Create库存商品(库存商品Model model)
         {
             model.ID = Guid.NewGuid();
+            model.UserID = this.UserID;
             var rowCount = this.库存商品Dao.Create库存商品(model);
             return rowCount;
         }
 
         public int Update库存商品(库存商品Model model)
         {
+            model.UserID = this.UserID;
             var rowCount = this.库存商品Dao.Update库存商品(model);
             return rowCount;
         }
@@ -120,9 +122,23 @@ namespace DaSongERP.Biz
                 throw new Exception("现货动量：库存商品不存在");
             }
 
-            if (!update && order.进货数量.GetValueOrDefault() > kc.虚拟数量.GetValueOrDefault())
+            if (order.进货数量.GetValueOrDefault() > kc.虚拟数量.GetValueOrDefault())
             {
+                if (update)
+                {
+                    OrderDao.UpdateOrder高亮(order.ID.Value, true);
+                }
+                else
+                {
+                    OrderDao.DeleteOrder(order.ID.Value);
+                }
+
                 throw new Exception("现货动量：采购数量大于虚拟数量");
+            }
+
+            if (order.进货数量.GetValueOrDefault() > kc.现货数量.GetValueOrDefault())
+            {
+                this.OrderDao.UpdateOrder在途待发(order.ID.Value, true);
             }
 
             return this.Save库存动量(model);

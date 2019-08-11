@@ -193,5 +193,37 @@ namespace DaSongERP.Dal
             var rowCount = (int)DBHelper.ExecuteScalar(cmd);
             return rowCount;
         }
+
+        public int UpdateOrder在途待发(Guid orderID, bool 在途待发)
+        {
+            var cmd = ProcCommands.sp_UpdateOrder在途待发().SetParameterValues(new
+            {
+                ID = orderID,
+                在途待发 = 在途待发
+            });
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
+
+        public void DeleteOrder(Guid orderID)
+        {
+            var cmd = ProcCommands.sp_DeleteOrder().SetParameterValues(new
+            {
+                ID = orderID
+            });
+            DBHelper.ExecuteNonQuery(cmd);
+        }
+
+        public int UpdateOrder高亮(Guid orderID, bool 高亮)
+        {
+            var cmd = ProcCommands.sp_UpdateOrder高亮().SetParameterValues(
+                new
+                {
+                    ID = orderID,
+                    高亮 = 高亮
+                });
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
     }
 }

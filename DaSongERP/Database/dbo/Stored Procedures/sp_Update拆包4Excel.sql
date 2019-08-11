@@ -30,6 +30,7 @@ BEGIN
 		, [审单操作ID] = @审单操作ID
 		, [拆包人ID] = @拆包人ID
 		, [拆包时间] = GETDATE()
+		, [在途待发] = 0
 	WHERE JD订单号 = @JD订单号;
 
 	SELECT @Count + CASE WHEN @@ROWCOUNT >= 1 THEN 1 ELSE 0 END AS [Result];

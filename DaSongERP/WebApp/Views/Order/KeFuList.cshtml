@@ -6,13 +6,14 @@
 
 @section Head{
     <script id="tmplRow" type="x-tmpl-mustache">
-        <tr data-id="{{ID}}" data-high-light="{{高亮}}" data-zicai="{{自采}}" data-xianhuo="{{现货}}">
+        <tr data-id="{{ID}}" data-high-light="{{高亮}}" data-zicai="{{自采}}" data-xianhuo="{{现货}}" data-zaitudaifa="{{在途待发}}">
             <td>{{店铺名称}}</td>
             <td>
                 {{JD订单号}}
                 <span class="异常 order-status">异常</span>
                 <span class="现货 order-status">现货</span>
                 <span class="自采 order-status">自采</span>
+                <span class="在途待发 order-status">在途待发</span>
             </td>
             <td>
                 <a href="{{商品图片}}" target="_blank">
@@ -61,6 +62,14 @@
                             <option value="" selected>全部</option>
                             <option value="true">异常订单</option>
                             <option value="false">非异常订单</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Ddl在途待发">在途待发</label>
+                        <select id="Ddl在途待发" class="form-control" name="在途待发" data-type="bool">
+                            <option value="" selected>全部</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
                         </select>
                     </div>
                 </div>

@@ -17,6 +17,7 @@ CREATE PROCEDURE [dbo].[sp_拆包审单List]
 	, @自采 BIT
 	, @高亮 BIT
 	, @订单终结 BIT
+	, @在途待发 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -28,7 +29,7 @@ BEGIN
 
 	SELECT @RecordsCount = COUNT(DISTINCT o.Id)
 	FROM vw_Orders o
-	WHERE o.现货 = 0
+	WHERE (o.现货 = 0 OR o.在途待发 = 1)
 		AND (@拆包人ID IS NULL OR o.[拆包人ID] = @拆包人ID)
 		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@来快递单号 IS NULL OR o.[来快递单号] LIKE '%' + @来快递单号 + '%')
@@ -37,14 +38,15 @@ BEGIN
 		AND (@拆包超时 IS NULL OR DATEDIFF(DAY, o.进货日期, GETDATE()) >= @拆包超时)
 		AND (ISNULL(@货号, '') = '' OR o.[货号] LIKE '%' + @货号 + '%')
 		AND (@自采 IS NULL OR o.[自采] = @自采)
-		AND (@高亮 IS NULL OR o.[高亮] = @高亮);
+		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
+		AND (@在途待发 IS NULL OR o.在途待发 = @在途待发);
 
 	SELECT @PagesCount = PagesCount, @PageSize = PageSize, @PageIndex = PageIndex
 	FROM [dbo].[InitPagingParams](@PageSize, @PageIndex, NULL, @RecordsCount);
 
 	SELECT o.*
 	FROM vw_Orders o
-	WHERE o.现货 = 0
+	WHERE (o.现货 = 0 OR o.在途待发 = 1)
 		AND (@拆包人ID IS NULL OR o.[采购人ID] = @拆包人ID)
 		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (@来快递单号 IS NULL OR o.[来快递单号] LIKE '%' + @来快递单号 + '%')
@@ -54,6 +56,7 @@ BEGIN
 		AND (ISNULL(@货号, '') = '' OR o.[货号] LIKE '%' + @货号 + '%')
 		AND (@自采 IS NULL OR o.[自采] = @自采)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
+		AND (@在途待发 IS NULL OR o.在途待发 = @在途待发)
 	ORDER BY o.进货日期 DESC
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 
