@@ -239,6 +239,11 @@ namespace DaSongERP.Dal
             for (var i = 1; i < sheet.PhysicalNumberOfRows; i++)
             {
                 var row = sheet.GetRow(i);
+                if (row == null)
+                {
+                    continue;
+                }
+
                 for (var j = 0; j < row.PhysicalNumberOfCells; j++)
                 {
                     var key = $"{i},{j}";
