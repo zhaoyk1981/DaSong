@@ -39,7 +39,7 @@ namespace DaSongERP.Biz
             return rowCount;
         }
 
-        private void 订单动量(Guid orderId)
+        private void 订单动量(Guid orderId, bool update = false)
         {
             var savedOrder = this.GetOrderBy(orderId);
             var stockBiz = new 库存商品Biz();
@@ -50,7 +50,7 @@ namespace DaSongERP.Biz
             }
             else if (savedOrder.现货.GetValueOrDefault())
             {
-                stockBiz.现货动量(savedOrder);
+                stockBiz.现货动量(savedOrder, update);
             }
             else if (savedOrder.自采.GetValueOrDefault())
             {
@@ -110,7 +110,7 @@ namespace DaSongERP.Biz
             }
 
             var rowCount = this.OrderDao.Update(order);
-            this.订单动量(order.ID.Value);
+            this.订单动量(order.ID.Value, true);
             return rowCount;
         }
 

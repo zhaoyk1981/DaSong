@@ -15,8 +15,11 @@
             <td>{{在途数量}}</td>
             <td>{{虚拟数量}}</td>
             <td>
-                <a href="/Stock/Edit/{{ID}}" class="btn btn-primary btn-edit" target="_blank">编辑</a>
-                <a href="/Stock/NewChangeQty/{{ID}}" class="btn btn-primary btn-edit" target="_blank">库存调整</a>
+                @if (PM.Any(UPM.仓库_读写))
+                {
+                    <a href="/Stock/Edit/{{ID}}" class="btn btn-primary btn-edit" target="_blank">编辑</a>
+                    <a href="/Stock/NewChangeQty/{{ID}}" class="btn btn-primary btn-edit" target="_blank">库存调整</a>
+                }
                 <a href="/Stock/ChangeQtyHistories/{{ID}}" class="btn btn-primary btn-edit" target="_blank">库存历史</a>
             </td>
         </tr>
@@ -49,7 +52,10 @@
             </fieldset>
             <div class="form-group">
                 <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
-                <a href="/stock/new" target="_blank" class="btn btn-primary">新建商品</a>
+                @if (PM.Any(UPM.仓库_读写))
+                {
+                    <a href="/stock/new" target="_blank" class="btn btn-primary">新建商品</a>
+                }
             </div>
         </div>
     </div>

@@ -99,7 +99,7 @@ namespace DaSongERP.Biz
             return this.库存商品Dao.Save库存动量(model);
         }
 
-        public int 现货动量(OrderModel order)
+        public int 现货动量(OrderModel order, bool update = false)
         {
             if (!order.现货.GetValueOrDefault())
             {
@@ -120,7 +120,7 @@ namespace DaSongERP.Biz
                 throw new Exception("现货动量：库存商品不存在");
             }
 
-            if (order.进货数量.GetValueOrDefault() > kc.虚拟数量.GetValueOrDefault())
+            if (!update && order.进货数量.GetValueOrDefault() > kc.虚拟数量.GetValueOrDefault())
             {
                 throw new Exception("现货动量：采购数量大于虚拟数量");
             }
