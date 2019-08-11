@@ -160,7 +160,7 @@
     <Content Include="js\pages\shouhouorder.js" />
     <Content Include="js\pages\shouhoureasonlist.js" />
     <Content Include="js\pages\signin.js" />
-    <Content Include="js\pages\stockchangehistories.js" />
+    <Content Include="js\pages\stockhistories.js" />
     <Content Include="js\pages\stocklist.js" />
     <Content Include="js\pages\tjchaibao.js" />
     <Content Include="js\pages\userlist.js" />
