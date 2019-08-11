@@ -15,7 +15,7 @@ namespace DaSongERP.WebApp.Controllers
     {
         public ActionResult ChaiBao()
         {
-            if (!PM.Any(UPM.管理, UPM.拆包))
+            if (!PM.Any(UPM.拆包))
             {
                 return Redirect("/SignIn");
             }

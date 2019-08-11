@@ -74,5 +74,13 @@ namespace DaSongERP.Dal
             });
             return (int)DBHelper.ExecuteScalar(cmd);
         }
+
+        public PagedList<库存动量Model> Get库存动量List(库存动量Condition condition)
+        {
+            var cmd = ProcCommands.sp_库存动量List().SetParameterValues(condition);
+            var dataSet = DBHelper.ExecuteDataSet(cmd);
+            var pagedList = new PagedList<库存动量Model>(condition, dataSet);
+            return pagedList;
+        }
     }
 }

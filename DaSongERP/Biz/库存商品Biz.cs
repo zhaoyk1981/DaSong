@@ -81,7 +81,7 @@ namespace DaSongERP.Biz
             {
                 options.Add(new ListItemModel()
                 {
-                    Text = "无",
+                    Text = "此商品不在库存商品中",
                     Value = string.Empty
                 });
             }
@@ -113,6 +113,17 @@ namespace DaSongERP.Biz
                 现货数量 = -order.进货数量.GetValueOrDefault(),
                 库存商品ID = order.库存商品ID
             };
+
+            var kc = this.库存商品Dao.Get库存商品By(order.库存商品ID.Value);
+            if (kc == null)
+            {
+                throw new Exception("现货动量：库存商品不存在");
+            }
+
+            if (order.进货数量.GetValueOrDefault() > kc.虚拟数量.GetValueOrDefault())
+            {
+                throw new Exception("现货动量：采购数量大于虚拟数量");
+            }
 
             return this.Save库存动量(model);
         }
@@ -152,6 +163,28 @@ namespace DaSongERP.Biz
             };
 
             return this.Save库存动量(model);
+        }
+
+        public Edit库存动量ViewModel GetEdit库存动量ViewModel(Guid id)
+        {
+            var vm = new Edit库存动量ViewModel();
+            vm.库存商品 = this.库存商品Dao.Get库存商品By(id);
+            return vm;
+        }
+
+        public 库存动量ListViewModel Get库存动量ListViewModel(Guid id)
+        {
+            var vm = new 库存动量ListViewModel();
+            vm.库存商品 = this.库存商品Dao.Get库存商品By(id);
+            vm.ModelList = new PagedList<库存动量Model>();
+            vm.ModelList.PageSize = 100;
+            return vm;
+        }
+
+        public PagedList<库存动量Model> Get库存动量List(库存动量Condition condition)
+        {
+            var list = this.库存商品Dao.Get库存动量List(condition);
+            return list;
         }
     }
 }

@@ -21,7 +21,7 @@
         formData.append("formJson", enhance.HTMLEncode(json));
 
         $.ajax({
-            url: '/Stock/AUpdate',
+            url: '/Stock/ASaveChangeQty',
             type: 'POST',
             dataType: 'JSON',
             data: formData,
@@ -39,21 +39,9 @@
         });
     };
 
-    let txtProductImage_change = function () {
-        let src = $.trim($('#TxtThumbnails').val());
-        let fg = $('#TxtThumbnails').closest('.form-group');
-        fg.find('a.product-thumbnail-link').prop('href', src).toggle(src !== '');
-        fg.find('img').prop('src', src);
-        if (src !== '' && timer != null) {
-            clearInterval(timer);
-            timer = null;
-        }
-    };
-
     return {
         ready: function () {
             $('#BtnSubmit').click(btnSubmit_click);
-            $('#TxtThumbnails').on('change', txtProductImage_change);
         }
     };
 });

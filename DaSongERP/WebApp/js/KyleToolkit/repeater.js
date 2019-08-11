@@ -201,7 +201,7 @@
                 $(item).toggleClass('focus-item', true);
             }
 
-            item.find('.row-select').prop('checked', $('.select-all').prop('checked') === true || _options.selectedIDs.indexOf(result.DataSource[i][_options.id].toLowerCase()) >= 0);
+            item.find('.row-select').prop('checked', $('.select-all').prop('checked') === true || _options.selectedIDs.indexOf(result.DataSource[i][_options.id].toString().toLowerCase()) >= 0);
 
             rptItems.append(item);
         }

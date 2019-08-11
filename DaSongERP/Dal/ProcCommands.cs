@@ -882,5 +882,18 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_Delete库存动量
+
+        #region sp_库存动量List
+        public static SqlCommand sp_库存动量List()
+        {
+            var cmd = new SqlCommand("sp_库存动量List") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@库存商品ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_库存动量List
     }
 }

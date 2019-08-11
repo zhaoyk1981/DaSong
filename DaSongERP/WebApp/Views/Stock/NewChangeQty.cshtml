@@ -1,0 +1,70 @@
+﻿@model Edit库存动量ViewModel
+@{
+    ViewBag.Title = "新建库存动量";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="vw-edit-stock vw-stock-form" data-page-js="newchangeqty">
+    @Html.Partial("_Nav")
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <div class="form" validation-group="submit" autocomplete="off">
+        <fieldset>
+            <input type="hidden" name="库存商品ID" id="Lbl库存商品ID" value="@Model.库存商品.ID.Value" />
+            <div class="row">
+                <div class="form-group col-6">
+                    <a href="@Model.库存商品.Thumbnails" target="_blank">
+                        <img src="@Model.库存商品.Thumbnails" class="product-image" />
+                    </a>
+                </div>
+                <div class="form-group col-6">
+                    <label class="static-label">商品名称：</label>
+                    <span>@DP.Txt(Model.库存商品.Name)</span>
+                </div>
+                <div class="form-group col-6">
+                    <label class="static-label">货号：</label>
+                    <span>@DP.Txt(Model.库存商品.货号)</span>
+                </div>
+                <div class="form-group col-6">
+                    <label class="static-label">规格：</label>
+                    <span>@DP.Txt(Model.库存商品.规格)</span>
+                </div>
+                <div class="form-group col-6">
+                    <label class="static-label">仓库：</label>
+                    <span>@DP.Txt(Model.库存商品.仓库)</span>
+                </div>
+                <div class="form-group col-6">
+                    <label class="static-label">库位：</label>
+                    <span>@DP.Txt(Model.库存商品.库位)</span>
+                </div>
+                <div class="form-group col-6">
+                    <label class="static-label">现货数量：</label>
+                    <span>@DP.Txt(Model.库存商品.现货数量.GetValueOrDefault().ToString("F0"))</span>
+                </div>
+                <div class="form-group col-6">
+                    <label class="static-label">在途数量：</label>
+                    <span>@DP.Txt(Model.库存商品.在途数量.GetValueOrDefault().ToString("F0"))</span>
+                </div>
+                <div class="form-group col-6">
+                    <label class="static-label">虚拟数量：</label>
+                    <span>@DP.Txt(Model.库存商品.虚拟数量.GetValueOrDefault().ToString("F0"))</span>
+                </div>
+                <div class="form-group col-6">
+                    <label for="TxtAmount">增加数量：</label>
+                    <input type="number" step="1" min="0" class="form-control" name="现货数量" id="Txt现货数量" value="" />
+                    <span class="validator" id="vd现货数量" data-required="" data-validate-target="#Txt现货数量"><span class="error-message text-danger">此项必填</span></span>
+                </div>
+                <div class="form-group col-12">
+                    <label for="TxtRemark">备注：</label>
+                    <textarea class="form-control" name="Remark" id="TxtRemark"></textarea>
+                    <span class="validator" id="vdRemark" data-required="" data-validate-target="#TxtRemark"><span class="error-message text-danger">此项必填</span></span>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" id="BtnSubmit">保存</button>
+        </div>
+        <div id="LblOrderNumberExists" class="alert alert-danger hide-when-empty"></div>
+    </div>
+</div>
+

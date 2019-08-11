@@ -15,6 +15,11 @@ namespace DaSongERP.WebApp.Controllers
     {
         public ActionResult Index()
         {
+            if (!PM.Any(UPM.仓库_只读, UPM.仓库_读写))
+            {
+                return Redirect("/SignIn");
+            }
+
             var vm = this.库存商品Biz.Get库存商品ListViewModel();
             vm.Json = SerializeObject(new
             {
@@ -64,6 +69,11 @@ namespace DaSongERP.WebApp.Controllers
 
         public ActionResult New()
         {
+            if (!PM.Any(UPM.仓库_读写))
+            {
+                return Redirect("/SignIn");
+            }
+
             var vm = 库存商品Biz.GetNew库存商品ViewModel();
             return View(vm);
         }
@@ -81,6 +91,11 @@ namespace DaSongERP.WebApp.Controllers
 
         public ActionResult Edit(Guid id)
         {
+            if (!PM.Any(UPM.仓库_读写))
+            {
+                return Redirect("/SignIn");
+            }
+
             var vm = 库存商品Biz.GetEdit库存商品ViewModel(id);
             return View(vm);
         }
@@ -106,6 +121,54 @@ namespace DaSongERP.WebApp.Controllers
             {
                 SpecOptions = options
             });
+        }
+
+        public ActionResult NewChangeQty(Guid id)
+        {
+            if (!PM.Any(UPM.仓库_读写))
+            {
+                return Redirect("/SignIn");
+            }
+
+            var vm = this.库存商品Biz.GetEdit库存动量ViewModel(id);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult ASaveChangeQty()
+        {
+            var model = this.DeserializeObject<库存动量Model>(Request.Params["FormJson"]);
+            var rowCount = this.库存商品Biz.Save库存动量(model);
+            return Json(new
+            {
+                Success = rowCount == 1
+            });
+        }
+
+        public ActionResult ChangeQtyHistories(Guid id)
+        {
+            if (!PM.Any(UPM.仓库_只读, UPM.仓库_读写))
+            {
+                return Redirect("/SignIn");
+            }
+
+            var vm = this.库存商品Biz.Get库存动量ListViewModel(id);
+            vm.Json = SerializeObject(new
+            {
+                AllIDs = new string[] { },
+                currentSortPaging = vm.ModelList.GetCurrentSortPaging()
+            });
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AChangeQtyHistories()
+        {
+            var condition = this.Request.Params.Map<库存动量Condition>();
+            condition.PageIndex = int.Parse(this.Request.Params["PageIndex"]);
+
+            var list = this.库存商品Biz.Get库存动量List(condition);
+            return this.Json(list);
         }
     }
 }

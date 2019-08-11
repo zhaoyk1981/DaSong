@@ -19,8 +19,7 @@ BEGIN
 	IF NOT EXISTS(SELECT * FROM [dbo].[库存商品] s WHERE s.仓库 = @仓库 AND s.货号 = @货号 AND s.规格 = @规格 AND ID <> @ID)
 	BEGIN
 		UPDATE [dbo].[库存商品] SET
-			[货号] = @货号
-			,[规格] = @规格
+			[规格] = @规格
 			,[Name] = @Name
 			,[Thumbnails] = @Thumbnails
 			,[Amount] = @Amount

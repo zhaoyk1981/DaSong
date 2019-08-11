@@ -51,7 +51,7 @@
                     <a class="nav-link" href="/Order/KeFuList">客服列表</a>
                 </li>
             }
-            @if (PM.Any(UPM.管理, UPM.拆包))
+            @if (PM.Any(UPM.拆包))
             {
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -62,6 +62,17 @@
                     </div>
                 </li>
             }
+            @if (PM.Any(UPM.仓库_只读, UPM.仓库_读写))
+            {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        仓库管理
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Stock">库存商品</a>
+                    </div>
+                </li>
+            }
             @if (PM.Any(UPM.管理))
             {
                 <li class="nav-item dropdown">
@@ -69,8 +80,6 @@
                         管理
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/Stock">库存商品</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/User">用户</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/Meta/ShenDanList">审单操作</a>

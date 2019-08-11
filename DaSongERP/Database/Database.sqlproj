@@ -148,5 +148,7 @@
     <Build Include="dbo\Stored Procedures\sp_Delete库存商品.sql" />
     <Build Include="dbo\Stored Procedures\sp_Delete库存动量.sql" />
     <Build Include="dbo\Stored Procedures\sp_Create库存商品.sql" />
+    <Build Include="dbo\Views\vw_库存动量.sql" />
+    <Build Include="dbo\Stored Procedures\sp_库存动量List.sql" />
   </ItemGroup>
 </Project>

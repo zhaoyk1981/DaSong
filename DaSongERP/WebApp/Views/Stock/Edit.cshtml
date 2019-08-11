@@ -8,9 +8,10 @@
     @Html.Partial("_Nav")
     <h2>@ViewBag.Title</h2>
     <hr />
-    <div class="form" validation-group="CreateStock" autocomplete="off">
+    <div class="form" validation-group="submit" autocomplete="off">
         <fieldset>
             <input type="hidden" name="ID" id="LblStockID" value="@Model.EditModel.ID.Value" />
+            <input type="hidden" name="货号" id="Lbl货号" value="@Model.EditModel.货号" />
             <div class="row">
                 <div class="form-group col-6">
                     <a href="@Model.EditModel.Thumbnails" target="_blank">
@@ -31,9 +32,8 @@
                     <input type="text" class="form-control" name="Name" id="TxtName" maxlength="200" value="@Model.EditModel.Name" />
                 </div>
                 <div class="form-group col-6">
-                    <label for="Txt货号">货号：</label>
-                    <input type="text" class="id-货号 form-control" name="货号" id="Txt货号" maxlength="50" value="@Model.EditModel.货号" />
-                    <span class="validator" id="vd货号" data-required="" data-validate-target="#Txt货号"><span class="error-message text-danger">此项必填</span></span>
+                    <label class="static-label">货号：</label>
+                    <span>@DP.Txt(Model.EditModel.货号)</span>
                 </div>
                 <div class="form-group col-6">
                     <label for="Txt规格">规格：</label>

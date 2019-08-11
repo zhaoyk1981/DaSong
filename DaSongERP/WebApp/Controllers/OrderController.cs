@@ -36,13 +36,24 @@ namespace DaSongERP.WebApp.Controllers
             }
 
             var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
-            var rowCount = this.OrderBiz.Create(order);
-
-            return Json(new
+            try
             {
-                Success = rowCount == 1,
-                OrderID = order.ID.Value.ToString()
-            });
+                var rowCount = this.OrderBiz.Create(order);
+
+                return Json(new
+                {
+                    Success = rowCount == 1,
+                    OrderID = order.ID.Value.ToString()
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    Success = false,
+                    ErrorMessage = ex.Message
+                });
+            }
         }
 
         public ActionResult ChaiBaoList()
@@ -162,12 +173,23 @@ namespace DaSongERP.WebApp.Controllers
             }
 
             var order = this.DeserializeObject<OrderModel>(Request.Params["FormJson"]);
-            var rowCount = this.OrderBiz.Update(order);
-
-            return Json(new
+            try
             {
-                Success = rowCount == 1
-            });
+                var rowCount = this.OrderBiz.Update(order);
+
+                return Json(new
+                {
+                    Success = rowCount == 1
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    Success = false,
+                    ErrorMessage = ex.Message
+                });
+            }
         }
 
         public ActionResult GenJin(Guid id)

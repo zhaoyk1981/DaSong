@@ -1,6 +1,6 @@
 ﻿define(['jquery', 'kyle_toolkit_enhance', 'kyle_toolkit_model', 'kyle_toolkit_validation'], function ($, enhance, model, validation) {
     let validate = function () {
-        let validationResult = validation.validate(['CreateStock']);
+        let validationResult = validation.validate(['submit']);
         if (validationResult !== true) {
             $('#BtnSubmit').prop('disabled', false);
         }

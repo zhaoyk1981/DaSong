@@ -32,7 +32,7 @@
                     alert('操作成功');
                 }
                 else {
-                    alert('操作失败');
+                    alert('操作失败,' + data.ErrorMessage);
                     $('#BtnSubmit').prop('disabled', false);
                 }
             }
