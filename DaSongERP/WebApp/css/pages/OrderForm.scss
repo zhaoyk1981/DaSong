@@ -1,9 +1,10 @@
 ﻿body {
+    .product-image,
+    .product-thumbnail {
+        height: 120px;
+    }
+
     .vw-order-form {
-        .product-image,
-        .product-thumbnail {
-            height: 120px;
-        }
 
         #LblStockInfo {
             min-height: 50px;

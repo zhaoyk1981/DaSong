@@ -7380,8 +7380,8 @@ table.main-table td:not(.main-cell) {
   padding-right: 15px; }
 
 /*#endregion components END */
-body .vw-order-form .product-image,
-body .vw-order-form .product-thumbnail {
+body .product-image,
+body .product-thumbnail {
   height: 120px; }
 
 body .vw-order-form #LblStockInfo {
