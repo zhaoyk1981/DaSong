@@ -13,5 +13,7 @@ namespace DaSongERP.Models
         public string Name { get; set; }
 
         public string Prefix { get; set; }
+
+        public string 京东仓 { get; set; }
     }
 }

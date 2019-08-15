@@ -429,6 +429,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单终结", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_拆包审单List
@@ -712,6 +713,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Prefix", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@京东仓", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Update店铺
@@ -749,6 +751,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Name", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Prefix", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@京东仓", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_Create店铺

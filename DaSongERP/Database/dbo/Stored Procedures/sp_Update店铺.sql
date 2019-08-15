@@ -7,6 +7,7 @@ CREATE PROCEDURE [dbo].[sp_Update店铺]
 	@ID UNIQUEIDENTIFIER
 	, @Name NVARCHAR(50)
 	, @Prefix NVARCHAR(50)
+	, @京东仓 NVARCHAR(50)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -22,6 +23,7 @@ BEGIN
 	UPDATE [dbo].[店铺] SET
            [Name] = @Name
            ,[Prefix] = @Prefix
+		   ,[京东仓] = @京东仓
     WHERE ID = @ID;
 
 	SELECT @@ROWCOUNT [RowCount];

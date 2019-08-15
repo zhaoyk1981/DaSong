@@ -78,6 +78,16 @@
                     <input type="text" name="货号" class="form-control" id="Txt货号" autocomplete="off" on-enter />
                 </div>
                 <div class="form-group col-6">
+                    <label for="Ddl中转仓">中转仓</label>
+                    <select id="Ddl中转仓" class="form-control" name="中转仓">
+                        <option value="" selected>全部</option>
+                        @foreach (var meta in Model.中转仓DataSource)
+                        {
+                            <option value="@meta.Name">@meta.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-6">
                     <label for="Ddl自采">是否自采</label>
                     <select id="Ddl自采" class="form-control" name="自采" data-type="bool">
                         <option value="" selected>全部</option>

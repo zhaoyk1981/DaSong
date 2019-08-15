@@ -65,6 +65,11 @@ namespace DaSongERP.Models
             }
         }
 
+        public string JD订单号
+        {
+            get { return this.Order?.JD订单号; }
+        }
+
         public string Remark { get; set; }
 
         public UserModel User { get; set; }

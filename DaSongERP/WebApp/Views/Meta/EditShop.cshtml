@@ -18,8 +18,12 @@
                 </div>
                 <div class="form-group col-6">
                     <label for="TxtSN">账号前缀</label>
-                    <input type="text" class="form-control" name="Prefix" id="TxtPrefix" autocomplete="off" value="@Model.Shop.Prefix"/>
+                    <input type="text" class="form-control" name="Prefix" id="TxtPrefix" autocomplete="off" value="@Model.Shop.Prefix" maxlength="50" />
                     <span class="validator" id="vdPrefix" data-required="" data-validate-target="#TxtPrefix"><span class="error-message text-danger">此项必填</span></span>
+                </div>
+                <div class="form-group col-6">
+                    <label for="Txt京东仓">京东仓</label>
+                    <input type="text" class="form-control" name="京东仓" id="Txt京东仓" autocomplete="off" value="@Model.Shop.京东仓" maxlength="50" />
                 </div>
             </div>
         </fieldset>
