@@ -1,5 +1,6 @@
 ﻿using DaSongERP.Conditions;
 using DaSongERP.Models;
+using DaSongERP.ViewModels;
 using DaSongERP.WebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,20 @@ namespace DaSongERP.WebApp.Controllers
                 return Redirect("/SignIn");
             }
 
-            var vm = this.统计Biz.统计拆包审单数量();
-            return View(vm);
+            //var vm = this.统计Biz.统计拆包审单数量();
+            return View(new 拆包审单统计ViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult AChaiBao()
+        {
+            var condition = this.DeserializeObject<统计Condition>(Request.Params["FormJson"]);
+            var vm = this.统计Biz.统计拆包审单数量(condition.Date);
+            return Json(new
+            {
+                By员工 = vm.By员工,
+                By状态 = vm.By状态
+            });
         }
     }
 }

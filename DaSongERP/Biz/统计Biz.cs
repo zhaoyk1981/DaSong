@@ -14,9 +14,9 @@ namespace DaSongERP.Biz
 {
     public class 统计Biz : Biz
     {
-        public 拆包审单统计ViewModel 统计拆包审单数量()
+        public 拆包审单统计Model 统计拆包审单数量(DateTime? date = null)
         {
-            return this.统计Dao.统计拆包审单数量(DateTime.Now.Date);
+            return this.统计Dao.统计拆包审单数量(date.GetValueOrDefault(DateTime.Now));
         }
     }
 }

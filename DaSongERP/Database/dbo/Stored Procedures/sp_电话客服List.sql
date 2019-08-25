@@ -11,6 +11,7 @@ CREATE PROCEDURE [dbo].[sp_电话客服List]
 	, @电话客服ID UNIQUEIDENTIFIER
 	, @JD订单号 NVARCHAR(50)
 	, @客人地址 NVARCHAR(150)
+	, @中转仓 NVARCHAR(50)
 	, @已导入 BIT
 	, @高亮 BIT
 	, @在途待发 BIT
@@ -31,6 +32,7 @@ BEGIN
 		AND (@电话客服ID IS NULL OR o.[跟进人ID] = @电话客服ID)
 		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (ISNULL(@客人地址, '') = '' OR o.[客人地址] LIKE '%' + @客人地址 + '%' OR o.[客人姓名] LIKE '%' + @客人地址 + '%' OR o.[客人电话] LIKE '%' + @客人地址 + '%')
+		AND (ISNULL(@中转仓, '') = '' OR o.[中转仓] = @中转仓)
 		AND (@已导入 IS NULL OR o.已导入 = @已导入)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
 		AND (@在途待发 IS NULL OR o.在途待发 = @在途待发);
@@ -46,6 +48,7 @@ BEGIN
 		AND (@电话客服ID IS NULL OR o.[跟进人ID] = @电话客服ID)
 		AND (ISNULL(@JD订单号, '') = '' OR o.[JD订单号] LIKE '%' + @JD订单号 + '%')
 		AND (ISNULL(@客人地址, '') = '' OR o.[客人地址] LIKE '%' + @客人地址 + '%' OR o.[客人姓名] LIKE '%' + @客人地址 + '%' OR o.[客人电话] LIKE '%' + @客人地址 + '%')
+		AND (ISNULL(@中转仓, '') = '' OR o.[中转仓] = @中转仓)
 		AND (@已导入 IS NULL OR o.已导入 = @已导入)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
 		AND (@在途待发 IS NULL OR o.在途待发 = @在途待发)

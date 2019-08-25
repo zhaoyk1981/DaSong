@@ -11,11 +11,13 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
+	DECLARE @DateEnd DATETIME = DATEADD(DAY, 1, @Date);
+
     WITH CNT AS(
 		SELECT u.ID, COUNT(0) [Count]
 		FROM 订单 o
 		JOIN Users u on o.拆包人ID = u.ID
-		WHERE DATEDIFF(DAY, o.拆包时间, @Date) = 0
+		WHERE o.拆包时间 >= @Date AND o.拆包时间 < @DateEnd
 		GROUP BY u.ID
 	)
 	SELECT u.ID, u.Name, ISNULL(c.[Count], 0) [Count]
@@ -29,7 +31,7 @@ BEGIN
 		SELECT p.ID, COUNT(0) [Count]
 		FROM 订单 o
 		JOIN 审单操作 p on o.审单操作ID = p.ID
-		WHERE DATEDIFF(DAY, o.拆包时间, @Date) = 0
+		WHERE o.拆包时间 >= @Date AND o.拆包时间 < @DateEnd
 		GROUP BY p.ID
 	)
 	SELECT p.ID, p.Name, ISNULL(c.[Count], 0) [Count]

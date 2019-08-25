@@ -9,8 +9,5 @@ namespace DaSongERP.ViewModels
 {
     public class 拆包审单统计ViewModel : ViewModel
     {
-        public IList<统计项Model<int>> ListByUser { get; set; }
-
-        public IList<统计项Model<int>> ListByStatus { get; set; }
     }
 }

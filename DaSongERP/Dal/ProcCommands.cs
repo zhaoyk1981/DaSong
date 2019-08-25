@@ -384,6 +384,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@电话客服ID", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@JD订单号", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@客人地址", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@已导入", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });

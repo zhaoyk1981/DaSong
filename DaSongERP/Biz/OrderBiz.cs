@@ -288,6 +288,7 @@ namespace DaSongERP.Biz
             var vm = new 电话客服ListViewModel();
             vm.Orders = new PagedList<OrderModel>();
             vm.Orders.PageSize = 100;
+            vm.中转仓DataSource = MetaDao.GetAll中转仓();
             return vm;
         }
 

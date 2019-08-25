@@ -9,14 +9,26 @@
     <h2>@ViewBag.Title</h2>
     <hr />
     <div>
+        <div class="form">
+            <fieldset>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label>日期：</label>
+                        <input type="date" id="TxtDate" name="Date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary btn-submit">查询</button>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <hr />
+    <div>
         <h3>按员工统计：</h3>
-        <p>
-            @Html.Raw(string.Join("<br />", Model.ListByUser.Select(m => $"<b>{m.Name}:</b> {m.Count.ToString("F0")}件")))
-        </p>
+        <p class="by-employees"></p>
         <h3>按状态统计：</h3>
-        <p>
-            @Html.Raw(string.Join("<br />", Model.ListByStatus.Select(m => $"<b>{m.Name}:</b> {m.Count.ToString("F0")}件")))
-        </p>
+        <p class="by-status"></p>
     </div>
 </div>
 
