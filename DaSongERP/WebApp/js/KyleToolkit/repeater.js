@@ -89,8 +89,7 @@
             data: d,
             success: function (data, textStatus, jqXHR) {
                 if (data == null) {
-                    window.location = window.location.href;
-                    return;
+                    throw new 'data is null';
                 }
 
                 if (data.location != null) {
@@ -103,8 +102,7 @@
                 }
 
                 if (data.DataSource == null) {
-                    window.location = window.location.href;
-                    return;
+                    throw new 'data.DataSource is null';
                 }
 
                 _dataBinding(data);
@@ -115,7 +113,7 @@
                 // 通常 textStatus 和 errorThrown 之中
                 // 只有一个会包含信息
                 //this; // 调用本次AJAX请求时传递的options参数
-                window.location = window.location.href;
+                throw new textStatus + ' ' + errorThrown;
             }
         });
     };

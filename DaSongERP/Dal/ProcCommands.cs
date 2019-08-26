@@ -85,6 +85,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@换货", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_CreateOrder
@@ -161,6 +162,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单终结备注", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@换货", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_UpdateOrder
@@ -361,6 +363,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@自采", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@淘宝账号", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_跟进List
@@ -408,6 +411,8 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@淘宝账号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@淘宝订单号", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_采购List
@@ -451,6 +456,8 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@淘宝账号", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_售后List
@@ -469,6 +476,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@自采", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_客服List

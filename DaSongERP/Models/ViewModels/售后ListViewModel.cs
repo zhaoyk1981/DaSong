@@ -12,5 +12,7 @@ namespace DaSongERP.ViewModels
     public class 售后ListViewModel : PagedListViewModel
     {
         public PagedList<OrderModel> Orders { get; set; }
+
+        public IList<MetaModel<Guid>> 中转仓DataSource { get; set; }
     }
 }

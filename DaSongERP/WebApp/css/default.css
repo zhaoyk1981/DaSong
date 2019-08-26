@@ -7412,6 +7412,8 @@ body .vw-order-list .order-status {
     background-color: darkgreen; }
   body .vw-order-list .order-status.在途待发 {
     background-color: purple; }
+  body .vw-order-list .order-status.换货 {
+    background-color: brown; }
 
 body .vw-order-list [data-zicai='true'] .order-status.自采 {
   display: inline-block; }
@@ -7423,4 +7425,7 @@ body .vw-order-list [data-xianhuo='true'] .order-status.现货 {
   display: inline-block; }
 
 body .vw-order-list [data-zaitudaifa='true'] .order-status.在途待发 {
+  display: inline-block; }
+
+body .vw-order-list [data-exchange='true'] .order-status.换货 {
   display: inline-block; }

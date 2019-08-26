@@ -6,13 +6,14 @@
 
 @section Head{
     <script id="tmplRow" type="x-tmpl-mustache">
-        <tr data-id="{{ID}}" data-high-light="{{高亮}}" data-zicai="{{自采}}" data-xianhuo="{{现货}}" data-zaitudaifa="{{在途待发}}">
+        <tr data-id="{{ID}}" data-high-light="{{高亮}}" data-zicai="{{自采}}" data-xianhuo="{{现货}}" data-zaitudaifa="{{在途待发}}" data-exchange="{{换货}}">
             <td>{{店铺名称}}</td>
             <td>
                 {{JD订单号}}
                 <span class="异常 order-status">异常</span>
                 <span class="现货 order-status">现货</span>
                 <span class="自采 order-status">自采</span>
+                <span class="换货 order-status">换货</span>
                 <span class="在途待发 order-status">在途待发</span>
             </td>
             <td>
@@ -25,6 +26,7 @@
             <td>{{采购备注}}</td>
             <td>{{{Baidu来快递单号}}}</td>
             <td>{{电话备注}}</td>
+            <td>{{中转仓}}</td>
             <td>
                 <a href="/Order/KeFu/{{ID}}" class="btn btn-primary btn-edit" target="_blank">客服</a>
             </td>
@@ -51,6 +53,16 @@
                     <div class="form-group col-6">
                         <label for="Txt客人地址">客人姓名、电话、地址</label>
                         <input type="text" name="客人地址" class="form-control" id="Txt客人地址" autocomplete="off" on-enter />
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Ddl中转仓">中转仓</label>
+                        <select id="Ddl中转仓" class="form-control" name="中转仓">
+                            <option value="" selected>全部</option>
+                            @foreach (var meta in Model.中转仓DataSource)
+                            {
+                                <option value="@meta.Name">@meta.Name</option>
+                            }
+                        </select>
                     </div>
                     <div class="form-group col-6">
                         <label for="Ddl自采">是否自采</label>
@@ -113,6 +125,7 @@
                     <th>SKU及采购备注</th>
                     <th>来快递单号</th>
                     <th>电话备注</th>
+                    <th>中转仓</th>
                     <th>操作</th>
                 </tr>
             </thead>

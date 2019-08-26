@@ -6,15 +6,17 @@
 
 @section Head{
     <script id="tmplRow" type="x-tmpl-mustache">
-        <tr data-id="{{ID}}" data-high-light="{{高亮}}" data-zicai="{{自采}}" data-xianhuo="{{现货}}" data-zaitudaifa="{{在途待发}}">
+        <tr data-id="{{ID}}" data-high-light="{{高亮}}" data-zicai="{{自采}}" data-xianhuo="{{现货}}" data-zaitudaifa="{{在途待发}}" data-exchange="{{换货}}">
             <td>{{店铺名称}}</td>
             <td>
                 {{JD订单号}}
                 <span class="异常 order-status">异常</span>
                 <span class="现货 order-status">现货</span>
                 <span class="自采 order-status">自采</span>
+                <span class="换货 order-status">换货</span>
                 <span class="在途待发 order-status">在途待发</span>
             </td>
+            <td>{{淘宝账号}}</td>
             <td>
                 <a href="{{商品图片}}" target="_blank">
                     <img src="{{商品图片}}" class="product-thumbnail" />
@@ -32,6 +34,7 @@
                 {{{Baidu转发单号}}}
             </td>
             <td>{{电话备注}}</td>
+            <td>{{中转仓}}</td>
             <td>
                 <a href="/Order/ShouHou/{{ID}}" class="btn btn-primary btn-edit" target="_blank">售后</a>
             </td>
@@ -52,8 +55,26 @@
                         <input type="text" name="JD订单号" class="form-control" id="TxtJD订单号" autocomplete="off" on-enter />
                     </div>
                     <div class="form-group col-6">
+                        <label for="Txt淘宝账号">淘宝账号</label>
+                        <input type="text" name="淘宝账号" class="form-control" id="Txt淘宝账号" autocomplete="off" on-enter />
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Txt淘宝订单号">淘宝订单号</label>
+                        <input type="text" name="淘宝订单号" class="form-control" id="Txt淘宝订单号" autocomplete="off" on-enter />
+                    </div>
+                    <div class="form-group col-6">
                         <label for="Txt客人地址">客人姓名、电话、地址</label>
                         <input type="text" name="客人地址" class="form-control" id="Txt客人地址" autocomplete="off" on-enter />
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Ddl中转仓">中转仓</label>
+                        <select id="Ddl中转仓" class="form-control" name="中转仓">
+                            <option value="" selected>全部</option>
+                            @foreach (var meta in Model.中转仓DataSource)
+                            {
+                                <option value="@meta.Name">@meta.Name</option>
+                            }
+                        </select>
                     </div>
                     <div class="form-group col-6">
                         <label for="Ddl售后状态">售后状态</label>
@@ -131,6 +152,7 @@
                 <tr>
                     <th>店铺</th>
                     <th>JD订单号</th>
+                    <th>淘宝账号</th>
                     <th>图片</th>
                     <th>订货日期</th>
                     <th>进货数量</th>
@@ -139,6 +161,7 @@
                     <th>来快递单号</th>
                     <th>转发单号</th>
                     <th>电话备注</th>
+                    <th>中转仓</th>
                     <th>操作</th>
                 </tr>
             </thead>

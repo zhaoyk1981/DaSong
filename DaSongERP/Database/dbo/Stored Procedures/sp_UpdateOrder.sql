@@ -24,6 +24,7 @@ CREATE PROCEDURE [dbo].[sp_UpdateOrder]
 	,@中转仓 NVARCHAR(50)
 	,@订单终结 BIT
 	,@订单终结备注 NVARCHAR(MAX)
+	,@换货 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -51,6 +52,7 @@ BEGIN
 		   ,[中转仓] = @中转仓
 		   ,[订单终结] = @订单终结
 		   ,[订单终结备注] = @订单终结备注
+		   ,[换货] = @换货
 		WHERE ID = @ID;
 
 	SELECT @@ROWCOUNT AS [RowCount];

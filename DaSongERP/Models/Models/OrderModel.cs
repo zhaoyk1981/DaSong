@@ -16,7 +16,9 @@ namespace DaSongERP.Models
         {
             get
             {
-                return RowIndex.HasValue ? RowIndex.Value + 1 : default(int?);
+                return RowIndex.HasValue
+                           ? RowIndex.Value + 1
+                           : default(int?);
             }
         }
 
@@ -28,7 +30,9 @@ namespace DaSongERP.Models
         {
             get
             {
-                return this.进货日期.HasValue ? this.进货日期.Value.ToString("yyyy-MM-dd HH:mm") : string.Empty;
+                return this.进货日期.HasValue
+                           ? this.进货日期.Value.ToString("yyyy-MM-dd HH:mm")
+                           : string.Empty;
             }
         }
 
@@ -46,10 +50,7 @@ namespace DaSongERP.Models
 
         public int 待入库数量
         {
-            get
-            {
-                return 进货数量.GetValueOrDefault() - 入库数量.GetValueOrDefault();
-            }
+            get { return 进货数量.GetValueOrDefault() - 入库数量.GetValueOrDefault(); }
         }
 
         public string 店铺 { get; set; }
@@ -81,10 +82,12 @@ namespace DaSongERP.Models
         {
             get
             {
-                var list = (来快递单号 ?? string.Empty)
-                    .Split(" ,;".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-                    .Select(m => m.Replace("\"", "").Trim())
-                    .Select(m => $"<a target=\"_blank\" href=\"https://www.baidu.com/s?wd={m}\">{m}</a>").ToList();
+                var list = (来快递单号 ?? string.Empty).Split(" ,;".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                                                  .Select(m => m.Replace("\"", "")
+                                                                .Trim())
+                                                  .Select(m => $"<a target=\"_blank\" href=\"https://www.baidu.com/s?wd={m}\">{m}</a>")
+                                                  .ToList();
+
                 return string.Join("<br/>", list);
             }
         }
@@ -97,10 +100,7 @@ namespace DaSongERP.Models
 
         public Guid? 跟进人ID
         {
-            get
-            {
-                return this.跟进人?.ID;
-            }
+            get { return this.跟进人?.ID; }
             set
             {
                 if (this.跟进人 == null)
@@ -139,6 +139,19 @@ namespace DaSongERP.Models
                 }
 
                 return this.京东价.Value * this.进货数量.Value - this.进货金额.Value;
+            }
+        }
+
+        public decimal? 订单金额
+        {
+            get
+            {
+                if (!京东价.HasValue || !this.进货数量.HasValue)
+                {
+                    return null;
+                }
+
+                return 京东价.Value * 进货数量.Value;
             }
         }
 
@@ -352,5 +365,9 @@ namespace DaSongERP.Models
         public string 中转仓 { get; set; }
 
         public bool? 在途待发 { get; set; }
+
+        public bool? 退款 { get; set; }
+
+        public bool? 换货 { get; set; }
     }
 }

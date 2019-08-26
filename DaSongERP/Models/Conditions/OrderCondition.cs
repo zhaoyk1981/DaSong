@@ -36,7 +36,7 @@ namespace DaSongERP.Conditions
 
         public string 客人地址 { get; set; }
 
-        public Guid? 淘宝账号ID { get; set; }
+        public string 淘宝账号 { get; set; }
 
         public string 淘宝订单号 { get; set; }
 
@@ -132,5 +132,7 @@ namespace DaSongERP.Conditions
         public bool? 订单终结 { get; set; }
 
         public bool? 在途待发 { get; set; }
+
+        public bool? 换货 { get; set; }
     }
 }

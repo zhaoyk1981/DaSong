@@ -31,6 +31,10 @@
             &.在途待发 {
                 background-color: purple;
             }
+
+            &.换货 {
+                background-color: brown;
+            }
         }
 
         [data-zicai='true'] {
@@ -53,6 +57,12 @@
 
         [data-zaitudaifa='true'] {
             .order-status.在途待发 {
+                display: inline-block;
+            }
+        }
+
+        [data-exchange='true'] {
+            .order-status.换货 {
                 display: inline-block;
             }
         }

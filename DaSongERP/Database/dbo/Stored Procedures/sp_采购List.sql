@@ -16,6 +16,8 @@ CREATE PROCEDURE [dbo].[sp_采购List]
 	, @现货 BIT
 	, @中转仓 NVARCHAR(50)
 	, @在途待发 BIT
+	, @淘宝账号 NVARCHAR(50)
+	, @淘宝订单号 NVARCHAR(50)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -34,7 +36,9 @@ BEGIN
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
 		AND (@现货 IS NULL OR o.[现货] = @现货)
 		AND (ISNULL(@中转仓, '') = '' OR o.[中转仓] = @中转仓)
-		AND (@在途待发 IS NULL OR o.在途待发 = @在途待发);
+		AND (@在途待发 IS NULL OR o.在途待发 = @在途待发)
+		AND (ISNULL(@淘宝账号, '') = '' OR o.[淘宝账号] LIKE '%' + @淘宝账号 + '%')
+		AND (ISNULL(@淘宝订单号, '') = '' OR o.[淘宝订单号] LIKE '%' + @淘宝订单号 + '%');
 
 	SELECT @PagesCount = PagesCount, @PageSize = PageSize, @PageIndex = PageIndex
 	FROM [dbo].[InitPagingParams](@PageSize, @PageIndex, NULL, @RecordsCount);
@@ -49,6 +53,8 @@ BEGIN
 		AND (@现货 IS NULL OR o.[现货] = @现货)
 		AND (ISNULL(@中转仓, '') = '' OR o.[中转仓] = @中转仓)
 		AND (@在途待发 IS NULL OR o.在途待发 = @在途待发)
+		AND (ISNULL(@淘宝账号, '') = '' OR o.[淘宝账号] LIKE '%' + @淘宝账号 + '%')
+		AND (ISNULL(@淘宝订单号, '') = '' OR o.[淘宝订单号] LIKE '%' + @淘宝订单号 + '%')
 	ORDER BY o.进货日期 DESC
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 
