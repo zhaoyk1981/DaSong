@@ -215,7 +215,7 @@ namespace DaSongERP.Biz
 
                 if (savedOrder.自采.GetValueOrDefault() && savedOrder.审单操作.入库.GetValueOrDefault())
                 {
-                    stockBiz.自采入库动量(savedOrder);
+                    stockBiz.入库动量(savedOrder);
                 }
             }
 

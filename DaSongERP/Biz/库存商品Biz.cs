@@ -162,13 +162,8 @@ namespace DaSongERP.Biz
             return this.Save库存动量(model);
         }
 
-        public int 自采入库动量(OrderModel order)
+        public int 入库动量(OrderModel order)
         {
-            if (!order.自采.GetValueOrDefault())
-            {
-                return 0;
-            }
-
             var model = new 库存动量Model()
             {
                 OrderID = order.ID,
