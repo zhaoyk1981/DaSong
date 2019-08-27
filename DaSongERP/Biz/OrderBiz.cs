@@ -36,12 +36,14 @@ namespace DaSongERP.Biz
 
             this.订单动量(order.ID.Value);
 
-            if (order.退款.GetValueOrDefault())
+            if (order.未发货退款.GetValueOrDefault())
             {
                 order.售后操作ID = new Guid("270D96A8-B765-4EA1-BCE9-1D05801E0612"); //未发货退款
                 order.售后原因ID = new Guid("6201D9A1-5DB1-448C-909D-C8716789FE63"); //不能等
                 order.退款金额 = order.订单金额;
                 order.售后人员ID = this.UserID;
+                order.售后完结 = true;
+                order.订单终结 = true;
                 this.Update售后(order);
             }
 

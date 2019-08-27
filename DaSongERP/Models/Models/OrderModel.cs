@@ -366,7 +366,7 @@ namespace DaSongERP.Models
 
         public bool? 在途待发 { get; set; }
 
-        public bool? 退款 { get; set; }
+        public bool? 未发货退款 { get; set; }
 
         public bool? 换货 { get; set; }
     }

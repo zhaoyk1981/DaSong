@@ -23,6 +23,7 @@ CREATE PROCEDURE [dbo].[sp_CreateOrder]
 	,@现货 BIT
 	,@中转仓 NVARCHAR(50)
 	,@换货 BIT
+	,@未发货退款 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -57,7 +58,8 @@ BEGIN
 		   ,[高亮]
 		   ,[现货]
 		   ,[中转仓]
-		   ,[换货])
+		   ,[换货]
+		   ,[未发货退款])
      SELECT
            @ID
            ,@进货日期
@@ -79,7 +81,8 @@ BEGIN
 		   ,@高亮
 		   ,@现货
 		   ,@中转仓
-		   ,@换货;
+		   ,@换货
+		   ,@未发货退款;
 
 	END
 

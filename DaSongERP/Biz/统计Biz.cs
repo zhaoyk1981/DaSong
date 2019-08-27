@@ -14,9 +14,19 @@ namespace DaSongERP.Biz
 {
     public class 统计Biz : Biz
     {
-        public 拆包审单统计Model 统计拆包审单数量(DateTime? date = null)
+        public 拆包审单统计Model 统计日拆包审单数量(DateTime? date = null)
         {
-            return this.统计Dao.统计拆包审单数量(date.GetValueOrDefault(DateTime.Now));
+            var dateStart = date.GetValueOrDefault(DateTime.Now).Date;
+            var dateEnd = dateStart.AddDays(1);
+            return this.统计Dao.统计拆包审单数量(dateStart, dateEnd);
+        }
+
+        public 拆包审单统计Model 统计月拆包审单数量(DateTime? date = null)
+        {
+            var dateStart = date.GetValueOrDefault(DateTime.Now).Date;
+            dateStart = new DateTime(dateStart.Year, dateStart.Month, 1);
+            var dateEnd = dateStart.AddMonths(1);
+            return this.统计Dao.统计拆包审单数量(dateStart, dateEnd);
         }
     }
 }

@@ -26,10 +26,22 @@ namespace DaSongERP.WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AChaiBao()
+        public ActionResult AChaiBaoByDay()
         {
             var condition = this.DeserializeObject<统计Condition>(Request.Params["FormJson"]);
-            var vm = this.统计Biz.统计拆包审单数量(condition.Date);
+            var vm = this.统计Biz.统计日拆包审单数量(condition.Date);
+            return Json(new
+            {
+                By员工 = vm.By员工,
+                By状态 = vm.By状态
+            });
+        }
+
+        [HttpPost]
+        public ActionResult AChaiBaoByMonth()
+        {
+            var condition = this.DeserializeObject<统计Condition>(Request.Params["FormJson"]);
+            var vm = this.统计Biz.统计月拆包审单数量(condition.Date);
             return Json(new
             {
                 By员工 = vm.By员工,

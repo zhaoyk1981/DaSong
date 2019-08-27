@@ -35,6 +35,10 @@
             &.换货 {
                 background-color: brown;
             }
+
+            &.未发货退款 {
+                background-color: black;
+            }
         }
 
         [data-zicai='true'] {
@@ -63,6 +67,12 @@
 
         [data-exchange='true'] {
             .order-status.换货 {
+                display: inline-block;
+            }
+        }
+
+        [data-refund='true'] {
+            .order-status.未发货退款 {
                 display: inline-block;
             }
         }

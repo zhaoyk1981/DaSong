@@ -86,6 +86,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@换货", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@未发货退款", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_CreateOrder
@@ -364,6 +365,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@高亮", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@淘宝账号", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@淘宝订单号", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_跟进List
@@ -800,7 +802,8 @@ namespace DaSongERP.Dal
         public static SqlCommand sp_统计拆包审单数量()
         {
             var cmd = new SqlCommand("sp_统计拆包审单数量") { CommandType = CommandType.StoredProcedure };
-            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@Date", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@DateStart", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@DateEnd", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_统计拆包审单数量

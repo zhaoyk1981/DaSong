@@ -14,12 +14,13 @@ namespace DaSongERP.Dal
 {
     public class 统计Dao : Dao
     {
-        public 拆包审单统计Model 统计拆包审单数量(DateTime date)
+        public 拆包审单统计Model 统计拆包审单数量(DateTime dateStart, DateTime dateEnd)
         {
             var vm = new 拆包审单统计Model();
             var cmd = ProcCommands.sp_统计拆包审单数量().SetParameterValues(new
             {
-                Date = date.Date
+                DateStart = dateStart.Date,
+                DateEnd = dateEnd.Date
             });
             var ds = DBHelper.ExecuteDataSet(cmd);
             vm.ListByUser = DbMapperUtil.Map<统计项Model<int>>(ds.Tables[0]);
