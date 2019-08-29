@@ -153,5 +153,9 @@
     <Build Include="dbo\Stored Procedures\sp_UpdateOrder在途待发.sql" />
     <Build Include="dbo\Stored Procedures\sp_UpdateOrder高亮.sql" />
     <Build Include="dbo\Stored Procedures\sp_DeleteOrder.sql" />
+    <Build Include="dbo\Stored Procedures\sp_统计每日未拆包审单.sql" />
+    <Build Include="dbo\Stored Procedures\sp_统计采购订单.sql" />
+    <Build Include="dbo\Stored Procedures\sp_设置未发货退款订单.sql" />
+    <Build Include="dbo\Stored Procedures\sp_还原未发货退款订单.sql" />
   </ItemGroup>
 </Project>

@@ -87,6 +87,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@换货", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@未发货退款", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单终结", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_CreateOrder
@@ -438,6 +439,8 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@订单终结", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@在途待发", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@中转仓", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@现货", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@进货日期", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_拆包审单List
@@ -944,5 +947,41 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_UpdateOrder高亮
+
+        #region sp_统计每日未拆包审单
+        public static SqlCommand sp_统计每日未拆包审单()
+        {
+            var cmd = new SqlCommand("sp_统计每日未拆包审单") { CommandType = CommandType.StoredProcedure };
+            return cmd;
+        }
+        #endregion sp_统计每日未拆包审单
+
+        #region sp_统计采购订单
+        public static SqlCommand sp_统计采购订单()
+        {
+            var cmd = new SqlCommand("sp_统计采购订单") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@DateStart", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@DateEnd", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_统计采购订单
+
+        #region sp_还原未发货退款订单
+        public static SqlCommand sp_还原未发货退款订单()
+        {
+            var cmd = new SqlCommand("sp_还原未发货退款订单") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_还原未发货退款订单
+
+        #region sp_设置未发货退款订单
+        public static SqlCommand sp_设置未发货退款订单()
+        {
+            var cmd = new SqlCommand("sp_设置未发货退款订单") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_设置未发货退款订单
     }
 }

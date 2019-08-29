@@ -44,6 +44,17 @@ label.static-label {
     margin-right: 20px;
 }
 
+span.notify-number {
+    display: inline-block;
+    margin-right: 25px;
+    margin-bottom: 10px;
+
+    .number {
+        display: block;
+        left: 82px;
+    }
+}
+
 .notify-number {
     position: relative;
 

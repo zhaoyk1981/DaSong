@@ -52,7 +52,13 @@
     @if (PM.Any(UPM.拆包))
     {
         <div>
-            <a href="/TongJi/ChaiBao">今日拆包审单数量</a>
+            <a href="/TongJi/ChaiBao">拆包审单数量</a>
+        </div>
+    }
+    @if (PM.Any(UPM.管理))
+    {
+        <div>
+            <a href="/TongJi/CaiGou">采购订单数量</a>
         </div>
     }
     @if (PM.Any(UPM.仓库_只读, UPM.仓库_读写))

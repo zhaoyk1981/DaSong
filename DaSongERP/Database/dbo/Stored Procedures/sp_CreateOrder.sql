@@ -24,6 +24,7 @@ CREATE PROCEDURE [dbo].[sp_CreateOrder]
 	,@中转仓 NVARCHAR(50)
 	,@换货 BIT
 	,@未发货退款 BIT
+	,@订单终结 BIT
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -59,7 +60,8 @@ BEGIN
 		   ,[现货]
 		   ,[中转仓]
 		   ,[换货]
-		   ,[未发货退款])
+		   ,[未发货退款]
+		   ,[订单终结])
      SELECT
            @ID
            ,@进货日期
@@ -82,7 +84,8 @@ BEGIN
 		   ,@现货
 		   ,@中转仓
 		   ,@换货
-		   ,@未发货退款;
+		   ,@未发货退款
+		   ,ISNULL(@订单终结, 0);
 
 	END
 

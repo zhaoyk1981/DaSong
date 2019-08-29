@@ -38,13 +38,7 @@ namespace DaSongERP.Biz
 
             if (order.未发货退款.GetValueOrDefault())
             {
-                order.售后操作ID = new Guid("270D96A8-B765-4EA1-BCE9-1D05801E0612"); //未发货退款
-                order.售后原因ID = new Guid("6201D9A1-5DB1-448C-909D-C8716789FE63"); //不能等
-                order.退款金额 = order.订单金额;
-                order.售后人员ID = this.UserID;
-                order.售后完结 = true;
-                order.订单终结 = true;
-                this.Update售后(order);
+                OrderDao.设置未发货退款订单(order.ID.Value);
             }
 
             return rowCount;
@@ -121,6 +115,15 @@ namespace DaSongERP.Biz
             }
 
             var rowCount = this.OrderDao.Update(order);
+            if (order.未发货退款.GetValueOrDefault())
+            {
+                OrderDao.设置未发货退款订单(order.ID.Value);
+            }
+            else
+            {
+                OrderDao.还原未发货退款订单(order.ID.Value);
+            }
+
             this.订单动量(order.ID.Value, true);
             return rowCount;
         }
@@ -402,6 +405,7 @@ namespace DaSongERP.Biz
             vm.Orders = new PagedList<OrderModel>();
             vm.Orders.PageSize = 100;
             vm.中转仓DataSource = MetaDao.GetAll中转仓();
+            vm.每日未拆包审单统计 = 统计Dao.统计每日未拆包审单();
             return vm;
         }
 

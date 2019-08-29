@@ -48,5 +48,41 @@ namespace DaSongERP.WebApp.Controllers
                 By状态 = vm.By状态
             });
         }
+
+        public ActionResult CaiGou()
+        {
+            if (!PM.Any(UPM.管理))
+            {
+                return Redirect("/SignIn");
+            }
+
+            return View(new 拆包审单统计ViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult ACaiGouByDay()
+        {
+            var condition = this.DeserializeObject<统计Condition>(Request.Params["FormJson"]);
+            var vm = this.统计Biz.统计日采购订单(condition.Date);
+            return Json(new
+            {
+                By中转仓 = vm.By中转仓,
+                By状态 = vm.By状态,
+                By员工 = vm.By员工
+            });
+        }
+
+        [HttpPost]
+        public ActionResult ACaiGouByMonth()
+        {
+            var condition = this.DeserializeObject<统计Condition>(Request.Params["FormJson"]);
+            var vm = this.统计Biz.统计月采购订单(condition.Date);
+            return Json(new
+            {
+                By中转仓 = vm.By中转仓,
+                By状态 = vm.By状态,
+                By员工 = vm.By员工
+            });
+        }
     }
 }

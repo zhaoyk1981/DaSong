@@ -19,6 +19,8 @@ CREATE PROCEDURE [dbo].[sp_拆包审单List]
 	, @订单终结 BIT
 	, @在途待发 BIT
 	, @中转仓 NVARCHAR(50)
+	, @现货 BIT
+	, @进货日期 DATETIME2(7)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -27,7 +29,7 @@ BEGIN
 
     DECLARE @RecordsCount AS INT -- 总记录数
 		, @PagesCount AS INT; -- 总页数
-
+		
 	SELECT @RecordsCount = COUNT(DISTINCT o.Id)
 	FROM vw_Orders o
 	WHERE (@拆包人ID IS NULL OR o.[拆包人ID] = @拆包人ID)
@@ -40,7 +42,9 @@ BEGIN
 		AND (@自采 IS NULL OR o.[自采] = @自采)
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
 		AND (@在途待发 IS NULL OR o.在途待发 = @在途待发)
-		AND (ISNULL(@中转仓, '') = '' OR o.[中转仓] = @中转仓);
+		AND (ISNULL(@中转仓, '') = '' OR o.[中转仓] = @中转仓)
+		AND (@现货 IS NULL OR o.现货 = @现货)
+		AND (@进货日期 IS NULL OR (o.进货日期 >= @进货日期 AND o.进货日期 < DATEADD(DAY, 1, @进货日期)));
 
 	SELECT @PagesCount = PagesCount, @PageSize = PageSize, @PageIndex = PageIndex
 	FROM [dbo].[InitPagingParams](@PageSize, @PageIndex, NULL, @RecordsCount);
@@ -58,6 +62,8 @@ BEGIN
 		AND (@高亮 IS NULL OR o.[高亮] = @高亮)
 		AND (@在途待发 IS NULL OR o.在途待发 = @在途待发)
 		AND (ISNULL(@中转仓, '') = '' OR o.[中转仓] = @中转仓)
+		AND (@现货 IS NULL OR o.现货 = @现货)
+		AND (@进货日期 IS NULL OR (o.进货日期 >= @进货日期 AND o.进货日期 < DATEADD(DAY, 1, @进货日期)))
 	ORDER BY o.进货日期 DESC
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 

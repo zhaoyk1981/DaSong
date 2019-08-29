@@ -7052,6 +7052,14 @@ label.static-label {
 .nav-item {
   margin-right: 20px; }
 
+span.notify-number {
+  display: inline-block;
+  margin-right: 25px;
+  margin-bottom: 10px; }
+  span.notify-number .number {
+    display: block;
+    left: 82px; }
+
 .notify-number {
   position: relative; }
   .notify-number .number {

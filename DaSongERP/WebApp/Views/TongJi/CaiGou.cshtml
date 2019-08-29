@@ -1,0 +1,37 @@
+﻿@model 拆包审单统计ViewModel
+@{
+    ViewBag.Title = "订单统计";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="vw-tongji vw-tongji-dingdan" data-page-js="tjcaigou" vm-json="@Model.Json">
+    @Html.Partial("_Nav")
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <div>
+        <div class="form">
+            <fieldset>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label>日期：</label>
+                        <input type="date" id="TxtDate" name="Date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary btn-by-day">统计当日</button>&nbsp;
+                    <button type="button" class="btn btn-primary btn-by-month">统计当月</button>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <h3>按中转仓统计：</h3>
+        <p class="by-stock"></p>
+        <h3>按状态统计：</h3>
+        <p class="by-status"></p>
+        <h3>按员工统计：</h3>
+        <p class="by-employees"></p>
+    </div>
+</div>
+

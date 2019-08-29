@@ -51,14 +51,21 @@
                     <a class="nav-link" href="/Order/KeFuList">客服列表</a>
                 </li>
             }
-            @if (PM.Any(UPM.拆包))
+            @if (PM.Any(UPM.拆包, UPM.管理))
             {
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         统计
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/TongJi/ChaiBao">今日拆包审单数量</a>
+                        @if (PM.Any(UPM.拆包))
+                        {
+                            <a class="dropdown-item" href="/TongJi/ChaiBao">拆包审单数量</a>
+                        }
+                        @if (PM.Any(UPM.管理))
+                        {
+                            <a class="dropdown-item" href="/TongJi/CaiGou">订单数量</a>
+                        }
                     </div>
                 </li>
             }

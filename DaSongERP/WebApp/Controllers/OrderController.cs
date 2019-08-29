@@ -64,6 +64,11 @@ namespace DaSongERP.WebApp.Controllers
             }
 
             var vm = this.OrderBiz.Get拆包审单ListViewModel();
+            if (DateTime.TryParse(Request.QueryString["Date"], out DateTime result))
+            {
+                vm.进货日期 = result.Date;
+            }
+
             vm.Json = SerializeObject(new
             {
                 AllIDs = new string[] { },

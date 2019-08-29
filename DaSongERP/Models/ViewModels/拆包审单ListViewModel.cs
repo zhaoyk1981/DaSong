@@ -14,5 +14,9 @@ namespace DaSongERP.ViewModels
         public PagedList<OrderModel> Orders { get; set; }
 
         public IList<MetaModel<Guid>> 中转仓DataSource { get; set; }
+
+        public IList<统计项Model<int>> 每日未拆包审单统计 { get; set; }
+
+        public DateTime? 进货日期 { get; set; }
     }
 }

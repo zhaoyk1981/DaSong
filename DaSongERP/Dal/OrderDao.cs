@@ -225,5 +225,25 @@ namespace DaSongERP.Dal
             var rowCount = (int)DBHelper.ExecuteScalar(cmd);
             return rowCount;
         }
+
+        public int 还原未发货退款订单(Guid orderID)
+        {
+            var cmd = ProcCommands.sp_还原未发货退款订单().SetParameterValues(new
+            {
+                ID = orderID
+            });
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
+
+        public int 设置未发货退款订单(Guid orderID)
+        {
+            var cmd = ProcCommands.sp_设置未发货退款订单().SetParameterValues(new
+            {
+                ID = orderID
+            });
+            var rowCount = (int)DBHelper.ExecuteScalar(cmd);
+            return rowCount;
+        }
     }
 }
