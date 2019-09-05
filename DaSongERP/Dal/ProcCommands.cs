@@ -983,5 +983,16 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_设置未发货退款订单
+
+        #region sp_销售统计
+        public static SqlCommand sp_销售统计()
+        {
+            var cmd = new SqlCommand("sp_销售统计") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@DateStart", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@DateEnd", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@运费", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_销售统计
     }
 }

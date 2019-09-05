@@ -1,0 +1,61 @@
+﻿@model 销售统计ViewModel
+@{
+    ViewBag.Title = "销售统计";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="vw-tongji vw-tongji-sales" data-page-js="tjsales" vm-json="@Model.Json">
+    @Html.Partial("_Nav")
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <div>
+        <div class="form" validation-group="submit">
+            <fieldset>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="TxtDateStart">日期：</label>
+                        <input type="date" id="TxtDateStart" name="DateStart" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        <span class="validator" id="vdDateStart" data-required="" data-validate-target="#TxtDateStart"><span class="error-message text-danger">此项必填</span></span>
+                    </div>
+                    <div class="form-group col-6">
+                        <label>运费：</label>
+                        <input type="number" min="0" step="0.01" name="运费" class="form-control" id="Txt运费" value="@Model.运费.GetValueOrDefault().ToString("F2")" />
+                        <span class="validator" id="vd运费" data-required="" data-validate-target="#Txt运费"><span class="error-message text-danger">此项必填</span></span>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary btn-by-day">统计当日</button>&nbsp;
+                    <button type="button" class="btn btn-primary btn-by-month">统计当月</button>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <hr />
+    <div>
+        <p>
+            <b>总订单数：</b>
+            <span class="总订单数"></span>
+        </p>
+        <p>
+            <b>有效订单数：</b>
+            <span class="有效订单数"></span>
+        </p>
+        <p>
+            <b>总销售额：</b>
+            <span class="总销售额"></span>
+        </p>
+        <p>
+            <b>有效销售额：</b>
+            <span class="有效销售额"></span>
+        </p>
+        <p>
+            <b>总毛利：</b>
+            <span class="总毛利"></span>
+        </p>
+        <p>
+            <b>有效毛利：</b>
+            <span class="有效毛利"></span>
+        </p>
+    </div>
+</div>
+

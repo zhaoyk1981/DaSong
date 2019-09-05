@@ -55,5 +55,12 @@ namespace DaSongERP.Dal
             m.ListBy员工 = DbMapperUtil.Map<统计项Model<int>>(ds.Tables[7]);
             return m;
         }
+
+        public 销售统计Model 统计销售额(销售统计Condition condition)
+        {
+            var cmd = ProcCommands.sp_销售统计().SetParameterValues(condition);
+            var m = DBHelper.ExecuteEntityList<销售统计Model>(cmd).FirstOrDefault();
+            return m;
+        }
     }
 }

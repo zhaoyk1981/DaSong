@@ -48,6 +48,7 @@
     <Compile Include="Conditions\库存动量Condition.cs" />
     <Compile Include="Conditions\库存商品Condition.cs" />
     <Compile Include="Conditions\统计Condition.cs" />
+    <Compile Include="Conditions\销售统计Condition.cs" />
     <Compile Include="Models\CellValueModel.cs" />
     <Compile Include="Models\ListItemModel.cs" />
     <Compile Include="Models\MetaModel.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Models\拆包审单统计Model.cs" />
     <Compile Include="Models\统计项Model.cs" />
     <Compile Include="Models\采购订单统计Model.cs" />
+    <Compile Include="Models\销售统计Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EditMetaViewModel.cs" />
     <Compile Include="ViewModels\EditOrderViewModel.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="ViewModels\电话客服ListViewModel.cs" />
     <Compile Include="ViewModels\跟进ListViewModel.cs" />
     <Compile Include="ViewModels\采购ListViewModel.cs" />
+    <Compile Include="ViewModels\销售统计ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YKUtils\YKUtils.csproj">

@@ -84,5 +84,19 @@ namespace DaSongERP.WebApp.Controllers
                 By员工 = vm.By员工
             });
         }
+
+        public ActionResult Sales()
+        {
+            var vm = 统计Biz.Get销售统计ViewModel();
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult ASales()
+        {
+            var condition = this.DeserializeObject<销售统计Condition>(Request.Params["FormJson"]);
+            var m = this.统计Biz.统计销售额(condition);
+            return Json(m);
+        }
     }
 }

@@ -43,5 +43,32 @@ namespace DaSongERP.Biz
             var dateEnd = dateStart.AddMonths(1);
             return this.统计Dao.统计采购订单(dateStart, dateEnd);
         }
+
+        public 销售统计ViewModel Get销售统计ViewModel()
+        {
+            var vm = new 销售统计ViewModel()
+            {
+                日期 = DateTime.Now.Date,
+                运费 = 12
+            };
+            return vm;
+        }
+
+        public 销售统计Model 统计销售额(销售统计Condition condition)
+        {
+            condition.DateStart = condition.DateStart.Value.Date;
+            switch (condition.DateType)
+            {
+                case "日":
+                    condition.DateEnd = condition.DateStart.Value.AddDays(1);
+                    break;
+                case "月":
+                    condition.DateStart = new DateTime(condition.DateStart.Value.Year, condition.DateStart.Value.Month, 1);
+                    condition.DateEnd = condition.DateStart.Value.AddMonths(1);
+                    break;
+            }
+
+            return this.统计Dao.统计销售额(condition);
+        }
     }
 }
