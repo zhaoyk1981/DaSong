@@ -168,7 +168,7 @@ namespace DaSongERP.Biz
             {
                 OrderID = order.ID,
                 Remark = "拆包审单入库",
-                在途数量 = order.进货数量.GetValueOrDefault() - order.入库数量.GetValueOrDefault(),
+                在途数量 = Math.Max(0, order.进货数量.GetValueOrDefault() - order.入库数量.GetValueOrDefault()),
                 现货数量 = order.入库数量.GetValueOrDefault(),
                 库存商品ID = order.库存商品ID
             };

@@ -20,7 +20,7 @@ BEGIN
 		UPDATE [dbo].[库存动量] SET
 			库存商品ID = @库存商品ID
 			, 现货数量 = ISNULL(@现货数量, 0)
-			, 在途数量 = CASE WHEN ISNULL(@在途数量, 0) < 0 THEN 0 ELSE ISNULL(@在途数量, 0) END
+			, 在途数量 = ISNULL(@在途数量, 0)
 			, Remark = ISNULL(@Remark, '')
 			, UserID = @UserID
 		WHERE OrderID = @OrderID;
@@ -39,7 +39,7 @@ BEGIN
 			   (@库存商品ID
 			   ,GETDATE()
 			   ,ISNULL(@现货数量, 0)
-			   ,CASE WHEN ISNULL(@在途数量, 0) < 0 THEN 0 ELSE ISNULL(@在途数量, 0) END
+			   ,ISNULL(@在途数量, 0)
 			   ,@OrderID
 			   ,ISNULL(@Remark, '')
 			   ,@UserID);
