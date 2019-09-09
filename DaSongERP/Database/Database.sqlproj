@@ -159,5 +159,6 @@
     <Build Include="dbo\Stored Procedures\sp_还原未发货退款订单.sql" />
     <Build Include="dbo\Functions\fn_计算运费.sql" />
     <Build Include="dbo\Stored Procedures\sp_销售统计.sql" />
+    <Build Include="dbo\Stored Procedures\sp_统计热销商品.sql" />
   </ItemGroup>
 </Project>

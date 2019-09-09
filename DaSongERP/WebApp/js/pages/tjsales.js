@@ -45,7 +45,7 @@
                 $('.有效毛利').text(data.Str有效毛利);
             }
         });
-    }
+    };
 
     return {
         ready: function () {

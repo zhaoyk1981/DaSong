@@ -994,5 +994,19 @@ namespace DaSongERP.Dal
             return cmd;
         }
         #endregion sp_销售统计
+
+        #region sp_统计热销商品
+        public static SqlCommand sp_统计热销商品()
+        {
+            var cmd = new SqlCommand("sp_统计热销商品") { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageIndex", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@PageSize", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderBy", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@DateStart", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@DateEnd", Value = DBNull.Value });
+            return cmd;
+        }
+        #endregion sp_统计热销商品
     }
 }

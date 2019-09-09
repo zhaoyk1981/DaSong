@@ -165,6 +165,7 @@
     <Content Include="js\pages\tjcaigou.js" />
     <Content Include="js\pages\tjchaibao.js" />
     <Content Include="js\pages\tjsales.js" />
+    <Content Include="js\pages\tjtopsales.js" />
     <Content Include="js\pages\userlist.js" />
     <Content Include="js\pages\zhongzhuancanglist.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -447,6 +448,7 @@
     <Content Include="Views\Stock\ChangeQtyHistories.cshtml" />
     <Content Include="Views\TongJi\CaiGou.cshtml" />
     <Content Include="Views\TongJi\Sales.cshtml" />
+    <Content Include="Views\TongJi\TopSales.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

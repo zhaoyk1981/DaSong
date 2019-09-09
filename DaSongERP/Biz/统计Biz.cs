@@ -70,5 +70,27 @@ namespace DaSongERP.Biz
 
             return this.统计Dao.统计销售额(condition);
         }
+
+        public PagedList<热销商品统计Model> 统计热销商品(热销商品统计Condition condition)
+        {
+            condition.DateStart = condition.DateStart.Value.Date;
+            condition.DateEnd = condition.DateEnd.Value.Date.AddDays(1);
+            return this.统计Dao.统计热销商品(condition);
+        }
+
+        public 热销商品统计ViewModel Get热销商品统计ViewModel()
+        {
+            var vm = new 热销商品统计ViewModel()
+            {
+                DateStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
+            };
+            vm.DateEnd = vm.DateStart.Value.AddMonths(1).AddDays(-1);
+            vm.List = new PagedList<热销商品统计Model>()
+            {
+                PageSize = 100
+            };
+            return vm;
+        }
+
     }
 }

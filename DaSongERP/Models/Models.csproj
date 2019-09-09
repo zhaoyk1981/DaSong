@@ -47,6 +47,7 @@
     <Compile Include="Conditions\UserCondition.cs" />
     <Compile Include="Conditions\库存动量Condition.cs" />
     <Compile Include="Conditions\库存商品Condition.cs" />
+    <Compile Include="Conditions\热销商品统计Condition.cs" />
     <Compile Include="Conditions\统计Condition.cs" />
     <Compile Include="Conditions\销售统计Condition.cs" />
     <Compile Include="Models\CellValueModel.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Models\店铺Model.cs" />
     <Compile Include="Models\快递Model.cs" />
     <Compile Include="Models\拆包审单统计Model.cs" />
+    <Compile Include="Models\热销商品统计Model.cs" />
     <Compile Include="Models\统计项Model.cs" />
     <Compile Include="Models\采购订单统计Model.cs" />
     <Compile Include="Models\销售统计Model.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="ViewModels\店铺ListViewModel.cs" />
     <Compile Include="ViewModels\拆包审单ListViewModel.cs" />
     <Compile Include="ViewModels\拆包审单统计ViewModel.cs" />
+    <Compile Include="ViewModels\热销商品统计ViewModel.cs" />
     <Compile Include="ViewModels\电话客服ListViewModel.cs" />
     <Compile Include="ViewModels\跟进ListViewModel.cs" />
     <Compile Include="ViewModels\采购ListViewModel.cs" />

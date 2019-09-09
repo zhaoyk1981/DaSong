@@ -98,5 +98,25 @@ namespace DaSongERP.WebApp.Controllers
             var m = this.统计Biz.统计销售额(condition);
             return Json(m);
         }
+
+        public ActionResult TopSales()
+        {
+            var vm = 统计Biz.Get热销商品统计ViewModel();
+            vm.Json = SerializeObject(new
+            {
+                AllIDs = new string[] { },
+                currentSortPaging = vm.List.GetCurrentSortPaging()
+            });
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult ATopSales()
+        {
+            var condition = this.Request.Params.Map<热销商品统计Condition>();
+            condition.PageIndex = int.Parse(this.Request.Params["PageIndex"]);
+            var m = this.统计Biz.统计热销商品(condition);
+            return Json(m);
+        }
     }
 }

@@ -62,5 +62,13 @@ namespace DaSongERP.Dal
             var m = DBHelper.ExecuteEntityList<销售统计Model>(cmd).FirstOrDefault();
             return m;
         }
+
+        public PagedList<热销商品统计Model> 统计热销商品(热销商品统计Condition condition)
+        {
+            var cmd = ProcCommands.sp_统计热销商品().SetParameterValues(condition);
+            var dataSet = DBHelper.ExecuteDataSet(cmd);
+            var pagedList = new PagedList<热销商品统计Model>(condition, dataSet);
+            return pagedList;
+        }
     }
 }
