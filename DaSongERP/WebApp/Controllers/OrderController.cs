@@ -511,6 +511,7 @@ namespace DaSongERP.WebApp.Controllers
             }
 
             var vm = this.OrderBiz.Get采购ListViewModel();
+            vm.货号 = (Request.QueryString["hh"] ?? string.Empty).Trim();
             vm.Json = SerializeObject(new
             {
                 AllIDs = new string[] { },

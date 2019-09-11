@@ -68,6 +68,18 @@ namespace DaSongERP.Dal
             var cmd = ProcCommands.sp_统计热销商品().SetParameterValues(condition);
             var dataSet = DBHelper.ExecuteDataSet(cmd);
             var pagedList = new PagedList<热销商品统计Model>(condition, dataSet);
+            var 库存商品List = DbMapperUtil.Map<库存商品Model>(dataSet.Tables[2]);
+            foreach (var m in pagedList.DataSource)
+            {
+                var g = 库存商品List.FirstOrDefault(n => n.货号 == m.货号);
+                if (g != null)
+                {
+                    m.Thumbnails = g.Thumbnails;
+                    m.现货数量 = g.现货数量;
+                    m.在途数量 = g.在途数量;
+                }
+            }
+
             return pagedList;
         }
     }

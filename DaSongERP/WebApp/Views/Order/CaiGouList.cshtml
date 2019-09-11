@@ -35,106 +35,106 @@
     </script>
 }
 
-    <div class="vw-order-list vw-caigou-list" data-page-js="caigoulist" vm-json="@Model.Json">
-        @Html.Partial("_Nav")
-        <h2>@ViewBag.Title</h2>
-        <hr/>
-        <div class="filters">
-            <div class="form" autocomplete="off" default-button="#BtnSearch">
-                <fieldset>
-                    <div class="row">
-                        <div class="form-group col-6">
-                            <label for="TxtJD订单号">JD订单号</label>
-                            <input type="text" name="JD订单号" class="form-control" id="TxtJD订单号" autocomplete="off" on-enter />
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="Txt淘宝账号">淘宝账号</label>
-                            <input type="text" name="淘宝账号" class="form-control" id="Txt淘宝账号" autocomplete="off" on-enter />
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="Txt淘宝订单号">淘宝订单号</label>
-                            <input type="text" name="淘宝订单号" class="form-control" id="Txt淘宝订单号" autocomplete="off" on-enter />
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="Txt货号">货号</label>
-                            <input type="text" name="货号" class="form-control" id="Txt货号" autocomplete="off" on-enter />
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="Ddl自采">是否自采</label>
-                            <select id="Ddl自采" class="form-control" name="自采" data-type="bool">
-                                <option value="" selected>全部</option>
-                                <option value="true">自采</option>
-                                <option value="false">非自采</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="Ddl现货">是否现货</label>
-                            <select id="Ddl现货" class="form-control" name="现货" data-type="bool">
-                                <option value="" selected>全部</option>
-                                <option value="true">现货</option>
-                                <option value="false">非现货</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="Ddl在途待发">在途待发</label>
-                            <select id="Ddl在途待发" class="form-control" name="在途待发" data-type="bool">
-                                <option value="" selected>全部</option>
-                                <option value="true">是</option>
-                                <option value="false">否</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="Ddl中转仓">中转仓</label>
-                            <select id="Ddl中转仓" class="form-control" name="中转仓">
-                                <option value="" selected>全部</option>
-                                @foreach (var meta in Model.中转仓DataSource)
-                                {
-                                    <option value="@meta.Name">@meta.Name</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="form-group col-6">
-                            <label for="Ddl异常订单">是否异常订单</label>
-                            <select id="Ddl异常订单" class="form-control" name="高亮" data-type="bool">
-                                <option value="" selected>全部</option>
-                                <option value="true">异常订单</option>
-                                <option value="false">非异常订单</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="My" data-type="bool" id="ChkMy" />
-                                <label class="form-check-label" for="ChkMy">只看我的</label>
-                            </div>
+<div class="vw-order-list vw-caigou-list" data-page-js="caigoulist" vm-json="@Model.Json">
+    @Html.Partial("_Nav")
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <div class="filters">
+        <div class="form" autocomplete="off" default-button="#BtnSearch">
+            <fieldset>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="TxtJD订单号">JD订单号</label>
+                        <input type="text" name="JD订单号" class="form-control" id="TxtJD订单号" autocomplete="off" on-enter />
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Txt淘宝账号">淘宝账号</label>
+                        <input type="text" name="淘宝账号" class="form-control" id="Txt淘宝账号" autocomplete="off" on-enter />
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Txt淘宝订单号">淘宝订单号</label>
+                        <input type="text" name="淘宝订单号" class="form-control" id="Txt淘宝订单号" autocomplete="off" on-enter />
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Txt货号">货号</label>
+                        <input type="text" name="货号" class="form-control" id="Txt货号" value="@Model.货号" autocomplete="off" on-enter />
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Ddl自采">是否自采</label>
+                        <select id="Ddl自采" class="form-control" name="自采" data-type="bool">
+                            <option value="" selected>全部</option>
+                            <option value="true">自采</option>
+                            <option value="false">非自采</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Ddl现货">是否现货</label>
+                        <select id="Ddl现货" class="form-control" name="现货" data-type="bool">
+                            <option value="" selected>全部</option>
+                            <option value="true">现货</option>
+                            <option value="false">非现货</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Ddl在途待发">在途待发</label>
+                        <select id="Ddl在途待发" class="form-control" name="在途待发" data-type="bool">
+                            <option value="" selected>全部</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Ddl中转仓">中转仓</label>
+                        <select id="Ddl中转仓" class="form-control" name="中转仓">
+                            <option value="" selected>全部</option>
+                            @foreach (var meta in Model.中转仓DataSource)
+                            {
+                                <option value="@meta.Name">@meta.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Ddl异常订单">是否异常订单</label>
+                        <select id="Ddl异常订单" class="form-control" name="高亮" data-type="bool">
+                            <option value="" selected>全部</option>
+                            <option value="true">异常订单</option>
+                            <option value="false">非异常订单</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="My" data-type="bool" id="ChkMy" />
+                            <label class="form-check-label" for="ChkMy">只看我的</label>
                         </div>
                     </div>
-                </fieldset>
-                <div class="form-group">
-                    <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
                 </div>
+            </fieldset>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" id="BtnSearch">查询</button>
             </div>
         </div>
-        <hr/>
-        <div class="repeater">
-            <div class="paging">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a href="javascript:void(0)" aria-label="Previous" class="btn-first-page page-link">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a href="javascript:void(0)" aria-label="Next" class="btn-last-page page-link">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div>当前记录：<span class="lbl-current-page-record-start"></span>~<span class="lbl-current-page-record-end"></span>/<span class="lbl-records-count"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页数：<span class="lbl-current-page-number"></span>/<span class="lbl-pages-count"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每页：<span class="lbl-page-size"></span></div>
-            <table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" role="grid">
-                <thead>
+    </div>
+    <hr />
+    <div class="repeater">
+        <div class="paging">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a href="javascript:void(0)" aria-label="Previous" class="btn-first-page page-link">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a href="javascript:void(0)" aria-label="Next" class="btn-last-page page-link">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div>当前记录：<span class="lbl-current-page-record-start"></span>~<span class="lbl-current-page-record-end"></span>/<span class="lbl-records-count"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页数：<span class="lbl-current-page-number"></span>/<span class="lbl-pages-count"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每页：<span class="lbl-page-size"></span></div>
+        <table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" role="grid">
+            <thead>
                 <tr>
                     <th>店铺</th>
                     <th>JD订单号</th>
@@ -147,24 +147,24 @@
                     <th>中转仓</th>
                     <th>操作</th>
                 </tr>
-                </thead>
-                <tbody class="repeat-items"></tbody>
-            </table>
-            <div class="paging">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
-                            <a href="javascript:void(0)" aria-label="Previous" class="btn-first-page page-link">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a href="javascript:void(0)" aria-label="Next" class="btn-last-page page-link">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            </thead>
+            <tbody class="repeat-items"></tbody>
+        </table>
+        <div class="paging">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a href="javascript:void(0)" aria-label="Previous" class="btn-first-page page-link">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a href="javascript:void(0)" aria-label="Next" class="btn-last-page page-link">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
+</div>

@@ -30,5 +30,19 @@ namespace DaSongERP.Models
                 return this.订单数.GetValueOrDefault().ToString();
             }
         }
+
+        public string Thumbnails { get; set; }
+
+        public int? 现货数量 { get; set; }
+
+        public int? 在途数量 { get; set; }
+
+        public int 虚拟数量
+        {
+            get
+            {
+                return 现货数量.GetValueOrDefault() + 在途数量.GetValueOrDefault();
+            }
+        }
     }
 }

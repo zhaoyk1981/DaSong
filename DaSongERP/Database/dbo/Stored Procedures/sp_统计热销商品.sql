@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE dbo.sp_统计热销商品
+CREATE PROCEDURE [dbo].[sp_统计热销商品]
 	@PageIndex INT = NULL
 	, @PageSize INT
 	, @OrderBy NVARCHAR(50) = NULL
@@ -44,4 +44,7 @@ BEGIN
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 
 	SELECT @PageIndex [PageIndex], @RecordsCount [RecordsCount], @PagesCount [PagesCount], @PageSize [PageSize];
+
+	SELECT 货号, MIN(Thumbnails) Thumbnails, SUM(现货数量) 现货数量, SUM(在途数量) 在途数量 FROM vw_库存商品
+	GROUP BY 货号;
 END

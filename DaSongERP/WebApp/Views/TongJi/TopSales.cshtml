@@ -7,14 +7,24 @@
 @section Head{
     <script id="tmplRow" type="x-tmpl-mustache">
         <tr>
-            <td>{{货号}}</td>
+            <td>
+                <a href="{{Thumbnails}}" target="_blank">
+                    <img src="{{Thumbnails}}" class="product-thumbnail" />
+                </a>
+            </td>
+            <td>
+                <a href="/Order/CaiGouList?hh={{货号}}" target="_blank">{{货号}}</a>
+            </td>
             <td>
                 {{Str总销量}}
             </td>
             <td>{{Str订单数}}</td>
+            <td>{{现货数量}}</td>
+            <td>{{在途数量}}</td>
+            <td>{{虚拟数量}}</td>
             @*<td>
-                <a href="#" class="btn btn-primary btn-view" target="_blank">查看订单</a>
-            </td>*@
+                    <a href="#" class="btn btn-primary btn-view" target="_blank">查看订单</a>
+                </td>*@
         </tr>
     </script>
 }
@@ -66,9 +76,13 @@
         <table class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" role="grid">
             <thead>
                 <tr>
+                    <th>商品图片</th>
                     <th>货号</th>
                     <th>总销量</th>
                     <th>订单数</th>
+                    <th>现货数量</th>
+                    <th>在途数量</th>
+                    <th>虚拟数量</th>
                 </tr>
             </thead>
             <tbody class="repeat-items"></tbody>
