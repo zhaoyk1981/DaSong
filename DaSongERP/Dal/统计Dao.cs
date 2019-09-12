@@ -71,12 +71,22 @@ namespace DaSongERP.Dal
             var 库存商品List = DbMapperUtil.Map<库存商品Model>(dataSet.Tables[2]);
             foreach (var m in pagedList.DataSource)
             {
-                var g = 库存商品List.FirstOrDefault(n => n.货号 == m.货号);
+                var g = 库存商品List.FirstOrDefault(n => n.货号 == m.货号 && n.规格 == m.规格);
                 if (g != null)
                 {
                     m.Thumbnails = g.Thumbnails;
                     m.现货数量 = g.现货数量;
                     m.在途数量 = g.在途数量;
+                }
+            }
+
+            var 退货商品List = DbMapperUtil.Map<热销商品统计Model>(dataSet.Tables[3]);
+            foreach (var m in pagedList.DataSource)
+            {
+                var g = 退货商品List.FirstOrDefault(n => n.货号 == m.货号 && n.规格 == m.规格);
+                if (g != null)
+                {
+                    m.退货数量 = g.总销量.GetValueOrDefault();
                 }
             }
 

@@ -8,8 +8,10 @@ namespace DaSongERP.Models
 {
     public class 热销商品统计Model : Model
     {
-        public string ID => 货号;
+        public string ID => $"{货号}_{规格}";
         public string 货号 { get; set; }
+
+        public string 规格 { get; set; }
 
         public int? 总销量 { get; set; }
 
@@ -20,6 +22,8 @@ namespace DaSongERP.Models
                 return this.总销量.GetValueOrDefault().ToString();
             }
         }
+
+        public int? 退货数量 { get; set; } = 0;
 
         public int? 订单数 { get; set; }
 
