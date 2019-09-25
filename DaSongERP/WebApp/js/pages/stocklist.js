@@ -34,7 +34,11 @@
                     return newCondition;
                 },
                 url: '/Stock/AIndex',
-                currentSortPaging: vm.currentSortPaging
+                currentSortPaging: vm.currentSortPaging,
+                onDataBound: function (data) {
+                    $('.总现货数量').text(data.现货数量.toString());
+                    $('.总在途数量').text(data.在途数量.toString());
+                }
             }, true);
 
             $('.repeater').delegate('.btn-delete', 'click', btnDelete_click);

@@ -1005,6 +1005,7 @@ namespace DaSongERP.Dal
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@OrderByDesc", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@DateStart", Value = DBNull.Value });
             cmd.Parameters.Add(new SqlParameter() { ParameterName = "@DateEnd", Value = DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter() { ParameterName = "@货号", Value = DBNull.Value });
             return cmd;
         }
         #endregion sp_统计热销商品

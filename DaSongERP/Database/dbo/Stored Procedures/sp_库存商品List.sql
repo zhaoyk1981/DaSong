@@ -22,7 +22,7 @@ BEGIN
 	SELECT @RecordsCount = COUNT(DISTINCT kc.Id)
 	FROM dbo.vw_库存商品 kc
 	WHERE (ISNULL(@仓库, '') = '' OR kc.仓库 = @仓库)
-		AND (ISNULL(@货号, '') = '' OR kc.货号 LIKE '%' + @货号 + '%')
+		AND (ISNULL(@货号, '') = '' OR kc.货号 LIKE '%' + @货号 + '%' OR kc.[Name] LIKE '%' + @货号 + '%')
 
 	SELECT @PagesCount = PagesCount, @PageSize = PageSize, @PageIndex = PageIndex
 	FROM [dbo].[InitPagingParams](@PageSize, @PageIndex, NULL, @RecordsCount);
@@ -30,9 +30,14 @@ BEGIN
 	SELECT kc.*
 	FROM dbo.vw_库存商品 kc
 	WHERE (ISNULL(@仓库, '') = '' OR kc.仓库 = @仓库)
-		AND (ISNULL(@货号, '') = '' OR kc.货号 LIKE '%' + @货号 + '%')
+		AND (ISNULL(@货号, '') = '' OR kc.货号 LIKE '%' + @货号 + '%' OR kc.[Name] LIKE '%' + @货号 + '%')
 	ORDER BY kc.仓库, kc.Name
 	OFFSET @PageIndex * @PageSize ROWS FETCH NEXT @PageSize ROWS ONLY;
 
 	SELECT @PageIndex [PageIndex], @RecordsCount [RecordsCount], @PagesCount [PagesCount], @PageSize [PageSize];
+
+	SELECT SUM(kc.现货数量) 现货数量, SUM(kc.在途数量) 在途数量
+	FROM dbo.vw_库存商品 kc
+	WHERE (ISNULL(@仓库, '') = '' OR kc.仓库 = @仓库)
+		AND (ISNULL(@货号, '') = '' OR kc.货号 LIKE '%' + @货号 + '%' OR kc.[Name] LIKE '%' + @货号 + '%');
 END

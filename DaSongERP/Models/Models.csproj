@@ -62,6 +62,7 @@
     <Compile Include="Models\审单操作Model.cs" />
     <Compile Include="Models\库存动量Model.cs" />
     <Compile Include="Models\库存商品Model.cs" />
+    <Compile Include="Models\库存商品PagedList.cs" />
     <Compile Include="Models\店铺Model.cs" />
     <Compile Include="Models\快递Model.cs" />
     <Compile Include="Models\拆包审单统计Model.cs" />

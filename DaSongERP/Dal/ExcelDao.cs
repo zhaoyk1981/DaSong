@@ -49,7 +49,7 @@ namespace DaSongERP.Dal
                 }
 
                 var o = new OrderModel();
-                o.电话备注 = GetStringValue(lastOrder?.电话备注, rowIndex, row, dictColumns, dictCellStatus, "电话备注");
+                o.电话备注 = GetStringValue(lastOrder?.电话备注, rowIndex, row, dictColumns, dictCellStatus, "备注");
                 o.JD订单号 = GetStringValue(lastOrder?.JD订单号, rowIndex, row, dictColumns, dictCellStatus, "销售平台单号");
                 o.客人姓名 = GetStringValue(lastOrder?.客人姓名, rowIndex, row, dictColumns, dictCellStatus, "收件人");
                 o.客人电话 = GetStringValue(lastOrder?.客人电话, rowIndex, row, dictColumns, dictCellStatus, "电话");

@@ -12,11 +12,13 @@ namespace DaSongERP.Dal
 {
     public class 库存商品Dao : Dao
     {
-        public PagedList<库存商品Model> Get库存商品List(库存商品Condition condition)
+        public 库存商品PagedList Get库存商品List(库存商品Condition condition)
         {
             var cmd = ProcCommands.sp_库存商品List().SetParameterValues(condition);
             var dataSet = DBHelper.ExecuteDataSet(cmd);
-            var pagedList = new PagedList<库存商品Model>(condition, dataSet);
+            var pagedList = new 库存商品PagedList(condition, dataSet);
+            pagedList.现货数量 = (int)dataSet.Tables[2].Rows[0]["现货数量"];
+            pagedList.在途数量 = (int)dataSet.Tables[2].Rows[0]["在途数量"];
             return pagedList;
         }
 

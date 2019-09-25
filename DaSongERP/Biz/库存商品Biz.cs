@@ -22,7 +22,7 @@ namespace DaSongERP.Biz
             return vm;
         }
 
-        public PagedList<库存商品Model> Get库存商品List(库存商品Condition condition)
+        public 库存商品PagedList Get库存商品List(库存商品Condition condition)
         {
             var list = this.库存商品Dao.Get库存商品List(condition);
             return list;
