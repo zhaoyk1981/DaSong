@@ -41,6 +41,11 @@
             }
         }
 
+        a.order-status.自采 {
+            background-color: transparent;
+            color: blue;
+        }
+
         [data-zicai='true'] {
             .order-status.自采 {
                 display: inline-block;

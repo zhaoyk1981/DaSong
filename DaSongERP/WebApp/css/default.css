@@ -7425,6 +7425,10 @@ body .vw-order-list .order-status {
   body .vw-order-list .order-status.未发货退款 {
     background-color: black; }
 
+body .vw-order-list a.order-status.自采 {
+  background-color: transparent;
+  color: blue; }
+
 body .vw-order-list [data-zicai='true'] .order-status.自采 {
   display: inline-block; }
 
