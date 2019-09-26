@@ -74,6 +74,8 @@ namespace DaSongERP.WebApp.Controllers
                 vm.在途待发 = true;
             }
 
+            vm.货号 = (Request.QueryString["prodid"] ?? string.Empty).Trim();
+
             vm.Json = SerializeObject(new
             {
                 AllIDs = new string[] { },

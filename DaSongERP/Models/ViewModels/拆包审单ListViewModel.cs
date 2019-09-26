@@ -20,5 +20,7 @@ namespace DaSongERP.ViewModels
         public DateTime? 进货日期 { get; set; }
 
         public bool? 在途待发 { get; set; }
+
+        public string 货号 { get; set; }
     }
 }
