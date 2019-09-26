@@ -69,6 +69,11 @@ namespace DaSongERP.WebApp.Controllers
                 vm.进货日期 = result.Date;
             }
 
+            if(string.Compare(Request.QueryString["pending"], "true", true) == 0)
+            {
+                vm.在途待发 = true;
+            }
+
             vm.Json = SerializeObject(new
             {
                 AllIDs = new string[] { },

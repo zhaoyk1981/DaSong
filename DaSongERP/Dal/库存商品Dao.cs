@@ -17,8 +17,8 @@ namespace DaSongERP.Dal
             var cmd = ProcCommands.sp_库存商品List().SetParameterValues(condition);
             var dataSet = DBHelper.ExecuteDataSet(cmd);
             var pagedList = new 库存商品PagedList(condition, dataSet);
-            pagedList.现货数量 = (int)dataSet.Tables[2].Rows[0]["现货数量"];
-            pagedList.在途数量 = (int)dataSet.Tables[2].Rows[0]["在途数量"];
+            pagedList.现货数量 = (dataSet.Tables[2].Rows[0]["现货数量"] as int?).GetValueOrDefault();
+            pagedList.在途数量 = (dataSet.Tables[2].Rows[0]["在途数量"] as int?).GetValueOrDefault();
             return pagedList;
         }
 

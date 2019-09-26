@@ -18,5 +18,7 @@ namespace DaSongERP.ViewModels
         public IList<统计项Model<int>> 每日未拆包审单统计 { get; set; }
 
         public DateTime? 进货日期 { get; set; }
+
+        public bool? 在途待发 { get; set; }
     }
 }
