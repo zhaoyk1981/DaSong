@@ -354,6 +354,9 @@ namespace DaSongERP.Models
 
         public bool? 已拆包 { get; set; }
 
+        public string Str已拆包 => this.已拆包.GetValueOrDefault() ? "已拆包" : "未拆";
+
+
         public bool? 已售后 { get; set; }
 
         public bool? 自采 { get; set; }
