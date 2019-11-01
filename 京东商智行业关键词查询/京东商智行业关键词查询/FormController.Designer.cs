@@ -33,6 +33,7 @@
             this.BtnChooseFile = new System.Windows.Forms.Button();
             this.LblSelectedFile = new System.Windows.Forms.Label();
             this.OfdKeyWords = new System.Windows.Forms.OpenFileDialog();
+            this.LblPercent = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // BtnLogin
@@ -78,11 +79,20 @@
             // 
             this.OfdKeyWords.Filter = "CSV 文件|*.csv";
             // 
+            // LblPercent
+            // 
+            this.LblPercent.AutoSize = true;
+            this.LblPercent.Location = new System.Drawing.Point(80, 459);
+            this.LblPercent.Name = "LblPercent";
+            this.LblPercent.Size = new System.Drawing.Size(0, 18);
+            this.LblPercent.TabIndex = 4;
+            // 
             // FormController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1874, 1255);
+            this.Controls.Add(this.LblPercent);
             this.Controls.Add(this.LblSelectedFile);
             this.Controls.Add(this.BtnChooseFile);
             this.Controls.Add(this.BtnSearch);
@@ -102,5 +112,6 @@
         private System.Windows.Forms.Button BtnChooseFile;
         private System.Windows.Forms.Label LblSelectedFile;
         private System.Windows.Forms.OpenFileDialog OfdKeyWords;
+        private System.Windows.Forms.Label LblPercent;
     }
 }
