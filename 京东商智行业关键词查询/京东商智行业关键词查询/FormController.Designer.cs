@@ -31,9 +31,9 @@
             this.BtnLogin = new System.Windows.Forms.Button();
             this.BtnSearch = new System.Windows.Forms.Button();
             this.BtnChooseFile = new System.Windows.Forms.Button();
-            this.LblSelectedFile = new System.Windows.Forms.Label();
             this.OfdKeyWords = new System.Windows.Forms.OpenFileDialog();
             this.LblPercent = new System.Windows.Forms.Label();
+            this.LblSelectedFile = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // BtnLogin
@@ -66,34 +66,36 @@
             this.BtnChooseFile.UseVisualStyleBackColor = true;
             this.BtnChooseFile.Click += new System.EventHandler(this.BtnChooseFile_Click);
             // 
-            // LblSelectedFile
-            // 
-            this.LblSelectedFile.AutoSize = true;
-            this.LblSelectedFile.Location = new System.Drawing.Point(80, 274);
-            this.LblSelectedFile.Name = "LblSelectedFile";
-            this.LblSelectedFile.Size = new System.Drawing.Size(134, 18);
-            this.LblSelectedFile.TabIndex = 3;
-            this.LblSelectedFile.Text = "您还未选择文件";
-            // 
             // OfdKeyWords
             // 
             this.OfdKeyWords.Filter = "CSV 文件|*.csv";
+            this.OfdKeyWords.Multiselect = true;
             // 
             // LblPercent
             // 
             this.LblPercent.AutoSize = true;
             this.LblPercent.Location = new System.Drawing.Point(80, 459);
             this.LblPercent.Name = "LblPercent";
-            this.LblPercent.Size = new System.Drawing.Size(0, 18);
+            this.LblPercent.Size = new System.Drawing.Size(0, 12);
             this.LblPercent.TabIndex = 4;
+            // 
+            // LblSelectedFile
+            // 
+            this.LblSelectedFile.Location = new System.Drawing.Point(83, 246);
+            this.LblSelectedFile.Multiline = true;
+            this.LblSelectedFile.Name = "LblSelectedFile";
+            this.LblSelectedFile.ReadOnly = true;
+            this.LblSelectedFile.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.LblSelectedFile.Size = new System.Drawing.Size(634, 105);
+            this.LblSelectedFile.TabIndex = 5;
             // 
             // FormController
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(774, 552);
-            this.Controls.Add(this.LblPercent);
             this.Controls.Add(this.LblSelectedFile);
+            this.Controls.Add(this.LblPercent);
             this.Controls.Add(this.BtnChooseFile);
             this.Controls.Add(this.BtnSearch);
             this.Controls.Add(this.BtnLogin);
@@ -112,8 +114,8 @@
         private System.Windows.Forms.Button BtnLogin;
         private System.Windows.Forms.Button BtnSearch;
         private System.Windows.Forms.Button BtnChooseFile;
-        private System.Windows.Forms.Label LblSelectedFile;
         private System.Windows.Forms.OpenFileDialog OfdKeyWords;
         private System.Windows.Forms.Label LblPercent;
+        private System.Windows.Forms.TextBox LblSelectedFile;
     }
 }

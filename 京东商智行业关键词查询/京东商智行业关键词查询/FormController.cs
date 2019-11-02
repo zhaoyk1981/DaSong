@@ -37,7 +37,7 @@ namespace 京东商智行业关键词查询
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
-            this.BtnSearch.Enabled = false;
+            this.BtnLogin.Enabled = this.BtnChooseFile.Enabled = this.BtnSearch.Enabled = false;
             Worker = new BackgroundWorker();
             Worker.WorkerSupportsCancellation = true;
             Worker.WorkerReportsProgress = true;
@@ -54,125 +54,129 @@ namespace 京东商智行业关键词查询
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.BtnSearch.Enabled = true;
-            var fileName = e.Result as string;
-            if (!e.Cancelled && !string.IsNullOrEmpty(fileName))
+            this.BtnLogin.Enabled = this.BtnChooseFile.Enabled = this.BtnSearch.Enabled = true;
+            if (!e.Cancelled)
             {
-                System.Diagnostics.Process.Start("Explorer", $"/select,{Path.Combine(Environment.CurrentDirectory, fileName)}");
+                System.Diagnostics.Process.Start("Explorer", $"{Environment.CurrentDirectory}");
             }
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            this.Worker.ReportProgress(0, $"正在读取文件 {Path.GetFileName(this.LblSelectedFile.Text)}");
-            var ext = Path.GetExtension(this.LblSelectedFile.Text).ToLower();
-            IList<KeywordModel> list = null;
-            switch (ext)
+            for (var idxFileName = 0; idxFileName < this.OfdKeyWords.FileNames.Length; idxFileName++)
             {
-                case ".csv":
-                    list = this.ReadKeywordsFromCsv(this.LblSelectedFile.Text);
-                    break;
-                default:
-                    MessageBox.Show("不支持此格式。");
-                    e.Result = "";
+                var csvFileName = this.OfdKeyWords.FileNames[idxFileName];
+                this.Worker.ReportProgress(0, $"正在读取文件 {Path.GetFileName(csvFileName)}");
+                var ext = Path.GetExtension(csvFileName).ToLower();
+                IList<KeywordModel> list = null;
+                switch (ext)
+                {
+                    case ".csv":
+                        list = this.ReadKeywordsFromCsv(csvFileName);
+                        break;
+                    default:
+                        MessageBox.Show("不支持此格式。");
+                        e.Result = "";
+                        return;
+                }
+
+                var dtNow = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+                var dtMonthAgo = DateTime.Now.AddDays(-31).ToString("yyyy-MM-dd");
+                var i = 0;
+                foreach (var kw in list)
+                {
+                    if (Worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+
+                        break;
+                    }
+
+                    var url = $"https://sz.jd.com/sz/api/industryKeyWord/getKeywordsSummData.ajax?channel=99&date=30{dtNow}&endDate={dtNow}&kw={WebUtility.UrlEncode(kw.Keyword)}&startDate={dtMonthAgo}";
+                    frmLogin.WebView.LoadUrlAndWait(url);
+                    var strJson = frmLogin.WebView.GetText();
+                    var resultObj = JsonConvert.DeserializeObject<ResultModel>(strJson);
+                    if (resultObj.message == "success" || resultObj.message == "success：上期数据为空")
+                    {
+                        var c = 0;
+                        if (!string.IsNullOrEmpty(resultObj.content.SearchClickIndex.value))
+                        {
+                            c++;
+                            kw.搜索点击指数.Value = decimal.Parse(resultObj.content.SearchClickIndex.value, NumberStyles.Any);
+                            kw.搜索点击指数.Rate = resultObj.content.SearchClickIndex.rate;
+                        }
+
+                        if (!string.IsNullOrEmpty(resultObj.content.SearchIndex.value))
+                        {
+                            c++;
+                            kw.搜索指数.Value = decimal.Parse(resultObj.content.SearchIndex.value, NumberStyles.Any);
+                            kw.搜索指数.Rate = resultObj.content.SearchIndex.rate;
+                        }
+
+                        if (!string.IsNullOrEmpty(resultObj.content.OrdAmtIndex.value))
+                        {
+                            c++;
+                            kw.成交金额指数.Value = decimal.Parse(resultObj.content.OrdAmtIndex.value, NumberStyles.Any);
+                            kw.成交金额指数.Rate = resultObj.content.OrdAmtIndex.rate;
+                        }
+
+                        if (!string.IsNullOrEmpty(resultObj.content.OrdNumIndex.value))
+                        {
+                            c++;
+                            kw.成交单量指数.Value = decimal.Parse(resultObj.content.OrdNumIndex.value, NumberStyles.Any);
+                            kw.成交单量指数.Rate = resultObj.content.OrdNumIndex.rate;
+                        }
+
+                        if (!string.IsNullOrEmpty(resultObj.content.ConvertRate.value))
+                        {
+                            c++;
+                            kw.成交转化率.Value = decimal.Parse(resultObj.content.ConvertRate.value, NumberStyles.Any);
+                            kw.成交转化率.Rate = resultObj.content.ConvertRate.rate;
+                        }
+
+                        if (!string.IsNullOrEmpty(resultObj.content.ClickRate.value))
+                        {
+                            c++;
+                            kw.点击率.Value = decimal.Parse(resultObj.content.ClickRate.value, NumberStyles.Any);
+                            kw.点击率.Rate = resultObj.content.ClickRate.rate;
+                        }
+
+                        if (!string.IsNullOrEmpty(resultObj.content.CommodityNumber.value))
+                        {
+                            c++;
+                            kw.全网商品数.Value = decimal.Parse(resultObj.content.CommodityNumber.value, NumberStyles.Any);
+                            kw.全网商品数.Rate = resultObj.content.CommodityNumber.rate;
+                        }
+
+                        if (!string.IsNullOrEmpty(resultObj.content.Competition.value))
+                        {
+                            c++;
+                            kw.潜力值.Value = decimal.Parse(resultObj.content.Competition.value, NumberStyles.Any);
+                            kw.潜力值.Rate = resultObj.content.Competition.rate;
+                        }
+
+                        kw.Valid = c > 0;
+                    }
+
+                    i++;
+                    var percent = Convert.ToInt32((decimal)i / list.Count * 100);
+                    Worker.ReportProgress(percent, $"文件：{idxFileName + 1}/{OfdKeyWords.FileNames.Length} {csvFileName}\r\n记录：{i}/{list.Count}");
+                }
+
+                if (e.Cancel)
+                {
+                    e.Result = null;
                     return;
-            }
-
-            var dtNow = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
-            var dtMonthAgo = DateTime.Now.AddDays(-31).ToString("yyyy-MM-dd");
-            var i = 0;
-            foreach (var kw in list)
-            {
-                if (Worker.CancellationPending)
-                {
-                    e.Cancel = true;
-
-                    break;
                 }
 
-                var url = $"https://sz.jd.com/sz/api/industryKeyWord/getKeywordsSummData.ajax?channel=99&date=30{dtNow}&endDate={dtNow}&kw={WebUtility.UrlEncode(kw.Keyword)}&startDate={dtMonthAgo}";
-                frmLogin.WebView.LoadUrlAndWait(url);
-                var strJson = frmLogin.WebView.GetText();
-                var resultObj = JsonConvert.DeserializeObject<ResultModel>(strJson);
-                if (resultObj.message == "success")
-                {
-                    var c = 0;
-                    if (!string.IsNullOrEmpty(resultObj.content.SearchClickIndex.value))
-                    {
-                        c++;
-                        kw.搜索点击指数.Value = decimal.Parse(resultObj.content.SearchClickIndex.value, NumberStyles.Any);
-                        kw.搜索点击指数.Rate = resultObj.content.SearchClickIndex.rate;
-                    }
-
-                    if (!string.IsNullOrEmpty(resultObj.content.SearchIndex.value))
-                    {
-                        c++;
-                        kw.搜索指数.Value = decimal.Parse(resultObj.content.SearchIndex.value, NumberStyles.Any);
-                        kw.搜索指数.Rate = resultObj.content.SearchIndex.rate;
-                    }
-
-                    if (!string.IsNullOrEmpty(resultObj.content.OrdAmtIndex.value))
-                    {
-                        c++;
-                        kw.成交金额指数.Value = decimal.Parse(resultObj.content.OrdAmtIndex.value, NumberStyles.Any);
-                        kw.成交金额指数.Rate = resultObj.content.OrdAmtIndex.rate;
-                    }
-
-                    if (!string.IsNullOrEmpty(resultObj.content.OrdNumIndex.value))
-                    {
-                        c++;
-                        kw.成交单量指数.Value = decimal.Parse(resultObj.content.OrdNumIndex.value, NumberStyles.Any);
-                        kw.成交单量指数.Rate = resultObj.content.OrdNumIndex.rate;
-                    }
-
-                    if (!string.IsNullOrEmpty(resultObj.content.ConvertRate.value))
-                    {
-                        c++;
-                        kw.成交转化率.Value = decimal.Parse(resultObj.content.ConvertRate.value, NumberStyles.Any);
-                        kw.成交转化率.Rate = resultObj.content.ConvertRate.rate;
-                    }
-
-                    if (!string.IsNullOrEmpty(resultObj.content.ClickRate.value))
-                    {
-                        c++;
-                        kw.点击率.Value = decimal.Parse(resultObj.content.ClickRate.value, NumberStyles.Any);
-                        kw.点击率.Rate = resultObj.content.ClickRate.rate;
-                    }
-
-                    if (!string.IsNullOrEmpty(resultObj.content.CommodityNumber.value))
-                    {
-                        c++;
-                        kw.全网商品数.Value = decimal.Parse(resultObj.content.CommodityNumber.value, NumberStyles.Any);
-                        kw.全网商品数.Rate = resultObj.content.CommodityNumber.rate;
-                    }
-
-                    if (!string.IsNullOrEmpty(resultObj.content.Competition.value))
-                    {
-                        c++;
-                        kw.潜力值.Value = decimal.Parse(resultObj.content.Competition.value, NumberStyles.Any);
-                        kw.潜力值.Rate = resultObj.content.Competition.rate;
-                    }
-
-                    kw.Valid = c > 0;
-                }
-
-                i++;
-                var percent = Convert.ToInt32((decimal)i / list.Count * 100);
-                Worker.ReportProgress(percent, $"进度：{i}/{list.Count}  {percent}%");
+                //frmLogin.WebView.LoadUrlAndWait("https://sz.jd.com/sz/api/industryKeyWord/getKeywordsSummData.ajax?channel=99&date=302019-10-28&endDate=2019-10-28&kw=%25E6%25B4%2597%25E6%2589%258B%25E6%25B6%25B2%2520%25E5%25A4%25A7%25E6%25A1%25B6&startDate=2019-09-29");
+                //MessageBox.Show(frmLogin.WebView.GetText());
+                var fileName = $"{Path.GetFileNameWithoutExtension(csvFileName)}_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xlsx";
+                WriteExcel(list, fileName);
+                Worker.ReportProgress(100, $"完成");
             }
 
-            if (e.Cancel)
-            {
-                e.Result = null;
-                return;
-            }
-
-            //frmLogin.WebView.LoadUrlAndWait("https://sz.jd.com/sz/api/industryKeyWord/getKeywordsSummData.ajax?channel=99&date=302019-10-28&endDate=2019-10-28&kw=%25E6%25B4%2597%25E6%2589%258B%25E6%25B6%25B2%2520%25E5%25A4%25A7%25E6%25A1%25B6&startDate=2019-09-29");
-            //MessageBox.Show(frmLogin.WebView.GetText());
-            var fileName = $"{Path.GetFileNameWithoutExtension(this.LblSelectedFile.Text)}_{DateTime.Now.ToString("yyyyMMddHHmmss")}.xlsx";
-            WriteExcel(list, fileName);
-            e.Result = fileName;
-            Worker.ReportProgress(100, $"完成, 成功：{list.Count(m => m.Valid)}，失败：{list.Count(m => !m.Valid)}，总共：{list.Count}");
+            e.Result = string.Empty;
         }
 
         private void FormController_FormClosing(object sender, FormClosingEventArgs e)
@@ -187,7 +191,7 @@ namespace 京东商智行业关键词查询
         {
             if (OfdKeyWords.ShowDialog() == DialogResult.OK)
             {
-                this.LblSelectedFile.Text = OfdKeyWords.FileName;
+                this.LblSelectedFile.Text = string.Join("\r\n", OfdKeyWords.FileNames);
             }
         }
 
