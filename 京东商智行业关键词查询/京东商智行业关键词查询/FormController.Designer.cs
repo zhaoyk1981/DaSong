@@ -89,16 +89,18 @@
             // 
             // FormController
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1874, 1255);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(774, 552);
             this.Controls.Add(this.LblPercent);
             this.Controls.Add(this.LblSelectedFile);
             this.Controls.Add(this.BtnChooseFile);
             this.Controls.Add(this.BtnSearch);
             this.Controls.Add(this.BtnLogin);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FormController";
-            this.Text = "FormController";
+            this.Text = "京东商智 行业关键词查询";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormController_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
