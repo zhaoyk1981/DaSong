@@ -103,72 +103,74 @@ namespace 京东商智行业关键词查询
                         break;
                     }
 
-                    var url = $"https://sz.jd.com/sz/api/industryKeyWord/getKeywordsSummData.ajax?channel=99&date=30{dtNow}&endDate={dtNow}&kw={UrlEncode(kw.Keyword)}&startDate={dtMonthAgo}";
-                    frmLogin.WebView.LoadUrlAndWait(url);
-                    var strJson = frmLogin.WebView.GetText();
-                    var resultObj = JsonConvert.DeserializeObject<ResultModel>(strJson);
-                    if (resultObj.message == "success" || resultObj.message == "success：上期数据为空")
+                    if (!string.IsNullOrEmpty(kw.Keyword))
                     {
-                        var c = 0;
-                        if (!string.IsNullOrEmpty(resultObj.content.SearchClickIndex.value))
+                        var url = $"https://sz.jd.com/sz/api/industryKeyWord/getKeywordsSummData.ajax?channel=99&date=30{dtNow}&endDate={dtNow}&kw={UrlEncode(kw.Keyword)}&startDate={dtMonthAgo}";
+                        frmLogin.WebView.LoadUrlAndWait(url);
+                        var strJson = frmLogin.WebView.GetText();
+                        var resultObj = JsonConvert.DeserializeObject<ResultModel>(strJson);
+                        if (resultObj.message == "success" || resultObj.message == "success：上期数据为空")
                         {
-                            c++;
-                            kw.搜索点击指数.Value = decimal.Parse(resultObj.content.SearchClickIndex.value, NumberStyles.Any);
-                            kw.搜索点击指数.Rate = resultObj.content.SearchClickIndex.rate;
-                        }
+                            var c = 0;
+                            if (!string.IsNullOrEmpty(resultObj.content.SearchClickIndex.value))
+                            {
+                                c++;
+                                kw.搜索点击指数.Value = decimal.Parse(resultObj.content.SearchClickIndex.value, NumberStyles.Any);
+                                kw.搜索点击指数.Rate = resultObj.content.SearchClickIndex.rate;
+                            }
 
-                        if (!string.IsNullOrEmpty(resultObj.content.SearchIndex.value))
-                        {
-                            c++;
-                            kw.搜索指数.Value = decimal.Parse(resultObj.content.SearchIndex.value, NumberStyles.Any);
-                            kw.搜索指数.Rate = resultObj.content.SearchIndex.rate;
-                        }
+                            if (!string.IsNullOrEmpty(resultObj.content.SearchIndex.value))
+                            {
+                                c++;
+                                kw.搜索指数.Value = decimal.Parse(resultObj.content.SearchIndex.value, NumberStyles.Any);
+                                kw.搜索指数.Rate = resultObj.content.SearchIndex.rate;
+                            }
 
-                        if (!string.IsNullOrEmpty(resultObj.content.OrdAmtIndex.value))
-                        {
-                            c++;
-                            kw.成交金额指数.Value = decimal.Parse(resultObj.content.OrdAmtIndex.value, NumberStyles.Any);
-                            kw.成交金额指数.Rate = resultObj.content.OrdAmtIndex.rate;
-                        }
+                            if (!string.IsNullOrEmpty(resultObj.content.OrdAmtIndex.value))
+                            {
+                                c++;
+                                kw.成交金额指数.Value = decimal.Parse(resultObj.content.OrdAmtIndex.value, NumberStyles.Any);
+                                kw.成交金额指数.Rate = resultObj.content.OrdAmtIndex.rate;
+                            }
 
-                        if (!string.IsNullOrEmpty(resultObj.content.OrdNumIndex.value))
-                        {
-                            c++;
-                            kw.成交单量指数.Value = decimal.Parse(resultObj.content.OrdNumIndex.value, NumberStyles.Any);
-                            kw.成交单量指数.Rate = resultObj.content.OrdNumIndex.rate;
-                        }
+                            if (!string.IsNullOrEmpty(resultObj.content.OrdNumIndex.value))
+                            {
+                                c++;
+                                kw.成交单量指数.Value = decimal.Parse(resultObj.content.OrdNumIndex.value, NumberStyles.Any);
+                                kw.成交单量指数.Rate = resultObj.content.OrdNumIndex.rate;
+                            }
 
-                        if (!string.IsNullOrEmpty(resultObj.content.ConvertRate.value))
-                        {
-                            c++;
-                            kw.成交转化率.Value = decimal.Parse(resultObj.content.ConvertRate.value, NumberStyles.Any);
-                            kw.成交转化率.Rate = resultObj.content.ConvertRate.rate;
-                        }
+                            if (!string.IsNullOrEmpty(resultObj.content.ConvertRate.value))
+                            {
+                                c++;
+                                kw.成交转化率.Value = decimal.Parse(resultObj.content.ConvertRate.value, NumberStyles.Any);
+                                kw.成交转化率.Rate = resultObj.content.ConvertRate.rate;
+                            }
 
-                        if (!string.IsNullOrEmpty(resultObj.content.ClickRate.value))
-                        {
-                            c++;
-                            kw.点击率.Value = decimal.Parse(resultObj.content.ClickRate.value, NumberStyles.Any);
-                            kw.点击率.Rate = resultObj.content.ClickRate.rate;
-                        }
+                            if (!string.IsNullOrEmpty(resultObj.content.ClickRate.value))
+                            {
+                                c++;
+                                kw.点击率.Value = decimal.Parse(resultObj.content.ClickRate.value, NumberStyles.Any);
+                                kw.点击率.Rate = resultObj.content.ClickRate.rate;
+                            }
 
-                        if (!string.IsNullOrEmpty(resultObj.content.CommodityNumber.value))
-                        {
-                            c++;
-                            kw.全网商品数.Value = decimal.Parse(resultObj.content.CommodityNumber.value, NumberStyles.Any);
-                            kw.全网商品数.Rate = resultObj.content.CommodityNumber.rate;
-                        }
+                            if (!string.IsNullOrEmpty(resultObj.content.CommodityNumber.value))
+                            {
+                                c++;
+                                kw.全网商品数.Value = decimal.Parse(resultObj.content.CommodityNumber.value, NumberStyles.Any);
+                                kw.全网商品数.Rate = resultObj.content.CommodityNumber.rate;
+                            }
 
-                        if (!string.IsNullOrEmpty(resultObj.content.Competition.value))
-                        {
-                            c++;
-                            kw.潜力值.Value = decimal.Parse(resultObj.content.Competition.value, NumberStyles.Any);
-                            kw.潜力值.Rate = resultObj.content.Competition.rate;
-                        }
+                            if (!string.IsNullOrEmpty(resultObj.content.Competition.value))
+                            {
+                                c++;
+                                kw.潜力值.Value = decimal.Parse(resultObj.content.Competition.value, NumberStyles.Any);
+                                kw.潜力值.Rate = resultObj.content.Competition.rate;
+                            }
 
-                        kw.Valid = c > 0;
+                            kw.Valid = c > 0;
+                        }
                     }
-
                     i++;
                     var percent = Convert.ToInt32((decimal)i / list.Count * 100);
                     Worker.ReportProgress(percent, $"文件：{idxFileName + 1}/{OfdKeyWords.FileNames.Length} {csvFileName}\r\n记录：{i}/{list.Count}");
