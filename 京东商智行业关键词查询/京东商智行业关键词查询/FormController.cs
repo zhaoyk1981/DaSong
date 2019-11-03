@@ -37,6 +37,7 @@ namespace 京东商智行业关键词查询
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
+            this.frmLogin.Hide();
             this.BtnLogin.Enabled = this.BtnChooseFile.Enabled = this.BtnSearch.Enabled = false;
             Worker = new BackgroundWorker();
             Worker.WorkerSupportsCancellation = true;
@@ -92,7 +93,7 @@ namespace 京东商智行业关键词查询
                         break;
                     }
 
-                    var url = $"https://sz.jd.com/sz/api/industryKeyWord/getKeywordsSummData.ajax?channel=99&date=30{dtNow}&endDate={dtNow}&kw={WebUtility.UrlEncode(kw.Keyword)}&startDate={dtMonthAgo}";
+                    var url = $"https://sz.jd.com/sz/api/industryKeyWord/getKeywordsSummData.ajax?channel=99&date=30{dtNow}&endDate={dtNow}&kw={WebUtility.UrlEncode(kw.Keyword).Replace("%", "%25")}&startDate={dtMonthAgo}";
                     frmLogin.WebView.LoadUrlAndWait(url);
                     var strJson = frmLogin.WebView.GetText();
                     var resultObj = JsonConvert.DeserializeObject<ResultModel>(strJson);
