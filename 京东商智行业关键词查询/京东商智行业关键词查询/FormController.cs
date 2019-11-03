@@ -62,6 +62,16 @@ namespace 京东商智行业关键词查询
             }
         }
 
+        private string UrlEncode(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return string.Empty;
+            }
+
+            return WebUtility.UrlEncode(WebUtility.UrlEncode(str));
+        }
+
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             for (var idxFileName = 0; idxFileName < this.OfdKeyWords.FileNames.Length; idxFileName++)
@@ -93,7 +103,7 @@ namespace 京东商智行业关键词查询
                         break;
                     }
 
-                    var url = $"https://sz.jd.com/sz/api/industryKeyWord/getKeywordsSummData.ajax?channel=99&date=30{dtNow}&endDate={dtNow}&kw={WebUtility.UrlEncode(kw.Keyword).Replace("%", "%25")}&startDate={dtMonthAgo}";
+                    var url = $"https://sz.jd.com/sz/api/industryKeyWord/getKeywordsSummData.ajax?channel=99&date=30{dtNow}&endDate={dtNow}&kw={UrlEncode(kw.Keyword)}&startDate={dtMonthAgo}";
                     frmLogin.WebView.LoadUrlAndWait(url);
                     var strJson = frmLogin.WebView.GetText();
                     var resultObj = JsonConvert.DeserializeObject<ResultModel>(strJson);
