@@ -46,7 +46,7 @@
             // BtnAddGame
             // 
             this.BtnAddGame.Location = new System.Drawing.Point(664, 104);
-            this.BtnAddGame.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnAddGame.Margin = new System.Windows.Forms.Padding(4);
             this.BtnAddGame.Name = "BtnAddGame";
             this.BtnAddGame.Size = new System.Drawing.Size(154, 34);
             this.BtnAddGame.TabIndex = 30;
@@ -173,7 +173,7 @@
             this.Controls.Add(this.BtnAddGame);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

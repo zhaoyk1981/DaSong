@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading;
 using VRGameConsole.Models;
 using System.Text;
+using System.Runtime.InteropServices;
 
 namespace VRGameConsole
 {
@@ -204,7 +205,7 @@ namespace VRGameConsole
             }
         }
 
-        public void KillProcess(string processName)
+        public bool KillProcess(string processName)
         {
             var retry = 3;
             while (true)
@@ -214,7 +215,7 @@ namespace VRGameConsole
                     var output = this.Execute($"TASKKILL /F /IM \"{processName}\" /T", 10);
                     if (!output.Contains("成功") && !output.Contains("SUCCESS"))
                     {
-                        break;
+                        return true;
                     }
                 }
                 catch
@@ -228,7 +229,13 @@ namespace VRGameConsole
                     this.Sleep(1);
                 }
             }
+
+            LockWorkStation();
+            return false;
         }
+
+        [DllImport("User32.DLL")]
+        public static extern void LockWorkStation();
 
         /// <summary>
         /// 执行DOS命令，返回DOS命令的输出
