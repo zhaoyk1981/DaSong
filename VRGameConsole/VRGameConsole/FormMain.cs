@@ -84,6 +84,20 @@ namespace VRGameConsole
             {
                 this.Model.Worker.RunWorkerAsync();
             }
+
+            var vbiz = new ValidationBiz();
+            if (!vbiz.Validate(true))
+            {
+                var vform = new FormValidation();
+                vform.FormMain = this;
+                vform.ShowDialog(this);
+                //this.BtnRunGame.Visible = false;
+            }
+        }
+
+        public void SetRunGameVisible()
+        {
+            this.BtnRunGame.Visible = true;
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
@@ -251,6 +265,13 @@ namespace VRGameConsole
         {
             this.Controller.StopAllRunning();
             this.Controller.ExportExcel();
+        }
+
+        private void btnRegKey_Click(object sender, EventArgs e)
+        {
+            var vform = new FormValidation();
+            vform.FormMain = this;
+            vform.ShowDialog(this);
         }
     }
 }

@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using VRGameConsole.Models;
+using System.Text;
 
 namespace VRGameConsole
 {
@@ -384,5 +385,12 @@ namespace VRGameConsole
                 .ToArray();
             return array;
         }
+
+        public bool IsValid()
+        {
+            return true;
+        }
+
+        
     }
 }
