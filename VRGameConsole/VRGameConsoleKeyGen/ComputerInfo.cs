@@ -15,5 +15,7 @@ namespace VRGameConsoleKeyGen
         public long DateEnd { get; set; }
 
         public long Passed { get; set; }
+
+        public string RandomKey { get; set; }
     }
 }

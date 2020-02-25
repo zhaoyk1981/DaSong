@@ -15,5 +15,7 @@ namespace VRGameConsole
         public long DateEnd { get; set; }
 
         public long Passed { get; set; }
+
+        public string RandomKey { get; set; } = Guid.NewGuid().ToString();
     }
 }

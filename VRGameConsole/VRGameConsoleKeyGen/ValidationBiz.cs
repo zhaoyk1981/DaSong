@@ -91,7 +91,7 @@ namespace VRGameConsoleKeyGen
             ComputerInfo model = null;
             try
             {
-                model = JsonConvert.DeserializeObject<ComputerInfo>(DesDecrypt(str));
+                model = JsonConvert.DeserializeObject<ComputerInfo>(DesDecrypt(str, cpuId));
                 if (model.CpuId != cpuId || model.DateStart > DateTime.UtcNow.Ticks || model.DateEnd < DateTime.UtcNow.Ticks || GetLastAccessTime() > DateTime.UtcNow.Ticks || model.Passed > DateTime.UtcNow.Ticks)
                 {
                     Delete();
@@ -127,7 +127,7 @@ namespace VRGameConsoleKeyGen
         /// <param name="strText">需被加密的字符串</param> 
         /// <param name="strEncrKey">密钥</param> 
         /// <returns></returns> 
-        public static string DesEncrypt(string strText, string strEncrKey = "A~GJL&RY")
+        public static string DesEncrypt(string strText, string strEncrKey)
         {
             try
             {
@@ -154,7 +154,7 @@ namespace VRGameConsoleKeyGen
         /// <param name="strText">需被解密的字符串</param> 
         /// <param name="sDecrKey">密钥</param> 
         /// <returns></returns> 
-        public static string DesDecrypt(string strText, string sDecrKey = "A~GJL&RY")
+        public static string DesDecrypt(string strText, string sDecrKey)
         {
             try
             {
@@ -200,8 +200,9 @@ namespace VRGameConsoleKeyGen
             model.CpuId = GetHash(cpuId);
             model.DateStart = start;
             model.DateEnd = end;
+            model.RandomKey = Guid.NewGuid().ToString();
             var str = JsonConvert.SerializeObject(model);
-            str = DesEncrypt(str);
+            str = DesEncrypt(str, model.CpuId);
             return str;
         }
     }
