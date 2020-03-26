@@ -298,6 +298,8 @@ namespace DianBaTaoBao
                         }
 
                         indexKeyword++;
+
+                        System.Threading.Thread.Sleep(1000);
                     }
 
                     indexFile++;
