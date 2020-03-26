@@ -103,7 +103,7 @@ namespace DianBaTaoBao.Biz
 
         public void QuitDriver()
         {
-            if (this.WebDriver == null)
+            if (this._WebDriver == null)
             {
                 return;
             }

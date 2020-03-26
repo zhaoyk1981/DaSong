@@ -54,7 +54,7 @@ namespace DianBaTaoBao
         {
             get
             {
-                return int.Parse(ConfigurationManager.AppSettings["Top"]);
+                return Math.Min(int.Parse(ConfigurationManager.AppSettings["Top"]), 20);
             }
         }
 
@@ -106,7 +106,7 @@ namespace DianBaTaoBao
                 }
             }
 
-            var fn = $"淘宝_电霸_关键词_月销量 {DateTime.Now.ToString("yyyyMMdd_HHmm")}.xlsx";
+            var fn = $"拼多多数据 {DateTime.Now.ToString("yyyyMMdd_HHmm")}.xlsx";
             new ExcelLogic().WriteToExcel(TaobaoResult, fn);
             System.Diagnostics.Process.Start("Explorer", $"/select,{Path.Combine(Environment.CurrentDirectory, fn)}");
 
