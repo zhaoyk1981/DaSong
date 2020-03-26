@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -49,6 +50,14 @@ namespace DianBaTaoBao
             this.TxtTaobaoProgress.Text = e.UserState as string;
         }
 
+        private int TopRows
+        {
+            get
+            {
+                return int.Parse(ConfigurationManager.AppSettings["Top"]);
+            }
+        }
+
         private void WorkerDianba_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled)
@@ -79,7 +88,30 @@ namespace DianBaTaoBao
 
         private void Merge()
         {
+            foreach (var kf in TaobaoResult)
+            {
+                var kfDianba = DianbaResult[kf.Key];
+                foreach (var k in kf.Value)
+                {
+                    var kd = kfDianba.Single(m => m.Keyword == k.Keyword);
+                    kd.List = kd.List.OrderByDescending(m => m.DispDianba月销量).ToList();
+                    for (var i = 0; i < k.List.Count; i++)
+                    {
+                        k.List[i].MetaDianba单价 = kd.List[i].MetaDianba单价;
+                        k.List[i].MetaDianba周销量 = kd.List[i].MetaDianba周销量;
+                        k.List[i].MetaDianba总销量 = kd.List[i].MetaDianba总销量;
+                        k.List[i].MetaDianba日销量 = kd.List[i].MetaDianba日销量;
+                        k.List[i].MetaDianba月销量 = kd.List[i].MetaDianba月销量;
+                    }
+                }
+            }
 
+            var fn = $"淘宝_电霸_关键词_月销量 {DateTime.Now.ToString("yyyyMMdd_HHmm")}.xlsx";
+            new ExcelLogic().WriteToExcel(TaobaoResult, fn);
+            System.Diagnostics.Process.Start("Explorer", $"/select,{Path.Combine(Environment.CurrentDirectory, fn)}");
+
+            this.TxtKeywordsInfo.Text = "完成\r\n\r\n" + this.TxtKeywordsInfo.Text;
+            this.KeywordsDict.Clear();
         }
 
         private void RemoveResult()
@@ -102,6 +134,7 @@ namespace DianBaTaoBao
                 {
                     if (me.CancellationPending)
                     {
+                        e.Cancel = true;
                         return;
                     }
 
@@ -114,10 +147,12 @@ namespace DianBaTaoBao
                     {
                         if (me.CancellationPending)
                         {
+                            e.Cancel = true;
                             return;
                         }
 
                         var result = new ResultModel();
+                        result.Keyword = searchItem.Keyword;
                         resultList.Add(result);
 
                         var txtSearch = SeleniumHelper.FindWebElement("input[name='search']");
@@ -128,26 +163,57 @@ namespace DianBaTaoBao
                         btnSearch.Click();
                         SeleniumHelper.Sleep(0.3);
                         SeleniumHelper.WaitWebElementHide("#loader");
-                        var rows = SeleniumHelper.FindWebElements("#dash-add2 > tr");
-                        var index = 0;
-                        foreach (var row in rows)
+
+                        #region 方案1
+                        //var rows = SeleniumHelper.FindWebElements("#dash-add2 > tr");
+                        //var index = 0;
+                        //foreach (var row in rows)
+                        //{
+                        //    if (me.CancellationPending)
+                        //    {
+                        //        e.Cancel = true;
+                        //        return;
+                        //    }
+
+                        //    me.ReportProgress(0, $"文件：{keywordsFile.Key} {indexFile + 1} / {KeywordsDict.Count} | 关键词: {searchItem.Keyword} {indexKeyword + 1} / {list.Count} | 行：{index + 1} / {rows.Count}");
+                        //    var resultItem = new ResultItemModel();
+                        //    result.List.Add(resultItem);
+
+                        //    resultItem.MetaDianba日销量 = SeleniumHelper.FindWebElement(row, "td:nth-of-type(5) > span")?.Text?.Trim();
+                        //    resultItem.MetaDianba周销量 = SeleniumHelper.FindWebElement(row, "td:nth-of-type(6)")?.Text?.Trim();
+                        //    resultItem.MetaDianba月销量 = SeleniumHelper.FindWebElement(row, "td:nth-of-type(7)")?.Text?.Trim();
+                        //    resultItem.MetaDianba总销量 = SeleniumHelper.FindWebElement(row, "td:nth-of-type(8)")?.Text?.Trim();
+                        //    resultItem.MetaDianba单价 = SeleniumHelper.FindWebElement(row, "td:nth-of-type(9)")?.Text?.Trim();
+                        //    index++;
+                        //}
+                        #endregion
+
+                        #region 方案2
+                        var cells5 = SeleniumHelper.FindWebElements("#dash-add2 > tr > td:nth-of-type(5) > span");
+                        var cells6 = SeleniumHelper.FindWebElements("#dash-add2 > tr > td:nth-of-type(6)");
+                        var cells7 = SeleniumHelper.FindWebElements("#dash-add2 > tr > td:nth-of-type(7)");
+                        var cells8 = SeleniumHelper.FindWebElements("#dash-add2 > tr > td:nth-of-type(8)");
+                        var cells9 = SeleniumHelper.FindWebElements("#dash-add2 > tr > td:nth-of-type(9)");
+                        for (var index = 0; index < cells5.Count; index++)
                         {
                             if (me.CancellationPending)
                             {
+                                e.Cancel = true;
                                 return;
                             }
 
-                            me.ReportProgress(0, $"文件：{keywordsFile.Key} {indexFile + 1} / {KeywordsDict.Count} | 关键词: {searchItem.Keyword} {indexKeyword + 1} / {list.Count} | 行：{index + 1} / {rows.Count}");
+                            me.ReportProgress(0, $"文件：{keywordsFile.Key} {indexFile + 1} / {KeywordsDict.Count} | 关键词: {searchItem.Keyword} {indexKeyword + 1} / {list.Count} | 行：{index + 1} / {cells5.Count}");
                             var resultItem = new ResultItemModel();
                             result.List.Add(resultItem);
 
-                            resultItem.MetaDianba日销量 = SeleniumHelper.FindWebElement(row, "td:nth-of-type(5) > span")?.Text?.Trim();
-                            resultItem.MetaDianba周销量 = SeleniumHelper.FindWebElement(row, "td:nth-of-type(6) > span")?.Text?.Trim();
-                            resultItem.MetaDianba月销量 = SeleniumHelper.FindWebElement(row, "td:nth-of-type(7) > span")?.Text?.Trim();
-                            resultItem.MetaDianba总销量 = SeleniumHelper.FindWebElement(row, "td:nth-of-type(8) > span")?.Text?.Trim();
-                            resultItem.MetaDianba单价 = SeleniumHelper.FindWebElement(row, "td:nth-of-type(9) > span")?.Text?.Trim();
-                            index++;
+                            resultItem.MetaDianba日销量 = cells5[index].Text?.Trim();
+                            resultItem.MetaDianba周销量 = cells6[index].Text?.Trim();
+                            resultItem.MetaDianba月销量 = cells7[index].Text?.Trim();
+                            resultItem.MetaDianba总销量 = cells8[index].Text?.Trim();
+                            resultItem.MetaDianba单价 = cells9[index].Text?.Trim();
+
                         }
+                        #endregion
 
                         indexKeyword++;
                     }
@@ -182,6 +248,7 @@ namespace DianBaTaoBao
                 {
                     if (me.CancellationPending)
                     {
+                        e.Cancel = true;
                         return;
                     }
 
@@ -194,10 +261,12 @@ namespace DianBaTaoBao
                     {
                         if (me.CancellationPending)
                         {
+                            e.Cancel = true;
                             return;
                         }
 
                         var result = new ResultModel();
+                        result.Keyword = searchItem.Keyword;
                         resultList.Add(result);
 
                         this.FormTaobao.WebView.LoadUrlAndWait($"https://s.taobao.com/search?q={HttpUtility.UrlEncode(searchItem.Keyword)}&imgfile=&commend=all&search_type=item&sourceId=tb.index&ie=utf8&sort=sale-desc");
@@ -206,10 +275,12 @@ namespace DianBaTaoBao
                         var doc = new HtmlAgilityPack.HtmlDocument();
                         doc.LoadHtml(strHtml);
                         var nodes = doc.DocumentNode.SelectNodes("//div[@data-category='auctions']");
+                        var index = 0;
                         foreach (var node in nodes)
                         {
                             if (me.CancellationPending)
                             {
+                                e.Cancel = true;
                                 return;
                             }
 
@@ -219,6 +290,11 @@ namespace DianBaTaoBao
 
                             resultItem.MetaTaobao单价 = (node.SelectSingleNode("descendant::div[@class='price g_price g_price-highlight']/strong")?.InnerText ?? string.Empty).Trim();
                             resultItem.MetaTaobao月销量 = (node.SelectSingleNode("descendant::div[@class='deal-cnt']")?.InnerText ?? string.Empty).Trim();
+                            index++;
+                            if (index >= TopRows && TopRows > 0)
+                            {
+                                break;
+                            }
                         }
 
                         indexKeyword++;
@@ -253,6 +329,12 @@ namespace DianBaTaoBao
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
+            if (this.KeywordsDict.Count == 0)
+            {
+                MessageBox.Show("请选择关键词文件。");
+                return;
+            }
+
             this.WorkerTaobao.RunWorkerAsync();
             this.WorkerDianba.RunWorkerAsync();
         }
@@ -270,6 +352,8 @@ namespace DianBaTaoBao
                     {
                         var keywords = File.ReadAllLines(fn, FileEncoding.DetectFileEncoding(fn, Encoding.Default))
                             .Where(m => !string.IsNullOrWhiteSpace(m) && !m.StartsWith("//"))
+                            .Select(m => m.Trim())
+                            .Distinct()
                             .Select(m => new KeywordModel() { Keyword = m })
                             .ToList();
                         var name = Path.GetFileNameWithoutExtension(fn);

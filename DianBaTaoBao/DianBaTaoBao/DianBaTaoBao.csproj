@@ -64,6 +64,7 @@
       <HintPath>..\packages\NPOI.2.4.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -86,6 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Biz\ExcelLogic.cs" />
     <Compile Include="Biz\SeleniumHelper.cs" />
     <Compile Include="FileEncoding.cs" />
     <Compile Include="FormMain.cs">

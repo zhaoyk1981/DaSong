@@ -24,6 +24,38 @@ namespace DianBaTaoBao.Models
             return null;
         }
 
+        public static int? ToInt2(string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                return null;
+            }
+
+            var s = str.Replace(",", "")
+                .Replace("人收货", "")
+                .Replace("+", "")
+                .Replace(" ", "");
+            var x = 1;
+            if (s.IndexOf("万") >= 0)
+            {
+                x = 10000;
+            }
+            else if (s.IndexOf("千") >= 0)
+            {
+                x = 1000;
+            }
+
+            s = s.Replace("万", "")
+                .Replace("千", "");
+
+            if (decimal.TryParse(s, out decimal val))
+            {
+                return Convert.ToInt32(val * x);
+            }
+
+            return null;
+        }
+
         public static decimal? ToDecimal(string str)
         {
             if (string.IsNullOrWhiteSpace(str))
@@ -40,24 +72,24 @@ namespace DianBaTaoBao.Models
             return null;
         }
 
-        public static string ToDispStr(int? source)
+        public static object ToDispStr(int? source)
         {
             if (!source.HasValue)
             {
                 return "N/A";
             }
 
-            return source.ToString();
+            return source.Value;
         }
 
-        public static string ToDispStr(decimal? source)
+        public static object ToDispStr(decimal? source)
         {
             if (!source.HasValue)
             {
                 return "N/A";
             }
 
-            return source.ToString();
+            return source.Value;
         }
 
         public static string ToDispStr(string source)
