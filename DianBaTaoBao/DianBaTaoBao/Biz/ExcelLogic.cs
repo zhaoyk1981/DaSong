@@ -67,13 +67,14 @@ namespace DianBaTaoBao.Biz
             SetCellText(row, "序号", ref colIndex);
             SetCellText(row, "淘宝月销量", ref colIndex);
             SetCellText(row, "淘宝价格", ref colIndex);
-            SetCellText(row, "", ref colIndex);
+            SetCellText(row, "淘宝链接", ref colIndex);
             SetCellText(row, "拼多多月销量", ref colIndex);
             SetCellText(row, "近一天销量", ref colIndex);
             SetCellText(row, "近一周销量", ref colIndex);
             SetCellText(row, "总销量", ref colIndex);
             SetCellText(row, "售价", ref colIndex);
             SetCellText(row, "差额", ref colIndex);
+            SetCellText(row, "拼多多链接", ref colIndex);
         }
 
         private void WriteResultItem(IRow row, ResultItemModel resultItem)
@@ -82,13 +83,14 @@ namespace DianBaTaoBao.Biz
             SetCellContent(row, resultItem.Sn, ref colIndex);
             SetCellContent(row, resultItem.IntTaobao月销量, ref colIndex);
             SetCellContent(row, resultItem.DecTaobao单价, ref colIndex);
-            SetEmptyCell(row, ref colIndex);
+            SetCellText(row, resultItem.MetaTaobaoUrl, ref colIndex);
             SetCellContent(row, resultItem.IntDianba月销量, ref colIndex);
             SetCellContent(row, resultItem.IntDianba日销量, ref colIndex);
             SetCellContent(row, resultItem.IntDianba周销量, ref colIndex);
             SetCellContent(row, resultItem.IntDianba总销量, ref colIndex);
             SetCellContent(row, resultItem.MetaDianba单价, ref colIndex);
             SetCellContent(row, resultItem.月销量差额, ref colIndex);
+            SetCellText(row, resultItem.MetaDianba商品Url, ref colIndex);
         }
 
         private void WriteResultAvg(IRow row, ResultModel result)
@@ -102,6 +104,8 @@ namespace DianBaTaoBao.Biz
             SetCellContent(row, result.AvgDb日销量, ref colIndex);
             SetCellContent(row, result.AvgDb周销量, ref colIndex);
             SetCellContent(row, result.AvgDb总销量, ref colIndex);
+            SetEmptyCell(row, ref colIndex);
+            SetCellContent(row, result.Avg月销量差额, ref colIndex);
         }
 
         private void SetCellContent(IRow row, int? content, ref int colIndex)

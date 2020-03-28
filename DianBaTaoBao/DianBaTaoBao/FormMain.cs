@@ -97,11 +97,17 @@ namespace DianBaTaoBao
                     kd.List = kd.List.OrderByDescending(m => m.DispDianba月销量).ToList();
                     for (var i = 0; i < k.List.Count; i++)
                     {
+                        if (kd.List.Count <= i)
+                        {
+                            break;
+                        }
+
                         k.List[i].MetaDianba单价 = kd.List[i].MetaDianba单价;
                         k.List[i].MetaDianba周销量 = kd.List[i].MetaDianba周销量;
                         k.List[i].MetaDianba总销量 = kd.List[i].MetaDianba总销量;
                         k.List[i].MetaDianba日销量 = kd.List[i].MetaDianba日销量;
                         k.List[i].MetaDianba月销量 = kd.List[i].MetaDianba月销量;
+                        k.List[i].MetaDianba商品Id = kd.List[i].MetaDianba商品Id;
                     }
                 }
             }
@@ -189,6 +195,7 @@ namespace DianBaTaoBao
                         #endregion
 
                         #region 方案2
+                        var cells3 = SeleniumHelper.FindWebElements("#dash-add2 > tr > td:nth-of-type(3)");
                         var cells5 = SeleniumHelper.FindWebElements("#dash-add2 > tr > td:nth-of-type(5) > span");
                         var cells6 = SeleniumHelper.FindWebElements("#dash-add2 > tr > td:nth-of-type(6)");
                         var cells7 = SeleniumHelper.FindWebElements("#dash-add2 > tr > td:nth-of-type(7)");
@@ -202,9 +209,16 @@ namespace DianBaTaoBao
                                 return;
                             }
 
-                            me.ReportProgress(0, $"文件：{keywordsFile.Key} {indexFile + 1} / {KeywordsDict.Count} | 关键词: {searchItem.Keyword} {indexKeyword + 1} / {list.Count} | 行：{index + 1} / {cells5.Count}");
+                            me.ReportProgress(0, $"文件：{keywordsFile.Key} | {indexFile + 1} / {KeywordsDict.Count} | 关键词: {searchItem.Keyword} {indexKeyword + 1} / {list.Count} | 行：{index + 1} / {cells5.Count}");
                             var resultItem = new ResultItemModel();
                             result.List.Add(resultItem);
+                            var gid = cells3[index].Text?.Trim() ?? string.Empty;
+                            var gidIndex = gid.LastIndexOf(商品Id);
+                            resultItem.MetaDianba商品Id = string.Empty;
+                            if (gidIndex >= 0 && gid.Length >= gidIndex + 商品Id.Length)
+                            {
+                                resultItem.MetaDianba商品Id = gid.Substring(gidIndex + 商品Id.Length);
+                            }
 
                             resultItem.MetaDianba日销量 = cells5[index].Text?.Trim();
                             resultItem.MetaDianba周销量 = cells6[index].Text?.Trim();
@@ -226,6 +240,8 @@ namespace DianBaTaoBao
 
             }
         }
+
+        private const string 商品Id = "商品ID:";
 
         private IDictionary<string, IList<KeywordModel>> KeywordsDict { get; set; } = new Dictionary<string, IList<KeywordModel>>();
 
@@ -275,25 +291,48 @@ namespace DianBaTaoBao
                         var doc = new HtmlAgilityPack.HtmlDocument();
                         doc.LoadHtml(strHtml);
                         var nodes = doc.DocumentNode.SelectNodes("//div[@data-category='auctions']");
-                        var index = 0;
-                        foreach (var node in nodes)
+                        me.ReportProgress(0, $"文件：{keywordsFile.Key} | {indexFile + 1} / {KeywordsDict.Count} | 关键词: {searchItem.Keyword} {indexKeyword + 1} / {list.Count}");
+                        if (nodes == null)
                         {
-                            if (me.CancellationPending)
+                            for (var n = 0; n < TopRows; n++)
                             {
-                                e.Cancel = true;
-                                return;
+                                if (me.CancellationPending)
+                                {
+                                    e.Cancel = true;
+                                    return;
+                                }
+
+                                result.List.Add(new ResultItemModel());
                             }
-
-                            me.ReportProgress(0, $"文件：{keywordsFile.Key} {indexFile + 1} / {KeywordsDict.Count} | 关键词: {searchItem.Keyword} {indexKeyword + 1} / {list.Count}");
-                            var resultItem = new ResultItemModel();
-                            result.List.Add(resultItem);
-
-                            resultItem.MetaTaobao单价 = (node.SelectSingleNode("descendant::div[@class='price g_price g_price-highlight']/strong")?.InnerText ?? string.Empty).Trim();
-                            resultItem.MetaTaobao月销量 = (node.SelectSingleNode("descendant::div[@class='deal-cnt']")?.InnerText ?? string.Empty).Trim();
-                            index++;
-                            if (index >= TopRows && TopRows > 0)
+                        }
+                        else
+                        {
+                            var index = 0;
+                            foreach (var node in nodes)
                             {
-                                break;
+                                if (me.CancellationPending)
+                                {
+                                    e.Cancel = true;
+                                    return;
+                                }
+
+
+                                var resultItem = new ResultItemModel();
+                                result.List.Add(resultItem);
+
+                                resultItem.MetaTaobao单价 = (node.SelectSingleNode("descendant::div[@class='price g_price g_price-highlight']/strong")?.InnerText ?? string.Empty).Trim();
+                                resultItem.MetaTaobao月销量 = (node.SelectSingleNode("descendant::div[@class='deal-cnt']")?.InnerText ?? string.Empty).Trim();
+                                resultItem.MetaTaobaoUrl = (node.SelectSingleNode("descendant::a[@class='J_ClickStat']").Attributes["href"]?.Value ?? string.Empty).Trim();
+                                if (resultItem.MetaTaobaoUrl.StartsWith("//"))
+                                {
+                                    resultItem.MetaTaobaoUrl = "https:" + resultItem.MetaTaobaoUrl;
+                                }
+
+                                index++;
+                                if (index >= TopRows && TopRows > 0)
+                                {
+                                    break;
+                                }
                             }
                         }
 

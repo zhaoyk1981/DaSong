@@ -40,9 +40,9 @@
             // 
             // BtnLogin
             // 
-            this.BtnLogin.Location = new System.Drawing.Point(84, 327);
+            this.BtnLogin.Location = new System.Drawing.Point(61, 108);
             this.BtnLogin.Name = "BtnLogin";
-            this.BtnLogin.Size = new System.Drawing.Size(113, 39);
+            this.BtnLogin.Size = new System.Drawing.Size(136, 39);
             this.BtnLogin.TabIndex = 0;
             this.BtnLogin.Text = "登录";
             this.BtnLogin.UseVisualStyleBackColor = true;
@@ -50,7 +50,7 @@
             // 
             // BtnKeywords
             // 
-            this.BtnKeywords.Location = new System.Drawing.Point(84, 67);
+            this.BtnKeywords.Location = new System.Drawing.Point(61, 12);
             this.BtnKeywords.Name = "BtnKeywords";
             this.BtnKeywords.Size = new System.Drawing.Size(136, 49);
             this.BtnKeywords.TabIndex = 1;
@@ -60,9 +60,9 @@
             // 
             // BtnSearch
             // 
-            this.BtnSearch.Location = new System.Drawing.Point(60, 487);
+            this.BtnSearch.Location = new System.Drawing.Point(61, 506);
             this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new System.Drawing.Size(137, 47);
+            this.BtnSearch.Size = new System.Drawing.Size(136, 47);
             this.BtnSearch.TabIndex = 2;
             this.BtnSearch.Text = "查询";
             this.BtnSearch.UseVisualStyleBackColor = true;
@@ -76,11 +76,11 @@
             // 
             // TxtKeywordsInfo
             // 
-            this.TxtKeywordsInfo.Location = new System.Drawing.Point(327, 12);
+            this.TxtKeywordsInfo.Location = new System.Drawing.Point(315, 12);
             this.TxtKeywordsInfo.Multiline = true;
             this.TxtKeywordsInfo.Name = "TxtKeywordsInfo";
             this.TxtKeywordsInfo.ReadOnly = true;
-            this.TxtKeywordsInfo.Size = new System.Drawing.Size(1291, 440);
+            this.TxtKeywordsInfo.Size = new System.Drawing.Size(1303, 440);
             this.TxtKeywordsInfo.TabIndex = 3;
             // 
             // TxtTaobaoProgress
@@ -101,9 +101,9 @@
             // 
             // BtnCancel
             // 
-            this.BtnCancel.Location = new System.Drawing.Point(84, 634);
+            this.BtnCancel.Location = new System.Drawing.Point(61, 596);
             this.BtnCancel.Name = "BtnCancel";
-            this.BtnCancel.Size = new System.Drawing.Size(113, 41);
+            this.BtnCancel.Size = new System.Drawing.Size(136, 41);
             this.BtnCancel.TabIndex = 6;
             this.BtnCancel.Text = "停止查询";
             this.BtnCancel.UseVisualStyleBackColor = true;
@@ -113,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1630, 1058);
+            this.ClientSize = new System.Drawing.Size(1630, 742);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.TxtDianbaProgress);
             this.Controls.Add(this.TxtTaobaoProgress);
@@ -122,7 +122,7 @@
             this.Controls.Add(this.BtnKeywords);
             this.Controls.Add(this.BtnLogin);
             this.Name = "FormMain";
-            this.Text = "淘宝 电霸";
+            this.Text = "淘宝 电霸 V3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);

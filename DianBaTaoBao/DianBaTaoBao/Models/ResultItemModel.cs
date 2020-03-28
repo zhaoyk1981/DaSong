@@ -8,35 +8,46 @@ namespace DianBaTaoBao.Models
 {
     public class ResultItemModel
     {
+        public string MetaTaobaoUrl { get; set; }
         public string MetaTaobao月销量 { get; set; }
 
 
         public int? IntTaobao月销量 => ConvertHelper.ToInt2(this.MetaTaobao月销量);
 
-        public object DispTaobao月销量 => ConvertHelper.ToDispStr(IntTaobao月销量);
 
         public string MetaTaobao单价 { get; set; }
 
         public decimal? DecTaobao单价 => ConvertHelper.ToDecimal(this.MetaTaobao单价);
 
-        public object DispTaobao单价 => ConvertHelper.ToDispStr(DecTaobao单价);
         public int Sn { get; set; }
+
+        public string MetaDianba商品Id { get; set; }
+
+        public string MetaDianba商品Url
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(MetaDianba商品Id))
+                {
+                    return $"http://app.yangkeduo.com/goods.html?goods_id={MetaDianba商品Id}";
+                }
+
+                return string.Empty;
+            }
+        }
 
         public string MetaDianba总销量 { get; set; }
 
         public int? IntDianba总销量 => ConvertHelper.ToInt2(this.MetaDianba总销量);
 
-        public object DispDianba总销量 => ConvertHelper.ToDispStr(this.IntDianba总销量);
         public string MetaDianba月销量 { get; set; }
 
         public int? IntDianba月销量 => ConvertHelper.ToInt2(this.MetaDianba月销量);
         public object DispDianba月销量 => ConvertHelper.ToDispStr(this.IntDianba月销量);
         public string MetaDianba周销量 { get; set; }
         public int? IntDianba周销量 => ConvertHelper.ToInt2(this.MetaDianba周销量);
-        public object DispDianba周销量 => ConvertHelper.ToDispStr(this.IntDianba周销量);
         public string MetaDianba日销量 { get; set; }
         public int? IntDianba日销量 => ConvertHelper.ToInt2(this.MetaDianba日销量);
-        public object DispDianba日销量 => ConvertHelper.ToDispStr(this.IntDianba日销量);
         public string MetaDianba单价 { get; set; }
 
         public int? 月销量差额

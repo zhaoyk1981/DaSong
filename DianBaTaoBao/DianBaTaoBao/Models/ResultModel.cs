@@ -25,8 +25,6 @@ namespace DianBaTaoBao.Models
             }
         }
 
-        public object DispAvgTb单价 => ConvertHelper.ToDispStr(AvgTb单价);
-
         public int? AvgTb月销量
         {
             get
@@ -40,8 +38,6 @@ namespace DianBaTaoBao.Models
                 return Convert.ToInt32(lst.Average(m => m.IntTaobao月销量.Value));
             }
         }
-
-        public object DispAvgTb月销量 => ConvertHelper.ToDispStr(AvgTb月销量);
 
         public int? AvgDb月销量
         {
@@ -57,8 +53,6 @@ namespace DianBaTaoBao.Models
             }
         }
 
-        public object DispAvgDb月销量 => ConvertHelper.ToDispStr(AvgDb月销量);
-
         public int? AvgDb日销量
         {
             get
@@ -72,8 +66,6 @@ namespace DianBaTaoBao.Models
                 return Convert.ToInt32(lst.Average(m => m.IntDianba日销量.Value));
             }
         }
-
-        public object DispAvgDb日销量 => ConvertHelper.ToDispStr(AvgDb日销量);
 
         public int? AvgDb周销量
         {
@@ -89,8 +81,6 @@ namespace DianBaTaoBao.Models
             }
         }
 
-        public object DispAvgDb周销量 => ConvertHelper.ToDispStr(AvgDb周销量);
-
         public int? AvgDb总销量
         {
             get
@@ -105,6 +95,18 @@ namespace DianBaTaoBao.Models
             }
         }
 
-        public object DispAvgDb总销量 => ConvertHelper.ToDispStr(AvgDb总销量);
+        public int? Avg月销量差额
+        {
+            get
+            {
+                var lst = List.Where(m => m.月销量差额.HasValue).ToList();
+                if (lst.Count == 0)
+                {
+                    return null;
+                }
+
+                return Convert.ToInt32(lst.Average(m => m.月销量差额.Value));
+            }
+        }
     }
 }
