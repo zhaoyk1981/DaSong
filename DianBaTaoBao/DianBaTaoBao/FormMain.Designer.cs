@@ -36,11 +36,13 @@
             this.TxtTaobaoProgress = new System.Windows.Forms.TextBox();
             this.TxtDianbaProgress = new System.Windows.Forms.TextBox();
             this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnContinue = new System.Windows.Forms.Button();
+            this.BtnSaveData = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnLogin
             // 
-            this.BtnLogin.Location = new System.Drawing.Point(61, 108);
+            this.BtnLogin.Location = new System.Drawing.Point(61, 341);
             this.BtnLogin.Name = "BtnLogin";
             this.BtnLogin.Size = new System.Drawing.Size(136, 39);
             this.BtnLogin.TabIndex = 0;
@@ -50,7 +52,7 @@
             // 
             // BtnKeywords
             // 
-            this.BtnKeywords.Location = new System.Drawing.Point(61, 12);
+            this.BtnKeywords.Location = new System.Drawing.Point(61, 212);
             this.BtnKeywords.Name = "BtnKeywords";
             this.BtnKeywords.Size = new System.Drawing.Size(136, 49);
             this.BtnKeywords.TabIndex = 1;
@@ -109,11 +111,33 @@
             this.BtnCancel.UseVisualStyleBackColor = true;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // BtnContinue
+            // 
+            this.BtnContinue.Location = new System.Drawing.Point(61, 118);
+            this.BtnContinue.Name = "BtnContinue";
+            this.BtnContinue.Size = new System.Drawing.Size(136, 49);
+            this.BtnContinue.TabIndex = 7;
+            this.BtnContinue.Text = "继续";
+            this.BtnContinue.UseVisualStyleBackColor = true;
+            this.BtnContinue.Click += new System.EventHandler(this.BtnContinue_Click);
+            // 
+            // BtnSaveData
+            // 
+            this.BtnSaveData.Location = new System.Drawing.Point(61, 671);
+            this.BtnSaveData.Name = "BtnSaveData";
+            this.BtnSaveData.Size = new System.Drawing.Size(136, 49);
+            this.BtnSaveData.TabIndex = 8;
+            this.BtnSaveData.Text = "存档";
+            this.BtnSaveData.UseVisualStyleBackColor = true;
+            this.BtnSaveData.Click += new System.EventHandler(this.BtnSaveData_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1630, 742);
+            this.Controls.Add(this.BtnSaveData);
+            this.Controls.Add(this.BtnContinue);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.TxtDianbaProgress);
             this.Controls.Add(this.TxtTaobaoProgress);
@@ -122,7 +146,7 @@
             this.Controls.Add(this.BtnKeywords);
             this.Controls.Add(this.BtnLogin);
             this.Name = "FormMain";
-            this.Text = "淘宝 电霸 V3";
+            this.Text = "淘宝 电霸 V4";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);
@@ -140,6 +164,8 @@
         private System.Windows.Forms.TextBox TxtTaobaoProgress;
         private System.Windows.Forms.TextBox TxtDianbaProgress;
         private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Button BtnContinue;
+        private System.Windows.Forms.Button BtnSaveData;
     }
 }
 

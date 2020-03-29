@@ -1,5 +1,6 @@
 ﻿using DianBaTaoBao.Biz;
 using DianBaTaoBao.Models;
+using Newtonsoft.Json;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,21 @@ namespace DianBaTaoBao
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            if (!Directory.Exists("C:\\ffehe"))
+            {
+                Directory.CreateDirectory("C:\\ffehe");
+            }
+
+            if (!Directory.Exists("C:\\ffehecache"))
+            {
+                Directory.CreateDirectory("C:\\ffehecache");
+            }
+
+            if (!Directory.Exists("SavedDataBackup"))
+            {
+                Directory.CreateDirectory("SavedDataBackup");
+            }
+
             this.FormTaobao = new FormTaobao();
             this.FormTaobao.Visible = false;
             this.WorkerTaobao.DoWork += WorkerTaobao_DoWork;
@@ -38,6 +54,8 @@ namespace DianBaTaoBao
             this.WorkerDianba.WorkerReportsProgress = true;
             this.WorkerTaobao.ProgressChanged += WorkerTaobao_ProgressChanged;
             this.WorkerDianba.ProgressChanged += WorkerDianba_ProgressChanged;
+            this.WorkerTaobao.WorkerSupportsCancellation = true;
+            this.WorkerDianba.WorkerSupportsCancellation = true;
         }
 
         private void WorkerDianba_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -62,7 +80,11 @@ namespace DianBaTaoBao
         {
             if (e.Cancelled)
             {
-                RemoveResult();
+                if (!WorkerTaobao.IsBusy)
+                {
+                    SaveData();
+                }
+
                 return;
             }
 
@@ -76,7 +98,11 @@ namespace DianBaTaoBao
         {
             if (e.Cancelled)
             {
-                RemoveResult();
+                if (!WorkerDianba.IsBusy)
+                {
+                    SaveData();
+                }
+
                 return;
             }
 
@@ -86,8 +112,66 @@ namespace DianBaTaoBao
             }
         }
 
+        private bool IsCompleted()
+        {
+            foreach (var kv in DianbaResult)
+            {
+                if (kv.Value.Any(m => !m.Completed))
+                {
+                    return false;
+                }
+            }
+
+            foreach (var kv in TaobaoResult)
+            {
+                if (kv.Value.Any(m => !m.Completed))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool SaveData()
+        {
+            if (IsCompleted())
+            {
+                return false;
+            }
+
+            if (this.KeywordsDict.Count == 0)
+            {
+                return false;
+            }
+
+            DeleteSavedData();
+            var savedData = new SavedDataModel();
+            savedData.KeywordsDict = this.KeywordsDict;
+            savedData.TaobaoResult = this.TaobaoResult;
+            savedData.DianbaResult = this.DianbaResult;
+            var strJson = JsonConvert.SerializeObject(savedData);
+            try
+            {
+                File.WriteAllText(SAVED_DATA_FILE_NAME, strJson, Encoding.UTF8);
+                File.Copy(SAVED_DATA_FILE_NAME, Path.Combine("SavedDataBackup", DateTime.Now.ToString("yyyyMMdd HHmmss") + ".json"));
+                MessageBox.Show("中断或发生错误。请先关闭本程序，然后重新打开本程序点击'继续'按钮并'登录'，继续'查询'.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"存档时发生错误，请尝试手动删除存档文件 {SAVED_DATA_FILE_NAME}");
+            }
+
+            return true;
+        }
+
         private void Merge()
         {
+            if (SaveData())
+            {
+                return;
+            }
+
             foreach (var kf in TaobaoResult)
             {
                 var kfDianba = DianbaResult[kf.Key];
@@ -132,7 +216,6 @@ namespace DianBaTaoBao
         private void WorkerDianba_DoWork(object sender, DoWorkEventArgs e)
         {
             var me = sender as BackgroundWorker;
-            DianbaResult.Clear();
             try
             {
                 var indexFile = 0;
@@ -144,8 +227,16 @@ namespace DianBaTaoBao
                         return;
                     }
 
-                    var resultList = new List<ResultModel>();
-                    DianbaResult.Add(keywordsFile.Key, resultList);
+                    IList<ResultModel> resultList = new List<ResultModel>();
+                    if (DianbaResult.ContainsKey(keywordsFile.Key))
+                    {
+                        resultList = DianbaResult[keywordsFile.Key];
+                    }
+                    else
+                    {
+                        DianbaResult.Add(keywordsFile.Key, resultList);
+                    }
+
 
                     var list = keywordsFile.Value.ToList();
                     var indexKeyword = 0;
@@ -157,9 +248,19 @@ namespace DianBaTaoBao
                             return;
                         }
 
-                        var result = new ResultModel();
-                        result.Keyword = searchItem.Keyword;
-                        resultList.Add(result);
+                        var result = resultList.SingleOrDefault(m => m.Keyword == searchItem.Keyword);
+                        if (result == null)
+                        {
+                            result = new ResultModel();
+                            result.Keyword = searchItem.Keyword;
+                            resultList.Add(result);
+                        }
+
+                        if (result.Completed)
+                        {
+                            indexKeyword++;
+                            continue;
+                        }
 
                         var txtSearch = SeleniumHelper.FindWebElement("input[name='search']");
                         txtSearch.Clear();
@@ -210,8 +311,18 @@ namespace DianBaTaoBao
                             }
 
                             me.ReportProgress(0, $"文件：{keywordsFile.Key} | {indexFile + 1} / {KeywordsDict.Count} | 关键词: {searchItem.Keyword} {indexKeyword + 1} / {list.Count} | 行：{index + 1} / {cells5.Count}");
-                            var resultItem = new ResultItemModel();
-                            result.List.Add(resultItem);
+                            var resultItem = result.List.ElementAtOrDefault(index);
+                            if (resultItem == null)
+                            {
+                                resultItem = new ResultItemModel();
+                                result.List.Add(resultItem);
+                            }
+
+                            if (resultItem.Completed)
+                            {
+                                continue;
+                            }
+
                             var gid = cells3[index].Text?.Trim() ?? string.Empty;
                             var gidIndex = gid.LastIndexOf(商品Id);
                             resultItem.MetaDianba商品Id = string.Empty;
@@ -225,8 +336,19 @@ namespace DianBaTaoBao
                             resultItem.MetaDianba月销量 = cells7[index].Text?.Trim();
                             resultItem.MetaDianba总销量 = cells8[index].Text?.Trim();
                             resultItem.MetaDianba单价 = cells9[index].Text?.Trim();
-
+                            resultItem.Completed = true;
+                            resultItem.HasError = false;
                         }
+
+                        while (result.List.Count < this.TopRows)
+                        {
+                            result.List.Add(new ResultItemModel()
+                            {
+                                HasError = false,
+                                Completed = true
+                            });
+                        }
+
                         #endregion
 
                         indexKeyword++;
@@ -256,7 +378,6 @@ namespace DianBaTaoBao
         private void WorkerTaobao_DoWork(object sender, DoWorkEventArgs e)
         {
             var me = sender as BackgroundWorker;
-            TaobaoResult.Clear();
             try
             {
                 var indexFile = 0;
@@ -268,8 +389,15 @@ namespace DianBaTaoBao
                         return;
                     }
 
-                    var resultList = new List<ResultModel>();
-                    TaobaoResult.Add(keywordsFile.Key, resultList);
+                    IList<ResultModel> resultList = new List<ResultModel>();
+                    if (TaobaoResult.ContainsKey(keywordsFile.Key))
+                    {
+                        resultList = TaobaoResult[keywordsFile.Key];
+                    }
+                    else
+                    {
+                        TaobaoResult.Add(keywordsFile.Key, resultList);
+                    }
 
                     var list = keywordsFile.Value.ToList();
                     var indexKeyword = 0;
@@ -281,64 +409,87 @@ namespace DianBaTaoBao
                             return;
                         }
 
-                        var result = new ResultModel();
-                        result.Keyword = searchItem.Keyword;
-                        resultList.Add(result);
-
-                        this.FormTaobao.WebView.LoadUrlAndWait($"https://s.taobao.com/search?q={HttpUtility.UrlEncode(searchItem.Keyword)}&imgfile=&commend=all&search_type=item&sourceId=tb.index&ie=utf8&sort=sale-desc");
-                        var strHtml = this.FormTaobao.WebView.GetHtml();
-                        strHtml = CleanHtml(strHtml);
-                        var doc = new HtmlAgilityPack.HtmlDocument();
-                        doc.LoadHtml(strHtml);
-                        var nodes = doc.DocumentNode.SelectNodes("//div[@data-category='auctions']");
-                        me.ReportProgress(0, $"文件：{keywordsFile.Key} | {indexFile + 1} / {KeywordsDict.Count} | 关键词: {searchItem.Keyword} {indexKeyword + 1} / {list.Count}");
-                        if (nodes == null)
+                        var result = resultList.SingleOrDefault(m => m.Keyword == searchItem.Keyword);
+                        if (result == null)
                         {
-                            for (var n = 0; n < TopRows; n++)
-                            {
-                                if (me.CancellationPending)
-                                {
-                                    e.Cancel = true;
-                                    return;
-                                }
-
-                                result.List.Add(new ResultItemModel());
-                            }
+                            result = new ResultModel();
+                            result.Keyword = searchItem.Keyword;
+                            resultList.Add(result);
                         }
-                        else
+
+                        if (!result.Completed)
                         {
-                            var index = 0;
-                            foreach (var node in nodes)
+                            this.FormTaobao.WebView.LoadUrlAndWait($"https://s.taobao.com/search?q={HttpUtility.UrlEncode(searchItem.Keyword)}&imgfile=&commend=all&search_type=item&sourceId=tb.index&ie=utf8&sort=sale-desc");
+                            var strHtml = this.FormTaobao.WebView.GetHtml();
+                            strHtml = CleanHtml(strHtml);
+                            var doc = new HtmlAgilityPack.HtmlDocument();
+                            doc.LoadHtml(strHtml);
+                            var nodes = doc.DocumentNode.SelectNodes("//div[@data-category='auctions']");
+                            me.ReportProgress(0, $"文件：{keywordsFile.Key} | {indexFile + 1} / {KeywordsDict.Count} | 关键词: {searchItem.Keyword} {indexKeyword + 1} / {list.Count}");
+                            if (nodes == null)
                             {
-                                if (me.CancellationPending)
+                                for (var n = 0; n < TopRows; n++)
                                 {
-                                    e.Cancel = true;
-                                    return;
-                                }
+                                    if (me.CancellationPending)
+                                    {
+                                        e.Cancel = true;
+                                        return;
+                                    }
 
-
-                                var resultItem = new ResultItemModel();
-                                result.List.Add(resultItem);
-
-                                resultItem.MetaTaobao单价 = (node.SelectSingleNode("descendant::div[@class='price g_price g_price-highlight']/strong")?.InnerText ?? string.Empty).Trim();
-                                resultItem.MetaTaobao月销量 = (node.SelectSingleNode("descendant::div[@class='deal-cnt']")?.InnerText ?? string.Empty).Trim();
-                                resultItem.MetaTaobaoUrl = (node.SelectSingleNode("descendant::a[@class='J_ClickStat']").Attributes["href"]?.Value ?? string.Empty).Trim();
-                                if (resultItem.MetaTaobaoUrl.StartsWith("//"))
-                                {
-                                    resultItem.MetaTaobaoUrl = "https:" + resultItem.MetaTaobaoUrl;
-                                }
-
-                                index++;
-                                if (index >= TopRows && TopRows > 0)
-                                {
-                                    break;
+                                    result.List.Add(new ResultItemModel()
+                                    {
+                                        HasError = false,
+                                        Completed = true
+                                    });
                                 }
                             }
+                            else
+                            {
+                                var index = 0;
+                                foreach (var node in nodes)
+                                {
+                                    if (me.CancellationPending)
+                                    {
+                                        e.Cancel = true;
+                                        return;
+                                    }
+
+                                    var resultItem = result.List.ElementAtOrDefault(index);
+                                    if (resultItem == null)
+                                    {
+                                        resultItem = new ResultItemModel();
+                                        result.List.Add(resultItem);
+                                    }
+
+                                    if (resultItem.Completed)
+                                    {
+                                        index++;
+                                        continue;
+                                    }
+
+                                    resultItem.MetaTaobao单价 = (node.SelectSingleNode("descendant::div[@class='price g_price g_price-highlight']/strong")?.InnerText ?? string.Empty).Trim();
+                                    resultItem.MetaTaobao月销量 = (node.SelectSingleNode("descendant::div[@class='deal-cnt']")?.InnerText ?? string.Empty).Trim();
+                                    resultItem.MetaTaobaoUrl = (node.SelectSingleNode("descendant::a[@class='J_ClickStat']").Attributes["href"]?.Value ?? string.Empty).Trim();
+                                    if (resultItem.MetaTaobaoUrl.StartsWith("//"))
+                                    {
+                                        resultItem.MetaTaobaoUrl = "https:" + resultItem.MetaTaobaoUrl;
+                                    }
+
+                                    resultItem.Completed = true;
+                                    resultItem.HasError = false;
+
+                                    index++;
+                                    if (index >= TopRows && TopRows > 0)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+
+                            System.Threading.Thread.Sleep(1000);
                         }
 
                         indexKeyword++;
-
-                        System.Threading.Thread.Sleep(1000);
                     }
 
                     indexFile++;
@@ -382,13 +533,15 @@ namespace DianBaTaoBao
 
         private void BtnKeywords_Click(object sender, EventArgs e)
         {
-            this.KeywordsDict.Clear();
             try
             {
                 if (this.openFileDialogKeywords.ShowDialog(this) == DialogResult.OK)
                 {
                     var b = new StringBuilder();
                     var files = openFileDialogKeywords.FileNames;
+                    this.KeywordsDict.Clear();
+                    this.TaobaoResult.Clear();
+                    this.DianbaResult.Clear();
                     foreach (var fn in files)
                     {
                         var keywords = File.ReadAllLines(fn, FileEncoding.DetectFileEncoding(fn, Encoding.Default))
@@ -431,6 +584,63 @@ namespace DianBaTaoBao
                         WorkerTaobao.CancelAsync();
                     }
                 }
+            }
+        }
+
+        private const string SAVED_DATA_FILE_NAME = "SavedData.json";
+
+        private void DeleteSavedData()
+        {
+            try
+            {
+                if (File.Exists(SAVED_DATA_FILE_NAME))
+                {
+                    File.Delete(SAVED_DATA_FILE_NAME);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void BtnContinue_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(SAVED_DATA_FILE_NAME))
+            {
+                MessageBox.Show("没有发现存档文件。");
+                return;
+            }
+
+            try
+            {
+                var strJson = File.ReadAllText(SAVED_DATA_FILE_NAME, Encoding.UTF8);
+                DeleteSavedData();
+                var savedData = JsonConvert.DeserializeObject<SavedDataModel>(strJson);
+                this.KeywordsDict = savedData.KeywordsDict;
+                this.TaobaoResult = savedData.TaobaoResult;
+                this.DianbaResult = savedData.DianbaResult;
+                var b = new StringBuilder();
+                b.AppendLine("存档读取成功！");
+                foreach (var kv in KeywordsDict)
+                {
+                    b.AppendLine($"{kv.Key}: {kv.Value.Count}");
+                }
+
+                this.TxtKeywordsInfo.Text = b.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("存档文件损坏");
+                return;
+            }
+        }
+
+        private void BtnSaveData_Click(object sender, EventArgs e)
+        {
+            if (KeywordsDict.Count > 0 && TaobaoResult.Count > 0 && DianbaResult.Count > 0)
+            {
+                SaveData();
             }
         }
     }

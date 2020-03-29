@@ -14,7 +14,6 @@ namespace DianBaTaoBao.Models
 
         public int? IntTaobao月销量 => ConvertHelper.ToInt2(this.MetaTaobao月销量);
 
-
         public string MetaTaobao单价 { get; set; }
 
         public decimal? DecTaobao单价 => ConvertHelper.ToDecimal(this.MetaTaobao单价);
@@ -62,5 +61,9 @@ namespace DianBaTaoBao.Models
                 return null;
             }
         }
+
+        public bool HasError { get; set; } = true;
+
+        public bool Completed { get; set; }
     }
 }

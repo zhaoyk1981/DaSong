@@ -16,7 +16,7 @@ namespace DianBaTaoBao.Models
             get
             {
                 var lst = List.Where(m => m.DecTaobao单价.HasValue).ToList();
-                if(lst.Count == 0)
+                if (lst.Count == 0)
                 {
                     return null;
                 }
@@ -30,7 +30,7 @@ namespace DianBaTaoBao.Models
             get
             {
                 var lst = List.Where(m => m.IntTaobao月销量.HasValue).ToList();
-                if(lst.Count == 0)
+                if (lst.Count == 0)
                 {
                     return null;
                 }
@@ -106,6 +106,22 @@ namespace DianBaTaoBao.Models
                 }
 
                 return Convert.ToInt32(lst.Average(m => m.月销量差额.Value));
+            }
+        }
+
+        public bool HasError
+        {
+            get
+            {
+                return List.Count > 0 && List.Any(m => m.HasError);
+            }
+        }
+
+        public bool Completed
+        {
+            get
+            {
+                return List.Count > 0 && List.All(m => m.Completed);
             }
         }
     }
