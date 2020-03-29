@@ -304,12 +304,6 @@ namespace DianBaTaoBao
                         var cells9 = SeleniumHelper.FindWebElements("#dash-add2 > tr > td:nth-of-type(9)");
                         for (var index = 0; index < cells5.Count; index++)
                         {
-                            if (me.CancellationPending)
-                            {
-                                e.Cancel = true;
-                                return;
-                            }
-
                             me.ReportProgress(0, $"文件：{keywordsFile.Key} | {indexFile + 1} / {KeywordsDict.Count} | 关键词: {searchItem.Keyword} {indexKeyword + 1} / {list.Count} | 行：{index + 1} / {cells5.Count}");
                             var resultItem = result.List.ElementAtOrDefault(index);
                             if (resultItem == null)
@@ -419,6 +413,7 @@ namespace DianBaTaoBao
 
                         if (!result.Completed)
                         {
+                            System.Threading.Thread.Sleep(1000);
                             this.FormTaobao.WebView.LoadUrlAndWait($"https://s.taobao.com/search?q={HttpUtility.UrlEncode(searchItem.Keyword)}&imgfile=&commend=all&search_type=item&sourceId=tb.index&ie=utf8&sort=sale-desc");
                             var strHtml = this.FormTaobao.WebView.GetHtml();
                             strHtml = CleanHtml(strHtml);
@@ -430,17 +425,17 @@ namespace DianBaTaoBao
                             {
                                 for (var n = 0; n < TopRows; n++)
                                 {
-                                    if (me.CancellationPending)
-                                    {
-                                        e.Cancel = true;
-                                        return;
-                                    }
-
                                     result.List.Add(new ResultItemModel()
                                     {
                                         HasError = false,
                                         Completed = true
                                     });
+                                }
+
+                                if (me.CancellationPending)
+                                {
+                                    e.Cancel = true;
+                                    return;
                                 }
                             }
                             else
@@ -448,12 +443,6 @@ namespace DianBaTaoBao
                                 var index = 0;
                                 foreach (var node in nodes)
                                 {
-                                    if (me.CancellationPending)
-                                    {
-                                        e.Cancel = true;
-                                        return;
-                                    }
-
                                     var resultItem = result.List.ElementAtOrDefault(index);
                                     if (resultItem == null)
                                     {
@@ -485,8 +474,6 @@ namespace DianBaTaoBao
                                     }
                                 }
                             }
-
-                            System.Threading.Thread.Sleep(1000);
                         }
 
                         indexKeyword++;
