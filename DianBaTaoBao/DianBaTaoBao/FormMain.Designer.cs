@@ -117,7 +117,7 @@
             this.BtnContinue.Name = "BtnContinue";
             this.BtnContinue.Size = new System.Drawing.Size(136, 49);
             this.BtnContinue.TabIndex = 7;
-            this.BtnContinue.Text = "继续";
+            this.BtnContinue.Text = "读档";
             this.BtnContinue.UseVisualStyleBackColor = true;
             this.BtnContinue.Click += new System.EventHandler(this.BtnContinue_Click);
             // 
@@ -146,7 +146,7 @@
             this.Controls.Add(this.BtnKeywords);
             this.Controls.Add(this.BtnLogin);
             this.Name = "FormMain";
-            this.Text = "淘宝 电霸 V4";
+            this.Text = "淘宝 电霸 V5";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);
