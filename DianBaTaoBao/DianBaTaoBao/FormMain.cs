@@ -78,16 +78,6 @@ namespace DianBaTaoBao
 
         private void WorkerDianba_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-            {
-                if (!WorkerTaobao.IsBusy)
-                {
-                    SaveData();
-                }
-
-                return;
-            }
-
             if (!WorkerTaobao.IsBusy)
             {
                 Merge();
@@ -96,16 +86,6 @@ namespace DianBaTaoBao
 
         private void WorkerTaobao_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-            {
-                if (!WorkerDianba.IsBusy)
-                {
-                    SaveData();
-                }
-
-                return;
-            }
-
             if (!WorkerDianba.IsBusy)
             {
                 Merge();
@@ -114,6 +94,11 @@ namespace DianBaTaoBao
 
         private bool IsCompleted()
         {
+            if (this.KeywordsDict.Count == 0 || TaobaoResult.Count == 0 || DianbaResult.Count == 0)
+            {
+                return false;
+            }
+
             foreach (var kv in DianbaResult)
             {
                 if (kv.Value.Any(m => !m.Completed))
@@ -135,15 +120,7 @@ namespace DianBaTaoBao
 
         private bool SaveData()
         {
-            if (IsCompleted())
-            {
-                return false;
-            }
-
-            if (this.KeywordsDict.Count == 0)
-            {
-                return false;
-            }
+            var isCompleted = IsCompleted();
 
             DeleteSavedData();
             var savedData = new SavedDataModel();
@@ -155,20 +132,26 @@ namespace DianBaTaoBao
             {
                 File.WriteAllText(SAVED_DATA_FILE_NAME, strJson, Encoding.UTF8);
                 File.Copy(SAVED_DATA_FILE_NAME, Path.Combine("SavedDataBackup", DateTime.Now.ToString("yyyyMMdd HHmmss") + ".json"));
-                MessageBox.Show("中断或发生错误。请先关闭本程序，然后重新打开本程序点击'继续'按钮并'登录'，继续'查询'.");
+                if (!isCompleted)
+                {
+                    MessageBox.Show("中断或发生错误。请先关闭本程序，然后重新打开本程序点击'继续'按钮并'登录'，继续'查询'.");
+                    return isCompleted;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"存档时发生错误，请尝试手动删除存档文件 {SAVED_DATA_FILE_NAME}");
+                File.WriteAllText($"{ Guid.NewGuid() }.json", strJson, Encoding.UTF8);
             }
 
-            return true;
+            return isCompleted;
         }
 
         private void Merge()
         {
-            if (SaveData())
+            if (!SaveData())
             {
+                // 当不完整时，不输入excel.
                 return;
             }
 
@@ -178,7 +161,7 @@ namespace DianBaTaoBao
                 foreach (var k in kf.Value)
                 {
                     var kd = kfDianba.Single(m => m.Keyword == k.Keyword);
-                    kd.List = kd.List.OrderByDescending(m => m.DispDianba月销量).ToList();
+                    kd.List = kd.List.OrderByDescending(m => m.IntDianba月销量.GetValueOrDefault()).ToList();
                     for (var i = 0; i < k.List.Count; i++)
                     {
                         if (kd.List.Count <= i)

@@ -42,7 +42,6 @@ namespace DianBaTaoBao.Models
         public string MetaDianba月销量 { get; set; }
 
         public int? IntDianba月销量 => ConvertHelper.ToInt2(this.MetaDianba月销量);
-        public object DispDianba月销量 => ConvertHelper.ToDispStr(this.IntDianba月销量);
         public string MetaDianba周销量 { get; set; }
         public int? IntDianba周销量 => ConvertHelper.ToInt2(this.MetaDianba周销量);
         public string MetaDianba日销量 { get; set; }
