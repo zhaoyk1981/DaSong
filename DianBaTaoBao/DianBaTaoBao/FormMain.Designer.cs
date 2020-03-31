@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.BtnLogin = new System.Windows.Forms.Button();
             this.BtnKeywords = new System.Windows.Forms.Button();
             this.BtnSearch = new System.Windows.Forms.Button();
@@ -38,6 +39,8 @@
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnContinue = new System.Windows.Forms.Button();
             this.BtnSaveData = new System.Windows.Forms.Button();
+            this.TxtSavedFileName = new System.Windows.Forms.TextBox();
+            this.timerRetry = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // BtnLogin
@@ -131,11 +134,25 @@
             this.BtnSaveData.UseVisualStyleBackColor = true;
             this.BtnSaveData.Click += new System.EventHandler(this.BtnSaveData_Click);
             // 
+            // TxtSavedFileName
+            // 
+            this.TxtSavedFileName.Location = new System.Drawing.Point(315, 683);
+            this.TxtSavedFileName.Name = "TxtSavedFileName";
+            this.TxtSavedFileName.ReadOnly = true;
+            this.TxtSavedFileName.Size = new System.Drawing.Size(621, 28);
+            this.TxtSavedFileName.TabIndex = 9;
+            // 
+            // timerRetry
+            // 
+            this.timerRetry.Interval = 5000;
+            this.timerRetry.Tick += new System.EventHandler(this.timerRetry_Tick);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1630, 742);
+            this.Controls.Add(this.TxtSavedFileName);
             this.Controls.Add(this.BtnSaveData);
             this.Controls.Add(this.BtnContinue);
             this.Controls.Add(this.BtnCancel);
@@ -146,7 +163,7 @@
             this.Controls.Add(this.BtnKeywords);
             this.Controls.Add(this.BtnLogin);
             this.Name = "FormMain";
-            this.Text = "淘宝 电霸 V5";
+            this.Text = "淘宝 电霸 V6";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);
@@ -166,6 +183,8 @@
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Button BtnContinue;
         private System.Windows.Forms.Button BtnSaveData;
+        private System.Windows.Forms.TextBox TxtSavedFileName;
+        private System.Windows.Forms.Timer timerRetry;
     }
 }
 

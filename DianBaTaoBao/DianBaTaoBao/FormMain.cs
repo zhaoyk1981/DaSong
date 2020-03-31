@@ -29,6 +29,8 @@ namespace DianBaTaoBao
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            this.TxtSavedFileName.Text = SAVED_DATA_FILE_NAME;
+
             if (!Directory.Exists("C:\\ffehe"))
             {
                 Directory.CreateDirectory("C:\\ffehe");
@@ -94,14 +96,14 @@ namespace DianBaTaoBao
 
         private bool IsCompleted()
         {
-            if (this.KeywordsDict.Count == 0 || TaobaoResult.Count == 0 || DianbaResult.Count == 0)
+            if (this.KeywordsDict.Count == 0 || TaobaoResult.Count == 0 || DianbaResult.Count == 0 || this.KeywordsDict.Count != TaobaoResult.Count || this.KeywordsDict.Count != DianbaResult.Count)
             {
                 return false;
             }
 
             foreach (var kv in DianbaResult)
             {
-                if (kv.Value.Any(m => !m.Completed))
+                if (kv.Value.Any(m => !m.Completed) || kv.Value.Count != KeywordsDict[kv.Key].Count)
                 {
                     return false;
                 }
@@ -109,7 +111,7 @@ namespace DianBaTaoBao
 
             foreach (var kv in TaobaoResult)
             {
-                if (kv.Value.Any(m => !m.Completed))
+                if (kv.Value.Any(m => !m.Completed) || kv.Value.Count != KeywordsDict[kv.Key].Count)
                 {
                     return false;
                 }
@@ -151,7 +153,13 @@ namespace DianBaTaoBao
         {
             if (!SaveData())
             {
-                // 当不完整时，不输入excel.
+                // 当不完整时，不输出excel.
+                if (this.Dianba查询 > 0)
+                {
+                    this.timerRetry.Enabled = true;
+                    this.timerRetry.Start();
+                }
+
                 return;
             }
 
@@ -315,6 +323,7 @@ namespace DianBaTaoBao
                             resultItem.MetaDianba单价 = cells9[index].Text?.Trim();
                             resultItem.Completed = true;
                             resultItem.HasError = false;
+                            this.Dianba查询 = 0;
                         }
 
                         while (result.List.Count < this.TopRows)
@@ -333,12 +342,33 @@ namespace DianBaTaoBao
 
                     indexFile++;
                 }
+
+                TxtDianbaProgress.Text = "已完成";
             }
             catch (Exception ex)
             {
+                var message = SeleniumHelper.FindWebElement(".swal2-content > span");
+                if (message != null)
+                {
+                    if (message.Text.IndexOf("账号访问异常") >= 0)
+                    {
+                        return;
+                    }
 
+                    if (message.Text.IndexOf("接口") >= 0)
+                    {
+                        var btnOk = SeleniumHelper.FindWebElement(".swal2-confirm");
+                        if (btnOk != null)
+                        {
+                            btnOk.Click();
+                            Dianba查询++;
+                        }
+                    }
+                }
             }
         }
+
+        private int Dianba查询 { get; set; }
 
         private const string 商品Id = "商品ID:";
 
@@ -464,6 +494,8 @@ namespace DianBaTaoBao
 
                     indexFile++;
                 }
+
+                TxtTaobaoProgress.Text = "已完成";
             }
             catch (Exception ex)
             {
@@ -475,6 +507,8 @@ namespace DianBaTaoBao
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
+            this.timerRetry.Enabled = false;
+            this.timerRetry.Stop();
             this.FormTaobao.Visible = true;
             this.FormTaobao.RedirectTo("https://login.taobao.com/member/login.jhtml");
             SeleniumHelper.RedirectTo("http://pdd.dianba6.com/");
@@ -486,11 +520,15 @@ namespace DianBaTaoBao
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            this.timerRetry.Enabled = false;
+            this.timerRetry.Stop();
             this.SeleniumHelper.QuitDriver();
         }
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
+            this.timerRetry.Enabled = false;
+            this.timerRetry.Stop();
             if (this.KeywordsDict.Count == 0)
             {
                 MessageBox.Show("请选择关键词文件。");
@@ -503,6 +541,8 @@ namespace DianBaTaoBao
 
         private void BtnKeywords_Click(object sender, EventArgs e)
         {
+            this.timerRetry.Enabled = false;
+            this.timerRetry.Stop();
             try
             {
                 if (this.openFileDialogKeywords.ShowDialog(this) == DialogResult.OK)
@@ -540,6 +580,8 @@ namespace DianBaTaoBao
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
+            this.timerRetry.Enabled = false;
+            this.timerRetry.Stop();
             if (WorkerDianba.IsBusy || WorkerTaobao.IsBusy)
             {
                 if (MessageBox.Show(this, "是否要停止查询？", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
@@ -608,10 +650,24 @@ namespace DianBaTaoBao
 
         private void BtnSaveData_Click(object sender, EventArgs e)
         {
-            if (KeywordsDict.Count > 0 && TaobaoResult.Count > 0 && DianbaResult.Count > 0)
+            if (KeywordsDict.Count > 0 && TaobaoResult.Count > 0 && DianbaResult.Count > 0 && !WorkerTaobao.IsBusy && !WorkerDianba.IsBusy)
             {
                 SaveData();
             }
+        }
+
+        private void timerRetry_Tick(object sender, EventArgs e)
+        {
+            var me = sender as Timer;
+            if (this.Dianba查询 <= 3 && this.KeywordsDict.Count > 0 && !IsCompleted())
+            {
+                if (!this.WorkerDianba.IsBusy)
+                {
+                    this.WorkerDianba.RunWorkerAsync();
+                }
+            }
+
+            me.Enabled = false;
         }
     }
 }
