@@ -47,7 +47,7 @@ namespace DianBaTaoBao.Biz
             foreach (var item in result.List)
             {
                 item.Sn = index + 1;
-                WriteResultItem(sheet.CreateRow(rowIndex++), item);
+                WriteResultItem(sheet.CreateRow(rowIndex++), item, result);
                 index++;
             }
 
@@ -65,6 +65,7 @@ namespace DianBaTaoBao.Biz
         {
             var colIndex = 0;
             SetCellText(row, "序号", ref colIndex);
+            SetCellText(row, "关键词", ref colIndex);
             SetCellText(row, "淘宝月销量", ref colIndex);
             SetCellText(row, "淘宝价格", ref colIndex);
             SetCellText(row, "淘宝链接", ref colIndex);
@@ -77,10 +78,11 @@ namespace DianBaTaoBao.Biz
             SetCellText(row, "拼多多链接", ref colIndex);
         }
 
-        private void WriteResultItem(IRow row, ResultItemModel resultItem)
+        private void WriteResultItem(IRow row, ResultItemModel resultItem, ResultModel result)
         {
             var colIndex = 0;
             SetCellContent(row, resultItem.Sn, ref colIndex);
+            SetCellContent(row, result.Keyword, ref colIndex);
             SetCellContent(row, resultItem.IntTaobao月销量, ref colIndex);
             SetCellContent(row, resultItem.DecTaobao单价, ref colIndex);
             SetCellText(row, resultItem.MetaTaobaoUrl, ref colIndex);
@@ -97,6 +99,7 @@ namespace DianBaTaoBao.Biz
         {
             var colIndex = 0;
             SetCellText(row, "平均", ref colIndex);
+            SetEmptyCell(row, ref colIndex);
             SetCellContent(row, result.AvgTb月销量, ref colIndex);
             SetCellContent(row, result.AvgTb单价, ref colIndex);
             SetEmptyCell(row, ref colIndex);

@@ -28,7 +28,7 @@ namespace DianBaTaoBao.Models
             {
                 if (!string.IsNullOrEmpty(MetaDianba商品Id))
                 {
-                    return $"http://app.yangkeduo.com/goods.html?goods_id={MetaDianba商品Id}";
+                    return $"https://app.yangkeduo.com/goods.html?goods_id={MetaDianba商品Id}";
                 }
 
                 return string.Empty;
