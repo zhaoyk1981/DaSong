@@ -163,7 +163,7 @@
             this.Controls.Add(this.BtnKeywords);
             this.Controls.Add(this.BtnLogin);
             this.Name = "FormMain";
-            this.Text = "淘宝 电霸 V7";
+            this.Text = "淘宝 电霸 V8";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);

@@ -253,6 +253,8 @@ namespace DianBaTaoBao
                             continue;
                         }
 
+
+                        SeleniumHelper.Sleep(DianbaWait);
                         var txtSearch = SeleniumHelper.FindWebElement("input[name='search']");
                         txtSearch.Clear();
                         txtSearch.SendKeys(searchItem.Keyword);
@@ -343,7 +345,7 @@ namespace DianBaTaoBao
                     indexFile++;
                 }
 
-                TxtDianbaProgress.Text = "已完成";
+                me.ReportProgress(0, "已完成");
             }
             catch (Exception ex)
             {
@@ -382,6 +384,31 @@ namespace DianBaTaoBao
             var r = source.Substring(s, d + close.Length - s);
             return r;
         }
+
+        private string TaobaoQuery
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["TaobaoQuery"];
+            }
+        }
+
+        private int TaobaoWait
+        {
+            get
+            {
+                return int.Parse(ConfigurationManager.AppSettings["TaobaoWait"]);
+            }
+        }
+
+        private int DianbaWait
+        {
+            get
+            {
+                return int.Parse(ConfigurationManager.AppSettings["DianbaWait"]);
+            }
+        }
+
         private void WorkerTaobao_DoWork(object sender, DoWorkEventArgs e)
         {
             var me = sender as BackgroundWorker;
@@ -426,8 +453,8 @@ namespace DianBaTaoBao
 
                         if (!result.Completed)
                         {
-                            System.Threading.Thread.Sleep(1000);
-                            this.FormTaobao.WebView.LoadUrlAndWait($"https://s.taobao.com/search?q={HttpUtility.UrlEncode(searchItem.Keyword)}&imgfile=&commend=all&search_type=item&sourceId=tb.index&ie=utf8&sort=sale-desc");
+                            System.Threading.Thread.Sleep(TaobaoWait * 1000);
+                            this.FormTaobao.WebView.LoadUrlAndWait($"https://s.taobao.com/search?q={HttpUtility.UrlEncode(searchItem.Keyword)}{TaobaoQuery}");
                             var strHtml = this.FormTaobao.WebView.GetHtml();
                             strHtml = CleanHtml(strHtml);
                             var doc = new HtmlAgilityPack.HtmlDocument();
@@ -495,7 +522,7 @@ namespace DianBaTaoBao
                     indexFile++;
                 }
 
-                TxtTaobaoProgress.Text = "已完成";
+                me.ReportProgress(0, "已完成");
             }
             catch (Exception ex)
             {
