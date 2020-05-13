@@ -65,7 +65,7 @@
             this.Controls.Add(this.LblProcess);
             this.Controls.Add(this.BtnBrowse);
             this.Name = "Form1";
-            this.Text = "京东 销量 评价数 抓取 v2";
+            this.Text = "京东 销量 评价数 抓取 v3";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

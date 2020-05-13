@@ -30,7 +30,29 @@ namespace JDTopComment
         //}
 
         private const string RESULT_COUNT = "result_count";
+
         private JDSearchResultModel GetSearchResultBy(string keyword)
+        {
+            var i = 0;
+            while (i <= 10)
+            {
+                try
+                {
+                    return _GetSearchResultBy(keyword);
+                }
+                catch (Exception ex)
+                {
+                    i++;
+                    System.Threading.Thread.Sleep(5000);
+                }
+            }
+
+            return new JDSearchResultModel()
+            {
+                Keyword = keyword
+            };
+        }
+        private JDSearchResultModel _GetSearchResultBy(string keyword)
         {
             var result = new JDSearchResultModel()
             {
@@ -49,9 +71,15 @@ namespace JDTopComment
                 if (respStr.IndexOf(RESULT_COUNT) >= 0)
                 {
                     result.ResultCount = GetResultCount(respStr);
+                    if (result.ResultCount.GetValueOrDefault() == 0)
+                    {
+                        return result;
+                    }
+
                     var doc = new HtmlAgilityPack.HtmlDocument();
                     doc.LoadHtml(respStr);
                     var glItems = doc.DocumentNode.SelectNodes("//li[@class='gl-item']");
+
                     var i = 0;
                     foreach (var glItem in glItems)
                     {
@@ -70,10 +98,15 @@ namespace JDTopComment
 
                     FillCommentsCount(result, client);
                 }
+                else
+                {
+                    System.Threading.Thread.Sleep(15000);
+                    throw new Exception("login");
+                }
             }
             catch (Exception ex)
             {
-
+                throw ex;
             }
 
             return result;
@@ -238,6 +271,8 @@ namespace JDTopComment
             this.LblProcess.Text = e.UserState as string;
         }
 
+        private IList<JDSearchResultModel> resultList { get; set; } = new List<JDSearchResultModel>();
+
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             var fileNames = e.Argument as IList<string>;
@@ -245,7 +280,7 @@ namespace JDTopComment
             foreach (var file in fileNames)
             {
                 var keywordList = File.ReadAllLines(file, FileEncoding.DetectFileEncoding(file, Encoding.Default)).Where(m => !string.IsNullOrEmpty(m) && !m.StartsWith("//")).ToList();
-                IList<JDSearchResultModel> resultList = new List<JDSearchResultModel>();
+
                 var keywordIndex = 0;
                 foreach (var k in keywordList)
                 {
