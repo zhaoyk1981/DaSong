@@ -31,6 +31,7 @@
             this.BtnBrowse = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.LblProcess = new System.Windows.Forms.Label();
+            this.ChkUseProxy = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // BtnBrowse
@@ -57,15 +58,28 @@
             this.LblProcess.Size = new System.Drawing.Size(0, 18);
             this.LblProcess.TabIndex = 2;
             // 
+            // ChkUseProxy
+            // 
+            this.ChkUseProxy.AutoSize = true;
+            this.ChkUseProxy.Checked = true;
+            this.ChkUseProxy.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChkUseProxy.Location = new System.Drawing.Point(305, 73);
+            this.ChkUseProxy.Name = "ChkUseProxy";
+            this.ChkUseProxy.Size = new System.Drawing.Size(106, 22);
+            this.ChkUseProxy.TabIndex = 3;
+            this.ChkUseProxy.Text = "使用代理";
+            this.ChkUseProxy.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1480, 852);
+            this.Controls.Add(this.ChkUseProxy);
             this.Controls.Add(this.LblProcess);
             this.Controls.Add(this.BtnBrowse);
             this.Name = "Form1";
-            this.Text = "京东 销量 评价数 抓取 v3";
+            this.Text = "京东 销量 评价数 抓取 v4";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -76,6 +90,7 @@
         private System.Windows.Forms.Button BtnBrowse;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label LblProcess;
+        private System.Windows.Forms.CheckBox ChkUseProxy;
     }
 }
 

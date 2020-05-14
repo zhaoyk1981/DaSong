@@ -33,8 +33,7 @@ namespace JDTopComment
 
         private JDSearchResultModel GetSearchResultBy(string keyword)
         {
-            var i = 0;
-            while (i <= 10)
+            while (true)
             {
                 try
                 {
@@ -42,15 +41,91 @@ namespace JDTopComment
                 }
                 catch (Exception ex)
                 {
-                    i++;
-                    System.Threading.Thread.Sleep(5000);
+                    _useProxy2 = !_useProxy2;
+
+                    if (ProxyList.Count > 0)
+                    {
+                        var p = ProxyList.FirstOrDefault(m => m.IsUsing);
+                        if (p != null)
+                        {
+                            ProxyList.Remove(p);
+
+                        }
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(20000);
+                    }
                 }
             }
+        }
 
-            return new JDSearchResultModel()
+        private HttpClient GetHttpClient()
+        {
+            if (ProxyList.Count == 0 || !_useProxy || !_useProxy2)
             {
-                Keyword = keyword
+                return new HttpClient();
+            }
+
+            var p = ProxyList.FirstOrDefault(m => m.IsUsing);
+            if (p == null)
+            {
+                p = ProxyList.ElementAt(Math.Abs(Convert.ToInt32(Guid.NewGuid().ToString().Substring(0, 8), 16)) % ProxyList.Count);
+                p.IsUsing = true;
+            }
+
+            WebProxy proxy = new WebProxy(p.Url, false)
+            {
+                UseDefaultCredentials = true
             };
+            HttpClientHandler httpClientHandler = new HttpClientHandler()
+            {
+                Proxy = proxy,
+                PreAuthenticate = true,
+                UseDefaultCredentials = true,
+            };
+
+            return new HttpClient(httpClientHandler);
+        }
+
+        private IList<ProxyAddrModel> ProxyList = new List<ProxyAddrModel>();
+
+        private void InitProxyAddress()
+        {
+            ProxyList.Clear();
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36");
+            try
+            {
+                var respStr = client.GetStringAsync($"https://www.xicidaili.com/nt/").Result;
+                var doc = new HtmlAgilityPack.HtmlDocument();
+                doc.LoadHtml(respStr);
+                var rows = doc.DocumentNode.SelectNodes("//tr").ToList();
+                for (var i = 1; i < rows.Count; i++)
+                {
+                    var row = rows[i];
+                    var type = row.SelectSingleNode("td[position()=6]").InnerText;
+                    if (string.Compare(type, "http", true) != 0)
+                    {
+                        continue;
+                    }
+
+                    var p = new ProxyAddrModel()
+                    {
+                        IpAddr = row.SelectSingleNode("td[position()=2]").InnerText,
+                        Port = row.SelectSingleNode("td[position()=3]").InnerText
+                    };
+
+                    if (!ProxyList.Any(m => m.Url == p.Url))
+                    {
+                        ProxyList.Add(p);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
         private JDSearchResultModel _GetSearchResultBy(string keyword)
         {
@@ -59,7 +134,8 @@ namespace JDTopComment
                 Keyword = keyword
             };
             var encodedKeyword = HttpUtility.UrlEncode(keyword);
-            var client = new HttpClient();
+            var client = GetHttpClient();
+            client.Timeout = TimeSpan.FromSeconds(10);
             client.DefaultRequestHeaders.Add("authority", "search.jd.com");
             client.DefaultRequestHeaders.Referrer = new Uri($"https://search.jd.com/Search?keyword={encodedKeyword}&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&psort=3&wtype=1&click=2");
             client.DefaultRequestHeaders.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36");
@@ -100,7 +176,8 @@ namespace JDTopComment
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(15000);
+                    //System.Threading.Thread.Sleep(15000);
+
                     throw new Exception("login");
                 }
             }
@@ -264,11 +341,15 @@ namespace JDTopComment
             this.Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             this.Worker.DoWork += Worker_DoWork;
             this.Worker.ProgressChanged += Worker_ProgressChanged;
+            InitProxyAddress();
         }
+        private bool _useProxy;
 
+        private bool _useProxy2;
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.LblProcess.Text = e.UserState as string;
+            this._useProxy = this.ChkUseProxy.Checked;
         }
 
         private IList<JDSearchResultModel> resultList { get; set; } = new List<JDSearchResultModel>();
