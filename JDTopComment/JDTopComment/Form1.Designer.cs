@@ -61,8 +61,6 @@
             // ChkUseProxy
             // 
             this.ChkUseProxy.AutoSize = true;
-            this.ChkUseProxy.Checked = true;
-            this.ChkUseProxy.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ChkUseProxy.Location = new System.Drawing.Point(305, 73);
             this.ChkUseProxy.Name = "ChkUseProxy";
             this.ChkUseProxy.Size = new System.Drawing.Size(106, 22);
@@ -79,7 +77,7 @@
             this.Controls.Add(this.LblProcess);
             this.Controls.Add(this.BtnBrowse);
             this.Name = "Form1";
-            this.Text = "京东 销量 评价数 抓取 v4";
+            this.Text = "京东 销量 评价数 抓取 v5";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

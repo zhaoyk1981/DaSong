@@ -49,12 +49,15 @@ namespace JDTopComment
                         if (p != null)
                         {
                             ProxyList.Remove(p);
-
+                        }
+                        else
+                        {
+                            System.Threading.Thread.Sleep(5000);
                         }
                     }
                     else
                     {
-                        System.Threading.Thread.Sleep(20000);
+                        System.Threading.Thread.Sleep(5000);
                     }
                 }
             }
@@ -174,11 +177,15 @@ namespace JDTopComment
 
                     FillCommentsCount(result, client);
                 }
+                else if(respStr == "<script>window.location.href='https://passport.jd.com/uc/login'</script>")
+                {
+                    throw new Exception("login");
+                }
                 else
                 {
                     //System.Threading.Thread.Sleep(15000);
 
-                    throw new Exception("login");
+                    //throw new Exception("login");
                 }
             }
             catch (Exception ex)
