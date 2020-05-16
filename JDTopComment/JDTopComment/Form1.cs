@@ -177,7 +177,7 @@ namespace JDTopComment
 
                     FillCommentsCount(result, client);
                 }
-                else if(respStr == "<script>window.location.href='https://passport.jd.com/uc/login'</script>")
+                else if (respStr == "<script>window.location.href='https://passport.jd.com/uc/login'</script>")
                 {
                     throw new Exception("login");
                 }
@@ -261,11 +261,18 @@ namespace JDTopComment
             if (this.openFileDialog1.ShowDialog(this) == DialogResult.OK)
             {
                 var fileNames = this.openFileDialog1.FileNames.ToList() as IList<string>;
+                this.MaxLen = Convert.ToInt32(NumMaxLen.Value);
+                this.Excludes = this.TxtExclude.Text.Split(",\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).ToList();
+
                 this.Worker.RunWorkerAsync(fileNames);
                 this.LblProcess.Text = string.Empty;
                 this.BtnBrowse.Text = "取消";
             }
         }
+
+        private int MaxLen { get; set; }
+
+        private IList<string> Excludes { get; set; } = new List<string>();
 
         private void Export(string file, IList<JDSearchResultModel> resultList)
         {
@@ -368,6 +375,15 @@ namespace JDTopComment
             foreach (var file in fileNames)
             {
                 var keywordList = File.ReadAllLines(file, FileEncoding.DetectFileEncoding(file, Encoding.Default)).Where(m => !string.IsNullOrEmpty(m) && !m.StartsWith("//")).ToList();
+                if (MaxLen > 0)
+                {
+                    keywordList = keywordList.Where(m => m.Length <= MaxLen).ToList();
+                }
+
+                if (Excludes.Count > 0)
+                {
+                    keywordList = keywordList.Where(m => !Excludes.Any(n => m.ToLower().Contains(n.ToLower()))).ToList();
+                }
 
                 var keywordIndex = 0;
                 foreach (var k in keywordList)
